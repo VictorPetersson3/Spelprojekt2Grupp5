@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.Diagnostics;
 
 public class BuildManager : MonoBehaviour
 {
@@ -14,60 +13,90 @@ public class BuildManager : MonoBehaviour
     }
 
 
-    public Dictionary<string, Queue<GameObject>> myPoolDictionary;
-    public List<Pool> myPoolList;
-
+    //public Dictionary<string, Queue<GameObject>> myPoolDictionary;
+    [SerializeField]
+    private List<Pool> myPoolList;
 
     [System.Serializable]
     public class Pool
     {
-        public string tag;
-        public GameObject prefab;
-        public int size;
+        public string myTileTag;
+        public GameObject myTilePrefab;
+        public int myAmountOfTiles;
+        public List<GameObject> myTileList = new List<GameObject>();
     }
 
-    // Start is called before the first frame update
+    [SerializeField]
+    private Vector3 myOriginalSpawnPoolPosition;
+
+
     void Start()
     {
-        myPoolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-        foreach (Pool pool in myPoolList)
+        for (int x = 0; x < myPoolList.Count; x++)
         {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-
-            for (int i = 0; i < pool.size; i++)
+            for (int y = 0; y < myPoolList[x].myAmountOfTiles; y++)
             {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                objectPool.Enqueue(obj);
+                Debug.Log(myPoolList[x].myTilePrefab);
+                GameObject gameObj = Instantiate(myPoolList[x].myTilePrefab);
+                gameObj.SetActive(false);
+                gameObj.transform.position = myOriginalSpawnPoolPosition;
+                myPoolList[x].myTileList.Add(gameObj);
             }
-
-            myPoolDictionary.Add(pool.tag, objectPool);
-
         }
+
+
+    }
+
+    private void Update()
+    {
+       
     }
 
 
-    public GameObject SpawnFromPool(string aTag, Vector3 aPosition, Quaternion aRotation)
+    public void SpawnFromPool(string aTag, Vector3 aPosition, Quaternion aRotation)
     {
 
-        if (myPoolDictionary.ContainsKey(aTag) == false)
+        for (int x = 0; x < myPoolList.Count; x++)
         {
-            Debug.LogWarning("Pool with tag " + aTag + " doesn't exist.");
-            return null;
+            for (int y = 0; y < myPoolList[x].myTileList.Count; y++)
+            {
+                if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
+                {
+                    myPoolList[x].myTileList[y].transform.position = aPosition;
+                    myPoolList[x].myTileList[y].SetActive(true);
+                    break;
+                }
+                else if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
+                {
+                    myPoolList[x].myTileList[y].transform.position = aPosition;
+                    myPoolList[x].myTileList[y].SetActive(true);
+                    break;
+                }
+                else if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
+                {
+                    myPoolList[x].myTileList[y].transform.position = aPosition;
+                    myPoolList[x].myTileList[y].SetActive(true);
+                    break;
+                }
+            }
         }
 
-        GameObject objectSpawn = myPoolDictionary[aTag].Dequeue();
+    }
 
-        objectSpawn.SetActive(true);
-        objectSpawn.transform.position = aPosition;
-        objectSpawn.transform.rotation = aRotation;
+    public void ResetTiles()
+    {
+        for (int x = 0; x < myPoolList.Count; x++)
+        {
+            for (int y = 0; y < myPoolList[x].myTileList.Count; y++)
+            {
+                if (myPoolList[x].myTileList[y].activeSelf == true)
+                {
+                    myPoolList[x].myTileList[y].transform.position = myOriginalSpawnPoolPosition;
+                    myPoolList[x].myTileList[y].SetActive(false);
+                }
+            }
+        }
 
-        objectSpawn.GetComponent<CubeForce>().OnObjectSpawn();
-
-        myPoolDictionary[aTag].Enqueue(objectSpawn);
-
-        return objectSpawn;
     }
 
 }
