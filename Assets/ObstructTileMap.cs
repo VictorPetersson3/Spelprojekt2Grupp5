@@ -17,7 +17,7 @@ public class ObstructTileMap : MonoBehaviour
     [SerializeField]
     WorldController myWorldController;
 
-
+    public WorldController GetWorldController { get { return myWorldController; } }
 
     JobHandle myJobHandle;
     FindTilesJob myFindTilesJob;
@@ -131,9 +131,9 @@ public class ObstructTileMap : MonoBehaviour
         }
     }
 
-    protected void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(myWidth, 0.1f, myDepth));
+        Gizmos.DrawWireCube(new Vector3(transform.position.x , 0, transform.position.z ), new Vector3(myWidth, 0.1f, myDepth));
     }
 }
