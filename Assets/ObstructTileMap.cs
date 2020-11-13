@@ -21,23 +21,26 @@ public class ObstructTileMap : MonoBehaviour
 
     JobHandle myJobHandle;
     FindTilesJob myFindTilesJob;
-    private void OnValidate()
+    public virtual void OnValidate()
     {
 
         myWorldController = FindObjectOfType<WorldController>();
     }
 
-    void Start()
+    public virtual void Start()
     {
         Invoke("CreateJob", 0.5f);
         myJobHandle.Complete();
 
     }
+    public virtual void Update()
+    {
+
+    }
 
 
 
-
-    void CreateJob()
+    protected void CreateJob()
     {
         myFindTilesJob = new FindTilesJob
         {
@@ -128,7 +131,7 @@ public class ObstructTileMap : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(myWidth, 0.1f, myDepth));
