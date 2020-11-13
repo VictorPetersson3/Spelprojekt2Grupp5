@@ -4,20 +4,71 @@ using UnityEngine;
 
 public class Placement : MonoBehaviour
 {
+   Vector3Int myInputCoordinates;
 
+   Tile tile;
 
-   Vector3 myInputCoordinates;
 
    private void Update()
    {
+      //TOUCH INPUT
       if (Input.touchCount > 0)
       {
-         myInputCoordinates = GetTouchCoordinates();
+         myInputCoordinates = Vector3Int.FloorToInt(GetTouchCoordinates());
       }
-      if (Input.GetMouseButtonDown(0))
+
+      //LEFT CLICK INPUT
+      //if (Input.GetMouseButtonDown(0))
+      //{
+      //   myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
+      //   Debug.Log(myInputCoordinates);
+      //   if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
+      //   {
+      //      tile = WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z);
+      //      tile.GetSetTileState = Tile.TileState.obstructed;
+      //      WorldController.Instance.GetWorld.CopySetTile(tile);
+      //   }
+      //   Debug.Log(WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState);
+      //}
+      if (Input.GetMouseButton(0))
       {
-         myInputCoordinates = GetClickCoordinates();
+         myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
+         Debug.Log(myInputCoordinates);
+         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
+         {
+            tile = WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z);
+            tile.GetSetTileState = Tile.TileState.obstructed;
+            WorldController.Instance.GetWorld.CopySetTile(tile);
+         }
+         Debug.Log(WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState);
       }
+
+      //RIGHT CLICK INPUT
+      //if (Input.GetMouseButtonDown(1))
+      //{
+      //   myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
+      //   Debug.Log(myInputCoordinates);
+      //   if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
+      //   {
+      //      tile = WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z);
+      //      tile.GetSetTileState = Tile.TileState.empty;
+      //      WorldController.Instance.GetWorld.CopySetTile(tile);
+      //   }
+      //   Debug.Log(WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState);
+      //}
+      if (Input.GetMouseButton(1))
+      {
+         myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
+         Debug.Log(myInputCoordinates);
+         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
+         {
+            tile = WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z);
+            tile.GetSetTileState = Tile.TileState.empty;
+            WorldController.Instance.GetWorld.CopySetTile(tile);
+         }
+         Debug.Log(WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState);
+      }
+
    }
    public GameObject WhatDidIHit(Vector3 anInputType)
    {
