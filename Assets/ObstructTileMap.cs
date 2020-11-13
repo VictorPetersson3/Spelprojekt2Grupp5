@@ -5,11 +5,15 @@ using Unity.Jobs;
 
 public class ObstructTileMap : MonoBehaviour
 {
+
+    [Header("Size settings")]
+    [Range(1, 13)]
     [SerializeField]
     int myWidth = 1;
+    [Range(1, 13)]
     [SerializeField]
     int myDepth = 1;
-
+    [Header("Refernce settings")]
     [SerializeField]
     WorldController myWorldController;
 

@@ -7,9 +7,9 @@ public class WorldController : MonoBehaviour
     public static WorldController Instance { get; protected set; }
     [Header("World Size Settings")]
     [SerializeField]
-    [Range(0, 25)]
+    [Range(0, 13)]
     int myWidth = 10;
-    [Range(0, 25)]
+    [Range(0, 13)]
     [SerializeField]
     int myDepth = 10;
 
