@@ -8,7 +8,9 @@
     {
         this.myWidth = aWidth;
         this.myDepth = aDepth;
+        
         myTiles = new Tile[myWidth, myDepth];
+       
         for (int x = 0; x < myWidth; x++)
         {
             for (int z = 0; z < myDepth; z++)
@@ -48,5 +50,8 @@
         }
         return myTiles[aX, aZ];
     }
-
+    public void CopySetTile(Tile aTile)
+    {
+        myTiles[aTile.GetX, aTile.GetZ] = aTile;
+    }
 }
