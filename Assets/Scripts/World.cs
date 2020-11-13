@@ -33,7 +33,7 @@
             return nullTile;
         }
 
-        Tile tempTile = new Tile(this, aX, aZ);
+        Tile tempTile = new Tile(this, aX, aZ, Tile.EMyDirections.None);
         tempTile.GetSetTileState = aTileState;
         return tempTile;
     }

@@ -5,10 +5,7 @@ using UnityEngine.UIElements;
 
 public class TileManager : MonoBehaviour
 {
-    [SerializeField]
-    List<GameObject> myTargetGoals = new List<GameObject>();
-    [SerializeField]
-    World myWorld;
+
     void Start()
     {
         
@@ -21,8 +18,4 @@ public class TileManager : MonoBehaviour
     }
 
 
-    public void AddTargetGoals(GameObject aTargetGoal)
-    {
-        myTargetGoals.Add(aTargetGoal);
-    }
 }
