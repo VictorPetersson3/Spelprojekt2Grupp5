@@ -18,7 +18,7 @@ public class WorldController : MonoBehaviour
     Color myObstructedTilesColor;
     [SerializeField]
     Color myEmptyTilesColor;
-    [Range(0.1f,1)]
+    [Range(0.1f, 1)]
     [SerializeField]
     float myAlpha = 0.5f;
 
@@ -35,7 +35,7 @@ public class WorldController : MonoBehaviour
     }
     public Tile GetTileAtPosition(float aX, float aZ)
     {
-        
+
         int x = Mathf.FloorToInt(aX);
         int z = Mathf.FloorToInt(aZ);
         return this.myWorld.GetTileAt(x, z);
@@ -44,7 +44,7 @@ public class WorldController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(new Vector3((float)(myWidth / 2.0f) - 0.5f, 0, (float)(myDepth / 2.0f) - 0.5f) , new Vector3(myWidth, 0.1f, myDepth));
+        Gizmos.DrawWireCube(new Vector3((float)(myWidth / 2.0f) - 0.5f, 0, (float)(myDepth / 2.0f) - 0.5f), new Vector3(myWidth, 0.1f, myDepth));
 
         if (myWorld != null)
         {
@@ -52,13 +52,16 @@ public class WorldController : MonoBehaviour
             {
                 for (int j = 0; j < myDepth; j++)
                 {
+
+
+
                     if (myWorld.GetTileAt(i, j).GetSetTileState == Tile.TileState.obstructed)
                     {
 
 
                         myObstructedTilesColor.a = myAlpha;
                         Gizmos.color = myObstructedTilesColor;
-                        Gizmos.DrawCube(new Vector3(i, 0, j), new Vector3(0.95f,0, 0.95f));
+                        Gizmos.DrawCube(new Vector3(i, 0, j), new Vector3(0.95f, 0, 0.95f));
 
                         Gizmos.color = Color.red;
                         Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1, 0, 1));
@@ -67,11 +70,11 @@ public class WorldController : MonoBehaviour
                     }
                     else
                     {
-                        
+
                         myEmptyTilesColor.a = myAlpha;
                         Gizmos.color = myEmptyTilesColor;
                         Gizmos.DrawCube(new Vector3(i, 0, j), new Vector3(0.95f, 0, 0.95f));
-                    
+
                         Gizmos.color = Color.green;
                         Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1, 0, 1));
                     }
@@ -79,6 +82,23 @@ public class WorldController : MonoBehaviour
                 }
             }
 
+        }
+        else
+        {
+            for (int i = 0; i < myWidth; i++)
+            {
+                for (int j = 0; j < myDepth; j++)
+                {
+                    Color colorOfGrid = Color.white;
+                    colorOfGrid.a = myAlpha;
+
+                    Gizmos.color = colorOfGrid;
+                    Gizmos.DrawCube(new Vector3(i, 0, j), new Vector3(0.95f, 0, 0.95f));
+
+                    Gizmos.color = Color.white;
+                    Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1, 0, 1));
+                }
+            }
         }
 
 
