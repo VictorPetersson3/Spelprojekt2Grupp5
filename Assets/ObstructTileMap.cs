@@ -73,12 +73,12 @@ public class ObstructTileMap : MonoBehaviour
 
         if (cornerPos.x < 0 || cornerPos.z < 0)
         {
-            Debug.Log("Some Tiles are out of range");
+            Debug.LogError("Tiles are out of range in the negativ coordinate space\nObject Postion: " + aObjectPosition);
             return null;
         }
         if (totalSizeZ > aWorldDepth || totalSizeX > aWorldWidth)
         {
-            Debug.Log("Some Tiles are out of range");
+            Debug.LogError("Tiles are out of range at in the possitive coordinate space\nObject Postion: " + aObjectPosition);
             return null;
         }
         int xStart = xPos - xExtents;
@@ -133,7 +133,12 @@ public class ObstructTileMap : MonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
+
+        Color colorN = Color.magenta;
+        colorN.a = 0.5f;
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x , 0, transform.position.z ), new Vector3(myWidth, 0.1f, myDepth));
+        Gizmos.DrawWireCube(new Vector3(Mathf.Floor( transform.position.x) - 0.5f , 0, Mathf.Floor(transform.position.z) - 0.5f), new Vector3(myWidth, 0.1f, myDepth));
+        Gizmos.color = colorN;
+        Gizmos.DrawCube(new Vector3(Mathf.Floor(transform.position.x) - 0.5f, 0, Mathf.Floor(transform.position.z) - 0.5f), new Vector3(myWidth - 0.05f, 0.05f, myDepth - 0.05f));
     }
 }

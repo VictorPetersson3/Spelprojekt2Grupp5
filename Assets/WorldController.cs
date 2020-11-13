@@ -52,21 +52,14 @@ public class WorldController : MonoBehaviour
             {
                 for (int j = 0; j < myDepth; j++)
                 {
-
-
-
                     if (myWorld.GetTileAt(i, j).GetSetTileState == Tile.TileState.obstructed)
                     {
-
-
                         myObstructedTilesColor.a = myAlpha;
                         Gizmos.color = myObstructedTilesColor;
                         Gizmos.DrawCube(new Vector3(i, 0, j), new Vector3(0.95f, 0, 0.95f));
 
                         Gizmos.color = Color.red;
                         Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1, 0, 1));
-
-
                     }
                     else
                     {
