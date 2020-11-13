@@ -34,7 +34,7 @@ public class WorldController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(new Vector3((float)(myWidth / 2.0f), 0, (float)(myDepth / 2.0f)), new Vector3(myWidth, 0.1f, myDepth));
+        Gizmos.DrawWireCube(new Vector3((float)(myWidth / 2.0f) - 0.5f, 0, (float)(myDepth / 2.0f) - 0.5f) , new Vector3(myWidth, 0.1f, myDepth));
 
         if (myWorld != null)
         {
@@ -46,6 +46,11 @@ public class WorldController : MonoBehaviour
                     {
                         Gizmos.color = Color.red;
                         Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1,0,1));
+                    }
+                    else
+                    {
+                        Gizmos.color = Color.green;
+                        Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1, 0, 1));
                     }
 
                 }
