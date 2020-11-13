@@ -13,6 +13,15 @@ public class WorldController : MonoBehaviour
     [SerializeField]
     int myDepth = 10;
 
+    [Header("Grid color Settings")]
+    [SerializeField]
+    Color myObstructedTilesColor;
+    [SerializeField]
+    Color myEmptyTilesColor;
+    [Range(0.1f,1)]
+    [SerializeField]
+    float myAlpha = 0.5f;
+
     World myWorld;
     public World GetWorld { get { return myWorld; } }
     public int GetWorldDepth { get { return myDepth; } }
@@ -26,6 +35,7 @@ public class WorldController : MonoBehaviour
     }
     public Tile GetTileAtPosition(float aX, float aZ)
     {
+        
         int x = Mathf.FloorToInt(aX);
         int z = Mathf.FloorToInt(aZ);
         return this.myWorld.GetTileAt(x, z);
@@ -44,11 +54,24 @@ public class WorldController : MonoBehaviour
                 {
                     if (myWorld.GetTileAt(i, j).GetSetTileState == Tile.TileState.obstructed)
                     {
+
+
+                        myObstructedTilesColor.a = myAlpha;
+                        Gizmos.color = myObstructedTilesColor;
+                        Gizmos.DrawCube(new Vector3(i, 0, j), new Vector3(0.95f,0, 0.95f));
+
                         Gizmos.color = Color.red;
-                        Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1,0,1));
+                        Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1, 0, 1));
+
+
                     }
                     else
                     {
+                        
+                        myEmptyTilesColor.a = myAlpha;
+                        Gizmos.color = myEmptyTilesColor;
+                        Gizmos.DrawCube(new Vector3(i, 0, j), new Vector3(0.95f, 0, 0.95f));
+                    
                         Gizmos.color = Color.green;
                         Gizmos.DrawWireCube(new Vector3(i, 0, j), new Vector3(1, 0, 1));
                     }

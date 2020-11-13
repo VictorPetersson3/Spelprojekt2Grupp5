@@ -17,7 +17,7 @@ public class ObstructTileMap : MonoBehaviour
     [SerializeField]
     WorldController myWorldController;
 
-   
+
 
     JobHandle myJobHandle;
     FindTilesJob myFindTilesJob;
@@ -55,8 +55,11 @@ public class ObstructTileMap : MonoBehaviour
         int xPos = Mathf.FloorToInt(aObjectPosition.x);
         int zPos = Mathf.FloorToInt(aObjectPosition.z);
 
-        int xExtents = aXSize / 2;
-        int zExtents = aZSize / 2;
+        float xF = aXSize;
+        float zF = aZSize;
+
+        int xExtents = Mathf.FloorToInt(xF / 2);
+        int zExtents = Mathf.FloorToInt(zF / 2);
 
         Vector3 cornerPos = new Vector3(xPos - xExtents, 0, zPos - zExtents);
 
@@ -64,7 +67,7 @@ public class ObstructTileMap : MonoBehaviour
         int totalSizeZ = Mathf.FloorToInt(cornerPos.z) + aZSize;
 
         Tile[] tileInRange = new Tile[aXSize * aZSize];
-        
+
         if (cornerPos.x < 0 || cornerPos.z < 0)
         {
             Debug.Log("Some Tiles are out of range");
@@ -75,23 +78,21 @@ public class ObstructTileMap : MonoBehaviour
             Debug.Log("Some Tiles are out of range");
             return null;
         }
-        int count = 0;
-        int xValue = 0;
-        int zValue = 0;
+        int xStart = xPos - xExtents;
+        int zStart = zPos - zExtents;
 
-        for (int x = xPos - xExtents; x < totalSizeX; x++)
+        int count = 0;
+
+        for (int x = xStart; x < totalSizeX; x++)
         {
-            for (int z = (zPos - zExtents); z < totalSizeZ; z++)
+            for (int z = zStart; z < totalSizeZ; z++)
             {
                 tileInRange[count] = WorldController.Instance.GetTileAtPosition(x, z);
-               
-                
                 count++;
-                zValue++;
             }
-            xValue++;
+
         }
-       
+
         return tileInRange;
     }
 
@@ -119,8 +120,8 @@ public class ObstructTileMap : MonoBehaviour
 
                     }
                     WorldController.Instance.GetWorld.CopySetTile(tileArray[i]);
-               
-                  
+
+
                 }
 
             }
@@ -129,7 +130,7 @@ public class ObstructTileMap : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(myWidth, 0, myDepth));
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(myWidth, 0.1f, myDepth));
     }
 }
