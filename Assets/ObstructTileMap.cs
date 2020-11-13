@@ -137,8 +137,8 @@ public class ObstructTileMap : MonoBehaviour
         Color colorN = Color.magenta;
         colorN.a = 0.5f;
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireCube(new Vector3(Mathf.Floor( transform.position.x) - 0.5f , 0, Mathf.Floor(transform.position.z) - 0.5f), new Vector3(myWidth, 0.1f, myDepth));
+        Gizmos.DrawWireCube(new Vector3(Mathf.Floor(transform.position.x), 0, Mathf.Floor(transform.position.z)), new Vector3(myWidth, 0.1f, myDepth));
         Gizmos.color = colorN;
-        Gizmos.DrawCube(new Vector3(Mathf.Floor(transform.position.x) - 0.5f, 0, Mathf.Floor(transform.position.z) - 0.5f), new Vector3(myWidth - 0.05f, 0.05f, myDepth - 0.05f));
+        Gizmos.DrawCube(new Vector3(Mathf.Floor(transform.position.x), 0, Mathf.Floor(transform.position.z)), new Vector3(myWidth - 0.05f, 0.05f, myDepth - 0.05f));
     }
 }
