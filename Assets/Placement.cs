@@ -1,29 +1,65 @@
-﻿using System.Numerics;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Placement
+public class Placement : MonoBehaviour
 {
-   UnityEngine.Vector3 myInputCoordinate;
-   Touch myTouch;
-   void PlacementLoop(bool aLoopState)
+
+
+   Vector3 myInputCoordinates;
+
+   private void Update()
    {
-      while (aLoopState)
+      if (Input.touchCount > 0)
       {
-         GetFlooredInput();
-         
+         myInputCoordinates = GetTouchCoordinates();
       }
-
+      if (Input.GetMouseButtonDown(0))
+      {
+         myInputCoordinates = GetClickCoordinates();
+      }
    }
-
-   void GetFlooredInput()
+   public GameObject WhatDidIHit(Vector3 anInputType)
    {
-      myTouch = Input.GetTouch(0);
-      myInputCoordinate = Camera.main.ScreenToWorldPoint(myTouch.position);
-      myInputCoordinate.z = 0f;
-      UnityEngine.Vector3Int.FloorToInt(myInputCoordinate);
+      RaycastHit hit;
+      Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+      if (Physics.Raycast(ray, out hit))
+      {
+         return hit.collider.gameObject;
+      }
+      return null;
    }
-   void ExitLoop()
+   public Vector3 WhereDidIHit(Vector3 anInputType)
    {
+      RaycastHit hit;
+      Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+      if (Physics.Raycast(ray, out hit))
+      {
+         return hit.point;
+      }
+      return new Vector3(0, 0, 0);
+   }
+   private Vector3 GetTouchCoordinates()
+   {
+      Vector3 input;
+      Touch touch = Input.GetTouch(0); ;
 
+      input = WhereDidIHit(touch.position);
+      input.y = 0f;
+
+      Debug.Log(input);
+
+      return input;
+   }
+   private Vector3 GetClickCoordinates()
+   {
+      Vector3 input;
+
+      input = WhereDidIHit(Input.mousePosition);
+      input.y = 0f;
+
+      Debug.Log(input);
+
+      return input;
    }
 }
