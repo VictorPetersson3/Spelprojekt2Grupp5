@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -306,6 +306,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &344845826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 344845828}
+  - component: {fileID: 344845827}
+  m_Layer: 0
+  m_Name: BuildManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &344845827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344845826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c778d57a8896a414a894daa609bb56ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPoolList:
+  - myTileTag: Cube
+    myTilePrefab: {fileID: 56419435}
+    myAmountOfTiles: 15
+    myTileList: []
+  - myTileTag: 
+    myTilePrefab: {fileID: 0}
+    myAmountOfTiles: 0
+    myTileList: []
+  myOriginalSpawnPoolPosition: {x: 13, y: 0, z: 0}
+--- !u!4 &344845828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344845826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582830562
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9c90b877b407b4b944757b52bdb17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myBuildManager: {fileID: 344845827}
 --- !u!4 &1045419684
 Transform:
   m_ObjectHideFlags: 0

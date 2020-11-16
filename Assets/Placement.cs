@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Placement : MonoBehaviour
 {
-   BuildManager myBuildManager;
+   [SerializeField] private BuildManager myBuildManager;
    private Vector3Int myInputCoordinates;
    private Tile myTile;
 
 
    private void Update()
    {
-      //TOUCH INPUT
+      //TOUCH INPUT - Oklart om det behövs
       if (Input.touchCount > 0)
       {
          myInputCoordinates = Vector3Int.FloorToInt(GetTouchCoordinates());
@@ -20,16 +20,19 @@ public class Placement : MonoBehaviour
       //LEFT CLICK INPUT
       if (Input.GetMouseButton(0))
       {
+         //Floorar spelarens input till integers
          myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
-         Debug.Log(myInputCoordinates);
+
+         myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
+
+         //Kollar om en tile är upptagen
          if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
          {
             //Spawnar en tile
+            myBuildManager.SpawnFromPool("Sphere", Quaternion.identity).transform.position = myInputCoordinates;
 
             //Sätter tilen till obstructed
-            myTile = WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z);
-            myTile.GetSetTileState = Tile.TileState.obstructed;
-            WorldController.Instance.GetWorld.CopySetTile(myTile);
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z,Tile.TileState.obstructed);
          }
       }
 
@@ -37,12 +40,20 @@ public class Placement : MonoBehaviour
       if (Input.GetMouseButton(1))
       {
          myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
-         Debug.Log(myInputCoordinates);
-         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
+         Debug.Log("");
+         myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
+
+         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
          {
-            myTile = WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z);
-            myTile.GetSetTileState = Tile.TileState.empty;
-            WorldController.Instance.GetWorld.CopySetTile(myTile);
+            //Spawnar en tile
+            myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
+
+            //Sätter tilen till obstructed
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+            
+            
+            //Sätter tilen till empty
+            //WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.empty);
          }
       }
    }
@@ -84,8 +95,6 @@ public class Placement : MonoBehaviour
 
       input = WhereDidIHit(Input.mousePosition);
       input.y = 0f;
-
-      Debug.Log(input);
 
       return input;
    }
