@@ -29,8 +29,10 @@ public class WorldController : MonoBehaviour
     void Start()
     {
         myWorld = new World(myWidth, myWidth);
+
         if (Instance != null)
             Debug.LogError("There should never be two world controllers.");
+        
         Instance = this;
     }
     public Tile GetTileAtPosition(float aX, float aZ)
