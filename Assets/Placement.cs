@@ -29,7 +29,7 @@ public class Placement : MonoBehaviour
          if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
          {
             //Spawnar en tile
-            myBuildManager.SpawnFromPool("Sphere", Quaternion.identity).transform.position = myInputCoordinates;
+            myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
 
             //Sätter tilen till obstructed
             WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z,Tile.TileState.obstructed);
@@ -40,20 +40,30 @@ public class Placement : MonoBehaviour
       if (Input.GetMouseButton(1))
       {
          myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
-         Debug.Log("");
+         
          myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
-         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
+         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
          {
-            //Spawnar en tile
-            myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
+            ////Spawnar en tile
+            //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
 
-            //Sätter tilen till obstructed
-            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+            ////Sätter tilen till obstructed
+            //WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
             
+            GameObject temp = WhatDidIHit(myInputCoordinates);
             
-            //Sätter tilen till empty
-            //WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.empty);
+            if (temp.tag == "Cube" || temp.tag == "Sphere")
+            {
+               //Sätter tilen till empty
+               WorldController.Instance.GetWorld.SetTileState((int)temp.transform.position.x, (int)temp.transform.position.z, Tile.TileState.empty);
+               
+               //Reset:ar tile-objektet
+               myBuildManager.ReturnToPool(temp);
+
+            }
+
+           
          }
       }
    }
