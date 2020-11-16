@@ -14,7 +14,6 @@ public class Portals : ObstructTileMap
     }
     public override void Update()
     {
-        
         base.Update();
     }
     void TeleportPlayer()
