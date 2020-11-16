@@ -12,8 +12,6 @@ public class BuildManager : MonoBehaviour
         globalInstance = this;
     }
 
-
-    //public Dictionary<string, Queue<GameObject>> myPoolDictionary;
     [SerializeField]
     private List<Pool> myPoolList;
 
@@ -43,17 +41,10 @@ public class BuildManager : MonoBehaviour
                 myPoolList[x].myTileList.Add(gameObj);
             }
         }
-
-
-    }
-
-    private void Update()
-    {
-       
     }
 
 
-    public void SpawnFromPool(string aTag, Vector3 aPosition, Quaternion aRotation)
+    public GameObject SpawnFromPool(string aTag, Quaternion aRotation)
     {
 
         for (int x = 0; x < myPoolList.Count; x++)
@@ -62,25 +53,23 @@ public class BuildManager : MonoBehaviour
             {
                 if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
                 {
-                    myPoolList[x].myTileList[y].transform.position = aPosition;
                     myPoolList[x].myTileList[y].SetActive(true);
-                    break;
+                    return myPoolList[x].myTileList[y].gameObject;
                 }
                 else if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
                 {
-                    myPoolList[x].myTileList[y].transform.position = aPosition;
                     myPoolList[x].myTileList[y].SetActive(true);
-                    break;
+                    return myPoolList[x].myTileList[y].gameObject;
                 }
                 else if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
                 {
-                    myPoolList[x].myTileList[y].transform.position = aPosition;
                     myPoolList[x].myTileList[y].SetActive(true);
-                    break;
+                    return myPoolList[x].myTileList[y].gameObject;
                 }
             }
         }
 
+        return null;
     }
 
     public void ResetTiles()
@@ -96,7 +85,5 @@ public class BuildManager : MonoBehaviour
                 }
             }
         }
-
     }
-
 }
