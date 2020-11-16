@@ -9,16 +9,20 @@ public class PlayerController : MonoBehaviour
     WorldController myWorldController;
     int myDirection;
 
+    public Tile GetCurrectTile { get { return myCurrentTile; } }
+
+
     private void Start()
     {
         myDirection = 1;
+        myWorldController.GetTileAtPosition(0, 0);
     }
     private void Update()
     {
         SetCurrentTile();
         print(myCurrentTile.GetX + " " + myCurrentTile.GetZ);
 
-        int staticCastedDirection = (int) myCurrentTile.GetSetDirection;
+        int staticCastedDirection = (int)myCurrentTile.GetSetDirection;
         Move(staticCastedDirection);
 
         if (transform.position.x >= 5)
@@ -33,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     public void Move(int aStaticCastedCoordinate)
     {
-        
+
         switch (aStaticCastedCoordinate)
         {
             case 0:
@@ -65,4 +69,5 @@ public class PlayerController : MonoBehaviour
     {
         myCurrentTile = myWorldController.GetWorld.GetTileAt(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.z));
     }
+
 }
