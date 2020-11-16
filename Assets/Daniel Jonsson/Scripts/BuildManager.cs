@@ -32,7 +32,6 @@ public class BuildManager : MonoBehaviour
     {
         for (int x = 0; x < myPoolList.Count; x++)
         {
-            myTotalPoolItems += myPoolList[x].myAmountOfTiles;
             for (int y = 0; y < myPoolList[x].myAmountOfTiles; y++)
             {
                 GameObject gameObj = Instantiate(myPoolList[x].myTilePrefab);

@@ -32,7 +32,7 @@
         }
         else
         {
-            Tile tempTile = new Tile(this, aX, aZ, Tile.EMyDirections.None);
+            Tile tempTile = new Tile(this, aX, aZ);
             tempTile.GetSetTileState = aTileState;
             CopySetTile(tempTile);
         }
