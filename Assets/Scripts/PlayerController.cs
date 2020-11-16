@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         myDirection = 1;
-        myWorldController.GetTileAtPosition(0, 0);
+        
     }
     private void Update()
     {
