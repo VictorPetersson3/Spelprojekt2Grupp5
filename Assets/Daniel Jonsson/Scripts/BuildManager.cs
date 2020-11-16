@@ -15,8 +15,6 @@ public class BuildManager : MonoBehaviour
     [SerializeField]
     private List<Pool> myPoolList;
 
-    private int myTotalPoolItems;
-
     [System.Serializable]
     public class Pool
     {
@@ -43,7 +41,6 @@ public class BuildManager : MonoBehaviour
                 myPoolList[x].myTileList.Add(gameObj);
             }
         }
-        Debug.Log(myTotalPoolItems);
     }
 
 
