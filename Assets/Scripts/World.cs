@@ -15,7 +15,7 @@
         {
             for (int z = 0; z < myDepth; z++)
             {
-                myTiles[x, z] = SetTileState(x, z, Tile.TileState.empty);
+                myTiles[x, z] = SetTile(x, z, Tile.TileState.empty);
                 
                 
             }
@@ -23,7 +23,7 @@
 
 
     }
-    public Tile SetTileState(int aX, int aZ, Tile.TileState aTileState)
+    public Tile SetTile(int aX, int aZ, Tile.TileState aTileState)
     {
         if (aX >= myWidth || aX < 0 || aZ >= myDepth || aZ < 0)
         {
