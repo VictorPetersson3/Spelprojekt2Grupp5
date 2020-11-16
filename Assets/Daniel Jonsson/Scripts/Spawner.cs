@@ -5,8 +5,6 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     BuildManager myBuildManager;
-    [SerializeField]
-    LayerMask layerMask;
 
     private void Start()
     {
@@ -35,9 +33,17 @@ public class Spawner : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    myBuildManager.SpawnFromPool("Sphere", objectHit.position + new Vector3(0 , (objectHit.localScale.y / 2), 0 ), Quaternion.identity);
+                    GameObject gameObj = myBuildManager.SpawnFromPool("Sphere", Quaternion.identity);
+                    gameObj.transform.position = objectHit.position;
+
                 }
-                
+                else if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    GameObject gameObj2 = myBuildManager.SpawnFromPool("Cube", Quaternion.identity);
+                    gameObj2.transform.position = objectHit.position;
+
+                }
+
             }
             else
             {

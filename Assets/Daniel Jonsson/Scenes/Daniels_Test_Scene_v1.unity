@@ -32358,6 +32358,52 @@ Transform:
   m_Father: {fileID: 175355935}
   m_RootOrder: 338
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1935436295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1935436297}
+  - component: {fileID: 1935436296}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1935436296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935436295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3e66ad97c035a41ae7118e6365ec16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!4 &1935436297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935436295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1943957810
 GameObject:
   m_ObjectHideFlags: 0
@@ -36182,6 +36228,59 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[0].myTileTag
+      value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[0].myTilePrefab
+      value: 
+      objectReference: {fileID: 4323386015091661951, guid: c3db8cc125cac2d46baf1bec4cff90e4,
+        type: 3}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[0].myAmountOfTiles
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[1].myTileTag
+      value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[1].myTilePrefab
+      value: 
+      objectReference: {fileID: 1882338541735705898, guid: d5f3530ee5c2fae4db0d692e643339db,
+        type: 3}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[1].myAmountOfTiles
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[2].myTileTag
+      value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[2].myTilePrefab
+      value: 
+      objectReference: {fileID: 4323386015091661951, guid: c3db8cc125cac2d46baf1bec4cff90e4,
+        type: 3}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[2].myAmountOfTiles
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6210364711353201919, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
         type: 3}
