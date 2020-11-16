@@ -32,9 +32,9 @@ public class BuildManager : MonoBehaviour
     {
         for (int x = 0; x < myPoolList.Count; x++)
         {
+            myTotalPoolItems += myPoolList[x].myAmountOfTiles;
             for (int y = 0; y < myPoolList[x].myAmountOfTiles; y++)
             {
-                Debug.Log(myPoolList[x].myTilePrefab);
                 GameObject gameObj = Instantiate(myPoolList[x].myTilePrefab);
                 gameObj.SetActive(false);
                 gameObj.transform.position = myOriginalSpawnPoolPosition;
@@ -52,16 +52,6 @@ public class BuildManager : MonoBehaviour
             for (int y = 0; y < myPoolList[x].myTileList.Count; y++)
             {
                 if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
-                {
-                    myPoolList[x].myTileList[y].SetActive(true);
-                    return myPoolList[x].myTileList[y].gameObject;
-                }
-                else if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
-                {
-                    myPoolList[x].myTileList[y].SetActive(true);
-                    return myPoolList[x].myTileList[y].gameObject;
-                }
-                else if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
                 {
                     myPoolList[x].myTileList[y].SetActive(true);
                     return myPoolList[x].myTileList[y].gameObject;
@@ -85,5 +75,11 @@ public class BuildManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ReturnToPool(GameObject aPooledGameObject)
+    {
+        aPooledGameObject.SetActive(false);
+        aPooledGameObject.transform.position = myOriginalSpawnPoolPosition;
     }
 }
