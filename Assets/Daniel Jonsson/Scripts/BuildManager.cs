@@ -9,7 +9,15 @@ public class BuildManager : MonoBehaviour
 
     private void Awake()
     {
-        globalInstance = this;
+        if (globalInstance == null)
+        {
+            globalInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (globalInstance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     [SerializeField]
@@ -35,6 +43,7 @@ public class BuildManager : MonoBehaviour
             for (int y = 0; y < myPoolList[x].myAmountOfTiles; y++)
             {
                 GameObject gameObj = Instantiate(myPoolList[x].myTilePrefab);
+                gameObj.transform.parent = gameObject.transform;
                 gameObj.SetActive(false);
                 gameObj.transform.position = myOriginalSpawnPoolPosition;
                 myPoolList[x].myTileList.Add(gameObj);
@@ -45,7 +54,6 @@ public class BuildManager : MonoBehaviour
 
     public GameObject SpawnFromPool(string aTag, Quaternion aRotation)
     {
-
         for (int x = 0; x < myPoolList.Count; x++)
         {
             for (int y = 0; y < myPoolList[x].myTileList.Count; y++)
@@ -57,7 +65,6 @@ public class BuildManager : MonoBehaviour
                 }
             }
         }
-
         return null;
     }
 
