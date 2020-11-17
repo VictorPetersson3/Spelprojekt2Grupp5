@@ -1545,6 +1545,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: myEntryAndExitDirection.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: myEntryAndExitDirection.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: mySecondPortal
+      value: 
+      objectReference: {fileID: 1946616777}
     - target: {fileID: 5834637311735858884, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
       propertyPath: myEntryAndExitDirection.x
@@ -1557,18 +1572,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50905d5fbafca994392b6fc065f26d20, type: 3}
---- !u!114 &1856052934 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5834637311735858884, guid: 50905d5fbafca994392b6fc065f26d20,
-    type: 3}
-  m_PrefabInstance: {fileID: 1856052933}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce420a7f80f0cc643a41d2790b45da97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1895573320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1685,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: myEntryAndExitDirection.x
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5834637311735858884, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
       propertyPath: myEntryAndExitDirection.x
@@ -1691,9 +1699,21 @@ PrefabInstance:
         type: 3}
       propertyPath: mySecondPortal
       value: 
-      objectReference: {fileID: 1856052934}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50905d5fbafca994392b6fc065f26d20, type: 3}
+--- !u!114 &1946616777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+    type: 3}
+  m_PrefabInstance: {fileID: 1946616776}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce420a7f80f0cc643a41d2790b45da97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2031636641
 GameObject:
   m_ObjectHideFlags: 0

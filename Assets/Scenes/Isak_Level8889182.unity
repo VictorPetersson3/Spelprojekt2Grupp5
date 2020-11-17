@@ -236,6 +236,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12d98e63eb2916c45a5f7d1d293ce20b, type: 3}
+--- !u!114 &107477405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2584639837659524108, guid: 12d98e63eb2916c45a5f7d1d293ce20b,
+    type: 3}
+  m_PrefabInstance: {fileID: 107477404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e976d38bd20d5d74b9b7803befbf9b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &125791118
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +568,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: myWorldController
+      value: 
+      objectReference: {fileID: 2063950005}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: myEntryAndExitDirection.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: myEntryAndExitDirection.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5834637311735858884, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
       propertyPath: myEntryAndExitDirection.z
@@ -570,9 +597,21 @@ PrefabInstance:
         type: 3}
       propertyPath: mySecondPortal
       value: 
-      objectReference: {fileID: 1620230519}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50905d5fbafca994392b6fc065f26d20, type: 3}
+--- !u!114 &268626849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+    type: 3}
+  m_PrefabInstance: {fileID: 268626848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce420a7f80f0cc643a41d2790b45da97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &440815397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,6 +1475,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Door
       objectReference: {fileID: 0}
+    - target: {fileID: 4831812572086577071, guid: e823a1316e22cd5448654d8a1c0e5a94,
+        type: 3}
+      propertyPath: myRailButtons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831812572086577071, guid: e823a1316e22cd5448654d8a1c0e5a94,
+        type: 3}
+      propertyPath: myWorldController
+      value: 
+      objectReference: {fileID: 2063950005}
+    - target: {fileID: 4831812572086577071, guid: e823a1316e22cd5448654d8a1c0e5a94,
+        type: 3}
+      propertyPath: myRailButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 107477405}
     - target: {fileID: 5822651858203611496, guid: e823a1316e22cd5448654d8a1c0e5a94,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2043,20 +2097,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: myWorldController
+      value: 
+      objectReference: {fileID: 2063950005}
+    - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
+        type: 3}
+      propertyPath: mySecondPortal
+      value: 
+      objectReference: {fileID: 268626849}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50905d5fbafca994392b6fc065f26d20, type: 3}
---- !u!114 &1620230519 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5834637311735858884, guid: 50905d5fbafca994392b6fc065f26d20,
-    type: 3}
-  m_PrefabInstance: {fileID: 1620230518}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce420a7f80f0cc643a41d2790b45da97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1694580573
 GameObject:
   m_ObjectHideFlags: 0
