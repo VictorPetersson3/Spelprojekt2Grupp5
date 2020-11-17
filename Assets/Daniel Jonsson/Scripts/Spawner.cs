@@ -35,7 +35,6 @@ public class Spawner : MonoBehaviour
                 {
                     GameObject gameObj = myBuildManager.SpawnFromPool("Sphere", Quaternion.identity);
                     gameObj.transform.position = objectHit.position;
-
                 }
                 else if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
