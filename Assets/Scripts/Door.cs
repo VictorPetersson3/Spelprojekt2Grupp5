@@ -95,6 +95,15 @@ public class Door : ObstructTileMap
             {
                 if (myRailButtons[i] != null)
                 {
+                    if (myRailButtons[i].GetMySwitch)
+                    {
+                        Gizmos.color = Color.green;
+                    }
+                    else
+                    {
+                        Gizmos.color = Color.red;
+                    }
+
                     Gizmos.DrawLine(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(Mathf.FloorToInt(myRailButtons[i].transform.position.x), 0, Mathf.FloorToInt(myRailButtons[i].transform.position.z)));
 
                 }
