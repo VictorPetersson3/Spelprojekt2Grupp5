@@ -28,7 +28,7 @@ public class WorldController : MonoBehaviour
     public int GetWorldWidth { get { return myWidth; } }
     void Start()
     {
-        myWorld = new World(myWidth, myWidth);
+        myWorld = new World(myWidth, myDepth);
 
         if (Instance != null)
             Debug.LogError("There should never be two world controllers.");

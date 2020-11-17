@@ -8,6 +8,8 @@ public class Door : ObstructTileMap
 
     int myX;
     int myZ;
+    
+    
     public override void Start()
     {
         myX = Mathf.FloorToInt(transform.position.x);
