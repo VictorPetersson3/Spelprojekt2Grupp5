@@ -11,12 +11,34 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     float myZoomOutMax = 8;
 
+    //[SerializeField]
+    //Transform[] myTargets;
+
+    public Renderer[] myTargets;
+
+    [SerializeField]
+    float myZoomPaddingPortrait = -20f;
+    [SerializeField]
+    float myZoomPaddingLandscape = 2f;
+
     private bool myMultiTouch = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+    }
+
+    private void LateUpdate()
+    {               
+        if(Screen.orientation == ScreenOrientation.LandscapeLeft||Screen.orientation == ScreenOrientation.LandscapeRight)
+        {
+            Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) + myZoomPaddingLandscape);
+            Debug.Log("In landscape mode");
+        }
+        else if (Screen.orientation == ScreenOrientation.Portrait)
+        {
+            Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) - myZoomPaddingPortrait);
+        }
     }
 
     // Update is called once per frame
@@ -28,35 +50,10 @@ public class CameraController : MonoBehaviour
             myTouchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        if(Input.touchCount == 2)
-        {
-            myMultiTouch = true;
-
-            Touch touchZero = Input.GetTouch(0);
-            Touch touchOne = Input.GetTouch(1);
-
-            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-
-            float prevTouchDistance = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-            float currentTouchDistance = (touchZero.position - touchOne.position).magnitude;
-
-            float difference = currentTouchDistance - prevTouchDistance;
-
-            Zoom(difference * 0.002f);
-        }
-
         else if(Input.GetMouseButton(0) && myMultiTouch == false)
         {
             Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Camera.main.transform.position += direction;
         }
-
-        Zoom(Input.GetAxis("Mouse ScrollWheel"));
-    }
-
-    void Zoom(float aZoomIncrement)
-    {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - aZoomIncrement, myZoomOutMin, myZoomOutMax);
     }
 }
