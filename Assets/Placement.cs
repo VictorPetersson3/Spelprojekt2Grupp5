@@ -11,17 +11,12 @@ public class Placement : MonoBehaviour
 
    private void Update()
    {
-      //TOUCH INPUT - Oklart om det behövs
-      if (Input.touchCount > 0)
-      {
-         myInputCoordinates = Vector3Int.FloorToInt(GetTouchCoordinates());
-      }
-
       //LEFT CLICK INPUT
       if (Input.GetMouseButton(0))
       {
-         //Floorar spelarens input till integers
-         myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
+         //Avrundar spelarens input till integers
+         myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
+         myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
 
          myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
@@ -39,18 +34,15 @@ public class Placement : MonoBehaviour
       //RIGHT CLICK INPUT
       if (Input.GetMouseButton(1))
       {
-         myInputCoordinates = Vector3Int.FloorToInt(GetClickCoordinates());
+         //Avrundar spelarens input till integers
+         myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
+         myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
          
          myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
+         //Kollar om en tile är upptagen
          if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
-         {
-            ////Spawnar en tile
-            //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
-
-            ////Sätter tilen till obstructed
-            //WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
-            
+         {  
             GameObject temp = WhatDidIHit(myInputCoordinates);
             
             if (temp.tag == "Cube" || temp.tag == "Sphere")
@@ -60,10 +52,7 @@ public class Placement : MonoBehaviour
                
                //Reset:ar tile-objektet
                myBuildManager.ReturnToPool(temp);
-
             }
-
-           
          }
       }
    }
