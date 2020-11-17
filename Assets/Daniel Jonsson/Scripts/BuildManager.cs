@@ -21,7 +21,7 @@ public class BuildManager : MonoBehaviour
     }
 
     [SerializeField]
-    private List<Pool> myPoolList;
+    private List<Pool> myPoolList = new List<Pool>();
 
     [System.Serializable]
     public class Pool
@@ -33,7 +33,7 @@ public class BuildManager : MonoBehaviour
     }
 
     [SerializeField]
-    private Vector3 myOriginalSpawnPoolPosition;
+    private Vector3 myOriginalSpawnPoolPosition = new Vector3(0 ,-10f ,0 );
 
 
     void Start()

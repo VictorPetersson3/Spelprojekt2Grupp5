@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
     public List<Level> myLevelList;
 
     [System.Serializable]
     public class Level
     {
+        public string myLevelName;
         public int myMinScore;
         public int myMediumScore;
         public int myHighScore;
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         for (int i = 1; i <= (int)(Levels.Count - 1); i++)
         {
             Level level = new Level();
+            level.myLevelName = "Level " + i;
             level.myFinishedScore = 0;
             level.myMinScore = 0;
             level.myMediumScore = 0;
@@ -34,12 +35,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        IsPlayerAlive();
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             BuildManager.globalInstance.ResetTiles();
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
@@ -82,8 +82,12 @@ public class GameManager : MonoBehaviour
                     myLevelList[i].myFinishedLevel = true;
                     //UI.ShowWinScreen();
                 }
-
             }
         }
+    }
+
+    public void IsPlayerAlive()
+    {
+
     }
 }
