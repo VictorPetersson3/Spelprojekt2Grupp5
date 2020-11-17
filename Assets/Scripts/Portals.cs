@@ -57,10 +57,6 @@ public class Portals : ObstructTileMap
             myPlayerController.transform.position = mySecondPortal.transform.position + myEntryAndExitDirection;
 
         }
-        // If Player Tile = myTile
-        // Teleport
-
-
     }
     protected override void OnDrawGizmos()
     {
