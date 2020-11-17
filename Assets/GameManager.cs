@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager globalInstance;
+
+    private void Awake()
+    {
+        if (globalInstance == null)
+        {
+            globalInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (globalInstance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     public List<Level> myLevelList;
 
     [System.Serializable]

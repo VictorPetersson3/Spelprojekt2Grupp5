@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     BuildManager myBuildManager;
+    GameManager myGameManager;
 
     private void Start()
     {
@@ -13,10 +14,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            myBuildManager.ResetTiles();
-        }
+
     }
 
     private void FixedUpdate()
