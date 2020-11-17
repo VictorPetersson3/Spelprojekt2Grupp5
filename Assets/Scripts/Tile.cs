@@ -1,7 +1,7 @@
 ﻿
 public struct Tile
 {
-    public enum TileState {empty, obstructed}
+    public enum TileState {empty, obstructed, road}
     public enum EMyDirections
     {
         North,
@@ -14,8 +14,12 @@ public struct Tile
     TileState myTileState;
     EMyDirections myDirection;
     World myWorld;
+    bool myStartTile;
+    bool myNeighborIsConnectedToStartTile;
 
     public TileState GetSetTileState{ get { return myTileState;} set { myTileState = value;} }
+    public bool GetSetStartTile{ get { return myStartTile;} set { myStartTile = value;} }
+    public bool GetSetNeighborIsConnectedToStartTile { get { return myNeighborIsConnectedToStartTile; } set { myNeighborIsConnectedToStartTile = value;} }
 
     public EMyDirections GetSetDirection { get { return myDirection; }set { myDirection = value; } }
 
@@ -30,6 +34,8 @@ public struct Tile
         this.myX = aX;
         this.myZ = aZ;
         myDirection = EMyDirections.None;
+        myStartTile = false;
+        myNeighborIsConnectedToStartTile = false;
     }
 
 
