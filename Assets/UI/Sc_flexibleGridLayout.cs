@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlexibleGridLayout : LayoutGroup
+public class Sc_flexibleGridLayout : LayoutGroup
 {
     public enum eFitType
     {
