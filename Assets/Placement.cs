@@ -5,6 +5,7 @@ using UnityEngine;
 public class Placement : MonoBehaviour
 {
    [SerializeField] private BuildManager myBuildManager;
+   [SerializeField] private PlayerController myPlayerController;
    private Vector3Int myInputCoordinates;
    private Tile myTile;
 
@@ -28,8 +29,9 @@ public class Placement : MonoBehaviour
 
             //Sätter tilen till obstructed
             WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z,Tile.TileState.road);
-         }
-      }
+            myPlayerController.QueueTile(WorldController.Instance.GetWorld.GetTileAt(myInputCoordinates.x, myInputCoordinates.z));
+            }
+        }
 
       //RIGHT CLICK INPUT
       if (Input.GetMouseButton(1))
