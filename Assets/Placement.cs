@@ -27,7 +27,7 @@ public class Placement : MonoBehaviour
             myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
 
             //Sätter tilen till obstructed
-            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z,Tile.TileState.obstructed);
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z,Tile.TileState.road);
          }
       }
 
@@ -41,7 +41,7 @@ public class Placement : MonoBehaviour
          myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
          //Kollar om en tile är upptagen
-         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
+         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed && WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
          {  
             GameObject temp = WhatDidIHit(myInputCoordinates);
             

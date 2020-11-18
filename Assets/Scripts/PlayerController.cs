@@ -7,61 +7,34 @@ public class PlayerController : MonoBehaviour
     Tile myCurrentTile;
     [SerializeField]
     WorldController myWorldController;
-    int myDirection;
+    List<Tile> myMovementQueue = new List<Tile>();
 
     public Tile GetCurrectTile { get { return myCurrentTile; } }
 
 
     private void Start()
     {
-        myDirection = 1;
-        
+        for (int i = 0; i < 9; i++)
+        {
+            myMovementQueue.Add(myWorldController.GetWorld.GetTileAt(i, 0));
+        }
     }
     private void Update()
     {
         SetCurrentTile();
-        print(myCurrentTile.GetX + " " + myCurrentTile.GetZ);
+        Move();
 
-        int staticCastedDirection = (int)myCurrentTile.GetSetDirection;
-        Move(staticCastedDirection);
-
-        if (transform.position.x >= 5)
-        {
-            myDirection = 0;
-        }
-        if (transform.position.z >= 5)
-        {
-            myDirection = 4;
-        }
     }
 
-    public void Move(int aStaticCastedCoordinate)
+    public void Move()
     {
-
-        switch (aStaticCastedCoordinate)
+        for (int i = 0; i < myMovementQueue.Count; i++)
         {
-            case 0:
-                transform.Translate(0, 0, 5 * Time.deltaTime);
-                break;
-            case 1:
-                transform.Translate(5 * Time.deltaTime, 0, 0);
-                break;
-            case 2:
-                transform.Translate(-5 * Time.deltaTime, 0, 0);
-                break;
-            case 3:
-                transform.Translate(0, 0, -5 * Time.deltaTime);
-                break;
-            case 4:
-                transform.Translate(0, 0, 0);
-                break;
-            default:
-                break;
+            while(transform.position != new Vector3(myMovementQueue[i+1].GetX, 0 ,myMovementQueue[i+1].GetZ)) 
+            {
+                Vector3.Lerp(new Vector3(myCurrentTile.GetX, 0 , myCurrentTile.GetZ), new Vector3(myMovementQueue[i].GetX, 0, myMovementQueue[i].GetZ), 5 * Time.deltaTime);
+            }
         }
-    }
-
-    void GetCurrentTileDirection()
-    {
 
     }
 

@@ -28,6 +28,7 @@ public class WorldController : MonoBehaviour
     public int GetWorldWidth { get { return myWidth; } }
     void Start()
     {
+
         myWorld = new World(myWidth, myDepth);
 
         if (Instance != null)
@@ -42,8 +43,6 @@ public class WorldController : MonoBehaviour
         int z = Mathf.FloorToInt(aZ);
         return this.myWorld.GetTileAt(x, z);
     }
-
-    
 
     [ExecuteInEditMode]
     private void OnDrawGizmos()
@@ -103,7 +102,6 @@ public class WorldController : MonoBehaviour
     }
     private void Update()
     {
-
     }
 
 }
