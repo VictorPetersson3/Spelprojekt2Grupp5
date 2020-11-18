@@ -12,11 +12,6 @@ public class Spawner : MonoBehaviour
         myBuildManager = BuildManager.globalInstance;
     }
 
-    private void Update()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         RaycastHit hit;
