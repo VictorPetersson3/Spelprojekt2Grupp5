@@ -8,10 +8,10 @@ public class CameraController : MonoBehaviour
     Vector3 originalPosition;
     Quaternion originalRotation;
 
-    [SerializeField]
-    float myZoomOutMin = 1;
-    [SerializeField]
-    float myZoomOutMax = 8;
+    //[SerializeField]
+    //float myZoomOutMin = 1;
+    //[SerializeField]
+    //float myZoomOutMax = 8;
 
     public Renderer[] myTargets;
 
@@ -19,9 +19,15 @@ public class CameraController : MonoBehaviour
     float myZoomPaddingPortrait = -20f;
     [SerializeField]
     float myZoomPaddingLandscape = 2f;
-
+    [SerializeField]
+    float myZoomPaddingTopDown = 22f;
     [SerializeField]
     float transitionSpeed = 5f;
+    [SerializeField]
+    Vector3 myWorldCenterPostion = Vector3.zero;
+
+
+    float currentPadding;
 
     private bool myMultiTouch = false;
 
@@ -52,9 +58,9 @@ public class CameraController : MonoBehaviour
     {
         if(shouldMoveToTopDownView)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(0, transform.position.y, 0), Time.deltaTime* transitionSpeed);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime* transitionSpeed);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime* transitionSpeed);
-            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 22, Time.deltaTime * transitionSpeed);
+            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, myZoomPaddingTopDown, Time.deltaTime * transitionSpeed);
         }
 
         if (!shouldMoveToTopDownView)
@@ -77,6 +83,19 @@ public class CameraController : MonoBehaviour
         {
             Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Camera.main.transform.position += direction;
+        }
+
+        if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
+        {
+            //Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) + myZoomPaddingLandscape);
+            //Debug.Log("In landscape mode");
+
+            currentPadding = myZoomPaddingLandscape;
+        }
+        else if (Screen.orientation == ScreenOrientation.Portrait && !shouldMoveToTopDownView)
+        {
+            //Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) - myZoomPaddingPortrait);
+            currentPadding = myZoomPaddingPortrait;
         }
     }
 
