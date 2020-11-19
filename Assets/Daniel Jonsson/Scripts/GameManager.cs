@@ -1,13 +1,25 @@
 ﻿using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManager : MonoBehaviour
 {
+    enum SaveSlot
+    {
+        Save1 = 0,
+        Save2 = 1,
+        Save3 = 2,
+        Count = 3
+    }
+
     public static GameManager globalInstance;
 
     private void Awake()
     {
+        LoadFile();
+
         if (globalInstance == null)
         {
             globalInstance = this;
@@ -80,20 +92,26 @@ public class GameManager : MonoBehaviour
         {
             if (i == SceneManager.GetActiveScene().buildIndex)
             {
-                myLevelList[i].myFinishedScore = aScore;
-                //UI.SetScore(myLevelList[i].myFinishedScore)
+                if (aScore > myLevelList[i].myFinishedScore)
+                {
+                    myLevelList[i].myFinishedScore = aScore;
+                    SaveFile();
+                }
 
-                if (myLevelList[i].myFinishedScore > myLevelList[i].myHighScore)
+                
+                //UI.SetScore(aScore)
+
+                if (aScore > myLevelList[i].myHighScore)
                 {
                     myLevelList[i].myFinishedLevel = false;
                     //UI.ShowFailScreen();
                 }
-                else if (myLevelList[i].myFinishedScore >= myLevelList[i].myMediumScore && aScore <= myLevelList[i].myHighScore)
+                else if (aScore >= myLevelList[i].myMediumScore && aScore <= myLevelList[i].myHighScore)
                 {
                     myLevelList[i].myFinishedLevel = true;
                     //UI.ShowWinScreen();
                 }
-                else if (myLevelList[i].myFinishedScore < myLevelList[i].myMinScore && myLevelList[i].myFinishedScore >= myLevelList[i].myMinScore && myLevelList[i].myFinishedScore < myLevelList[i].myMediumScore)
+                else if (aScore < myLevelList[i].myMinScore && myLevelList[i].myFinishedScore >= myLevelList[i].myMinScore && myLevelList[i].myFinishedScore < myLevelList[i].myMediumScore)
                 {
                     myLevelList[i].myFinishedLevel = true;
                     //UI.ShowWinScreen();
@@ -115,4 +133,48 @@ public class GameManager : MonoBehaviour
         //BuildManager.globalInstance.ResetTiles();
         //Player.ResetPlayer();
     }
+
+
+    public void SaveFile()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/Save";
+        Debug.Log(Application.persistentDataPath);
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, myLevelList);
+        stream.Close();
+    }
+
+    public void LoadFile()
+    {
+        string path = Application.persistentDataPath + "/Save";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            List<Level> loadLevels = (List<Level>)formatter.Deserialize(stream);
+            stream.Close();
+
+            myLevelList = loadLevels;
+        }
+        else
+        {
+            //UI.ErrorSave();
+        }
+    }
+
+    public List<bool> CheckAllFinishedLevels()
+    {
+        List<bool> listOfFinishedLevels = new List<bool>();
+        for (int i = 0; i < myLevelList.Count; i++)
+        {
+            listOfFinishedLevels.Add(myLevelList[i].myFinishedLevel);
+        }
+
+        return listOfFinishedLevels;
+    }
+
 }
