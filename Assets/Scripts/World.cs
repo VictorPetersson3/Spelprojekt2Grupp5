@@ -17,8 +17,6 @@
             for (int z = 0; z < myDepth; z++)
             {
                 SetTileState(x, z, Tile.TileState.empty);
-
-
             }
         }
     }
@@ -39,7 +37,6 @@
         }
 
     }
-
 
     public Tile GetTileAt(int aX, int aZ)
     {

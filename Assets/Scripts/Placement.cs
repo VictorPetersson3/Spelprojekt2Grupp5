@@ -29,8 +29,10 @@ public class Placement : MonoBehaviour
 
             //Sätter tilen till obstructed
             WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z,Tile.TileState.road);
+
+            //Lägger till tilen i tilen i en lista i PlayerController
             myPlayerController.QueueTile(WorldController.Instance.GetWorld.GetTileAt(myInputCoordinates.x, myInputCoordinates.z));
-            }
+         }
         }
 
       //RIGHT CLICK INPUT
@@ -57,7 +59,13 @@ public class Placement : MonoBehaviour
             }
          }
       }
-   }
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        {
+            myPlayerController.UpdateMovementPath();
+        }
+    }
+    
+
    public GameObject WhatDidIHit(Vector3 anInputType)
    {
       RaycastHit hit;
