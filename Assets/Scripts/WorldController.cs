@@ -28,6 +28,7 @@ public class WorldController : MonoBehaviour
     public int GetWorldWidth { get { return myWidth; } }
     void Start()
     {
+
         myWorld = new World(myWidth, myDepth);
 
         if (Instance != null)
@@ -43,7 +44,13 @@ public class WorldController : MonoBehaviour
         return this.myWorld.GetTileAt(x, z);
     }
 
-    
+    public Road GetRoadAtPosition(float aX, float aZ)
+    {
+
+        int x = Mathf.FloorToInt(aX);
+        int z = Mathf.FloorToInt(aZ);
+        return this.myWorld.GetRoadAt(x, z);
+    }
 
     [ExecuteInEditMode]
     private void OnDrawGizmos()
@@ -103,7 +110,6 @@ public class WorldController : MonoBehaviour
     }
     private void Update()
     {
-
     }
 
 }
