@@ -196,7 +196,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -233,7 +233,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145243350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 0, z: 4.5}
+  m_LocalPosition: {x: 4.5, y: 0, z: 4.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -439,13 +439,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459786248}
-  m_LocalRotation: {x: 0.6532815, y: 0.27059805, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: -0.74, y: 12.7, z: -3.57}
+  m_LocalRotation: {x: 0.4887563, y: -0.002408192, z: 0.0013491319, w: 0.872416}
+  m_LocalPosition: {x: 4.53, y: 8.26, z: -0.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 58.518, y: -0.316, z: 0}
 --- !u!1001 &1627977876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -461,7 +461,7 @@ PrefabInstance:
     - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
         type: 3}
       propertyPath: myPoolList.Array.size
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
         type: 3}
@@ -600,8 +600,13 @@ PrefabInstance:
         type: 3}
       propertyPath: myPoolList.Array.data[0].myTilePrefab
       value: 
-      objectReference: {fileID: 8130346196132814220, guid: efadb6205c1e10241af034c7301c8d8d,
+      objectReference: {fileID: 976887252364513304, guid: 0def56393f6b7e8428c9df16f22e127b,
         type: 3}
+    - target: {fileID: 6210364711353201918, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
+        type: 3}
+      propertyPath: myPoolList.Array.data[0].myAmountOfTiles
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6210364711353201919, guid: 5f00d8d7f7013624e9ae4d5afad64e72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -689,6 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myBuildManager: {fileID: 1071004568}
+  myPlayerController: {fileID: 2122836252}
 --- !u!4 &1993884080
 Transform:
   m_ObjectHideFlags: 0
@@ -736,6 +742,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myWorldController: {fileID: 320751794}
+  myBuildManager: {fileID: 1071004568}
+  myStartingPos: {x: 0, y: 0, z: 0}
 --- !u!65 &2122836253
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -767,7 +775,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 02cb9f5b097d18745be661f20382f134, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

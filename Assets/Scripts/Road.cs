@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Road : MonoBehaviour
 {
-    List<Tile> myNeighbors = new List<Tile>();
+    Tile[] myNeighbors = new Tile[4];
     EMyRoadTypes myRoadType;
     int myX, myZ;
     public enum EMyRoadTypes
@@ -33,7 +33,7 @@ public class Road : MonoBehaviour
     public int GetSetX { get { return myX; } set { myX = value; } }
     public int GetSetZ { get { return myZ; } set { myZ = value; } }
 
-    public List<Tile> GetSetNeighbors { get { return myNeighbors; } set { myNeighbors = value; } }
+    public Tile[] GetSetNeighbors { get { return myNeighbors; } set { myNeighbors = value; } }
     public EMyRoadTypes GetSetRoadType { get { return myRoadType; } set { myRoadType = value; } }
 
 
