@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public Tile GetCurrectTile { get { return myCurrentTile; } }
     [SerializeField]
     Vector3 myStartingPos;
- 
+    private bool myIsPlaying = false;
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         SetCurrentTile();
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (myIsPlaying)
         {
             if (!myCoroutineIsActive)
             {
@@ -40,7 +40,10 @@ public class PlayerController : MonoBehaviour
 
         
     }
-
+    public void StartPlaying()
+    {
+        myIsPlaying = true;
+    }
     private void PlaceTileAtPlayerStartPosition()
     {
         if (WorldController.Instance.GetTileAtPosition(Mathf.FloorToInt(myStartingPos.x), Mathf.FloorToInt(myStartingPos.z)).GetSetTileState == Tile.TileState.empty)
