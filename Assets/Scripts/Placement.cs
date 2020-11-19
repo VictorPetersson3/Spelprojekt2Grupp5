@@ -5,6 +5,7 @@ using UnityEngine;
 public class Placement : MonoBehaviour
 {
    [SerializeField] private BuildManager myBuildManager;
+   [SerializeField] private PlayerController myPlayerController;
    private Vector3Int myInputCoordinates;
    private Tile myTile;
 
@@ -27,9 +28,12 @@ public class Placement : MonoBehaviour
             myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
 
             //Sätter tilen till obstructed
-            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z,Tile.TileState.obstructed);
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z,Tile.TileState.road);
+
+            //Lägger till tilen i tilen i en lista i PlayerController
+            myPlayerController.QueueTile(WorldController.Instance.GetWorld.GetTileAt(myInputCoordinates.x, myInputCoordinates.z));
          }
-      }
+        }
 
       //RIGHT CLICK INPUT
       if (Input.GetMouseButton(1))
@@ -41,7 +45,7 @@ public class Placement : MonoBehaviour
          myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
          //Kollar om en tile är upptagen
-         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
+         if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed && WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
          {  
             GameObject temp = WhatDidIHit(myInputCoordinates);
             
@@ -55,7 +59,13 @@ public class Placement : MonoBehaviour
             }
          }
       }
-   }
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        {
+            myPlayerController.UpdateMovementPath();
+        }
+    }
+    
+
    public GameObject WhatDidIHit(Vector3 anInputType)
    {
       RaycastHit hit;
