@@ -104,17 +104,17 @@ public class GameManager : MonoBehaviour
                 if (aScore > myLevelList[i].myHighScore)
                 {
                     myLevelList[i].myFinishedLevel = false;
-                    //UI.ShowFailScreen();
+                    //UI.ShowFailScreen(aScore, 1);
                 }
                 else if (aScore >= myLevelList[i].myMediumScore && aScore <= myLevelList[i].myHighScore)
                 {
                     myLevelList[i].myFinishedLevel = true;
-                    //UI.ShowWinScreen();
+                    //UI.ShowWinScreen(aScore, 2);
                 }
                 else if (aScore < myLevelList[i].myMinScore && myLevelList[i].myFinishedScore >= myLevelList[i].myMinScore && myLevelList[i].myFinishedScore < myLevelList[i].myMediumScore)
                 {
                     myLevelList[i].myFinishedLevel = true;
-                    //UI.ShowWinScreen();
+                    //UI.ShowWinScreen(aScore, 3);
                 }
             }
         }
