@@ -5,14 +5,13 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     Vector3 myTouchStart;
+    Vector3 originalPosition;
+    Quaternion originalRotation;
 
     [SerializeField]
     float myZoomOutMin = 1;
     [SerializeField]
     float myZoomOutMax = 8;
-
-    //[SerializeField]
-    //Transform[] myTargets;
 
     public Renderer[] myTargets;
 
@@ -21,21 +20,28 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     float myZoomPaddingLandscape = 2f;
 
+    [SerializeField]
+    float transitionSpeed = 5f;
+
     private bool myMultiTouch = false;
+
+    bool shouldMoveToTopDownView = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        originalPosition = transform.position;
+        originalRotation = transform.rotation;
     }
 
     private void LateUpdate()
     {               
-        if(Screen.orientation == ScreenOrientation.LandscapeLeft||Screen.orientation == ScreenOrientation.LandscapeRight)
+        if(Screen.orientation == ScreenOrientation.LandscapeLeft||Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
         {
             Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) + myZoomPaddingLandscape);
             Debug.Log("In landscape mode");
         }
-        else if (Screen.orientation == ScreenOrientation.Portrait)
+        else if (Screen.orientation == ScreenOrientation.Portrait && !shouldMoveToTopDownView)
         {
             Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) - myZoomPaddingPortrait);
         }
@@ -44,16 +50,38 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(shouldMoveToTopDownView)
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(0, transform.position.y, 0), Time.deltaTime* transitionSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime* transitionSpeed);
+            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 22, Time.deltaTime * transitionSpeed);
+        }
+
+        if (!shouldMoveToTopDownView)
+        {
+            transform.position = Vector3.Lerp(transform.position, originalPosition, Time.deltaTime * transitionSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * transitionSpeed);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            MoveToTopDownView();
+        }
+
         if(Input.GetMouseButtonDown(0))
         {
-            myMultiTouch = false;
             myTouchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        else if(Input.GetMouseButton(0) && myMultiTouch == false)
+        else if(Input.GetMouseButton(0))
         {
             Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Camera.main.transform.position += direction;
         }
+    }
+
+    public void MoveToTopDownView()
+    {
+        shouldMoveToTopDownView = !shouldMoveToTopDownView;
     }
 }
