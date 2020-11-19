@@ -12,7 +12,7 @@ public class Sc_escapeMenu : MonoBehaviour
     GameObject myEscapeMenuUpArrow;
     [SerializeField]
     RectTransform myEscapeMenuRect;
-    private Vector3 myMin = new Vector3(0.0f, 0.0f, 0.0f);
+    private Vector3 myMin = new Vector3(0.0f, 240.0f, 0.0f);
 
     public void EscapeMenuUp(GameObject aEscapeMenuContainer)
     {
@@ -22,7 +22,7 @@ public class Sc_escapeMenu : MonoBehaviour
     }
     public void EscapeMenuDown(GameObject aEscapeMenuContainer)
     {
-        LeanTween.move(myEscapeMenuRect, new Vector3(0, -620.0f, 0), 1.0f).setEase(easeType);
+        LeanTween.move(myEscapeMenuRect, new Vector3(0, -520.0f, 0), 1.0f).setEase(easeType);
         myEscapeMenuUpArrow.SetActive(true);
         myEscapeMenuDownArrow.SetActive(false);
     }
