@@ -6,39 +6,25 @@ public class Sc_BounceElement : MonoBehaviour
 {
     [SerializeField]
     RectTransform myRectTransform;
+    [SerializeField]
+    AnimationCurve myCurve;
+    [SerializeField]
+    LeanTweenType easeType;
 
-    public LeanTweenType easeType;
-    Vector3 myMovementDestination = new Vector3(1.0f,200.2f,1.0f);
+    Vector3 myMovementDestination = new Vector3(0.0f, 1.0f, 0.0f);
     bool myIsTweening = false;
     bool myHasReachedEnd = false;
 
     private void Update()
     {
-        //if(!myHasReachedEnd)
-        //{
-            LeanTween.move(myRectTransform, myMovementDestination, 3.0f).setEase(easeType);
-        //    if (LeanTween.isTweening(myRectTransform))
-        //    {
-        //        myIsTweening = true;
-        //    }
-        //    if (myIsTweening)
-        //    {
-        //        myHasReachedEnd = true;
-        //    }
-        //}
-        //else
-        //{
-        //    LeanTween.move(myRectTransform, new Vector3 (1.0f, 1.0f, 1.0f), 3.0f).setEase(easeType);
-        //    if (LeanTween.isTweening(myRectTransform))
-        //    {
-        //        myIsTweening = true;
-        //    }
-        //    if (myIsTweening)
-        //    {
-        //        myHasReachedEnd = false;
-        //    }
-        //}
-
+        if(easeType == LeanTweenType.animationCurve)
+        {
+            LeanTween.move(myRectTransform, myMovementDestination * 40, 4.0f).setLoopPingPong().setEase(myCurve);
+        }
+        else
+        {
+            LeanTween.move(myRectTransform, myMovementDestination * 40, 4.0f).setLoopPingPong().setEase(easeType);
+        }
     }
 
 }
