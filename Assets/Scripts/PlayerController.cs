@@ -56,41 +56,41 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateMovementPath()
     {
-        List<Tile> temp = new List<Tile>();
-        for (int i = 0; i < myMovementQueue.Count; i++)
-        {
-            myMovementQueue[i].SetRoad(myWorldController.GetRoadAtPosition(myMovementQueue[i].GetX, myMovementQueue[i].GetZ));
+        //List<Tile> temp = new List<Tile>();
+        //for (int i = 0; i < myMovementQueue.Count; i++)
+        //{
+        //    myMovementQueue[i].SetRoad(myWorldController.GetRoadAtPosition(myMovementQueue[i].GetX, myMovementQueue[i].GetZ));
 
-            myMovementQueue[i].GetSetRoad.GetSetNeighbors = GetNeighbors(myMovementQueue[i]);
+        //    myMovementQueue[i].GetSetRoad.GetSetNeighbors = GetNeighbors(myMovementQueue[i]);
 
-            switch (myMovementQueue[i].GetSetRoad.GetSetNeighbors.Count)
-            {
-                case 0:
-                    Debug.Log("Case 0 Straight");
-                    myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Straight;
-                    break;
-                case 1:
-                    Debug.Log("Case 1 Straight");
-                    myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Straight;
-                    break;
-                case 2:
-                    Debug.Log("Case 2 Straight");
-                    myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Straight;
-                    break;
-                case 3:
-                    Debug.Log("Case 3 Threeway");
-                    myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Threeway;
-                    break;
-                case 4:
-                    Debug.Log("Case 4 Intersection");
-                    myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Intersection;
-                    break;
-                default:
-                    Debug.Log("Error in UpdateMovementPath PlayerController");
-                    break;
-            }
-            temp.Add(myMovementQueue[i]);
-        }
+        //    switch (myMovementQueue[i].GetSetRoad.GetSetNeighbors.Count)
+        //    {
+        //        case 0:
+        //            Debug.Log("Case 0 Straight");
+        //            myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Straight;
+        //            break;
+        //        case 1:
+        //            Debug.Log("Case 1 Straight");
+        //            myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Straight;
+        //            break;
+        //        case 2:
+        //            Debug.Log("Case 2 Straight");
+        //            myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Straight;
+        //            break;
+        //        case 3:
+        //            Debug.Log("Case 3 Threeway");
+        //            myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Threeway;
+        //            break;
+        //        case 4:
+        //            Debug.Log("Case 4 Intersection");
+        //            myMovementQueue[i].GetSetRoad.GetSetRoadType = Road.EMyRoadTypes.Intersection;
+        //            break;
+        //        default:
+        //            Debug.Log("Error in UpdateMovementPath PlayerController");
+        //            break;
+        //    }
+        //    temp.Add(myMovementQueue[i]);
+        //}
     }
 
     List<Tile> GetNeighbors(Tile center)
