@@ -44,12 +44,26 @@ public class CameraController : MonoBehaviour
     {               
         if(Screen.orientation == ScreenOrientation.LandscapeLeft||Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
         {
-            Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) + myZoomPaddingLandscape);
-            Debug.Log("In landscape mode");
+            if(myTargets[0] != null)
+            {
+                Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) + myZoomPaddingLandscape);
+            }
+            else
+            {
+                Camera.main.orthographicSize = ((Camera.main.aspect) + myZoomPaddingLandscape);
+            }
+            //Debug.Log("In landscape mode");
         }
         else if (Screen.orientation == ScreenOrientation.Portrait && !shouldMoveToTopDownView)
         {
-            Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) - myZoomPaddingPortrait);
+            if (myTargets[0] != null)
+            {
+                Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) - myZoomPaddingPortrait);
+            }
+            else
+            {
+                Camera.main.orthographicSize = ((Camera.main.aspect) + myZoomPaddingPortrait);
+            }
         }
     }
 
