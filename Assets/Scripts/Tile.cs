@@ -3,7 +3,6 @@ public struct Tile
 {
     public enum TileState {empty, obstructed, road}
 
-
     TileState myTileState;
     World myWorld;
     Road myRoad;

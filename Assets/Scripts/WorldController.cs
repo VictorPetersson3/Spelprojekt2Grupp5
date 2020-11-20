@@ -23,7 +23,7 @@ public class WorldController : MonoBehaviour
     float myAlpha = 0.5f;
 
     World myWorld;
-    public World GetWorld { get { return myWorld; } }
+    public World GetWorld { get {return myWorld; } }
     public int GetWorldDepth { get { return myDepth; } }
     public int GetWorldWidth { get { return myWidth; } }
     void Start()
