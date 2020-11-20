@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
             if (!myCoroutineIsActive)
             {
                 StartCoroutine(StartMovement());
+                myIsPlaying = false;
             }
         }
     }
