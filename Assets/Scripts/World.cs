@@ -41,10 +41,6 @@ public class World
 
     }
 
-    public void SetRoadState(int aX, int aZ, Road.EMyRoadTypes aRoadType)
-    {
-        myRoads[aX, aZ].GetSetRoadType = aRoadType;
-    }
 
     public Tile GetTileAt(int aX, int aZ)
     {
@@ -59,23 +55,11 @@ public class World
         return myTiles[aX, aZ];
     }
 
-    public Road GetRoadAt(int aX, int aZ)
-    {
-        if (myRoads[aX, aZ] != null)
-        {
-            return myRoads[aX, aZ];
-
-        }
-        return null;
-    }
     public void CopySetTile(Tile aTile)
     {
         myTiles[aTile.GetX, aTile.GetZ] = aTile;
     }
 
-    public void CopySetRoad(Road aRoad)
-    {
-        myRoads[aRoad.GetSetX, aRoad.GetSetZ] = aRoad;
-    }
+
 }
 

@@ -18,6 +18,7 @@ public class Placement : MonoBehaviour
       {
          if (Input.GetMouseButton(0))
          {
+                Debug.Log("Pressed Mouse");
             //Avrundar spelarens input till integers
             myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
             myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
@@ -65,11 +66,6 @@ public class Placement : MonoBehaviour
                }
             }
          }
-      }
-
-      if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
-      {
-         myPlayerController.UpdateMovementPath();
       }
    }
 

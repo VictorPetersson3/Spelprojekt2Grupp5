@@ -22,12 +22,10 @@ public class PlayerController : MonoBehaviour
     {
         myStartingPos.y = 1;
         transform.position = myStartingPos;
-        SetCurrentTile();
         PlaceTileAtPlayerStartPosition();
     }
     private void Update()
     {
-        SetCurrentTile();
 
         if (myIsPlaying)
         {
@@ -43,15 +41,15 @@ public class PlayerController : MonoBehaviour
     }
     private void PlaceTileAtPlayerStartPosition()
     {
-        if (WorldController.Instance.GetTileAtPosition(Mathf.FloorToInt(myStartingPos.x), Mathf.FloorToInt(myStartingPos.z)).GetSetTileState == Tile.TileState.empty)
-        {
-            //Spawnar en tile
-            myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myStartingPos + Vector3.down;
+        //if (WorldController.Instance.GetTileAtPosition(Mathf.FloorToInt(myStartingPos.x), Mathf.FloorToInt(myStartingPos.z)).GetSetTileState == Tile.TileState.empty)
+        //{
+        //    //Spawnar en tile
+        //    myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myStartingPos + Vector3.down;
 
-            //Sätter tilen till obstructed
-            WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myStartingPos.x), Mathf.FloorToInt(myStartingPos.z), Tile.TileState.road);
-            QueueTile(WorldController.Instance.GetWorld.GetTileAt(Mathf.FloorToInt(myStartingPos.x), Mathf.FloorToInt(myStartingPos.z)));
-        }
+        //    //Sätter tilen till obstructed
+        //    WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myStartingPos.x), Mathf.FloorToInt(myStartingPos.z), Tile.TileState.road);
+        //    QueueTile(WorldController.Instance.GetWorld.GetTileAt(Mathf.FloorToInt(myStartingPos.x), Mathf.FloorToInt(myStartingPos.z)));
+        //}
     }
 
     public void UpdateMovementPath()
@@ -186,10 +184,5 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void SetCurrentTile()
-    {
-        myCurrentTile = myWorldController.GetWorld.GetTileAt(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.z));
-        
-    }
 
 }
