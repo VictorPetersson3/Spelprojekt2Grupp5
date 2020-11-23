@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PathTile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    Vector3 myPosition;
+    public Vector3 GetPathTilePosition { get{ return myPosition; }set { myPosition = value; } }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
