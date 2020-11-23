@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        LoadFile();
 
         if (globalInstance == null)
         {
