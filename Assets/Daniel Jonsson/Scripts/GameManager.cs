@@ -8,17 +8,21 @@ public class GameManager : MonoBehaviour
 {
     enum SaveSlot
     {
-        Save1 = 0,
-        Save2 = 1,
-        Save3 = 2,
-        Count = 3
+        Save1 = 1,
+        Save2 = 2,
+        Save3 = 3
     }
 
+
+    private SaveSlot mySaveSlot;
+    private bool myLoadedLevel;
+
     public static GameManager globalInstance;
+    public List<Level> myLevelList;
+
 
     private void Awake()
     {
-
         if (globalInstance == null)
         {
             globalInstance = this;
@@ -30,8 +34,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    public List<Level> myLevelList;
+    
 
     [System.Serializable]
     public class Level
@@ -47,18 +50,25 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        for (int i = 1; i <= (int)(Levels.Count - 1); i++)
+
+        PlayerPrefs.SetInt("level1", 50);
+
+        if (myLoadedLevel == false)
         {
-            Level level = new Level();
-            level.myLevelName = "Level " + i;
-            level.myFinishedScore = 0;
-            level.myMinScore = 0;
-            level.myMediumScore = 0;
-            level.myHighScore = 0;
-            level.myFinishedLevel = false;
-            myLevelList.Add(level);
+            for (int i = 1; i <= (int)(Levels.Count - 1); i++)
+            {
+                Level level = new Level();
+                level.myLevelName = "Level " + i;
+                level.myFinishedScore = 0;
+                level.myMinScore = 0;
+                level.myMediumScore = 0;
+                level.myHighScore = 0;
+                level.myFinishedLevel = false;
+                myLevelList.Add(level);
+            }
         }
     }
+
 
     private void Update()
     {
@@ -94,7 +104,7 @@ public class GameManager : MonoBehaviour
                 if (aScore > myLevelList[i].myFinishedScore)
                 {
                     myLevelList[i].myFinishedScore = aScore;
-                    SaveFile();
+                    SaveFile(1);
                 }
 
                 
@@ -134,10 +144,17 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void SaveFile()
+    public void SaveFile(int aSaveFileIndex)
     {
+        string path = "";
+
+        if (SetSaveFile(aSaveFileIndex))
+        {
+            path = Application.persistentDataPath + "/" + mySaveSlot;
+        }
+
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/Save";
+        
         Debug.Log(Application.persistentDataPath);
         FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -145,9 +162,14 @@ public class GameManager : MonoBehaviour
         stream.Close();
     }
 
-    public void LoadFile()
+    public void LoadFile(int aLoadedFileIndex)
     {
-        string path = Application.persistentDataPath + "/Save";
+        string path = "";
+
+        if (SetSaveFile(aLoadedFileIndex))
+        {
+            path = Application.persistentDataPath + "/" + mySaveSlot;
+        }
 
         if (File.Exists(path))
         {
@@ -158,9 +180,13 @@ public class GameManager : MonoBehaviour
             stream.Close();
 
             myLevelList = loadLevels;
+
+            myLoadedLevel = true;
         }
-        else
+        else 
         {
+            Debug.Log("NO EXISTED PATH FOR LOADED FILE");
+            myLoadedLevel = false;
             //UI.ErrorSave();
         }
     }
@@ -174,6 +200,34 @@ public class GameManager : MonoBehaviour
         }
 
         return listOfFinishedLevels;
+    }
+
+
+    bool SetSaveFile(int aSaveIndex)
+    {
+        switch (aSaveIndex)
+        {
+            case (int)SaveSlot.Save1:
+                {
+                    mySaveSlot = SaveSlot.Save1;
+                    return true;
+                }
+            case (int)SaveSlot.Save2:
+                {
+                    mySaveSlot = SaveSlot.Save2;
+                    return true;
+                }
+            case (int)SaveSlot.Save3:
+                {
+                    mySaveSlot = SaveSlot.Save3;
+                    return true;
+                }
+            default:
+                {
+                    Debug.Log("NO VALID PATH");
+                    return false;
+                }
+        }
     }
 
 }
