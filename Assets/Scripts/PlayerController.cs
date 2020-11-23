@@ -12,10 +12,10 @@ public class PlayerController : MonoBehaviour
     int step = 1;
     [Range(1, 8)]
     [SerializeField]
-    float myMovementSpeed = 3;
+    float myMovementSpeed = 8;
     void Start()
     {
-        myMovementList = new List<PathTile>();     
+        myMovementList = new List<PathTile>();
     }
 
     void Update()
@@ -35,7 +35,4 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    
-
 }

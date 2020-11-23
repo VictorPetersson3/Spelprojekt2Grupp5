@@ -22,7 +22,7 @@ public class Placement : MonoBehaviour
             myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
             myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
 
-            myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(WorldController.Instance.GetWorldWidth, 0, WorldController.Instance.GetWorldDepth));
+            myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(WorldController.Instance.GetWorldWidth - 1, 0, WorldController.Instance.GetWorldDepth - 1));
 
             //Kollar om en tile är upptagen
             if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
