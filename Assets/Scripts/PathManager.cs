@@ -8,7 +8,7 @@ public class PathManager : MonoBehaviour
     PlayerController myPlayerController;
 
     [SerializeField]
-    PathTile pathTilePrefab;
+    PathTile pathTilePrefab; 
 
     PathTile myStartPathTile;
     PathTile myLastPlacedPathTile;
@@ -16,7 +16,7 @@ public class PathManager : MonoBehaviour
     PathTile[,] myPathTiles;
 
     List<PathTile> myPath;
-
+  
     void Start()
     {
         myPath = new List<PathTile>();
