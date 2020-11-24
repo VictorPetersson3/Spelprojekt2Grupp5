@@ -42,6 +42,10 @@ public class Placement : MonoBehaviour
                     //Sätter tilen till obstructed
                     WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
                 }
+                else
+                {
+                    Debug.Log("You cant place here");
+                }
             }
         }
 
