@@ -26,7 +26,7 @@ public class WorldController : MonoBehaviour
     public World GetWorld { get {return myWorld; } }
     public int GetWorldDepth { get { return myDepth; } }
     public int GetWorldWidth { get { return myWidth; } }
-    void Start()
+    void Awake()
     {
 
         myWorld = new World(myWidth, myDepth);
