@@ -14,7 +14,13 @@ public class PathManager : MonoBehaviour
     PathTile myLastPlacedPathTile;
     [SerializeField]
     PathTile myEndTile;
+    [SerializeField]
+    List<Portals> myPortals = new List<Portals>();
 
+    public List<Portals> GetPortalTiles()
+    {
+        return myPortals;
+    }
 
     PathTile[,] myPathTiles;
 
@@ -35,14 +41,22 @@ public class PathManager : MonoBehaviour
     }
     void Start()
     {
+        
         myPath = new List<PathTile>();
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
         myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
         myLastPlacedPathTile = myStartPathTile;
         AddItemToMap(myStartPathTile);
+
+        AddItemToPortalMap(Instantiate(myPathTilePrefab, myPortals[0].GetExit() + myPortals[0].transform.position, Quaternion.identity));
         
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
+    }
+
+    public void AddItemToPortalMap(PathTile aPathTileToAdd)
+    {
+        myPortals[0].AddVectorToMovementList(aPathTileToAdd);
     }
     public void AddItemToMap(PathTile aPathTileToAdd)
     {
@@ -63,6 +77,7 @@ public class PathManager : MonoBehaviour
             myPath.Add(myEndTile);
             myPathTiles[x, z] = myEndTile;
         }
+        
         myPlayerController.myMovementList = myPath;
 
 
@@ -99,6 +114,10 @@ public class PathManager : MonoBehaviour
                 return true;
             }
         }
+        
+        
+        
+
         return false;
 
     }

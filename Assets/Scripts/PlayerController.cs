@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     Tile myCurrentTile;
     public Tile GetCurrectTile { get { return myCurrentTile; } }
 
+    [SerializeField]
+    PathManager myPathMananger;
     public List<PathTile> myMovementList;
     [SerializeField]
     ParticleSystem myDeathEffect;
@@ -21,12 +23,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        print(transform.position + Vector3.right + "myPos");
+        print(myPathMananger.GetPortalTiles()[0].GetPos() + "PortalTile");
         if (Input.GetKey(KeyCode.Space))
         {
             if (myMovementList[step].IsEndTile)
             {
                 Debug.Log("You win");
 
+            }
+            if (myPathMananger.GetPortalTiles()[0].GetPos() == transform.position + Vector3.left)
+            {
+                print("Telelport");
+                transform.position = myPathMananger.GetPortalTiles()[0].GetExit() + myPathMananger.GetPortalTiles()[0].transform.position;
+                myMovementList = myPathMananger.GetPortalTiles()[0].GetMovementList();
             }
             else
             {
