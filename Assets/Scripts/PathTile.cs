@@ -8,3 +8,4 @@ public class PathTile : MonoBehaviour
     public Vector3 GetPathTilePosition { get{ return myPosition; }set { myPosition = value; } }
 
 }
+ 
