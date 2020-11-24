@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,16 +14,37 @@ public class GameManager : MonoBehaviour
         Save3 = 3
     }
 
-
     private SaveSlot mySaveSlot;
     private bool myLoadedLevel;
 
     public static GameManager globalInstance;
-    public List<Level> myLevelList;
+    [SerializeField] Text myMoneyText;
+    [SerializeField] Text myLevelText;
+
+    [SerializeField] short myFirstActTransition, mySecondActTransition;
+
+    [SerializeField]
+    public List<Level> myLevelList = new List<Level>();
+
+
+    [System.Serializable]
+    public class Level
+    {
+        public string myLevelName;
+        public int myMinScore;
+        public int myMediumScore;
+        public int myHighScore;
+        public int myFinishedScore;
+        public int myStartingMoney;
+        public int myAmountOfMoney;
+        public bool myFinishedLevel;
+    }
+
 
 
     private void Awake()
     {
+
         if (globalInstance == null)
         {
             globalInstance = this;
@@ -34,32 +56,43 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+   
 
-    [System.Serializable]
-    public class Level
-    {
-        public string myLevelName;
-        public int myMinScore;
-        public int myMediumScore;
-        public int myHighScore;
-        public int myFinishedScore;
-        public bool myFinishedLevel;
-    }
+   
+
 
 
     void Start()
     {
+        int actNumber = 1;
+        int levelNumber = 1;
+        string act = "Act " + actNumber + ": ";
 
-        PlayerPrefs.SetInt("level1", 50);
+        
 
         if (myLoadedLevel == false)
         {
             for (int i = 1; i <= (int)(Levels.Count - 1); i++)
             {
+                if (i == myFirstActTransition)
+                {
+                    actNumber += 1;
+                    act = "Act " + actNumber + ": ";
+                    levelNumber = 1;
+                }
+                else if (i == mySecondActTransition)
+                {
+                    actNumber += 1;
+                    act = "Act " + actNumber + ": ";
+                    levelNumber = 1;
+                }
+                
                 Level level = new Level();
-                level.myLevelName = "Level " + i;
+                level.myLevelName = act +  " Level " + levelNumber;
+                levelNumber++;
                 level.myFinishedScore = 0;
+                level.myStartingMoney = 0;
+                level.myAmountOfMoney = 0;
                 level.myMinScore = 0;
                 level.myMediumScore = 0;
                 level.myHighScore = 0;
@@ -72,15 +105,52 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        IsPlayerAlive();
-
-        if (Input.GetKeyDown(KeyCode.R))
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            BuildManager.globalInstance.ResetTiles();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            CheckTextStatus();
         }
     }
 
+    public void CheckTextStatus()
+    {
+        myMoneyText.text = "Money: " + myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+        myLevelText.text = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myLevelName;
+    }
+
+    public void ResetLevel()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ResetAllLevels();
+    }
+
+    public void NextLevel()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index + 1);
+        ResetAmountOfMoney(index - 1);
+    }
+
+    public void BackLevel()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index - 1);
+        ResetAmountOfMoney(index - 1);
+    }
+
+    public void ResetAmountOfMoney(int aBuildIndex)
+    {
+        myLevelList[aBuildIndex].myAmountOfMoney = myLevelList[aBuildIndex].myStartingMoney;
+        BuildManager.globalInstance.ResetTiles();
+    }
+
+    public void ResetAllLevels()
+    {
+        for (int i = 0; i < myLevelList.Count; i++)
+        {
+            myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
+        }
+    }
 
     public void SetLevelScore(int aLowScore, int aMediumScore, int aHighScore)
     {
@@ -182,6 +252,7 @@ public class GameManager : MonoBehaviour
             myLevelList = loadLevels;
 
             myLoadedLevel = true;
+            ResetAllLevels();
         }
         else 
         {
@@ -229,5 +300,14 @@ public class GameManager : MonoBehaviour
                 }
         }
     }
+
+    public void RemoveMoney(int someMoney)
+    {
+        int myTotalMoney = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+        myTotalMoney += someMoney;
+
+        myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney = myTotalMoney;
+    }
+
 
 }
