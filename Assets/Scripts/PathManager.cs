@@ -8,7 +8,7 @@ public class PathManager : MonoBehaviour
     PlayerController myPlayerController;
 
     [SerializeField]
-    PathTile myPathTilePrefab; 
+    PathTile myPathTilePrefab;
 
     PathTile myStartPathTile;
     PathTile myLastPlacedPathTile;
@@ -18,7 +18,13 @@ public class PathManager : MonoBehaviour
 
     PathTile[,] myPathTiles;
 
-    List<PathTile> myPath;
+    public PathTile[,] GetPathTileMap { get { return myPathTiles; } }
+    public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } }
+    public List<Vector3> GetPathFromStart { get { return myPathList; } }
+    
+    List<Vector3> myPathList;
+
+    
 
     void OnValidate()
     {
@@ -30,21 +36,26 @@ public class PathManager : MonoBehaviour
             {
                 myEndTile = objects[i];
                 break;
-            }     
+            }
         }
     }
     void Start()
     {
-        myPath = new List<PathTile>();
+        myPathList = new List<Vector3>();
+        myPlayerController.myMovementList = myPathList;
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
         myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
+
+
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
+
         myLastPlacedPathTile = myStartPathTile;
-        AddItemToMap(myStartPathTile);
-        
+
+        AddItemToMap(myStartPathTile, myPathList);
+
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
     }
-    public void AddItemToMap(PathTile aPathTileToAdd)
+    public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList)
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
         int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
@@ -52,7 +63,7 @@ public class PathManager : MonoBehaviour
         if (myPathTiles[x, z] != myEndTile)
         {
             myPathTiles[x, z] = aPathTileToAdd;
-            myPath.Add(aPathTileToAdd);
+            aList.Add(aPathTileToAdd.transform.position);
             myLastPlacedPathTile = aPathTileToAdd;
 
             Debug.Log("Add noraml tile");
@@ -60,41 +71,39 @@ public class PathManager : MonoBehaviour
         else
         {
             Debug.Log("Add end tile");
-            myPath.Add(myEndTile);
+            aList.Add(myEndTile.transform.position);
             myPathTiles[x, z] = myEndTile;
         }
-        myPlayerController.myMovementList = myPath;
-
-
     }
-    public bool CheckPlacement(Vector3 aPosition)
+    public bool CheckPlacement(Vector3 aPosition, PathTile aLastPlacedTile)
     {
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
         if (x - 1 >= 0)
         {
-            if (myPathTiles[x - 1, z] == myLastPlacedPathTile)
+
+            if (myPathTiles[x - 1, z] == aLastPlacedTile)
             {
                 return true;
             }
         }
         if (x + 1 < WorldController.Instance.GetWorldWidth)
-        { 
-            if (myPathTiles[x + 1, z] == myLastPlacedPathTile)
+        {
+            if (myPathTiles[x + 1, z] == aLastPlacedTile)
             {
                 return true;
             }
         }
         if (z - 1 >= 0)
         {
-            if (myPathTiles[x, z - 1] == myLastPlacedPathTile)
+            if (myPathTiles[x, z - 1] == aLastPlacedTile)
             {
                 return true;
             }
         }
         if (z + 1 < WorldController.Instance.GetWorldDepth)
         {
-            if (myPathTiles[x, z + 1] == myLastPlacedPathTile)
+            if (myPathTiles[x, z + 1] == aLastPlacedTile)
             {
                 return true;
             }
