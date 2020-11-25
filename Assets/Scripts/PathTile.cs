@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PathTile : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    bool isEndTile = false;
+
+    Vector3 myPosition;
+    public Vector3 GetPathTilePosition { get { return myPosition; } set { myPosition = value; } }
+    public bool IsEndTile { get { return isEndTile; } }
+
     void Start()
     {
-        
+        myPosition = new Vector3(Mathf.FloorToInt(transform.position.x), 0, Mathf.FloorToInt(transform.position.z));
+        transform.position = myPosition;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+ 

@@ -23,11 +23,12 @@ public class WorldController : MonoBehaviour
     float myAlpha = 0.5f;
 
     World myWorld;
-    public World GetWorld { get { return myWorld; } }
+    public World GetWorld { get {return myWorld; } }
     public int GetWorldDepth { get { return myDepth; } }
     public int GetWorldWidth { get { return myWidth; } }
-    void Start()
+    void Awake()
     {
+
         myWorld = new World(myWidth, myDepth);
 
         if (Instance != null)
@@ -43,7 +44,6 @@ public class WorldController : MonoBehaviour
         return this.myWorld.GetTileAt(x, z);
     }
 
-    
 
     [ExecuteInEditMode]
     private void OnDrawGizmos()
@@ -103,7 +103,6 @@ public class WorldController : MonoBehaviour
     }
     private void Update()
     {
-
     }
 
 }
