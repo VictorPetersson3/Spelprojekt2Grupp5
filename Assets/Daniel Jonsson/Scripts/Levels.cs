@@ -8,5 +8,5 @@ public enum Levels
     Level03 = 3,
     Level04 = 4,
     Level05 = 5,
-    Count = 6
+    Count = 40
 }

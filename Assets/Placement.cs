@@ -7,10 +7,14 @@ public class Placement : MonoBehaviour
     [SerializeField]
     PathManager myPathManager;
     [SerializeField] private BuildManager myBuildManager;
+    GameManager myGameManger = GameManager.globalInstance;
     private Vector3Int myInputCoordinates;
     private Tile myTile;
     [SerializeField]
     PathTile temp;
+
+    [SerializeField]
+    int myPathMoney;
 
     int a = 1;
     private void Update()
@@ -32,15 +36,16 @@ public class Placement : MonoBehaviour
 
                 if (myPathManager.CheckPlacement(myInputCoordinates))
                 {
-                    
                     PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
                     path.name = "Path Tile " + a;
                     a++;
                     path.GetPathTilePosition = myInputCoordinates;
                     myPathManager.AddItemToMap(path);
+                    
 
                     //Sätter tilen till obstructed
                     WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+                    GameManager.globalInstance.ChangeMoney(myPathMoney);
                 }
                 else
                 {

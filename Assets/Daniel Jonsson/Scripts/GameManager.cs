@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     private void Awake()
     {
 
@@ -57,10 +56,6 @@ public class GameManager : MonoBehaviour
     }
 
    
-
-   
-
-
 
     void Start()
     {
@@ -141,7 +136,7 @@ public class GameManager : MonoBehaviour
     public void ResetAmountOfMoney(int aBuildIndex)
     {
         myLevelList[aBuildIndex].myAmountOfMoney = myLevelList[aBuildIndex].myStartingMoney;
-        BuildManager.globalInstance.ResetTiles();
+        //BuildManager.globalInstance.ResetTiles();
     }
 
     public void ResetAllLevels()
@@ -301,7 +296,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RemoveMoney(int someMoney)
+    public void ChangeMoney(int someMoney)
     {
         int myTotalMoney = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
         myTotalMoney += someMoney;

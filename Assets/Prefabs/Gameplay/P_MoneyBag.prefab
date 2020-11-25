@@ -102,7 +102,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1681007756726794923}
-  m_Layer: 0
+  - component: {fileID: 1385029146}
+  - component: {fileID: 4192201646463385680}
+  m_Layer: 8
   m_Name: P_MoneyBag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,3 +126,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1385029146
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077514585455850309}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4722023, y: 0.07366967, z: 0.42127895}
+  m_Center: {x: -0.038725376, y: 0.8303685, z: 0.015908718}
+--- !u!114 &4192201646463385680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077514585455850309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3279205ff080004497ffd12338cc130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myMoneyValue: 30

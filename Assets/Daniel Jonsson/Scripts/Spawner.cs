@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
                 {
                     GameObject gameObj = myBuildManager.SpawnFromPool("Sphere", Quaternion.identity);
                     gameObj.transform.position = objectHit.position;
-                    GameManager.globalInstance.RemoveMoney(-30);
+                    GameManager.globalInstance.ChangeMoney(-30);
                 }
                 else if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
