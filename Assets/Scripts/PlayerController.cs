@@ -7,7 +7,21 @@ public class PlayerController : MonoBehaviour
     Tile myCurrentTile;
     public Tile GetCurrectTile { get { return myCurrentTile; } }
 
-    public List<Vector3> myMovementList;
+    public List<Vector3> PlayerMoveList
+    {
+        get
+        {
+            return myMovementList;
+        }
+        set
+        {
+            
+
+            myMovementList = value;
+        }
+    }
+
+    List<Vector3> myMovementList;
     [SerializeField]
     ParticleSystem myDeathEffect;
     int step = 1;
@@ -42,7 +56,7 @@ public class PlayerController : MonoBehaviour
             
                 if (distanceToNextPos.magnitude < 0.05f)
                 {
-                    if (step < myMovementList.Count - 1)
+                    if (step < myMovementList.Count)
                     {
                         step++;
 

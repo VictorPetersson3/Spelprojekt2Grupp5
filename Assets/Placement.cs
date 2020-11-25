@@ -68,7 +68,7 @@ public class Placement : MonoBehaviour
     }
     void PlacementLogic()
     {
-        Debug.Log(myListOfIntersections.Count);
+
         //Spawnar en tile
         //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
         if (myListOfIntersections.Count != 0)
@@ -85,7 +85,7 @@ public class Placement : MonoBehaviour
                         path.name = "Path Tile " + a;
                         a++;
                         path.GetPathTilePosition = myInputCoordinates;
-                        myPathManager.AddItemToMap(path, myListOfIntersections[i].ChooseListToAddTileTo);
+                        myPathManager.AddItemToMap(path, myListOfIntersections[i].ChooseListToAddTileTo, myListOfIntersections[i]);
                         myListOfIntersections[i].GetSetLastPlacedTile = path;
 
                     }
@@ -96,7 +96,7 @@ public class Placement : MonoBehaviour
                         intersectionPath.name = "Intersection Tile ";
                         intersectionPath.GetPathTilePosition = myInputCoordinates;
                         
-                        myPathManager.AddItemToMap(intersectionPath, myListOfIntersections[i].ChooseListToAddTileTo);
+                        myPathManager.AddItemToMap(intersectionPath, myListOfIntersections[i].ChooseListToAddTileTo, myListOfIntersections[i]);
                     }
 
                     //Sätter tilen till obstructed
@@ -119,7 +119,7 @@ public class Placement : MonoBehaviour
                     path.name = "Path Tile " + a;
                     a++;
                     path.GetPathTilePosition = myInputCoordinates;
-                    myPathManager.AddItemToMap(path, myPathManager.GetPathFromStart);
+                    myPathManager.AddItemToMap(path, myPathManager.GetPathFromStart, null);
 
                 }
                 else
@@ -128,7 +128,7 @@ public class Placement : MonoBehaviour
                     path.name = "Intersection Tile ";
                     myListOfIntersections.Add(path);
                     path.GetPathTilePosition = myInputCoordinates;
-                    myPathManager.AddItemToMap(path, myPathManager.GetPathFromStart);
+                    myPathManager.AddItemToMap(path, myPathManager.GetPathFromStart, null);
                 }
 
                 WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PathTileIntersection : PathTile
 {
-    PathManager pathManager;
+
     PlayerController myPlayerController;
     List<Vector3>[] myPathTiles;
     PathTile myLastPlacedTile;
 
-    public PathTile GetSetLastPlacedTile { get { return myLastPlacedTile; } set { myLastPlacedTile = value; } }
+    public PathTile GetSetLastPlacedTile { get { return myLastPlacedTile; } set { Debug.Log("Update last placed tile"); myLastPlacedTile = value; } }
+    [SerializeField]
     Directions myOutDirection;
     enum Directions
     {
@@ -22,7 +23,7 @@ public class PathTileIntersection : PathTile
     public override void Start()
     {
         myLastPlacedTile = this;
-        pathManager = FindObjectOfType<PathManager>();
+
         myPlayerController = FindObjectOfType<PlayerController>();
         // 0 = left, 1 = up, 2 = right, 3 = down
         myPathTiles = new List<Vector3>[4];
@@ -31,17 +32,20 @@ public class PathTileIntersection : PathTile
             myPathTiles[i] = new List<Vector3>();
         }
 
+
         base.Start();
     }
     void Update()
     {
-        PassThroughPlayer();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            for (int i = 0; i < 4; i++)
-            {
-                Debug.Log(myPathTiles[i].Count);
-            }
+            
+        }
+
+        PassThroughPlayer();
+        if (Input.GetMouseButton(0))
+        {
+
             CheckIfPlacedNextToMe();
         }
     }
@@ -53,115 +57,111 @@ public class PathTileIntersection : PathTile
         }
         set
         {
-            myPathTiles[(int)myOutDirection] = value;  
-
+            myPathTiles[(int)myOutDirection] = value;
         }
     }
     void PassThroughPlayer()
     {
-        if (Vector3.Distance(transform.position, myPlayerController.transform.position) < 1)
+
+        if (Vector3.Distance(transform.position, myPlayerController.transform.position) < 1.1)
         {
             if (myOutDirection == Directions.right)
             {
-                if (GetInputDirection() == (int)Directions.down || GetInputDirection() == (int)Directions.left)
+                if (GetInputDirection() != (int)Directions.right)
                 {
-                    myPlayerController.myMovementList = myPathTiles[(int)myOutDirection];
-                    myPlayerController.SetPlayerStep = 1;
-                }
-                if (GetInputDirection() == (int)Directions.up || GetInputDirection() == (int)Directions.left)
-                {
-                    myPlayerController.myMovementList = myPathTiles[(int)myOutDirection];
+           
+                    myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
                     myPlayerController.SetPlayerStep = 1;
                 }
             }
             else if (myOutDirection == Directions.left)
             {
-                if (GetInputDirection() == (int)Directions.right || GetInputDirection() == (int)Directions.down)
+                if (GetInputDirection() != (int)Directions.left)
                 {
-                    myPlayerController.myMovementList = myPathTiles[(int)myOutDirection];
-                    myPlayerController.SetPlayerStep = 1;
-                }
-                if (GetInputDirection() == (int)Directions.up || GetInputDirection() == (int)Directions.right)
-                {
-                    myPlayerController.myMovementList = myPathTiles[(int)myOutDirection];
+
+                
+                    myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
                     myPlayerController.SetPlayerStep = 1;
                 }
             }
             else if (myOutDirection == Directions.up)
             {
-                if (GetInputDirection() == (int)Directions.right || GetInputDirection() == (int)Directions.down)
+                if (GetInputDirection() != (int)Directions.up)
                 {
-                    myPlayerController.myMovementList = myPathTiles[(int)myOutDirection];
-                    myPlayerController.SetPlayerStep = 1;
-                }
-                if (GetInputDirection() == (int)Directions.left || GetInputDirection() == (int)Directions.down)
-                {
-                    myPlayerController.myMovementList = myPathTiles[(int)myOutDirection];
+                    
+                    myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
                     myPlayerController.SetPlayerStep = 1;
                 }
             }
             else // Down
             {
-                if (GetInputDirection() == (int)Directions.up || GetInputDirection() == (int)Directions.right)
+                if (GetInputDirection() != (int)Directions.down)
                 {
-                    myPlayerController.myMovementList = myPathTiles[(int)myOutDirection];
+                  
+                    myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
                     myPlayerController.SetPlayerStep = 1;
 
                 }
-                if (GetInputDirection() == (int)Directions.left || GetInputDirection() == (int)Directions.up)
-                {
-                    myPlayerController.myMovementList = myPathTiles[(int)myOutDirection];
-                    myPlayerController.SetPlayerStep = 1;
-                }
-            }     
-        }     
+
+            }
+        }
     }
-    
-    public void CheckIfPlacedNextToMe()
+
+    void CheckIfPlacedNextToMe()
     {
         int x = Mathf.FloorToInt(transform.position.x);
         int z = Mathf.FloorToInt(transform.position.z);
         if (x - 1 >= 0)
         {
-            if (pathManager.GetPathTileMap[x - 1, z] == pathManager.GetLastPlacedTile)
+            if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile && myPathTiles[0].Count == 0)
             {
-                AddExitingListToIntersection(0 , pathManager.GetPathFromStart);
+
+                AddExitingListToIntersection(0, myPathManager.GetPathFromStart);
             }
         }
         if (x + 1 < WorldController.Instance.GetWorldWidth)
         {
-            if (pathManager.GetPathTileMap[x + 1, z] == pathManager.GetLastPlacedTile)
+            if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile && myPathTiles[2].Count == 0)
             {
-                AddExitingListToIntersection(2, pathManager.GetPathFromStart);
+
+                AddExitingListToIntersection(2, myPathManager.GetPathFromStart);
             }
         }
         if (z - 1 >= 0)
         {
-            if (pathManager.GetPathTileMap[x, z - 1] == pathManager.GetLastPlacedTile)
+            if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile && myPathTiles[3].Count == 0)
             {
-                AddExitingListToIntersection(3, pathManager.GetPathFromStart);
+
+                AddExitingListToIntersection(3, myPathManager.GetPathFromStart);
             }
         }
         if (z + 1 < WorldController.Instance.GetWorldDepth)
         {
-            if (pathManager.GetPathTileMap[x, z + 1] == pathManager.GetLastPlacedTile)
+            if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile && myPathTiles[1].Count == 0)
             {
-                AddExitingListToIntersection(1, pathManager.GetPathFromStart);
+
+                AddExitingListToIntersection(1, myPathManager.GetPathFromStart);
             }
         }
+
     }
 
     public void AddExitingListToIntersection(int aIndex, List<Vector3> aPathTileList)
     {
-        myPathTiles[aIndex] = aPathTileList;
-        
+        myPathTiles[aIndex].Clear();
+        for (int i = 0; i < aPathTileList.Count; i++)
+        {
+            myPathTiles[aIndex].Add(aPathTileList[i]);
+        }
     }
     int GetInputDirection()
     {
+
         if (myPlayerController.transform.position.x < transform.position.x + 0.5f && myPlayerController.transform.position.x > transform.position.x - 0.5f)
         {
             if (myPlayerController.transform.position.y < transform.position.y)
             {
+
                 return 3;
             }
             else
@@ -179,12 +179,11 @@ public class PathTileIntersection : PathTile
             {
                 return 2;
             }
-
         }
         return 0;
 
     }
-    
+
 
 
 }

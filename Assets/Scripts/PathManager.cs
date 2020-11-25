@@ -15,16 +15,17 @@ public class PathManager : MonoBehaviour
     [SerializeField]
     PathTile myEndTile;
 
-
+    List<PathTileIntersection> myPathIntersectionlist;
     PathTile[,] myPathTiles;
 
+    public List<PathTileIntersection> PathTileIntersectionList { get { return myPathIntersectionlist; } set { myPathIntersectionlist = value; } }
     public PathTile[,] GetPathTileMap { get { return myPathTiles; } }
-    public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } }
+    public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
     public List<Vector3> GetPathFromStart { get { return myPathList; } }
-    
+
     List<Vector3> myPathList;
 
-    
+
 
     void OnValidate()
     {
@@ -41,8 +42,9 @@ public class PathManager : MonoBehaviour
     }
     void Start()
     {
+        myPathIntersectionlist = new List<PathTileIntersection>();
         myPathList = new List<Vector3>();
-        myPlayerController.myMovementList = myPathList;
+        myPlayerController.PlayerMoveList = myPathList;
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
         myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
 
@@ -51,11 +53,12 @@ public class PathManager : MonoBehaviour
 
         myLastPlacedPathTile = myStartPathTile;
 
-        AddItemToMap(myStartPathTile, myPathList);
+        AddItemToMap(myStartPathTile, myPathList, null);
 
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
     }
-    public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList)
+
+    public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdeifier)
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
         int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
@@ -64,13 +67,27 @@ public class PathManager : MonoBehaviour
         {
             myPathTiles[x, z] = aPathTileToAdd;
             aList.Add(aPathTileToAdd.transform.position);
-            myLastPlacedPathTile = aPathTileToAdd;
 
-            Debug.Log("Add noraml tile");
+            if (aPathTileToAdd.GetType() != typeof(PathTileIntersection))
+            {
+                if (pathTileIdeifier != null)
+                {
+                    pathTileIdeifier.GetSetLastPlacedTile = aPathTileToAdd;
+                }
+                else
+                {
+                    myLastPlacedPathTile = aPathTileToAdd;
+                }
+            }
+            else
+            {
+                
+                myPathIntersectionlist.Add((PathTileIntersection)aPathTileToAdd);
+            }
         }
         else
         {
-            Debug.Log("Add end tile");
+
             aList.Add(myEndTile.transform.position);
             myPathTiles[x, z] = myEndTile;
         }
