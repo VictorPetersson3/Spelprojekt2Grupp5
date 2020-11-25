@@ -48,7 +48,6 @@ public class PathManager : MonoBehaviour
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
         myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
 
-
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
 
         myLastPlacedPathTile = myStartPathTile;
@@ -81,13 +80,11 @@ public class PathManager : MonoBehaviour
             }
             else
             {
-                
                 myPathIntersectionlist.Add((PathTileIntersection)aPathTileToAdd);
             }
         }
         else
         {
-
             aList.Add(myEndTile.transform.position);
             myPathTiles[x, z] = myEndTile;
         }
@@ -98,7 +95,6 @@ public class PathManager : MonoBehaviour
         int z = Mathf.FloorToInt(aPosition.z);
         if (x - 1 >= 0)
         {
-
             if (myPathTiles[x - 1, z] == aLastPlacedTile)
             {
                 return true;

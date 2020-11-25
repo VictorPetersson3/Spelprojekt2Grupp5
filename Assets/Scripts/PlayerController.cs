@@ -15,8 +15,7 @@ public class PlayerController : MonoBehaviour
         }
         set
         {
-            
-
+            step = 1;
             myMovementList = value;
         }
     }
@@ -24,6 +23,7 @@ public class PlayerController : MonoBehaviour
     List<Vector3> myMovementList;
     [SerializeField]
     ParticleSystem myDeathEffect;
+    [SerializeField]
     int step = 1;
     [Range(1, 8)]
     [SerializeField]
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
             
                 if (distanceToNextPos.magnitude < 0.05f)
                 {
-                    if (step < myMovementList.Count)
+                    if (step <= myMovementList.Count)
                     {
                         step++;
 

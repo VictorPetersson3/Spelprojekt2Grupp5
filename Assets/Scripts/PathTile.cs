@@ -32,7 +32,7 @@ public class PathTile : MonoBehaviour
                     if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.PathTileIntersectionList[i])
                     {
                         myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo.Add(transform.position);
-                        Debug.Log("Add intersection to the left\nAmount of intersections in the world: " + myPathManager.PathTileIntersectionList.Count);
+                        myPathManager.PathTileIntersectionList[i].GetSetLastPlacedTile = myPathManager.PathTileIntersectionList[i];
 
                     }
                 }
@@ -44,8 +44,8 @@ public class PathTile : MonoBehaviour
                     if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile)
                     {
                         myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo.Add(transform.position);
-                        Debug.Log("Add intersection to the right");
 
+                        myPathManager.PathTileIntersectionList[i].GetSetLastPlacedTile = myPathManager.PathTileIntersectionList[i];
                     }
                 }
             }
@@ -56,7 +56,7 @@ public class PathTile : MonoBehaviour
                     if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile)
                     {
                         myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo.Add(transform.position);
-                        Debug.Log("Add intersection to the down");
+                        myPathManager.PathTileIntersectionList[i].GetSetLastPlacedTile = myPathManager.PathTileIntersectionList[i];
 
                     }
                 }
@@ -68,8 +68,7 @@ public class PathTile : MonoBehaviour
                     if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile)
                     {
                         myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo.Add(transform.position);
-                        Debug.Log("Add intersection to the up");
-
+                        myPathManager.PathTileIntersectionList[i].GetSetLastPlacedTile = myPathManager.PathTileIntersectionList[i];
                     }
                 }
             }
