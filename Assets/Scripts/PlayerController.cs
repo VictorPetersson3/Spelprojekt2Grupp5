@@ -52,8 +52,14 @@ public class PlayerController : MonoBehaviour
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, myMovementList[step], myMovementSpeed * Time.deltaTime);
-                Vector3 distanceToNextPos = myMovementList[step] - transform.position; 
-            
+
+             
+
+                Quaternion lookAtRotation = Quaternion.LookRotation(myMovementList[step] - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.1f);
+
+                Vector3 distanceToNextPos = myMovementList[step] - transform.position;
+
                 if (distanceToNextPos.magnitude < 0.05f)
                 {
                     if (step <= myMovementList.Count)
