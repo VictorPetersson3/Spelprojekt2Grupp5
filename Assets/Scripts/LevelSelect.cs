@@ -7,7 +7,7 @@ public class LevelSelect : MonoBehaviour
    private GameObject mySelectedLevel;
    void Update()
    {
-      if (Input.GetMouseButtonDown(0) || Input.touchCount == 1)
+      if (Input.GetMouseButtonDown(0) && Input.touchCount == 1)
       {
          mySelectedLevel = WhatDidIHit();
          Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(mySelectedLevel);
