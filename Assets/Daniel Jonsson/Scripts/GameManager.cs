@@ -172,7 +172,6 @@ public class GameManager : MonoBehaviour
                     SaveFile(1);
                 }
 
-                
                 //UI.SetScore(aScore)
 
                 if (aScore > myLevelList[i].myHighScore)
