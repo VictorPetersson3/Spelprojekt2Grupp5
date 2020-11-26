@@ -21,6 +21,8 @@ public class PathTile : MonoBehaviour
         myPathManager = FindObjectOfType<PathManager>();
         myPosition = new Vector3(Mathf.FloorToInt(transform.position.x), 0, Mathf.FloorToInt(transform.position.z));
         transform.position = myPosition;
+       
+        
         CheckNeighbors();
         
     }
@@ -29,6 +31,7 @@ public class PathTile : MonoBehaviour
         int x = Mathf.FloorToInt(transform.position.x);
         int z = Mathf.FloorToInt(transform.position.z);
 
+        List <Vector3> someTiles = myPathManager.GetMyLastPlacedTiles();
         if (myPathManager.PathTileIntersectionList != null && myIntersection == null)
         {
             if (myPathManager.PathTileIntersectionList.Count != 0)
@@ -43,7 +46,17 @@ public class PathTile : MonoBehaviour
                             myPathManager.GetDirections = PathTileIntersection.Directions.right;
                             myPathManager.PathTileIntersectionList[i].AddNewPathToIntersection(myPathManager.GetDirections);
                             myIntersection = myPathManager.PathTileIntersectionList[i];
-                        }       
+                        }
+                        if (someTiles.Count != 0)
+                        {
+                            for (int j = 0; j < someTiles.Count; j++)
+                            {
+                                if (myPathManager.GetPathTileMap[x - 1, z].transform.position == someTiles[j] && someTiles[j].GetType() == typeof(PathTileIntersection))
+                                {
+                                    myIntersection = (PathTileIntersection)myPathManager.GetPathTileMap[x - 1, z];
+                                }
+                            }
+                        }
                     }
                 }
                 if (x + 1 < WorldController.Instance.GetWorldWidth)
@@ -56,7 +69,17 @@ public class PathTile : MonoBehaviour
                             myPathManager.PathTileIntersectionList[i].AddNewPathToIntersection(myPathManager.GetDirections);
                             myIntersection = myPathManager.PathTileIntersectionList[i];
                         }
-                    
+                        if (someTiles.Count != 0)
+                        {
+                            for (int j = 0; j < someTiles.Count; j++)
+                            {
+                                if (myPathManager.GetPathTileMap[x + 1, z].transform.position == someTiles[j] && someTiles[j].GetType() == typeof(PathTileIntersection))
+                                {
+                                    myIntersection = (PathTileIntersection)myPathManager.GetPathTileMap[x + 1, z];
+                                }
+                            }
+                        }
+
                     }
                 }
                 if (z - 1 >= 0)
@@ -70,6 +93,16 @@ public class PathTile : MonoBehaviour
                             myPathManager.PathTileIntersectionList[i].AddNewPathToIntersection(myPathManager.GetDirections);
                             myIntersection = myPathManager.PathTileIntersectionList[i];
                         }
+                        if (someTiles.Count != 0)
+                        {
+                            for (int j = 0; j < someTiles.Count; j++)
+                            {
+                                if (myPathManager.GetPathTileMap[x, z - 1].transform.position == someTiles[j] && someTiles[j].GetType() == typeof(PathTileIntersection))
+                                {
+                                    myIntersection = (PathTileIntersection)myPathManager.GetPathTileMap[x, z - 1];
+                                }
+                            }
+                        }
                     }
                 }
                 if (z + 1 < WorldController.Instance.GetWorldDepth)
@@ -82,7 +115,17 @@ public class PathTile : MonoBehaviour
                             myPathManager.GetDirections = PathTileIntersection.Directions.down;
                             myPathManager.PathTileIntersectionList[i].AddNewPathToIntersection(myPathManager.GetDirections);
                              myIntersection = myPathManager.PathTileIntersectionList[i];
-                        } 
+                        }
+                        if (someTiles.Count != 0)
+                        {
+                            for (int j = 0; j < someTiles.Count; j++)
+                            {
+                                if (myPathManager.GetPathTileMap[x, z + 1].transform.position == someTiles[j] && someTiles[j].GetType() == typeof(PathTileIntersection))
+                                {
+                                    myIntersection = (PathTileIntersection)myPathManager.GetPathTileMap[x, z + 1];
+                                }
+                            }
+                        }
                     }
                 }
 

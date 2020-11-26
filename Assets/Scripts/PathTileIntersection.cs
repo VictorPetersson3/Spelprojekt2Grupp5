@@ -141,6 +141,7 @@ public class PathTileIntersection : PathTile
     public void AddNewPathToIntersection(Directions aDirection)
     {
         myPathManager.GetDirections = aDirection;
+
     }
     public void AddExitingListToIntersection(List<Vector3> aList, Directions directions)
     {
