@@ -6,18 +6,23 @@ public class PlayerController : MonoBehaviour
 {
     Tile myCurrentTile;
     public Tile GetCurrectTile { get { return myCurrentTile; } }
-
-    public List<Vector3> PlayerMoveList
+    bool t = false;
+    public void PlayerMoveList(List<Vector3> aListToCopy, PathTileIntersection aPathTileIntersection)
     {
-        get
+        
+        if (!t)
         {
-            return myMovementList;
+            step = 0;
+            t = true;
         }
-        set
+        else if (aPathTileIntersection != null)
         {
             step = 1;
-            myMovementList = value;
+            t = true;
         }
+
+        myMovementList = aListToCopy;
+
     }
 
     List<Vector3> myMovementList;
@@ -53,19 +58,17 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, myMovementList[step], myMovementSpeed * Time.deltaTime);
 
-             
-
                 Quaternion lookAtRotation = Quaternion.LookRotation(myMovementList[step] - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.1f);
 
                 Vector3 distanceToNextPos = myMovementList[step] - transform.position;
 
-                if (distanceToNextPos.magnitude < 0.05f)
+                if (distanceToNextPos.magnitude < 0.1f)
                 {
                     if (step <= myMovementList.Count)
                     {
                         step++;
-
+                        t = false;
                     }
                     else
                     {

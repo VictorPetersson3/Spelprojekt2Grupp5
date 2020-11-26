@@ -16,10 +16,10 @@ public class Placement : MonoBehaviour
     [SerializeField]
     bool placeIntersection = false;
     int a = 1;
-    List<PathTileIntersection> myListOfIntersections;
+
     private void Start()
     {
-        myListOfIntersections = new List<PathTileIntersection>();
+
     }
 
     private void Update()
@@ -66,18 +66,19 @@ public class Placement : MonoBehaviour
             }
         }
     }
+
+
     void PlacementLogic()
     {
-
         //Spawnar en tile
         //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
-        if (myListOfIntersections.Count != 0)
+        if (myPathManager.PathTileIntersectionList.Count != 0)
         {
             PathTileIntersection intersectionPath = null;
 
-            for (int i = 0; i < myListOfIntersections.Count; i++)
+            for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
             {
-                if (myPathManager.CheckPlacement(myInputCoordinates, myListOfIntersections[i].GetSetLastPlacedTile))
+                if (myPathManager.CheckPlacement(myInputCoordinates))
                 {
                     if (!placeIntersection)
                     {
@@ -85,18 +86,18 @@ public class Placement : MonoBehaviour
                         path.name = "Path Tile " + a;
                         a++;
                         path.GetPathTilePosition = myInputCoordinates;
-                        myPathManager.AddItemToMap(path, myListOfIntersections[i].ChooseListToAddTileTo, myListOfIntersections[i]);
-                        myListOfIntersections[i].GetSetLastPlacedTile = path;
+                        myPathManager.AddItemToMap(path, myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo, myPathManager.PathTileIntersectionList[i]);
+
 
                     }
                     else
                     {
                         intersectionPath = Instantiate(intersection, myInputCoordinates, transform.rotation);
-                        myListOfIntersections[i].GetSetLastPlacedTile = intersectionPath;
+
                         intersectionPath.name = "Intersection Tile ";
                         intersectionPath.GetPathTilePosition = myInputCoordinates;
-                        
-                        myPathManager.AddItemToMap(intersectionPath, myListOfIntersections[i].ChooseListToAddTileTo, myListOfIntersections[i]);
+
+                        myPathManager.AddItemToMap(intersectionPath, myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo, myPathManager.PathTileIntersectionList[i]);
                     }
 
                     //Sätter tilen till obstructed
@@ -104,14 +105,11 @@ public class Placement : MonoBehaviour
                     WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
                 }
             }
-            if (intersectionPath != null)
-            {
-                myListOfIntersections.Add(intersectionPath);
-            }
+
         }
         else
         {
-            if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetLastPlacedTile))
+            if (myPathManager.CheckPlacement(myInputCoordinates))
             {
                 if (!placeIntersection)
                 {
@@ -126,18 +124,18 @@ public class Placement : MonoBehaviour
                 {
                     PathTileIntersection path = Instantiate(intersection, myInputCoordinates, transform.rotation);
                     path.name = "Intersection Tile ";
-                    myListOfIntersections.Add(path);
+
                     path.GetPathTilePosition = myInputCoordinates;
                     myPathManager.AddItemToMap(path, myPathManager.GetPathFromStart, null);
                 }
 
                 WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
-                
+
             }
         }
 
-    
-     
+
+
 
 
     }

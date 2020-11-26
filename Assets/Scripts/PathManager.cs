@@ -23,9 +23,9 @@ public class PathManager : MonoBehaviour
     public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
     public List<Vector3> GetPathFromStart { get { return myPathList; } }
 
+    public PathTileIntersection.Directions GetDirections { get { return myCurrectPathList; } set { myCurrectPathList = value; } }
     List<Vector3> myPathList;
-
-
+    PathTileIntersection.Directions myCurrectPathList;
 
     void OnValidate()
     {
@@ -44,7 +44,8 @@ public class PathManager : MonoBehaviour
     {
         myPathIntersectionlist = new List<PathTileIntersection>();
         myPathList = new List<Vector3>();
-        myPlayerController.PlayerMoveList = myPathList;
+
+        myPlayerController.PlayerMoveList(myPathList, null);
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
         myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
 
@@ -57,7 +58,7 @@ public class PathManager : MonoBehaviour
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
     }
 
-    public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdeifier)
+    public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdentifier)
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
         int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
@@ -69,9 +70,9 @@ public class PathManager : MonoBehaviour
 
             if (aPathTileToAdd.GetType() != typeof(PathTileIntersection))
             {
-                if (pathTileIdeifier != null)
+                if (pathTileIdentifier != null)
                 {
-                    pathTileIdeifier.GetSetLastPlacedTile = aPathTileToAdd;
+                    myLastPlacedPathTile = aPathTileToAdd;
                 }
                 else
                 {
@@ -89,36 +90,143 @@ public class PathManager : MonoBehaviour
             myPathTiles[x, z] = myEndTile;
         }
     }
-    public bool CheckPlacement(Vector3 aPosition, PathTile aLastPlacedTile)
+    public List<Vector3> GetMyLastPlacedTiles()
     {
-        int x = Mathf.FloorToInt(aPosition.x);
-        int z = Mathf.FloorToInt(aPosition.z);
-        if (x - 1 >= 0)
+
+        List<Vector3> somePathTiles = new List<Vector3>();
+        somePathTiles.Add(myLastPlacedPathTile.transform.position);
+        for (int j = 0; j < myPathIntersectionlist.Count; j++)
         {
-            if (myPathTiles[x - 1, z] == aLastPlacedTile)
+            for (int i = 0; i < 4; i++)
             {
-                return true;
+                if (myPathIntersectionlist[j].GetPathTileLists[i].Count != 0)
+                {
+                    somePathTiles.Add(myPathIntersectionlist[j].GetPathTileLists[i][myPathIntersectionlist[j].GetPathTileLists[i].Count - 1]);
+                }
+                else
+                {
+                    somePathTiles.Add(myPathIntersectionlist[j].transform.position);
+                }
             }
         }
-        if (x + 1 < WorldController.Instance.GetWorldWidth)
+        return somePathTiles;
+    }
+    public void CheckIfPlacedNextToIntersection(PathTileIntersection aIntersection, List<Vector3> aList)
+    {
+        int x = Mathf.FloorToInt(aIntersection.transform.position.x);
+        int z = Mathf.FloorToInt(aIntersection.transform.position.z);
+
+        List<Vector3> someLastPlacedTiles = new List<Vector3>();
+        someLastPlacedTiles = GetMyLastPlacedTiles();
+
+
+
+        for (int i = 0; i < someLastPlacedTiles.Count; i++)
         {
-            if (myPathTiles[x + 1, z] == aLastPlacedTile)
+            Debug.Log(myPathTiles[x, z - 1].transform.position);
+            if (x - 1 >= 0)
             {
-                return true;
+                if (myPathTiles[x - 1, z] != null)
+                {
+                    if (myPathTiles[x - 1, z].transform.position == someLastPlacedTiles[i] && aIntersection.GetPathTileLists[0].Count == 0)
+                    {
+                        // Fix myPathManager.GetPathFromStart to be dynamic
+                        aIntersection.AddExitingListToIntersection(aList, PathTileIntersection.Directions.left);
+                    }
+                }
+            }
+            if (x + 1 < WorldController.Instance.GetWorldWidth)
+            {
+                Debug.Log("Made it through world bounds");
+                if (myPathTiles[x + 1, z] != null)
+                {
+                    Debug.Log("Made it through null check");
+                    if (myPathTiles[x + 1, z].transform.position == someLastPlacedTiles[i] && aIntersection.GetPathTileLists[2].Count == 0)
+                    {
+                        Debug.Log("add list");
+                        aIntersection.AddExitingListToIntersection(aList, PathTileIntersection.Directions.right);
+                    }
+                }
+            }
+            if (z - 1 >= 0)
+            {
+                Debug.Log("Made it through world bounds");
+                if (myPathTiles[x, z - 1] != null)
+                {
+                    Debug.Log("Made it through null check");
+                    if (myPathTiles[x, z - 1].transform.position == someLastPlacedTiles[i] && aIntersection.GetPathTileLists[3].Count == 0)
+                    {
+                        Debug.Log("add list");
+                        aIntersection.AddExitingListToIntersection(aList, PathTileIntersection.Directions.down);
+                    }
+                }
+            }
+            if (z + 1 < WorldController.Instance.GetWorldDepth)
+            {
+                Debug.Log("Made it through world bounds");
+                if (myPathTiles[x, z + 1] != null)
+                {
+                    Debug.Log("Made it through null check");
+                    if (myPathTiles[x, z + 1].transform.position == someLastPlacedTiles[i] && aIntersection.GetPathTileLists[1].Count == 0)
+                    {
+                        Debug.Log("add list");
+                        aIntersection.AddExitingListToIntersection(aList, PathTileIntersection.Directions.up);
+                    }
+                }
             }
         }
-        if (z - 1 >= 0)
+    }
+    public bool CheckPlacement(Vector3 aPosition)
+    {
+        int x = (int)aPosition.x;
+        int z = (int)aPosition.z;
+        List<Vector3> someLastPlacedTiles = new List<Vector3>();
+        someLastPlacedTiles = GetMyLastPlacedTiles();
+
+
+
+        for (int i = 0; i < someLastPlacedTiles.Count; i++)
         {
-            if (myPathTiles[x, z - 1] == aLastPlacedTile)
+            if (x - 1 >= 0)
             {
-                return true;
+
+                if (myPathTiles[x - 1, z] != null)
+                {
+                    if (myPathTiles[x - 1, z].transform.position == someLastPlacedTiles[i])
+                    {
+                        return true;
+                    }
+                }
             }
-        }
-        if (z + 1 < WorldController.Instance.GetWorldDepth)
-        {
-            if (myPathTiles[x, z + 1] == aLastPlacedTile)
+            if (x + 1 < WorldController.Instance.GetWorldWidth)
             {
-                return true;
+                if (myPathTiles[x + 1, z] != null)
+                {
+                    if (myPathTiles[x + 1, z].transform.position == someLastPlacedTiles[i])
+                    {
+                        return true;
+                    }
+                }
+            }
+            if (z - 1 >= 0)
+            {
+                if (myPathTiles[x, z - 1] != null)
+                {
+                    if (myPathTiles[x, z - 1].transform.position == someLastPlacedTiles[i])
+                    {
+                        return true;
+                    }
+                }
+            }
+            if (z + 1 < WorldController.Instance.GetWorldDepth)
+            {
+                if (myPathTiles[x, z + 1] != null)
+                {
+                    if (myPathTiles[x, z + 1].transform.position == someLastPlacedTiles[i])
+                    {
+                        return true;
+                    }
+                }
             }
         }
         return false;

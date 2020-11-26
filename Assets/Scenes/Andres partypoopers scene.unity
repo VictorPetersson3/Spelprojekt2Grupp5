@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myDeathEffect: {fileID: 688291469}
+  step: 1
   myMovementSpeed: 4.82
 --- !u!23 &160594223
 MeshRenderer:
@@ -618,8 +619,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1963332873}
   - component: {fileID: 1963332872}
-  - component: {fileID: 1963332871}
   - component: {fileID: 1963332870}
+  - component: {fileID: 1963332871}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -652,7 +653,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1963332869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9c90b877b407b4b944757b52bdb17a, type: 3}
+  m_Script: {fileID: 11500000, guid: b11c133f01331754ebabd131241e9390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myPathManager: {fileID: 1963332870}
