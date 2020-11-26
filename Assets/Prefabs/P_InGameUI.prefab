@@ -617,7 +617,10 @@ MonoBehaviour:
   myBuildButton: {fileID: 1132214174867890004}
   myCameraButton: {fileID: 1132214175621773411}
   myPlayButton: {fileID: 1132214175188174711}
-  mySc_FadeIfDisabledParents: []
+  mySc_FadeIfDisabledParents:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1132214174635543286
 GameObject:
   m_ObjectHideFlags: 0
@@ -4878,12 +4881,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2964130165969682149}
-        m_MethodName: PressButtonEffect
-        m_Mode: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: RemoveTile
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 1132214176287666203}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.RectTransform, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6061,6 +6064,7 @@ GameObject:
   - component: {fileID: 6101838922068410799}
   - component: {fileID: 495190894015650841}
   - component: {fileID: 3563719245866166141}
+  - component: {fileID: 8255050219444517204}
   m_Layer: 5
   m_Name: ExitGame
   m_TagString: Untagged
@@ -6191,6 +6195,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8255050219444517204}
+        m_MethodName: LoadLevel
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3563719245866166141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6201,6 +6216,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54f3074e97ab12b4682f3617d432e1f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8255050219444517204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681154790463866070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83943940630b96e4c9a065f8c33f7392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5798141765125403453
