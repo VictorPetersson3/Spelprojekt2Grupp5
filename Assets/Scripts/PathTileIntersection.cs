@@ -26,39 +26,33 @@ public class PathTileIntersection : PathTile
 
     public override void Start()
     {
-        myLastPlacedTile = this;
-        aNewPathManager = FindObjectOfType<PathManager>();
-        myPlayerController = FindObjectOfType<PlayerController>();
-        // 0 = left, 1 = up, 2 = right, 3 = down
         myPathTiles = new List<Vector3>[4];
         for (int i = 0; i < 4; i++)
         {
             myPathTiles[i] = new List<Vector3>();
         }
-        base.Start();
+        myLastPlacedTile = this;
+        aNewPathManager = FindObjectOfType<PathManager>();
+        myPlayerController = FindObjectOfType<PlayerController>();
+        // 0 = left, 1 = up, 2 = right, 3 = down
     }
     void Update()
     {
+        PassThroughPlayer();
         if (Input.GetKeyDown(KeyCode.G))
         {
             if (aNewPathManager.PathTileIntersectionList.Count == 1)
             {
                 aNewPathManager.CheckIfPlacedNextToIntersection(this, myPathManager.GetPathFromStart);
-
-            }
-            else
-            {
-
-            }
+            }   
         }
 
-        PassThroughPlayer();
         if (Input.GetMouseButton(0))
         {
 
             if (aNewPathManager.PathTileIntersectionList.Count == 1)
             {
-                aNewPathManager.CheckIfPlacedNextToIntersection(this, myPathManager.GetPathFromStart);
+                aNewPathManager.CheckIfPlacedNextToIntersection(this, aNewPathManager.GetPathFromStart);
 
             }
             else
@@ -71,18 +65,27 @@ public class PathTileIntersection : PathTile
     {
         get
         {
-            Debug.Log("Add into list via GET");
-            return myPathTiles[(int)myPathManager.GetDirections];
+            Debug.Log(myPathTiles);
+            return myPathTiles[(int)aNewPathManager.GetDirections];
         }
         set
         {
             Debug.Log("Add into list via SET");
-            myPathTiles[(int)myPathManager.GetDirections] = value;
+            myPathTiles[(int)aNewPathManager.GetDirections] = value;
         }
     }
    
     public void AddIntoList(Vector3 aPathTileToAdd, Directions directions)
     {
+        /*if (myPathTiles == null)
+        {
+            myPathTiles = new List<Vector3>[4];
+            for (int i = 0; i < 4; i++)
+            {
+                myPathTiles[i] = new List<Vector3>();
+            }
+        }*/
+
         if (myPathTiles[(int)directions].Count > 1)
         {
             if (aPathTileToAdd != myPathTiles[(int)directions][1])
@@ -140,10 +143,10 @@ public class PathTileIntersection : PathTile
     
     public void AddNewPathToIntersection(Directions aDirection)
     {
-        myPathManager.GetDirections = aDirection;
+        aNewPathManager.GetDirections = aDirection;
 
     }
-    public void AddExitingListToIntersection(List<Vector3> aList, Directions directions)
+    public void AddExistingListToIntersection(List<Vector3> aList, Directions directions)
     {
         myPathTiles[(int)directions].Clear();
         for (int i = aList.Count - 1; i > 0; i--)
@@ -151,7 +154,6 @@ public class PathTileIntersection : PathTile
             Debug.Log("Number of tiles added in exsiting list: " + i);
             myPathTiles[(int)directions].Add(aList[i]);
         }
-      
     }
     int GetInputDirection()
     {

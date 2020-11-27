@@ -20,7 +20,6 @@ public class PathManager : MonoBehaviour
 
     public List<PathTileIntersection> PathTileIntersectionList { get { return myPathIntersectionlist; } set { myPathIntersectionlist = value; } }
     public PathTile[,] GetPathTileMap { get { return myPathTiles; } }
-    public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
     public List<Vector3> GetPathFromStart { get { return myPathList; } }
 
     public PathTileIntersection.Directions GetDirections { get { return myCurrectPathList; } set { myCurrectPathList = value; } }
@@ -53,12 +52,12 @@ public class PathManager : MonoBehaviour
 
         myLastPlacedPathTile = myStartPathTile;
 
-        AddItemToMap(myStartPathTile, myPathList, null);
+        AddItemToMap(myStartPathTile, true, null);
 
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
     }
 
-    public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdentifier)
+    public void AddItemToMap(PathTile aPathTileToAdd, bool aIsStartList, PathTileIntersection pathTileIdentifier)
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
         int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
@@ -66,10 +65,14 @@ public class PathManager : MonoBehaviour
         if (myPathTiles[x, z] != myEndTile)
         {
             myPathTiles[x, z] = aPathTileToAdd;
-            aList.Add(aPathTileToAdd.transform.position);
+            if (aIsStartList)
+            {
+                myPathList.Add(aPathTileToAdd.transform.position);
+            }
 
             if (aPathTileToAdd.GetType() != typeof(PathTileIntersection))
             {
+             
                 if (pathTileIdentifier != null)
                 {
                     myLastPlacedPathTile = aPathTileToAdd;
@@ -81,31 +84,47 @@ public class PathManager : MonoBehaviour
             }
             else
             {
-                myPathIntersectionlist.Add((PathTileIntersection)aPathTileToAdd);
+               
+                if (pathTileIdentifier != null)
+                {
+                    pathTileIdentifier.AddIntoList(aPathTileToAdd.transform.position, myCurrectPathList);
+                }
             }
         }
         else
-        {
-            aList.Add(myEndTile.transform.position);
+        {            
             myPathTiles[x, z] = myEndTile;
         }
+    }
+    public void AddIntoIntersectionList(PathTileIntersection aIntersection)
+    {
+        myPathIntersectionlist.Add(aIntersection);
     }
     public List<Vector3> GetMyLastPlacedTiles()
     {
 
         List<Vector3> somePathTiles = new List<Vector3>();
-        somePathTiles.Add(myLastPlacedPathTile.transform.position);
-        for (int j = 0; j < myPathIntersectionlist.Count; j++)
+        
+
+        if (myLastPlacedPathTile != null&& myPathIntersectionlist != null)
         {
-            for (int i = 0; i < 4; i++)
+            somePathTiles.Add(myLastPlacedPathTile.transform.position);
+
+            for (int j = 0; j < myPathIntersectionlist.Count; j++)
             {
-                if (myPathIntersectionlist[j].GetPathTileLists[i].Count != 0)
+                for (int i = 0; i < 4; i++)
                 {
-                    somePathTiles.Add(myPathIntersectionlist[j].GetPathTileLists[i][myPathIntersectionlist[j].GetPathTileLists[i].Count - 1]);
-                }
-                else
-                {
-                    somePathTiles.Add(myPathIntersectionlist[j].transform.position);
+                    if (myPathIntersectionlist[j].GetPathTileLists != null)
+                    {
+                        if (myPathIntersectionlist[j].GetPathTileLists[i].Count != 0)
+                        {
+                            somePathTiles.Add(myPathIntersectionlist[j].GetPathTileLists[i][myPathIntersectionlist[j].GetPathTileLists[i].Count - 1]);
+                        }
+                        else
+                        {
+                            somePathTiles.Add(myPathIntersectionlist[j].transform.position);
+                        }
+                    }
                 }
             }
         }
@@ -123,7 +142,7 @@ public class PathManager : MonoBehaviour
 
         for (int i = 0; i < someLastPlacedTiles.Count; i++)
         {
-            Debug.Log(myPathTiles[x, z - 1].transform.position);
+        
             if (x - 1 >= 0)
             {
                 if (myPathTiles[x - 1, z] != null)
@@ -131,46 +150,37 @@ public class PathManager : MonoBehaviour
                     if (myPathTiles[x - 1, z].transform.position == someLastPlacedTiles[i] && aIntersection.GetPathTileLists[0].Count == 0)
                     {
                         // Fix myPathManager.GetPathFromStart to be dynamic
-                        aIntersection.AddExitingListToIntersection(aList, PathTileIntersection.Directions.left);
+                        aIntersection.AddExistingListToIntersection(aList, PathTileIntersection.Directions.left);
                     }
                 }
             }
             if (x + 1 < WorldController.Instance.GetWorldWidth)
             {
-                Debug.Log("Made it through world bounds");
                 if (myPathTiles[x + 1, z] != null)
                 {
-                    Debug.Log("Made it through null check");
                     if (myPathTiles[x + 1, z].transform.position == someLastPlacedTiles[i] && aIntersection.GetPathTileLists[2].Count == 0)
                     {
-                        Debug.Log("add list");
-                        aIntersection.AddExitingListToIntersection(aList, PathTileIntersection.Directions.right);
+                        aIntersection.AddExistingListToIntersection(aList, PathTileIntersection.Directions.right);
                     }
                 }
             }
             if (z - 1 >= 0)
             {
-                Debug.Log("Made it through world bounds");
                 if (myPathTiles[x, z - 1] != null)
                 {
-                    Debug.Log("Made it through null check");
                     if (myPathTiles[x, z - 1].transform.position == someLastPlacedTiles[i] && aIntersection.GetPathTileLists[3].Count == 0)
                     {
-                        Debug.Log("add list");
-                        aIntersection.AddExitingListToIntersection(aList, PathTileIntersection.Directions.down);
+                        aIntersection.AddExistingListToIntersection(aList, PathTileIntersection.Directions.down);
                     }
                 }
             }
             if (z + 1 < WorldController.Instance.GetWorldDepth)
             {
-                Debug.Log("Made it through world bounds");
                 if (myPathTiles[x, z + 1] != null)
                 {
-                    Debug.Log("Made it through null check");
                     if (myPathTiles[x, z + 1].transform.position == someLastPlacedTiles[i] && aIntersection.GetPathTileLists[1].Count == 0)
                     {
-                        Debug.Log("add list");
-                        aIntersection.AddExitingListToIntersection(aList, PathTileIntersection.Directions.up);
+                        aIntersection.AddExistingListToIntersection(aList, PathTileIntersection.Directions.up);
                     }
                 }
             }
@@ -183,13 +193,10 @@ public class PathManager : MonoBehaviour
         List<Vector3> someLastPlacedTiles = new List<Vector3>();
         someLastPlacedTiles = GetMyLastPlacedTiles();
 
-
-
         for (int i = 0; i < someLastPlacedTiles.Count; i++)
         {
             if (x - 1 >= 0)
             {
-
                 if (myPathTiles[x - 1, z] != null)
                 {
                     if (myPathTiles[x - 1, z].transform.position == someLastPlacedTiles[i])

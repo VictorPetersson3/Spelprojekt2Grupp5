@@ -67,77 +67,84 @@ public class Placement : MonoBehaviour
         }
     }
 
-
-    void PlacementLogic()
+    bool CheckIntersections()
     {
-        //Spawnar en tile
-        //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
         if (myPathManager.PathTileIntersectionList.Count != 0)
         {
-            PathTileIntersection intersectionPath = null;
-
-            for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
-            {
-                if (myPathManager.CheckPlacement(myInputCoordinates))
-                {
-                    if (!placeIntersection)
-                    {
-                        PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
-                        path.name = "Path Tile " + a;
-                        a++;
-                        path.GetPathTilePosition = myInputCoordinates;
-                        myPathManager.AddItemToMap(path, myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo, myPathManager.PathTileIntersectionList[i]);
-
-
-                    }
-                    else
-                    {
-                        intersectionPath = Instantiate(intersection, myInputCoordinates, transform.rotation);
-
-                        intersectionPath.name = "Intersection Tile ";
-                        intersectionPath.GetPathTilePosition = myInputCoordinates;
-
-                        myPathManager.AddItemToMap(intersectionPath, myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo, myPathManager.PathTileIntersectionList[i]);
-                    }
-
-                    //Sätter tilen till obstructed
-
-                    WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
-                }
-            }
-
+            return true;
         }
-        else
+        return false;
+
+    }
+    void PlacementLogicIfIntersectionExsits()
+    {
+        if (myPathManager.CheckPlacement(myInputCoordinates))
         {
-            if (myPathManager.CheckPlacement(myInputCoordinates))
+            if (!placeIntersection)
             {
-                if (!placeIntersection)
+                for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
                 {
                     PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
                     path.name = "Path Tile " + a;
                     a++;
                     path.GetPathTilePosition = myInputCoordinates;
-                    myPathManager.AddItemToMap(path, myPathManager.GetPathFromStart, null);
-
+                    myPathManager.AddItemToMap(path, false, myPathManager.PathTileIntersectionList[i]);
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
                 {
-                    PathTileIntersection path = Instantiate(intersection, myInputCoordinates, transform.rotation);
-                    path.name = "Intersection Tile ";
+                    PathTileIntersection intersectionPath = null;
+                    intersectionPath = Instantiate(intersection, myInputCoordinates, transform.rotation);
 
-                    path.GetPathTilePosition = myInputCoordinates;
-                    myPathManager.AddItemToMap(path, myPathManager.GetPathFromStart, null);
+                    intersectionPath.name = "Intersection Tile ";
+                    intersectionPath.GetPathTilePosition = myInputCoordinates;
+                    myPathManager.AddIntoIntersectionList(intersectionPath);
+                    myPathManager.AddItemToMap(intersectionPath, false, myPathManager.PathTileIntersectionList[i]);
+
                 }
-
-                WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+            }
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+        }
+    }
+    void PlacementLogicIfNoIntersection()
+    {
+        if (myPathManager.CheckPlacement(myInputCoordinates))
+        {
+            if (!placeIntersection)
+            {
+                PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+                path.name = "Path Tile " + a;
+                a++;
+                path.GetPathTilePosition = myInputCoordinates;
+                myPathManager.AddItemToMap(path, true, null);
 
             }
+            else
+            {
+                PathTileIntersection path = Instantiate(intersection, myInputCoordinates, transform.rotation);
+                path.name = "Intersection Tile ";
+
+                path.GetPathTilePosition = myInputCoordinates;
+                myPathManager.AddIntoIntersectionList(path);
+                myPathManager.AddItemToMap(path, true, path);
+            }
+
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+
         }
-
-
-
-
-
+    }
+    void PlacementLogic()
+    {
+        if (CheckIntersections())
+        {
+            PlacementLogicIfIntersectionExsits();
+        }
+        else
+        {
+            PlacementLogicIfNoIntersection();
+        }
     }
     public GameObject WhatDidIHit(Vector3 anInputType)
     {
