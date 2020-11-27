@@ -55,14 +55,21 @@ public class PathManager : MonoBehaviour
 
         myLastPlacedPathTile = myStartPathTile;
 
-        PathTile temp = Instantiate(myPathTilePrefab, myPortals[0].GetExit() + myPortals[0].transform.position, Quaternion.identity);
-        GetPathTileMap[Mathf.FloorToInt(temp.GetPathTilePosition.x), Mathf.FloorToInt(temp.GetPathTilePosition.z)] = temp;
-        AddItemToPortalMap(temp);
-        print(myPortals[0].transform.position);
+        InstantiateFirstPortalExitTile();
 
         AddItemToMap(myStartPathTile, myPathList, null);
 
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
+    }
+
+    private void InstantiateFirstPortalExitTile()
+    {
+        PathTile temp = Instantiate(myPathTilePrefab, myPortals[0].GetExit() + myPortals[0].transform.position, Quaternion.identity);
+        temp.GetPathTilePosition = myPortals[0].GetExit() + myPortals[0].transform.position;
+        GetPathTileMap[Mathf.FloorToInt(myPortals[0].GetExit().x + myPortals[0].transform.position.x), Mathf.FloorToInt(myPortals[0].GetExit().z + myPortals[0].transform.position.z)] = temp;
+        AddItemToPortalMap(temp);
+        GetPortals[0].GetSetLastPathTile = temp;
+        WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[0].GetExit().x + myPortals[0].transform.position.x), Mathf.FloorToInt(myPortals[0].GetExit().z + myPortals[0].transform.position.z), Tile.TileState.obstructed);
     }
 
     public void AddItemToPortalMap(PathTile aPathTileToAdd)

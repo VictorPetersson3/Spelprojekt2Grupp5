@@ -27,9 +27,9 @@ public class PlayerController : MonoBehaviour
     ParticleSystem myDeathEffect;
     [SerializeField]
     int step = 1;
-    [Range(1, 8)]
+    [Range(1, 12)]
     [SerializeField]
-    float myMovementSpeed = 8;
+    float myMovementSpeed = 12;
 
     public int SetPlayerStep
     {
