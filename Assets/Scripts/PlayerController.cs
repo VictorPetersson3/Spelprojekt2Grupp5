@@ -20,14 +20,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    PathManager myPathManager;
     List<Vector3> myMovementList;
     [SerializeField]
     ParticleSystem myDeathEffect;
     [SerializeField]
     int step = 1;
-    [Range(1, 8)]
+    [Range(1, 12)]
     [SerializeField]
-    float myMovementSpeed = 8;
+    float myMovementSpeed = 12;
 
     public int SetPlayerStep
     {
@@ -42,7 +44,8 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        float distance = Vector3.Distance(myPathManager.GetPortals[0].GetPos() + Vector3.right, transform.position);
         if (Input.GetKey(KeyCode.Space))
         {
             if (step == myMovementList.Count)
@@ -52,8 +55,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, myMovementList[step], myMovementSpeed * Time.deltaTime);
-                Vector3 distanceToNextPos = myMovementList[step] - transform.position; 
-            
+                Vector3 distanceToNextPos = myMovementList[step] - transform.position;
+
                 if (distanceToNextPos.magnitude < 0.05f)
                 {
                     if (step <= myMovementList.Count)
@@ -68,6 +71,13 @@ public class PlayerController : MonoBehaviour
                         myDeathEffect.Play();
                     }
                 }
+            }
+            if (distance < 0.1f)
+            {
+                transform.position = myPathManager.GetPortals[0].GetExit() + myPathManager.GetPortals[0].transform.position;
+
+                myMovementList = myPathManager.GetPortals[0].GetMovementList();
+                step = 1;
             }
 
         }
