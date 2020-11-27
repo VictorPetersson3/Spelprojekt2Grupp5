@@ -12,8 +12,7 @@ public class Sc_BounceElement : MonoBehaviour
     LeanTweenType easeType;
 
     Vector3 myMovementDestination = new Vector3(0.0f, 1.0f, 0.0f);
-    bool myIsTweening = false;
-    bool myHasReachedEnd = false;
+   
 
     private void Update()
     {
