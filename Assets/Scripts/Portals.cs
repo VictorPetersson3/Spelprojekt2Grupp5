@@ -13,7 +13,11 @@ public class Portals : ObstructTileMap
     [SerializeField]
     Vector3 myEntryAndExitDirection;
 
-    List<PathTile> myContinuingPath;
+    public PathTile myLastPlacedTile;
+    public PathTile GetSetLastPathTile { get { return myLastPlacedTile; } set { myLastPlacedTile = value; } }
+
+
+    List<Vector3> myContinuingPath;
 
     public Portals SetSecondPortal { set { mySecondPortal = value; } }
 
@@ -31,38 +35,41 @@ public class Portals : ObstructTileMap
             }
             else
             {
-               
+
                 mySecondPortal.SetSecondPortal = this;
             }
         }
 
-        
+
         myPlayerController = FindObjectOfType<PlayerController>();
         base.OnValidate();
     }
+
 
     public Vector3 GetPos()
     {
         return transform.position;
     }
 
-    public List<PathTile> GetMovementList()
+    public List<Vector3> GetMovementList()
     {
         return myContinuingPath;
     }
 
     public void AddVectorToMovementList(PathTile aTilePos)
     {
-        myContinuingPath.Add(aTilePos);
+        myContinuingPath.Add(aTilePos.GetPathTilePosition);
+        print(aTilePos.transform.position + "Added aTilePos To MovementList");
     }
     public override void Start()
     {
         base.Start();
-        myContinuingPath = new List<PathTile>();
+        myContinuingPath = new List<Vector3>();
+        
+
     }
     public override void Update()
     {
-
         base.Update();
     }
 
@@ -74,7 +81,7 @@ public class Portals : ObstructTileMap
     {
         Vector3 flooredPosition = new Vector3(Mathf.FloorToInt(transform.position.x), 0, Mathf.FloorToInt(transform.position.z));
         Vector3 playerTilePos = new Vector3(myPlayerController.GetCurrectTile.GetX, 0, myPlayerController.GetCurrectTile.GetZ);
-       
+
         if (playerTilePos == flooredPosition)
         {
             myPlayerController.transform.position = mySecondPortal.transform.position + myEntryAndExitDirection;

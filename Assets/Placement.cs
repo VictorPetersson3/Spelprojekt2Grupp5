@@ -68,6 +68,18 @@ public class Placement : MonoBehaviour
     }
     void PlacementLogic()
     {
+        if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[0].GetSetLastPathTile))
+        {
+            print("poopy");
+            PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+            path.name = "Path Tile " + a;
+            a++;
+            path.GetPathTilePosition = myInputCoordinates;
+            myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+            myPathManager.AddItemToPortalMap(path);
+            myPathManager.GetPortals[0].GetSetLastPathTile = path;
+
+        }
 
         //Spawnar en tile
         //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
@@ -103,6 +115,7 @@ public class Placement : MonoBehaviour
 
                     WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
                 }
+                
             }
             if (intersectionPath != null)
             {

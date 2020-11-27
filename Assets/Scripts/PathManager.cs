@@ -14,8 +14,9 @@ public class PathManager : MonoBehaviour
     PathTile myLastPlacedPathTile;
     [SerializeField]
     PathTile myEndTile;
-
     List<PathTileIntersection> myPathIntersectionlist;
+    [SerializeField]
+    List<Portals> myPortals = new List<Portals>();
     PathTile[,] myPathTiles;
 
     public List<PathTileIntersection> PathTileIntersectionList { get { return myPathIntersectionlist; } set { myPathIntersectionlist = value; } }
@@ -23,7 +24,9 @@ public class PathManager : MonoBehaviour
     public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
     public List<Vector3> GetPathFromStart { get { return myPathList; } }
 
-    List<Vector3> myPathList;
+    public List<Portals> GetPortals { get { return myPortals; } }
+
+    List<Vector3> myPathList; 
 
 
 
@@ -52,9 +55,21 @@ public class PathManager : MonoBehaviour
 
         myLastPlacedPathTile = myStartPathTile;
 
+        PathTile temp = Instantiate(myPathTilePrefab, myPortals[0].GetExit() + myPortals[0].transform.position, Quaternion.identity);
+        GetPathTileMap[Mathf.FloorToInt(temp.GetPathTilePosition.x), Mathf.FloorToInt(temp.GetPathTilePosition.z)] = temp;
+        AddItemToPortalMap(temp);
+        print(myPortals[0].transform.position);
+
         AddItemToMap(myStartPathTile, myPathList, null);
 
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
+    }
+
+    public void AddItemToPortalMap(PathTile aPathTileToAdd)
+    {
+        print(aPathTileToAdd.transform.position);
+        myPortals[0].AddVectorToMovementList(aPathTileToAdd);
+        
     }
 
     public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdeifier)
