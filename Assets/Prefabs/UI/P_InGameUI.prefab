@@ -617,10 +617,7 @@ MonoBehaviour:
   myBuildButton: {fileID: 1132214174867890004}
   myCameraButton: {fileID: 1132214175621773411}
   myPlayButton: {fileID: 1132214175188174711}
-  mySc_FadeIfDisabledParents:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  mySc_FadeIfDisabledParents: []
 --- !u!1 &1132214174635543286
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,7 +2616,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
