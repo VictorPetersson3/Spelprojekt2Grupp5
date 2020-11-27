@@ -4,6 +4,8 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UI;
+using System.Collections;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,10 +23,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text myMoneyText;
     [SerializeField] Text myLevelText;
 
+
     [SerializeField] short myFirstActTransition, mySecondActTransition;
 
     [SerializeField]
     public List<Level> myLevelList = new List<Level>();
+
+    public class AllLevelScores
+    {
+        public List<LevelScore> LevelScores;
+    }
+
+    [System.Serializable]
+    public class LevelScore
+    {
+        public string myLevelName;
+        public int myMinScore;
+        public int myMediumScore;
+        public int myHighScore;
+        public int myStartingMoney;
+    }
+
 
 
     [System.Serializable]
@@ -34,15 +53,16 @@ public class GameManager : MonoBehaviour
         public int myMinScore;
         public int myMediumScore;
         public int myHighScore;
-        public int myFinishedScore;
         public int myStartingMoney;
         public int myAmountOfMoney;
+        public int myFinishedScore;
         public bool myFinishedLevel;
     }
 
 
     private void Awake()
     {
+        
 
         if (globalInstance == null)
         {
@@ -55,7 +75,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   
+
 
     void Start()
     {
@@ -63,7 +83,6 @@ public class GameManager : MonoBehaviour
         int levelNumber = 1;
         string act = "Act " + actNumber + ": ";
 
-        
 
         if (myLoadedLevel == false)
         {
@@ -81,9 +100,9 @@ public class GameManager : MonoBehaviour
                     act = "Act " + actNumber + ": ";
                     levelNumber = 1;
                 }
-                
+
                 Level level = new Level();
-                level.myLevelName = act +  " Level " + levelNumber;
+                level.myLevelName = act + " Level " + levelNumber;
                 levelNumber++;
                 level.myFinishedScore = 0;
                 level.myStartingMoney = 0;
@@ -95,6 +114,8 @@ public class GameManager : MonoBehaviour
                 myLevelList.Add(level);
             }
         }
+
+
     }
 
 
@@ -147,18 +168,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetLevelScore(int aLowScore, int aMediumScore, int aHighScore)
-    {
-        for (int i = 0; i < (int)(Levels.Count - 1); i++)
-        {
-            if (i == SceneManager.GetActiveScene().buildIndex)
-            {
-                myLevelList[i].myMinScore = aLowScore;
-                myLevelList[i].myMediumScore = aMediumScore;
-                myLevelList[i].myHighScore = aHighScore;
-            }
-        }
-    }
 
     public void SetFinishedLevel(int aScore)
     {
@@ -169,7 +178,6 @@ public class GameManager : MonoBehaviour
                 if (aScore > myLevelList[i].myFinishedScore)
                 {
                     myLevelList[i].myFinishedScore = aScore;
-                    SaveFile(1);
                 }
 
                 //UI.SetScore(aScore)
@@ -208,23 +216,73 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void SaveFile(int aSaveFileIndex)
+    public void SaveScore()
+    {
+        string json =               "{\n" +
+                                    "\"LevelScores\":[\n";
+
+        for (int i = 0; i < myLevelList.Count; i++)
+        {
+            LevelScore saveobject = new LevelScore
+            {
+                myLevelName = myLevelList[i].myLevelName,
+                myMinScore = myLevelList[i].myMinScore,
+                myMediumScore = myLevelList[i].myMediumScore,
+                myHighScore = myLevelList[i].myHighScore,
+                myStartingMoney = myLevelList[i].myStartingMoney
+            };
+
+
+
+            json += JsonUtility.ToJson(saveobject);
+            if (i != myLevelList.Count - 1)
+            {
+                json += ",\n";
+            }
+           
+        }
+        
+        json += "\n]\n}";
+
+        string path = Application.streamingAssetsPath + "/levelscores.txt";
+        if (File.Exists(path))
+        {
+            for (int i = 1; i < 5000; i++)
+            {
+                string backupPath = Application.streamingAssetsPath + "/backupLevelscore" + i + ".txt";
+                if (File.Exists(backupPath))
+                {
+                    continue;
+                }
+                else
+                {
+                    FileUtil.CopyFileOrDirectory(path, backupPath);
+                    break;
+                }
+            }
+        }
+
+        File.WriteAllText(Application.streamingAssetsPath + "/levelscores.txt", json);
+    }
+
+
+    public void SaveFile(int aSaveIndex)
     {
         string path = "";
 
-        if (SetSaveFile(aSaveFileIndex))
+        if (SetSaveFile(aSaveIndex))
         {
-            path = Application.persistentDataPath + "/" + mySaveSlot;
+            path = Application.streamingAssetsPath + "/" + mySaveSlot;
         }
 
         BinaryFormatter formatter = new BinaryFormatter();
-        
-        Debug.Log(Application.persistentDataPath);
+
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, myLevelList);
         stream.Close();
     }
+
 
     public void LoadFile(int aLoadedFileIndex)
     {
@@ -232,7 +290,7 @@ public class GameManager : MonoBehaviour
 
         if (SetSaveFile(aLoadedFileIndex))
         {
-            path = Application.persistentDataPath + "/" + mySaveSlot;
+            path = Application.streamingAssetsPath + "/" + mySaveSlot;
         }
 
         if (File.Exists(path))
@@ -248,7 +306,7 @@ public class GameManager : MonoBehaviour
             myLoadedLevel = true;
             ResetAllLevels();
         }
-        else 
+        else
         {
             Debug.Log("NO EXISTED PATH FOR LOADED FILE");
             myLoadedLevel = false;
@@ -303,5 +361,42 @@ public class GameManager : MonoBehaviour
         myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney = myTotalMoney;
     }
 
+    public void LoadAllScores()
+    {
+        AllLevelScores levelListScore;
+        string path = Application.streamingAssetsPath + "/levelscores.txt";
+        string contents = File.ReadAllText(path);
+        levelListScore = JsonUtility.FromJson<AllLevelScores>(contents);
+
+        if (levelListScore != null)
+        {
+            for (int i = 0; i < levelListScore.LevelScores.Count; i++)
+            {
+                myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
+                myLevelList[i].myMinScore = levelListScore.LevelScores[i].myMinScore;
+                myLevelList[i].myMediumScore = levelListScore.LevelScores[i].myMediumScore;
+                myLevelList[i].myHighScore = levelListScore.LevelScores[i].myHighScore;
+                myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
+                myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
+            }
+        }
+
+
+
+        //AllLevelScores levelListScore;
+        //TextAsset file = Resources.Load("levelscores") as TextAsset;
+        //string json = file.ToString();
+
+        //levelListScore = JsonUtility.FromJson<AllLevelScores>(json);
+        //for (int i = 0; i < levelListScore.LevelScores.Count; i++)
+        //{
+        //    myLevelList[i].myMinScore = levelListScore.LevelScores[i].myMinScore;
+        //    myLevelList[i].myMediumScore = levelListScore.LevelScores[i].myMediumScore;
+        //    myLevelList[i].myHighScore = levelListScore.LevelScores[i].myHighScore;
+        //    myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
+        //    myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
+        //}
+
+    }
 
 }
