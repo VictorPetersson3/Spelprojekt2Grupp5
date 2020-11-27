@@ -13,6 +13,12 @@ public class Portals : ObstructTileMap
     [SerializeField]
     Vector3 myEntryAndExitDirection;
 
+    public PathTile myLastPlacedTile;
+    public PathTile GetSetLastPathTile { get { return myLastPlacedTile; } set { myLastPlacedTile = value; } }
+
+
+    List<Vector3> myContinuingPath;
+
     public Portals SetSecondPortal { set { mySecondPortal = value; } }
 
     public override void OnValidate()
@@ -29,29 +35,53 @@ public class Portals : ObstructTileMap
             }
             else
             {
-               
+
                 mySecondPortal.SetSecondPortal = this;
             }
         }
 
-        
+
         myPlayerController = FindObjectOfType<PlayerController>();
         base.OnValidate();
+    }
+
+
+    public Vector3 GetPos()
+    {
+        return transform.position;
+    }
+
+    public List<Vector3> GetMovementList()
+    {
+        return myContinuingPath;
+    }
+
+    public void AddVectorToMovementList(PathTile aTilePos)
+    {
+        myContinuingPath.Add(aTilePos.GetPathTilePosition);
+        print(aTilePos.transform.position + "Added aTilePos To MovementList");
     }
     public override void Start()
     {
         base.Start();
+        myContinuingPath = new List<Vector3>();
+        
+
     }
     public override void Update()
     {
-
         base.Update();
+    }
+
+    public Vector3 GetExit()
+    {
+        return myEntryAndExitDirection;
     }
     void TeleportPlayer()
     {
         Vector3 flooredPosition = new Vector3(Mathf.FloorToInt(transform.position.x), 0, Mathf.FloorToInt(transform.position.z));
         Vector3 playerTilePos = new Vector3(myPlayerController.GetCurrectTile.GetX, 0, myPlayerController.GetCurrectTile.GetZ);
-       
+
         if (playerTilePos == flooredPosition)
         {
             myPlayerController.transform.position = mySecondPortal.transform.position + myEntryAndExitDirection;
@@ -72,7 +102,6 @@ public class Portals : ObstructTileMap
         {
             Gizmos.color = Color.white;
             Gizmos.DrawLine(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(Mathf.FloorToInt(mySecondPortal.transform.position.x), 0.1f, Mathf.FloorToInt(mySecondPortal.transform.position.z)));
-
         }
 
         Color d = Color.yellow;

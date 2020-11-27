@@ -68,6 +68,7 @@ public class Placement : MonoBehaviour
     }
     void PlacementLogic()
     {
+        AddToPortalListLogic();
 
         //Spawnar en tile
         //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
@@ -103,6 +104,7 @@ public class Placement : MonoBehaviour
 
                     WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
                 }
+                
             }
             if (intersectionPath != null)
             {
@@ -136,11 +138,25 @@ public class Placement : MonoBehaviour
             }
         }
 
-    
-     
-
-
     }
+
+    private void AddToPortalListLogic()
+    {
+        if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[0].GetSetLastPathTile) && myPathManager.GetPortals[0].GetSetLastPathTile != null)
+        {
+            print(myPathManager.GetPortals[0].GetSetLastPathTile);
+            PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+            path.name = "Path Tile " + a;
+            a++;
+            path.GetPathTilePosition = myInputCoordinates;
+            myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+            myPathManager.AddItemToPortalMap(path);
+            myPathManager.GetPortals[0].GetSetLastPathTile = path;
+
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+        }
+    }
+
     public GameObject WhatDidIHit(Vector3 anInputType)
     {
         RaycastHit hit;
