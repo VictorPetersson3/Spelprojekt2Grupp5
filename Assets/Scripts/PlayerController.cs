@@ -9,7 +9,11 @@ public class PlayerController : MonoBehaviour
     bool t = false;
     public void PlayerMoveList(List<Vector3> aListToCopy, PathTileIntersection aPathTileIntersection)
     {
-        
+
+        for (int i = 0; i < aListToCopy.Count; i++)
+        {
+            Debug.Log(i + ". " + aListToCopy[i], gameObject);
+        }
         if (!t)
         {
             step = 0;

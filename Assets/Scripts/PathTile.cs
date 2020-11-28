@@ -9,7 +9,7 @@ public class PathTile : MonoBehaviour
     public PathManager myPathManager;
     Vector3 myPosition;
     PathTileIntersection myIntersection = null;
-
+    PathTileIntersection.Directions myDirection;
 
 
     public Vector3 GetPathTilePosition { get { return myPosition; } set { myPosition = value; } }
@@ -24,6 +24,8 @@ public class PathTile : MonoBehaviour
         CheckNeighbors();
 
     }
+    
+
     void CheckLeft(int aX, int aZ)
     {
         if (aX - 1 >= 0)
@@ -36,7 +38,6 @@ public class PathTile : MonoBehaviour
                     myPathManager.PathTileIntersectionList[i].AddNewPathToIntersection(myPathManager.GetDirections);
                     myIntersection = myPathManager.PathTileIntersectionList[i];
                 }
-
             }
         }
     }
@@ -52,8 +53,6 @@ public class PathTile : MonoBehaviour
                     myPathManager.PathTileIntersectionList[i].AddNewPathToIntersection(myPathManager.GetDirections);
                     myIntersection = myPathManager.PathTileIntersectionList[i];
                 }
-
-
             }
         }
     }
@@ -103,7 +102,7 @@ public class PathTile : MonoBehaviour
         {
             if (myPathManager.PathTileIntersectionList.Count != 0)
             {
-                CheckLeft(x,z);
+                CheckLeft(x, z);
                 CheckRight(x, z);
                 CheckDown(x, z);
                 CheckUp(x, z);

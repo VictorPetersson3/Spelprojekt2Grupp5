@@ -82,25 +82,25 @@ public class Placement : MonoBehaviour
         {
             if (!placeIntersection)
             {
+                PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+                path.name = "Path Tile " + a;
+                a++;
+                path.GetPathTilePosition = myInputCoordinates;
                 for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
                 {
-                    PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
-                    path.name = "Path Tile " + a;
-                    a++;
-                    path.GetPathTilePosition = myInputCoordinates;
                     myPathManager.AddItemToMap(path, false, myPathManager.PathTileIntersectionList[i]);
                 }
             }
             else
             {
+                PathTileIntersection intersectionPath = null;
+                intersectionPath = Instantiate(intersection, myInputCoordinates, transform.rotation);
+
+                intersectionPath.name = "Intersection Tile ";
+                intersectionPath.GetPathTilePosition = myInputCoordinates;
+                myPathManager.AddIntoIntersectionList(intersectionPath);
                 for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
                 {
-                    PathTileIntersection intersectionPath = null;
-                    intersectionPath = Instantiate(intersection, myInputCoordinates, transform.rotation);
-
-                    intersectionPath.name = "Intersection Tile ";
-                    intersectionPath.GetPathTilePosition = myInputCoordinates;
-                    myPathManager.AddIntoIntersectionList(intersectionPath);
                     myPathManager.AddItemToMap(intersectionPath, false, myPathManager.PathTileIntersectionList[i]);
 
                 }
