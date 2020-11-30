@@ -64,20 +64,20 @@ public class PathManager : MonoBehaviour
 
     private void InstantiateFirstPortalExitTile()
     {
-        PathTile temp = Instantiate(myPathTilePrefab, myPortals[0].GetExit() + myPortals[0].transform.position, Quaternion.identity);
-        temp.GetPathTilePosition = myPortals[0].GetExit() + myPortals[0].transform.position;
-        GetPathTileMap[Mathf.FloorToInt(myPortals[0].GetExit().x + myPortals[0].transform.position.x), Mathf.FloorToInt(myPortals[0].GetExit().z + myPortals[0].transform.position.z)] = temp;
-        AddItemToPortalMap(temp);
-        GetPortals[0].GetSetLastPathTile = temp;
-        WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[0].GetExit().x + myPortals[0].transform.position.x), Mathf.FloorToInt(myPortals[0].GetExit().z + myPortals[0].transform.position.z), Tile.TileState.obstructed);
+        for (int i = 0; i < myPortals.Count; i++)
+        {
+            PathTile temp = Instantiate(myPathTilePrefab, myPortals[i].GetExit() + myPortals[i].transform.position, Quaternion.identity);
+            temp.GetPathTilePosition = myPortals[i].GetExit() + myPortals[i].transform.position;
+            GetPathTileMap[Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z)] = temp;
+            AddItemToPortalMap(temp, i);
+            GetPortals[i].GetSetLastPathTile = temp;
+            WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z), Tile.TileState.obstructed);
+        }
     }
 
-    public void AddItemToPortalMap(PathTile aPathTileToAdd)
+    public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {
-        print(aPathTileToAdd.transform.position);
-        myPortals[0].AddVectorToMovementList(aPathTileToAdd);
-        
-    }
+        myPortals[index].AddVectorToMovementList(aPathTileToAdd);    }
 
     public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdeifier)
     {
