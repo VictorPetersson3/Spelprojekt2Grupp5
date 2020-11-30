@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myMovementSpeed = 12;
 
+    int indexForNextPortalDistance = 0;
+    bool myDontIncreaseIndexFirstTime = true;
     public int SetPlayerStep
     {
         set
@@ -44,8 +46,8 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {   
-        float distance = Vector3.Distance(myPathManager.GetPortals[0].GetPos() + Vector3.right, transform.position);
+    {
+        
         if (Input.GetKey(KeyCode.Space))
         {
             if (step == myMovementList.Count)
@@ -72,14 +74,20 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-            if (distance < 0.1f)
+            
+            for (int i = 0; i < myPathManager.GetPortals.Count; i++)
             {
-                transform.position = myPathManager.GetPortals[0].GetExit() + myPathManager.GetPortals[0].transform.position;
+                float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
+                if (distance < 0.1f)
+                {
+                    transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
 
-                myMovementList = myPathManager.GetPortals[0].GetMovementList();
-                step = 1;
+                    myMovementList = myPathManager.GetPortals[i].GetMovementList();
+                    step = 1;
+
+                }
+
             }
-
         }
     }
 }
