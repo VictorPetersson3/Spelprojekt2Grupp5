@@ -19,6 +19,7 @@ public class Door : ObstructTileMap
     {
         myPlayerController = FindObjectOfType<PlayerController>();
         base.OnValidate();
+
     }
 
 
@@ -26,7 +27,8 @@ public class Door : ObstructTileMap
     {
         myX = Mathf.FloorToInt(transform.position.x);
         myZ = Mathf.FloorToInt(transform.position.z);
-        base.Start();
+        //base.Start();
+
     }
 
 

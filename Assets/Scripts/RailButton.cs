@@ -10,7 +10,7 @@ public class RailButton : ObstructTileMap
     int myZ;
     [SerializeField]
     PlayerController myPlayerController;
-    bool mySwitch = false;
+    public bool mySwitch = false;
 
     [SerializeField]
     KeyCode debugButton;
@@ -27,7 +27,9 @@ public class RailButton : ObstructTileMap
     {
         myX = Mathf.FloorToInt(transform.position.x);
         myZ = Mathf.FloorToInt(transform.position.z);
-        base.Start();
+        //base.Start();
+
+
     }
     public override void Update()
     {
