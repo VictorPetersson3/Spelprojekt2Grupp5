@@ -142,18 +142,21 @@ public class Placement : MonoBehaviour
 
     private void AddToPortalListLogic()
     {
-        if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[0].GetSetLastPathTile) && myPathManager.GetPortals[0].GetSetLastPathTile != null)
+        for (int i = 0; i < myPathManager.GetPortals.Count; i++)
         {
-            print(myPathManager.GetPortals[0].GetSetLastPathTile);
-            PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
-            path.name = "Path Tile " + a;
-            a++;
-            path.GetPathTilePosition = myInputCoordinates;
-            myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
-            myPathManager.AddItemToPortalMap(path);
-            myPathManager.GetPortals[0].GetSetLastPathTile = path;
+            if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[i].GetSetLastPathTile) && myPathManager.GetPortals[i].GetSetLastPathTile != null)
+            {
+                print(myPathManager.GetPortals[i].GetSetLastPathTile);
+                PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+                path.name = "Path Tile " + a;
+                a++;
+                path.GetPathTilePosition = myInputCoordinates;
+                myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+                myPathManager.AddItemToPortalMap(path, i);
+                myPathManager.GetPortals[i].GetSetLastPathTile = path;
 
-            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+                WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+            }
         }
     }
 

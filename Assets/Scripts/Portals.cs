@@ -45,7 +45,6 @@ public class Portals : ObstructTileMap
         base.OnValidate();
     }
 
-
     public Vector3 GetPos()
     {
         return transform.position;
@@ -63,14 +62,14 @@ public class Portals : ObstructTileMap
     }
     public override void Start()
     {
-        base.Start();
+        //base.Start();
         myContinuingPath = new List<Vector3>();
         
 
     }
     public override void Update()
     {
-        base.Update();
+        //base.Update();
     }
 
     public Vector3 GetExit()
