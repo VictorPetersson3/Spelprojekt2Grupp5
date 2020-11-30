@@ -365,20 +365,27 @@ public class GameManager : MonoBehaviour
     {
         AllLevelScores levelListScore;
         string path = Application.streamingAssetsPath + "/levelscores.txt";
-        string contents = File.ReadAllText(path);
-        levelListScore = JsonUtility.FromJson<AllLevelScores>(contents);
-
-        if (levelListScore != null)
+        if (File.Exists(path))
         {
-            for (int i = 0; i < levelListScore.LevelScores.Count; i++)
+            string contents = File.ReadAllText(path);
+            levelListScore = JsonUtility.FromJson<AllLevelScores>(contents);
+
+            if (levelListScore != null)
             {
-                myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
-                myLevelList[i].myMinScore = levelListScore.LevelScores[i].myMinScore;
-                myLevelList[i].myMediumScore = levelListScore.LevelScores[i].myMediumScore;
-                myLevelList[i].myHighScore = levelListScore.LevelScores[i].myHighScore;
-                myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
-                myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
+                for (int i = 0; i < levelListScore.LevelScores.Count; i++)
+                {
+                    myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
+                    myLevelList[i].myMinScore = levelListScore.LevelScores[i].myMinScore;
+                    myLevelList[i].myMediumScore = levelListScore.LevelScores[i].myMediumScore;
+                    myLevelList[i].myHighScore = levelListScore.LevelScores[i].myHighScore;
+                    myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
+                    myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
+                }
             }
+        }
+        else
+        {
+            Debug.Log("NO FILE PATH DETECTED AT: "+ path);
         }
 
 
