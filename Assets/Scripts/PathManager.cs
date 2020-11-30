@@ -77,10 +77,7 @@ public class PathManager : MonoBehaviour
 
     public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {
-        print(aPathTileToAdd.transform.position + "poooooop");
-        myPortals[index].AddVectorToMovementList(aPathTileToAdd);
-        
-    }
+        myPortals[index].AddVectorToMovementList(aPathTileToAdd);    }
 
     public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdeifier)
     {
