@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class LevelSelect : MonoBehaviour
 {
-   [Header("Parent GameObject till alla level-objekt in här")]
-   [SerializeField] private GameObject myLevels;
+//   [SerializeField] private GameObject[] myLevels;
 
    [Header("Linjen mellan levlarnas tjocklek")]
    [SerializeField] private GameObject myLine;
@@ -13,10 +12,21 @@ public class LevelSelect : MonoBehaviour
 
    private GameObject[] myLineList;
    private GameObject mySelectedLevel;
+   private GameObject mySelectedUI;
+   [SerializeField] private GameObject myMainUI;
 
+   //private void OnValidate()
+   //{
+   //   myLevels = new GameObject[transform.childCount];
+   //   for (int i = 0; i < transform.childCount; i++)
+   //   {
+   //      myLevels[i] = transform.GetChild(i).gameObject.transform.GetChild(i).transform.gameObject;
+   //   }
+   //}
    private void Start()
    {
       GenerateLines();
+      mySelectedUI = myMainUI;
    }
    void Update()
    {
@@ -24,6 +34,18 @@ public class LevelSelect : MonoBehaviour
       {
          mySelectedLevel = WhatDidIHit();
          Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(mySelectedLevel);
+         if (mySelectedLevel != null)
+         {
+            mySelectedUI.SetActive(false);
+            mySelectedUI = mySelectedLevel.transform.parent.GetChild(0).gameObject;
+            mySelectedUI.SetActive(true);
+         }
+         else
+         {
+            mySelectedUI.SetActive(false);
+            mySelectedUI = myMainUI;
+            mySelectedUI.SetActive(true);
+         }
       }
    }
    public GameObject WhatDidIHit()
@@ -39,20 +61,17 @@ public class LevelSelect : MonoBehaviour
    }
    private void GenerateLines()
    {
-      Transform[] levelTransforms = new Transform[myLevels.gameObject.transform.childCount];
+      Transform[] levelTransforms = new Transform[transform.childCount];
       Vector3 linePos;
       Vector3 lineScale = Vector3.zero;
-      Quaternion lineRot = Quaternion.identity;
-      myLineList = new GameObject[myLevels.gameObject.transform.childCount];
+      Quaternion lineRot;
+      myLineList = new GameObject[transform.childCount];
 
-      Debug.Log(myLevels.gameObject.transform.GetChild(0));
-      Debug.Log(myLevels.gameObject.transform.GetChild(1));
+      levelTransforms[0] = transform.GetChild(0).GetChild(1);
 
-      levelTransforms[0] = myLevels.gameObject.transform.GetChild(0);
-
-      for (int i = 1; i < myLevels.gameObject.transform.childCount; i++)
+      for (int i = 1; i < transform.childCount; i++)
       {
-         levelTransforms[i] = myLevels.gameObject.transform.GetChild(i);
+         levelTransforms[i] = transform.GetChild(i).GetChild(1);
 
          linePos = levelTransforms[i - 1].position + (levelTransforms[i].position - levelTransforms[i - 1].position) / 2;
 
@@ -78,19 +97,25 @@ public class LevelSelect : MonoBehaviour
          lineScale.y = myLineThickness.x;
          lineScale.z = myLineThickness.y;
 
-         lineRot = Quaternion.Euler
-         (
-            0, 
-            -Mathf.Atan
+         if ((levelTransforms[i].position.x - levelTransforms[i - 1].position.x) != 0)
+         {
+            lineRot = Quaternion.Euler
             (
-               (levelTransforms[i].position.z - levelTransforms[i - 1].position.z) / (levelTransforms[i].position.x - levelTransforms[i - 1].position.x)
-            ) * 180 / Mathf.PI, 
-            -Mathf.Atan
-            (
-               (levelTransforms[i].position.y - levelTransforms[i - 1].position.y) / (levelTransforms[i].position.x - levelTransforms[i - 1].position.x)
-            ) * 180 / Mathf.PI
-         );
-
+               0,
+               -Mathf.Atan
+               (
+                  (levelTransforms[i].position.z - levelTransforms[i - 1].position.z) / (levelTransforms[i].position.x - levelTransforms[i - 1].position.x)
+               ) * 180 / Mathf.PI,
+               -Mathf.Atan
+               (
+                  (levelTransforms[i].position.y - levelTransforms[i - 1].position.y) / (levelTransforms[i].position.x - levelTransforms[i - 1].position.x)
+               ) * 180 / Mathf.PI
+            );
+         }
+         else
+         {
+            lineRot = Quaternion.Euler(0, 90, 0);
+         }
          myLineList[i - 1] = Instantiate(myLine, linePos, lineRot, levelTransforms[i - 1]);
          myLineList[i - 1].transform.localScale = lineScale;
          myLineList[i - 1].SetActive(true);
