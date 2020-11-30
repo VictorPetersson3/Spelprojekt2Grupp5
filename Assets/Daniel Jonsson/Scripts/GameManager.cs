@@ -38,9 +38,8 @@ public class GameManager : MonoBehaviour
     public class LevelScore
     {
         public string myLevelName;
-        public int myMinScore;
-        public int myMediumScore;
-        public int myHighScore;
+        public int myTwoStarScore;
+        public int myThreeStarScore;
         public int myStartingMoney;
     }
 
@@ -49,21 +48,19 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public class Level
     {
+        [Header("\nLevel Scores\n")]
         public string myLevelName;
-        public int myMinScore;
-        public int myMediumScore;
-        public int myHighScore;
+        public int myTwoStarScore;
+        public int myThreeStarScore;
         public int myStartingMoney;
+        [Header("\nPlayer Progress\n")]
         public int myAmountOfMoney;
         public int myFinishedScore;
         public bool myFinishedLevel;
     }
 
-
     private void Awake()
     {
-        
-
         if (globalInstance == null)
         {
             globalInstance = this;
@@ -74,7 +71,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
 
     void Start()
@@ -100,16 +96,14 @@ public class GameManager : MonoBehaviour
                     act = "Act " + actNumber + ": ";
                     levelNumber = 1;
                 }
-
                 Level level = new Level();
                 level.myLevelName = act + " Level " + levelNumber;
                 levelNumber++;
                 level.myFinishedScore = 0;
                 level.myStartingMoney = 0;
                 level.myAmountOfMoney = 0;
-                level.myMinScore = 0;
-                level.myMediumScore = 0;
-                level.myHighScore = 0;
+                level.myTwoStarScore = 0;
+                level.myThreeStarScore = 0;
                 level.myFinishedLevel = false;
                 myLevelList.Add(level);
             }
@@ -169,36 +163,78 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void SetFinishedLevel(int aScore)
+    public void SetFinishedLevel()
     {
-        for (int i = 0; i < (int)(Levels.Count - 1); i++)
+        int mediumLevelScore = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myTwoStarScore;
+        int highLevelScore = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myThreeStarScore;
+
+        int amountOfMoneyEarned = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+
+
+        if (amountOfMoneyEarned > myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myFinishedScore)
         {
-            if (i == SceneManager.GetActiveScene().buildIndex)
-            {
-                if (aScore > myLevelList[i].myFinishedScore)
-                {
-                    myLevelList[i].myFinishedScore = aScore;
-                }
-
-                //UI.SetScore(aScore)
-
-                if (aScore > myLevelList[i].myHighScore)
-                {
-                    myLevelList[i].myFinishedLevel = false;
-                    //UI.ShowFailScreen(aScore, 1);
-                }
-                else if (aScore >= myLevelList[i].myMediumScore && aScore <= myLevelList[i].myHighScore)
-                {
-                    myLevelList[i].myFinishedLevel = true;
-                    //UI.ShowWinScreen(aScore, 2);
-                }
-                else if (aScore < myLevelList[i].myMinScore && myLevelList[i].myFinishedScore >= myLevelList[i].myMinScore && myLevelList[i].myFinishedScore < myLevelList[i].myMediumScore)
-                {
-                    myLevelList[i].myFinishedLevel = true;
-                    //UI.ShowWinScreen(aScore, 3);
-                }
-            }
+            myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myFinishedScore = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
         }
+        
+        if (amountOfMoneyEarned > 0 && amountOfMoneyEarned < mediumLevelScore)
+        {
+            Debug.Log("Failed LEVEL\nONE STAR");
+            //UI.ShowFailScreen(amountOfMoneyEarned, 1);
+        }
+        else if (amountOfMoneyEarned >= mediumLevelScore && amountOfMoneyEarned < highLevelScore)
+        {
+            Debug.Log("Finished Level!\nTWO STARS");
+            myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myFinishedLevel = true;
+            //UI.ShowWinScreen(amountOfMoneyEarned, 2);
+        }
+        else if (amountOfMoneyEarned >= highLevelScore )
+        {
+            Debug.Log("Finished Level!\nTHREE STARS");
+            myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myFinishedLevel = true;
+            //UI.ShowWinScreen(amountOfMoneyEarned, 3);
+        }
+
+
+
+        //for (int i = 0; i < (int)(Levels.Count - 1); i++)
+        //{
+        //    if (i == SceneManager.GetActiveScene().buildIndex)
+        //    {
+        //        if (aScore > myLevelList[i].myFinishedScore)
+        //        {
+        //            myLevelList[i].myFinishedScore = aScore;
+        //        }
+
+        //        //UI.SetScore(aScore)
+
+        //        if (aScore > myLevelList[i].myHighScore)
+        //        {
+        //            myLevelList[i].myFinishedLevel = false;
+        //            //UI.ShowFailScreen(aScore, 1);
+        //        }
+        //        else if (aScore >= myLevelList[i].myMediumScore && aScore <= myLevelList[i].myHighScore)
+        //        {
+        //            myLevelList[i].myFinishedLevel = true;
+        //            //UI.ShowWinScreen(aScore, 2);
+        //        }
+        //        else if (aScore < myLevelList[i].myMinScore && myLevelList[i].myFinishedScore >= myLevelList[i].myMinScore && myLevelList[i].myFinishedScore < myLevelList[i].myMediumScore)
+        //        {
+        //            myLevelList[i].myFinishedLevel = true;
+        //            //UI.ShowWinScreen(aScore, 3);
+        //        }
+        //    }
+        //}
+    }
+
+
+    public void ResetPlayerProgress()
+    {
+        for (int i = 1; i < (int)Levels.Count; i++)
+        {
+            myLevelList[i - 1].myFinishedScore = 0;
+            myLevelList[i - 1].myFinishedLevel = false;
+        }
+        
     }
 
     public void IsPlayerAlive()
@@ -226,9 +262,8 @@ public class GameManager : MonoBehaviour
             LevelScore saveobject = new LevelScore
             {
                 myLevelName = myLevelList[i].myLevelName,
-                myMinScore = myLevelList[i].myMinScore,
-                myMediumScore = myLevelList[i].myMediumScore,
-                myHighScore = myLevelList[i].myHighScore,
+                myTwoStarScore = myLevelList[i].myTwoStarScore,
+                myThreeStarScore = myLevelList[i].myThreeStarScore,
                 myStartingMoney = myLevelList[i].myStartingMoney
             };
 
@@ -375,9 +410,8 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < levelListScore.LevelScores.Count; i++)
                 {
                     myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
-                    myLevelList[i].myMinScore = levelListScore.LevelScores[i].myMinScore;
-                    myLevelList[i].myMediumScore = levelListScore.LevelScores[i].myMediumScore;
-                    myLevelList[i].myHighScore = levelListScore.LevelScores[i].myHighScore;
+                    myLevelList[i].myTwoStarScore = levelListScore.LevelScores[i].myTwoStarScore;
+                    myLevelList[i].myThreeStarScore = levelListScore.LevelScores[i].myThreeStarScore;
                     myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
                     myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
                 }

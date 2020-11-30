@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &40368079
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &72651384
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1001 &73789776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -328,6 +328,88 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ef61a763b85d9749b9c967ccacab0c1, type: 3}
+--- !u!1 &110292396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 110292400}
+  - component: {fileID: 110292399}
+  - component: {fileID: 110292398}
+  - component: {fileID: 110292397}
+  m_Layer: 0
+  m_Name: WorldController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &110292397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110292396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2647cd2d5aaa1649910000bb9612fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPlayerController: {fileID: 1388900421}
+  myPathTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
+    type: 3}
+  myEndTile: {fileID: 1907994114}
+--- !u!114 &110292398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110292396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11c133f01331754ebabd131241e9390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPathManager: {fileID: 110292397}
+  myBuildManager: {fileID: 0}
+  temp: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1, type: 3}
+  myPathMoney: -10
+--- !u!114 &110292399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110292396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91541f00b4fd57a418b7db1114310f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myWidth: 9
+  myDepth: 11
+  myObstructedTilesColor: {r: 1, g: 0, b: 0.15225315, a: 1}
+  myEmptyTilesColor: {r: 0.13124222, g: 1, b: 0.0141509175, a: 1}
+  myAlpha: 0.5
+--- !u!4 &110292400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110292396}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &169672613
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &180074501
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &230841849
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &273782539
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &305127392
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &361462066
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &378988740
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &382655130
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &398986478
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,7 +915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1001 &399733722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -948,7 +1030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &429310746
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +1076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &443492400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,7 +1122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &451988160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1001 &468240193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1212,7 +1294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &587666047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,7 +1340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &590995295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,7 +1386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &654269460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 9
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &657413017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,7 +1478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &671668423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,7 +1524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &689580437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,7 +1603,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689580437}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5.28, y: 10.87, z: 3.07}
+  m_LocalPosition: {x: 5.28, y: 10.87, z: 5.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1603,7 +1685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &717609140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1649,7 +1731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &797153944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,7 +1777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &889031451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,7 +1823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1001 &940968541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1868,7 +1950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1001 &1005286967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1998,7 +2080,7 @@ PrefabInstance:
     - target: {fileID: 4353293028645901086, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4353293028645901086, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
@@ -2019,7 +2101,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myWorldController
       value: 
-      objectReference: {fileID: 2063950005}
+      objectReference: {fileID: 0}
     - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
       propertyPath: mySecondPortal
@@ -2104,7 +2186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1167653488
 GameObject:
   m_ObjectHideFlags: 0
@@ -2150,7 +2232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1167879247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1173249652
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,7 +2324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1249914111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2288,7 +2370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1274177244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,7 +2416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!114 &1388900421 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4672840498732208381, guid: 0c782d155949ac341bf2cb6acfa40762,
@@ -2392,7 +2474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 7
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1001 &1583144936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2469,7 +2551,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myWorldController
       value: 
-      objectReference: {fileID: 2063950005}
+      objectReference: {fileID: 0}
     - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
       propertyPath: myPlayerController
@@ -2522,7 +2604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1685095525
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,7 +2650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1723304046
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,7 +2696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1001 &1799129264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2729,7 +2811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1808370223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,7 +2857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1853435709
 GameObject:
   m_ObjectHideFlags: 0
@@ -2821,7 +2903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 7
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1867903517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2867,7 +2949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &1870083088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2960,7 +3042,7 @@ Transform:
   m_LocalScale: {x: 2.7537, y: 1, z: 2.2412}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1871781300
 PrefabInstance:
@@ -2988,7 +3070,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myWorldController
       value: 
-      objectReference: {fileID: 2063950005}
+      objectReference: {fileID: 0}
     - target: {fileID: 4831812572086577071, guid: e823a1316e22cd5448654d8a1c0e5a94,
         type: 3}
       propertyPath: myPlayerController
@@ -3032,7 +3114,7 @@ PrefabInstance:
     - target: {fileID: 5822651858203611496, guid: e823a1316e22cd5448654d8a1c0e5a94,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5822651858203611496, guid: e823a1316e22cd5448654d8a1c0e5a94,
         type: 3}
@@ -3120,7 +3202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &2004834963
 GameObject:
   m_ObjectHideFlags: 0
@@ -3166,7 +3248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &2020218251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,7 +3294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &2025014423
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,88 +3340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
---- !u!1 &2063950004
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2063950006}
-  - component: {fileID: 2063950005}
-  - component: {fileID: 2063950008}
-  - component: {fileID: 2063950007}
-  m_Layer: 0
-  m_Name: WorldController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2063950005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063950004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91541f00b4fd57a418b7db1114310f1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myWidth: 9
-  myDepth: 11
-  myObstructedTilesColor: {r: 1, g: 0, b: 0.15225315, a: 1}
-  myEmptyTilesColor: {r: 0.13124222, g: 1, b: 0.0141509175, a: 1}
-  myAlpha: 0.5
---- !u!4 &2063950006
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063950004}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2063950007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063950004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2647cd2d5aaa1649910000bb9612fcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myPlayerController: {fileID: 1388900421}
-  myPathTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-    type: 3}
-  myEndTile: {fileID: 1907994114}
---- !u!114 &2063950008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063950004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11c133f01331754ebabd131241e9390, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myPathManager: {fileID: 2063950007}
-  myBuildManager: {fileID: 0}
-  temp: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1, type: 3}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &2084205517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3385,7 +3386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
 --- !u!1 &2120035538
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,7 +3462,7 @@ Transform:
   - {fileID: 587666048}
   - {fileID: 443492401}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2128174999
 GameObject:
@@ -3508,4 +3509,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myWidth: 1
   myDepth: 1
-  myWorldController: {fileID: 2063950005}
+  myWorldController: {fileID: 110292399}
