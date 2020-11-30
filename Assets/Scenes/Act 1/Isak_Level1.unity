@@ -908,6 +908,8 @@ MonoBehaviour:
   myPathManager: {fileID: 2063950008}
   myBuildManager: {fileID: 0}
   temp: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1, type: 3}
+  intersection: {fileID: 0}
+  placeIntersection: 0
 --- !u!114 &2063950008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,6 +926,7 @@ MonoBehaviour:
   myPathTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
     type: 3}
   myEndTile: {fileID: 932197793}
+  myPortals: []
 --- !u!1 &2120035538
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +963,7 @@ Transform:
   - {fileID: 617132736}
   - {fileID: 965685280}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2125529552
 GameObject:
@@ -1132,7 +1135,7 @@ PrefabInstance:
     - target: {fileID: 8058011032119383566, guid: 0c782d155949ac341bf2cb6acfa40762,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8058011032119383566, guid: 0c782d155949ac341bf2cb6acfa40762,
         type: 3}
