@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private SaveSlot mySaveSlot;
     private bool myLoadedLevel;
 
+    private int myAllLevels = 40;
+
     public static GameManager globalInstance;
     [SerializeField] Text myMoneyText;
     [SerializeField] Text myLevelText;
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] short myFirstActTransition, mySecondActTransition;
 
     [SerializeField]
-    public List<Level> myLevelList = new List<Level>();
+    public List<PlayerProgression> myLevelList = new List<PlayerProgression>();
 
     public class AllLevelScores
     {
@@ -44,9 +46,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     [System.Serializable]
-    public class Level
+    public class PlayerProgression
     {
         [Header("\nLevel Scores\n")]
         public string myLevelName;
@@ -77,27 +78,27 @@ public class GameManager : MonoBehaviour
     {
         int actNumber = 1;
         int levelNumber = 1;
-        string act = "Act " + actNumber + ": ";
+        string act = actNumber + "-";
 
 
         if (myLoadedLevel == false)
         {
-            for (int i = 1; i <= (int)(Levels.Count - 1); i++)
+            for (int i = 1; i <= myAllLevels; i++)
             {
                 if (i == myFirstActTransition)
                 {
                     actNumber += 1;
-                    act = "Act " + actNumber + ": ";
+                    act = actNumber + "-";
                     levelNumber = 1;
                 }
                 else if (i == mySecondActTransition)
                 {
                     actNumber += 1;
-                    act = "Act " + actNumber + ": ";
+                    act = actNumber + "-";
                     levelNumber = 1;
                 }
-                Level level = new Level();
-                level.myLevelName = act + " Level " + levelNumber;
+                PlayerProgression level = new PlayerProgression();
+                level.myLevelName = "Level " + act + levelNumber;
                 levelNumber++;
                 level.myFinishedScore = 0;
                 level.myStartingMoney = 0;
@@ -108,8 +109,6 @@ public class GameManager : MonoBehaviour
                 myLevelList.Add(level);
             }
         }
-
-
     }
 
 
@@ -129,7 +128,6 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel()
     {
-        int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         ResetAllLevels();
     }
@@ -229,7 +227,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetPlayerProgress()
     {
-        for (int i = 1; i < (int)Levels.Count; i++)
+        for (int i = 1; i < myAllLevels; i++)
         {
             myLevelList[i - 1].myFinishedScore = 0;
             myLevelList[i - 1].myFinishedLevel = false;
@@ -333,7 +331,7 @@ public class GameManager : MonoBehaviour
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            List<Level> loadLevels = (List<Level>)formatter.Deserialize(stream);
+            List<PlayerProgression> loadLevels = (List<PlayerProgression>)formatter.Deserialize(stream);
             stream.Close();
 
             myLevelList = loadLevels;
@@ -422,8 +420,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("NO FILE PATH DETECTED AT: "+ path);
         }
 
-
-
         //AllLevelScores levelListScore;
         //TextAsset file = Resources.Load("levelscores") as TextAsset;
         //string json = file.ToString();
@@ -438,6 +434,11 @@ public class GameManager : MonoBehaviour
         //    myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
         //}
 
+    }
+
+    public List<PlayerProgression> GetPlayerStats()
+    {
+        return myLevelList;
     }
 
 }
