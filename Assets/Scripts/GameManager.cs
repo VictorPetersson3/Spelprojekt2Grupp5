@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
     {
         [Header("\nLevel Scores\n")]
         public string myLevelName;
-        public int myThreeStarScore;
         public int myTwoStarScore;
         public int myOneStarScore;
         public int myStartingMoney;
@@ -104,14 +103,13 @@ public class GameManager : MonoBehaviour
                 level.myStartingMoney = 0;
                 level.myAmountOfMoney = 0;
                 level.myTwoStarScore = 0;
-                level.myThreeStarScore = 0;
                 level.myAmountOfStars = 0;
                 level.myFinishedLevel = false;
                 myLevelList.Add(level);
             }
         }
 
-        //LoadFile(1);
+        LoadFile(1);
 
 
     }
@@ -119,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
 
@@ -176,72 +174,89 @@ public class GameManager : MonoBehaviour
 
     public void SetFinishedLevel()
     {
-        int mediumLevelScore = myLevelList[myActiveScene].myTwoStarScore;
-        int highLevelScore = myLevelList[myActiveScene].myThreeStarScore;
+        int oneStar = 1;
+        int twoStars = 2;
+        int threeStars = 3;
+
+        int myOneStarScore = myLevelList[myActiveScene].myOneStarScore;
+        int myTwoStarScore = myLevelList[myActiveScene].myTwoStarScore;
 
         int amountOfMoneyEarned = myLevelList[myActiveScene].myAmountOfMoney;
 
 
-        if (amountOfMoneyEarned > myLevelList[myActiveScene].myFinishedScore)
+        if (amountOfMoneyEarned < myLevelList[myActiveScene].myFinishedScore)
         {
             myLevelList[myActiveScene].myFinishedScore = myLevelList[myActiveScene].myAmountOfMoney;
         }
-        
-        if (amountOfMoneyEarned > 0 && amountOfMoneyEarned < mediumLevelScore)
+
+        if (amountOfMoneyEarned > 0 && amountOfMoneyEarned < myTwoStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
                 myLevelList[myActiveScene].myAmountOfStars += 3;
+                myLevelList[myActiveScene].myFinishedLevel = true;
             }
 
             if (myLevelList[myActiveScene].myFinishedLevel == true)
             {
-                int tempStars = 0;
-                tempStars = myLevelList[myActiveScene].myAmountOfStars;
-                myLevelList[myActiveScene].myAmountOfStars -= tempStars;
+                int currentStars = 0;
+                currentStars = myLevelList[myActiveScene].myAmountOfStars;
 
-                myLevelList[myActiveScene].myAmountOfStars += 3;
+                if (currentStars < threeStars)
+                {
+                    myLevelList[myActiveScene].myAmountOfStars -= currentStars;
+                    myLevelList[myActiveScene].myAmountOfStars += threeStars;
+                }
+                
             }
             Debug.Log("Finished LEVEL\nTHREE STARS");
-            myLevelList[myActiveScene].myFinishedLevel = true;
+            
             //UI.ShowFailScreen(amountOfMoneyEarned, 1);
         }
-        else if (amountOfMoneyEarned >= mediumLevelScore && amountOfMoneyEarned < highLevelScore)
+        else if (amountOfMoneyEarned >= myTwoStarScore && amountOfMoneyEarned < myOneStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
-                myLevelList[myActiveScene].myAmountOfStars += 2;
+                myLevelList[myActiveScene].myAmountOfStars += twoStars;
+                myLevelList[myActiveScene].myFinishedLevel = true;
             }
 
             if (myLevelList[myActiveScene].myFinishedLevel == true)
             {
-                int tempStars = 0;
-                tempStars = myLevelList[myActiveScene].myAmountOfStars;
-                myLevelList[myActiveScene].myAmountOfStars -= tempStars;
+                int currentStars = 0;
+                currentStars = myLevelList[myActiveScene].myAmountOfStars;
 
-                myLevelList[myActiveScene].myAmountOfStars += 2;
+                if (currentStars < twoStars)
+                {
+                    myLevelList[myActiveScene].myAmountOfStars -= currentStars;
+                    myLevelList[myActiveScene].myAmountOfStars += twoStars;
+                }
             }
             Debug.Log("Finished Level!\nTWO STARS");
-            myLevelList[myActiveScene].myFinishedLevel = true;
+            
             //UI.ShowWinScreen(amountOfMoneyEarned, 2);
         }
-        else if (amountOfMoneyEarned >= highLevelScore )
+        else if (amountOfMoneyEarned >= myOneStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
                 myLevelList[myActiveScene].myAmountOfStars += 1;
+                myLevelList[myActiveScene].myFinishedLevel = true;
             }
 
             if (myLevelList[myActiveScene].myFinishedLevel == true)
             {
-                int tempStars = 0;
-                tempStars = myLevelList[myActiveScene].myAmountOfStars;
-                myLevelList[myActiveScene].myAmountOfStars -= tempStars;
-
-                myLevelList[myActiveScene].myAmountOfStars += 1;
+                int currentStars = 0;
+                currentStars = myLevelList[myActiveScene].myAmountOfStars;
+                if (currentStars < oneStar)
+                {
+                    myLevelList[myActiveScene].myAmountOfStars -= currentStars;
+                    myLevelList[myActiveScene].myAmountOfStars += oneStar;
+                }
             }
+
             Debug.Log("Finished Level!\nONE STARS");
-            myLevelList[myActiveScene].myFinishedLevel = true;
+            
             //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
@@ -285,7 +300,7 @@ public class GameManager : MonoBehaviour
             myLevelList[i - 1].myFinishedScore = 0;
             myLevelList[i - 1].myFinishedLevel = false;
         }
-        
+
     }
 
     public void IsPlayerAlive()
@@ -305,7 +320,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveScore()
     {
-        string json =               "{\n" +
+        string json = "{\n" +
                                     "\"LevelScores\":[\n";
 
         for (int i = 0; i < myLevelList.Count; i++)
@@ -314,7 +329,6 @@ public class GameManager : MonoBehaviour
             {
                 myLevelName = myLevelList[i].myLevelName,
                 myTwoStarScore = myLevelList[i].myTwoStarScore,
-                myThreeStarScore = myLevelList[i].myThreeStarScore,
                 myStartingMoney = myLevelList[i].myStartingMoney
             };
 
@@ -325,9 +339,9 @@ public class GameManager : MonoBehaviour
             {
                 json += ",\n";
             }
-           
+
         }
-        
+
         json += "\n]\n}";
 
         string path = Application.streamingAssetsPath + "/levelscores.txt";
@@ -462,7 +476,6 @@ public class GameManager : MonoBehaviour
                 {
                     myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
                     myLevelList[i].myTwoStarScore = levelListScore.LevelScores[i].myTwoStarScore;
-                    myLevelList[i].myThreeStarScore = levelListScore.LevelScores[i].myThreeStarScore;
                     myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
                     myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
                 }
@@ -470,7 +483,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("NO FILE PATH DETECTED AT: "+ path);
+            Debug.Log("NO FILE PATH DETECTED AT: " + path);
         }
 
         //AllLevelScores levelListScore;
@@ -504,14 +517,14 @@ public class GameManager : MonoBehaviour
     }
     public int GetHighestScore(int aLevelHighScoreIndex)
     {
-        return myLevelList[aLevelHighScoreIndex].myThreeStarScore;
+        return myLevelList[aLevelHighScoreIndex].myTwoStarScore;
     }
 
     public void SetLevel(int aLevelIndex)
     {
         myActiveScene = aLevelIndex;
     }
-    
+
     public int GetTotalStars()
     {
         int totalStars = 0;
