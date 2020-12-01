@@ -76,17 +76,7 @@ public class Portals : ObstructTileMap
     {
         return myEntryAndExitDirection;
     }
-    void TeleportPlayer()
-    {
-        Vector3 flooredPosition = new Vector3(Mathf.FloorToInt(transform.position.x), 0, Mathf.FloorToInt(transform.position.z));
-        Vector3 playerTilePos = new Vector3(myPlayerController.GetCurrectTile.GetX, 0, myPlayerController.GetCurrectTile.GetZ);
-
-        if (playerTilePos == flooredPosition)
-        {
-            myPlayerController.transform.position = mySecondPortal.transform.position + myEntryAndExitDirection;
-
-        }
-    }
+ 
     protected override void OnDrawGizmos()
     {
         Color c = Color.cyan;

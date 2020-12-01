@@ -33,15 +33,13 @@ public class RailButton : ObstructTileMap
     }
     public override void Update()
     {
-        //if (myPlayerController.GetCurrectTile.GetX == myX && myPlayerController.GetCurrectTile.GetZ == myZ)
-        //{
-        //    mySwitch = true;
-        //}
-
-
-        if (Input.GetKeyDown(debugButton))
+        if (myPlayerController != null)
         {
-            mySwitch = true;
+            float distance = Vector3.Distance(myPlayerController.transform.position, transform.position);
+            if (distance < 0.05f)
+            {
+                mySwitch = true;
+            }
         }
     }
     protected override void OnDrawGizmos()
