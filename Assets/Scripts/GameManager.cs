@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private bool myLoadedLevel;
 
     private int myAllLevels = 40;
+    private int myActiveScene;
 
     public static GameManager globalInstance;
     //[SerializeField] Text myMoneyText;
@@ -51,18 +52,19 @@ public class GameManager : MonoBehaviour
     {
         [Header("\nLevel Scores\n")]
         public string myLevelName;
-        public int myTwoStarScore;
         public int myThreeStarScore;
+        public int myTwoStarScore;
+        public int myOneStarScore;
         public int myStartingMoney;
         [Header("\nPlayer Progress\n")]
         public int myAmountOfMoney;
+        public int myAmountOfStars;
         public int myFinishedScore;
         public bool myFinishedLevel;
     }
 
     private void Awake()
     {
-        
 
         if (globalInstance == null)
         {
@@ -103,12 +105,13 @@ public class GameManager : MonoBehaviour
                 level.myAmountOfMoney = 0;
                 level.myTwoStarScore = 0;
                 level.myThreeStarScore = 0;
+                level.myAmountOfStars = 0;
                 level.myFinishedLevel = false;
                 myLevelList.Add(level);
             }
         }
 
-        LoadFile(1);
+        //LoadFile(1);
 
 
     }
@@ -122,10 +125,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            CheckTextStatus();
-        }
+        //if (SceneManager.GetActiveScene().buildIndex != 0)
+        //{
+        //    CheckTextStatus();
+        //}
     }
 
     public void CheckTextStatus()
@@ -144,19 +147,21 @@ public class GameManager : MonoBehaviour
     {
         int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index + 1);
-        ResetAmountOfMoney(index - 1);
+        //ResetAmountOfMoney(index - 1);
+        ResetAmountOfMoney();
     }
 
     public void BackLevel()
     {
         int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index - 1);
-        ResetAmountOfMoney(index - 1);
+        //ResetAmountOfMoney(index - 1);
+        ResetAmountOfMoney();
     }
 
-    public void ResetAmountOfMoney(int aBuildIndex)
+    public void ResetAmountOfMoney()
     {
-        myLevelList[aBuildIndex].myAmountOfMoney = myLevelList[aBuildIndex].myStartingMoney;
+        myLevelList[myActiveScene].myAmountOfMoney = myLevelList[myActiveScene].myStartingMoney;
         //BuildManager.globalInstance.ResetTiles();
     }
 
@@ -171,32 +176,72 @@ public class GameManager : MonoBehaviour
 
     public void SetFinishedLevel()
     {
-        int mediumLevelScore = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myTwoStarScore;
-        int highLevelScore = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myThreeStarScore;
+        int mediumLevelScore = myLevelList[myActiveScene].myTwoStarScore;
+        int highLevelScore = myLevelList[myActiveScene].myThreeStarScore;
 
-        int amountOfMoneyEarned = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+        int amountOfMoneyEarned = myLevelList[myActiveScene].myAmountOfMoney;
 
 
-        if (amountOfMoneyEarned > myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myFinishedScore)
+        if (amountOfMoneyEarned > myLevelList[myActiveScene].myFinishedScore)
         {
-            myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myFinishedScore = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+            myLevelList[myActiveScene].myFinishedScore = myLevelList[myActiveScene].myAmountOfMoney;
         }
         
         if (amountOfMoneyEarned > 0 && amountOfMoneyEarned < mediumLevelScore)
         {
-            Debug.Log("Failed LEVEL\nONE STAR");
+            if (myLevelList[myActiveScene].myFinishedLevel == false)
+            {
+                myLevelList[myActiveScene].myAmountOfStars += 3;
+            }
+
+            if (myLevelList[myActiveScene].myFinishedLevel == true)
+            {
+                int tempStars = 0;
+                tempStars = myLevelList[myActiveScene].myAmountOfStars;
+                myLevelList[myActiveScene].myAmountOfStars -= tempStars;
+
+                myLevelList[myActiveScene].myAmountOfStars += 3;
+            }
+            Debug.Log("Finished LEVEL\nTHREE STARS");
+            myLevelList[myActiveScene].myFinishedLevel = true;
             //UI.ShowFailScreen(amountOfMoneyEarned, 1);
         }
         else if (amountOfMoneyEarned >= mediumLevelScore && amountOfMoneyEarned < highLevelScore)
         {
+            if (myLevelList[myActiveScene].myFinishedLevel == false)
+            {
+                myLevelList[myActiveScene].myAmountOfStars += 2;
+            }
+
+            if (myLevelList[myActiveScene].myFinishedLevel == true)
+            {
+                int tempStars = 0;
+                tempStars = myLevelList[myActiveScene].myAmountOfStars;
+                myLevelList[myActiveScene].myAmountOfStars -= tempStars;
+
+                myLevelList[myActiveScene].myAmountOfStars += 2;
+            }
             Debug.Log("Finished Level!\nTWO STARS");
-            myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myFinishedLevel = true;
+            myLevelList[myActiveScene].myFinishedLevel = true;
             //UI.ShowWinScreen(amountOfMoneyEarned, 2);
         }
         else if (amountOfMoneyEarned >= highLevelScore )
         {
-            Debug.Log("Finished Level!\nTHREE STARS");
-            myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myFinishedLevel = true;
+            if (myLevelList[myActiveScene].myFinishedLevel == false)
+            {
+                myLevelList[myActiveScene].myAmountOfStars += 1;
+            }
+
+            if (myLevelList[myActiveScene].myFinishedLevel == true)
+            {
+                int tempStars = 0;
+                tempStars = myLevelList[myActiveScene].myAmountOfStars;
+                myLevelList[myActiveScene].myAmountOfStars -= tempStars;
+
+                myLevelList[myActiveScene].myAmountOfStars += 1;
+            }
+            Debug.Log("Finished Level!\nONE STARS");
+            myLevelList[myActiveScene].myFinishedLevel = true;
             //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
@@ -396,10 +441,10 @@ public class GameManager : MonoBehaviour
 
     public void ChangeMoney(int someMoney)
     {
-        int myTotalMoney = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+        int myTotalMoney = myLevelList[myActiveScene].myAmountOfMoney;
         myTotalMoney += someMoney;
 
-        myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney = myTotalMoney;
+        myLevelList[myActiveScene].myAmountOfMoney = myTotalMoney;
     }
 
     public void LoadAllScores()
@@ -451,15 +496,37 @@ public class GameManager : MonoBehaviour
 
     public int GetUpdatedScore()
     {
-        return myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+        return myLevelList[myActiveScene].myAmountOfMoney;
     }
     public string GetName(int aLevelIndex)
     {
         return myLevelList[aLevelIndex].myLevelName;
     }
-    public int GetHighestScore(int aLevelHighScore)
+    public int GetHighestScore(int aLevelHighScoreIndex)
     {
-        return myLevelList[aLevelHighScore].myThreeStarScore;
+        return myLevelList[aLevelHighScoreIndex].myThreeStarScore;
+    }
+
+    public void SetLevel(int aLevelIndex)
+    {
+        myActiveScene = aLevelIndex;
+    }
+    
+    public int GetTotalStars()
+    {
+        int totalStars = 0;
+
+        for (int i = 0; i < myLevelList.Count; i++)
+        {
+            totalStars += myLevelList[i].myAmountOfStars;
+        }
+
+        return totalStars;
+    }
+
+    public int GetLevelStars(int aLevelIndex)
+    {
+        return myLevelList[aLevelIndex].myAmountOfStars;
     }
 
 }
