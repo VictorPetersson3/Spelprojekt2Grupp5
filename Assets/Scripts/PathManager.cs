@@ -19,13 +19,13 @@ public class PathManager : MonoBehaviour
     List<Portals> myPortals = new List<Portals>();
     PathTile[,] myPathTiles;
 
+    List<PathTile> myPathList = new List<PathTile>(); 
     public PathTile[,] GetPathTileMap { get { return myPathTiles; } }
     public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
-    public List<Vector3> GetPathFromStart { get { return myPathList; } }
+    public List<PathTile> GetPathFromStart { get { return myPathList; } }
 
     public List<Portals> GetPortals { get { return myPortals; } }
 
-    List<Vector3> myPathList; 
 
 
 
@@ -44,9 +44,10 @@ public class PathManager : MonoBehaviour
     }
     void Start()
     {
-        myPathList = new List<Vector3>();
+   
         myPlayerController.PlayerMoveList = myPathList;
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
+       
         myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
 
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
@@ -65,6 +66,7 @@ public class PathManager : MonoBehaviour
         for (int i = 0; i < myPortals.Count; i++)
         {
             PathTile temp = Instantiate(myPathTilePrefab, myPortals[i].GetExit() + myPortals[i].transform.position, Quaternion.identity);
+            temp.SetPathManager = this;
             temp.GetPathTilePosition = myPortals[i].GetExit() + myPortals[i].transform.position;
             GetPathTileMap[Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z)] = temp;
             AddItemToPortalMap(temp, i);
@@ -84,13 +86,13 @@ public class PathManager : MonoBehaviour
 
         if (myPathTiles[x, z] != myEndTile)
         {
-            myLastPlacedPathTile = aPathTileToAdd;
+         
             myPathTiles[x, z] = aPathTileToAdd;
-            myPathList.Add(aPathTileToAdd.transform.position);
+            myPathList.Add(aPathTileToAdd);
         }
         else
         {
-            myPathList.Add(myEndTile.transform.position);
+            myPathList.Add(myEndTile);
             myPathTiles[x, z] = myEndTile;
         }
     }

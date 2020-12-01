@@ -17,7 +17,7 @@ public class Portals : ObstructTileMap
     public PathTile GetSetLastPathTile { get { return myLastPlacedTile; } set { myLastPlacedTile = value; } }
 
 
-    List<Vector3> myContinuingPath;
+    List<PathTile> myContinuingPath;
 
     public Portals SetSecondPortal { set { mySecondPortal = value; } }
 
@@ -50,20 +50,20 @@ public class Portals : ObstructTileMap
         return transform.position;
     }
 
-    public List<Vector3> GetMovementList()
+    public List<PathTile> GetMovementList()
     {
         return myContinuingPath;
     }
 
     public void AddVectorToMovementList(PathTile aTilePos)
     {
-        myContinuingPath.Add(aTilePos.GetPathTilePosition);
+        myContinuingPath.Add(aTilePos);
         print(aTilePos.transform.position + "Added aTilePos To MovementList");
     }
     public override void Start()
     {
         //base.Start();
-        myContinuingPath = new List<Vector3>();
+        myContinuingPath = new List<PathTile>();
         
 
     }

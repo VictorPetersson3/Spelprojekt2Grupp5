@@ -11,17 +11,6 @@ public class Placement : MonoBehaviour
     private Tile myTile;
     [SerializeField]
     PathTile temp;
-    [SerializeField]
-    PathTileIntersection intersection;
-    [SerializeField]
-
-    int a = 1;
-    List<PathTileIntersection> myListOfIntersections;
-    private void Start()
-    {
-        myListOfIntersections = new List<PathTileIntersection>();
-    }
-
     private void Update()
     {
         //LEFT CLICK INPUT
@@ -74,12 +63,11 @@ public class Placement : MonoBehaviour
         //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
         if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetLastPlacedTile))
         {
-            PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
-            path.name = "Path Tile " + a;
-            a++;
+            PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
+
             path.GetPathTilePosition = myInputCoordinates;
             myPathManager.AddItemToMap(path);
-           
+            path.CheckNeighbors();
             WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
         }
         //Sätter tilen till obstructed
@@ -93,8 +81,6 @@ public class Placement : MonoBehaviour
             {
                 print(myPathManager.GetPortals[i].GetSetLastPathTile);
                 PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
-                path.name = "Path Tile " + a;
-                a++;
                 path.GetPathTilePosition = myInputCoordinates;
                 myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
                 myPathManager.AddItemToPortalMap(path, i);
