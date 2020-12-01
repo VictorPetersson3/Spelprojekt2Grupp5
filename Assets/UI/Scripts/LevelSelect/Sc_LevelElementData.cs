@@ -8,10 +8,6 @@ public class Sc_LevelElementData : MonoBehaviour
 {
 
     [SerializeField]
-    string myLevelName;
-    [SerializeField]
-    int mySpendGoal;
-    [SerializeField]
     int myLevelIndex;
     [SerializeField]
     Texture2D myImage;
@@ -32,15 +28,21 @@ public class Sc_LevelElementData : MonoBehaviour
     private Sprite myConvertedImageSprite;
     private Vector3 myMin = new Vector3(200.0f, 0.0f, 0.0f);
     Sc_InterfaceLevelManager myLevelManagerInterface;
+
+    private void Start()
+    {
+        myLevelNameTMP.text = GameManager.globalInstance.GetName(myLevelIndex);
+        myLevelSpendGoalTMP.text = GameManager.globalInstance.GetHighestScore(myLevelIndex).ToString();
+    } 
     private void OnValidate()
     {
         myLevelManagerInterface = FindObjectOfType<Sc_InterfaceLevelManager>();
-            
+
         myActive = false;
         myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
         myLevelImage.sprite = myConvertedImageSprite;
-        myLevelNameTMP.text = myLevelName;
-        myLevelSpendGoalTMP.text = mySpendGoal.ToString("0");
+        //myLevelNameTMP.text = myLevelName;
+        //myLevelSpendGoalTMP.text = mySpendGoal.ToString("0");
     }
     private void Update()
     {

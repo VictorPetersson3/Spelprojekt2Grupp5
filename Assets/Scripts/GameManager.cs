@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     private int myAllLevels = 40;
 
     public static GameManager globalInstance;
-    [SerializeField] Text myMoneyText;
-    [SerializeField] Text myLevelText;
+    //[SerializeField] Text myMoneyText;
+    //[SerializeField] Text myLevelText;
 
 
     [SerializeField] short myFirstActTransition, mySecondActTransition;
@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
+
         if (globalInstance == null)
         {
             globalInstance = this;
@@ -71,11 +73,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-
-    void Start()
-    {
         int actNumber = 1;
         int levelNumber = 1;
         string act = actNumber + "-";
@@ -109,6 +107,16 @@ public class GameManager : MonoBehaviour
                 myLevelList.Add(level);
             }
         }
+
+        LoadFile(1);
+
+
+    }
+
+
+    void Start()
+    {
+        
     }
 
 
@@ -122,8 +130,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckTextStatus()
     {
-        myMoneyText.text = "Money: " + myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
-        myLevelText.text = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myLevelName;
+        //myMoneyText.text = "Money: " + myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+        //myLevelText.text = myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myLevelName;
     }
 
     public void ResetLevel()
@@ -439,6 +447,19 @@ public class GameManager : MonoBehaviour
     public List<PlayerProgression> GetPlayerStats()
     {
         return myLevelList;
+    }
+
+    public int GetUpdatedScore()
+    {
+        return myLevelList[SceneManager.GetActiveScene().buildIndex - 1].myAmountOfMoney;
+    }
+    public string GetName(int aLevelIndex)
+    {
+        return myLevelList[aLevelIndex].myLevelName;
+    }
+    public int GetHighestScore(int aLevelHighScore)
+    {
+        return myLevelList[aLevelHighScore].myThreeStarScore;
     }
 
 }

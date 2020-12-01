@@ -6,16 +6,16 @@ public class Sc_ScoreCounter : MonoBehaviour
 {
     [SerializeField]
     TextMeshProUGUI myScore;
-   
 
-    private float myScoreValue = 10000;
+    GameManager myGameManager;
+
     private void Update()
     {
         SetScoreText();
     }
     void SetScoreText()
     {
-        myScore.text = myScoreValue.ToString("0");
+        myScore.text = GameManager.globalInstance.GetUpdatedScore().ToString();
     }
 
 }
