@@ -56,7 +56,7 @@ public class Sc_shopUIVertical : MonoBehaviour
         {
             aThirdColumn.SetActive(true);
             LeanTween.move(myStoreColumn3, myMin, 1.0f).setEase(easeType);
-            ScaleMainButtonsDown();
+        Invoke("ScaleMainButtonsDown", 0.20f);
             myBuildHasBeenPressed = true;
         }
     }
@@ -89,6 +89,10 @@ public class Sc_shopUIVertical : MonoBehaviour
         myBuildButton.interactable = !myBuildButton.interactable;
         myCameraButton.interactable = !myCameraButton.interactable;
         myPlayButton.interactable = !myPlayButton.interactable;
+        for (int i = 0; i < mySc_FadeIfDisabledParents.Length; i++)
+        {
+            mySc_FadeIfDisabledParents[i].ButtonChangesState();
+        }
     }
     void DeActivateMainButtons()
     {

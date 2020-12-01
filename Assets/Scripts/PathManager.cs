@@ -14,8 +14,9 @@ public class PathManager : MonoBehaviour
     PathTile myLastPlacedPathTile;
     [SerializeField]
     PathTile myEndTile;
-
     List<PathTileIntersection> myPathIntersectionlist;
+    [SerializeField]
+    List<Portals> myPortals = new List<Portals>();
     PathTile[,] myPathTiles;
 
     public List<PathTileIntersection> PathTileIntersectionList { get { return myPathIntersectionlist; } set { myPathIntersectionlist = value; } }
@@ -23,7 +24,9 @@ public class PathManager : MonoBehaviour
     public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
     public List<Vector3> GetPathFromStart { get { return myPathList; } }
 
-    List<Vector3> myPathList;
+    public List<Portals> GetPortals { get { return myPortals; } }
+
+    List<Vector3> myPathList; 
 
 
 
@@ -52,10 +55,29 @@ public class PathManager : MonoBehaviour
 
         myLastPlacedPathTile = myStartPathTile;
 
+        InstantiateFirstPortalExitTile();
+
         AddItemToMap(myStartPathTile, myPathList, null);
 
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
     }
+
+    private void InstantiateFirstPortalExitTile()
+    {
+        for (int i = 0; i < myPortals.Count; i++)
+        {
+            PathTile temp = Instantiate(myPathTilePrefab, myPortals[i].GetExit() + myPortals[i].transform.position, Quaternion.identity);
+            temp.GetPathTilePosition = myPortals[i].GetExit() + myPortals[i].transform.position;
+            GetPathTileMap[Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z)] = temp;
+            AddItemToPortalMap(temp, i);
+            GetPortals[i].GetSetLastPathTile = temp;
+            WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z), Tile.TileState.obstructed);
+        }
+    }
+
+    public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
+    {
+        myPortals[index].AddVectorToMovementList(aPathTileToAdd);    }
 
     public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdeifier)
     {

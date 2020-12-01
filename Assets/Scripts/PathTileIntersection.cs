@@ -32,7 +32,6 @@ public class PathTileIntersection : PathTile
             myPathTiles[i] = new List<Vector3>();
         }
 
-
         base.Start();
     }
     void Update()
