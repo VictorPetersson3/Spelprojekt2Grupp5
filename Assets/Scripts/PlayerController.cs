@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < aListToCopy.Count; i++)
         {
-            Debug.Log(i + ". " + aListToCopy[i], gameObject);
+            //Debug.Log(i + ". " + aListToCopy[i], gameObject);
         }
         if (!t)
         {

@@ -133,7 +133,7 @@ public class ObstructTileMap : MonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
-
+      
         Color colorN = Color.magenta;
         colorN.a = 0.5f;
         Gizmos.color = Color.magenta;

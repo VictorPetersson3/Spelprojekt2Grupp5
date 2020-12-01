@@ -8,11 +8,12 @@ public class PathTileIntersection : PathTile
     PlayerController myPlayerController;
     List<Vector3>[] myPathTiles;
     PathTile myLastPlacedTile;
+    int myAmountOfConections = 0;
 
-
-    PathManager aNewPathManager;
-
+    PathManager myNewPathManager;
+    bool runOnce = true;
     public List<Vector3>[] GetPathTileLists { get { return myPathTiles; } }
+    public int GetIntersectionConnections { get { return myAmountOfConections; } }
 
     [SerializeField]
     Directions myOutDirection;
@@ -21,9 +22,11 @@ public class PathTileIntersection : PathTile
         left,
         up,
         right,
-        down
+        down,
+        none
     }
     bool t = false;
+
     public override void Start()
     {
         myPathTiles = new List<Vector3>[4];
@@ -32,40 +35,20 @@ public class PathTileIntersection : PathTile
             myPathTiles[i] = new List<Vector3>();
         }
         myLastPlacedTile = this;
-        aNewPathManager = FindObjectOfType<PathManager>();
+        myNewPathManager = FindObjectOfType<PathManager>();
         myPlayerController = FindObjectOfType<PlayerController>();
         // 0 = left, 1 = up, 2 = right, 3 = down
+        myNewPathManager.CheckIfPlacedNextToIntersection(this);
     }
     void Update()
     {
         PassThroughPlayer();
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            for (int i = 0; i < myPathTiles.Length; i++)
-            {
-                for (int j = 0; j < myPathTiles[i].Count; j++)
-                {
-                    Debug.Log("My list " + i + ", Position: " + myPathTiles[i][j], gameObject);
-                }
-            }
 
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            // Work in progress
-            if (aNewPathManager.PathTileIntersectionList.Count == 1 && !t)
-            {
-                aNewPathManager.CheckIfPlacedNextToIntersection(this, aNewPathManager.GetPathFromStart);
-                t = true;
-            }
-            else
-            {
-                aNewPathManager.CheckIfPlacedNextToIntersection(this, aNewPathManager.GetPathFromStart);
-            }
-        }
     }
-
+    public void CheckMyNeighbors()
+    {
+        myNewPathManager.CheckIfPlacedNextToIntersection(this);
+    }
 
     public void AddIntoList(Vector3 aPathTileToAdd, Directions directions)
     {
@@ -79,98 +62,125 @@ public class PathTileIntersection : PathTile
             }
         }
 
-        if (myPathTiles[(int)directions].Count == 0)
+        if (directions != Directions.none)
         {
-            myPathTiles[(int)directions].Add(transform.position);
+            if (myPathTiles[(int)directions].Count == 0)
+            {
+
+                for (int i = 0; i < myPathTiles[(int)directions].Count; i++)
+                {
+                    Debug.Log("List to copy: "+ directions + "at index "+ i + " " + myPathTiles[(int)directions][i]);
+                }
+                myPathTiles[(int)directions].Add(transform.position);
+                
+            }
+            Debug.Log("Add this: " + aPathTileToAdd);
+            myPathTiles[(int)directions].Add(aPathTileToAdd);
+
         }
-        myPathTiles[(int)directions].Add(aPathTileToAdd);
+        else
+        {
+            Debug.Log("Does not what list to add in to");
+        }
 
     }
 
 
     void PassThroughPlayer()
     {
-
-        if (Vector3.Distance(transform.position, myPlayerController.transform.position) < 1.1f)
+        if (Vector3.Distance(transform.position, myPlayerController.transform.position) < 1.1f && runOnce)
         {
             if (myOutDirection == Directions.right)
             {
                 if (GetInputDirection() != (int)Directions.right)
                 {
                     myPlayerController.PlayerMoveList(myPathTiles[(int)myOutDirection], this);
-
-
                     Debug.Log("Set player list to left in list: " + (int)myOutDirection);
+
                 }
+
             }
             else if (myOutDirection == Directions.left)
             {
                 if (GetInputDirection() != (int)Directions.left)
                 {
                     myPlayerController.PlayerMoveList(myPathTiles[(int)myOutDirection], this);
-
                     Debug.Log("Set player list to left in list: " + (int)myOutDirection);
                 }
+
+
             }
             else if (myOutDirection == Directions.up)
             {
                 if (GetInputDirection() != (int)Directions.up)
                 {
                     myPlayerController.PlayerMoveList(myPathTiles[(int)myOutDirection], this);
-
                     Debug.Log("Set player list to left in list: " + (int)myOutDirection);
                 }
+
             }
             else // Down
             {
                 if (GetInputDirection() != (int)Directions.down)
                 {
-
                     Debug.Log("Set player list to left in list: " + (int)myOutDirection);
                     myPlayerController.PlayerMoveList(myPathTiles[(int)myOutDirection], this);
 
                 }
+
             }
+            runOnce = false;
         }
+        if (Vector3.Distance(transform.position, myPlayerController.transform.position) > 1.2f)
+        {
+            runOnce = true;
+        }
+
+
     }
     public void AddNewPathToIntersection(Directions aDirection)
     {
-        Debug.Log("Add new list in direction " + aDirection);
-        aNewPathManager.GetDirections = aDirection;
-
+        myNewPathManager.GetDirections = aDirection;
+    }
+    public void AddConetions()
+    {
+        myAmountOfConections++;
     }
     public void AddListToIntersection(List<Vector3> aList, Directions directions)
     {
-        if (aNewPathManager.PathTileIntersectionList.Count == 1 && !t)
+        if (myNewPathManager.PathTileIntersectionList.Count == 1 && !t)
         {
-            if (aNewPathManager.GetPathFromStart.Count != 0)
+            if (myNewPathManager.GetPathFromStart.Count != 0)
             {
+                AddConetions();
                 myPathTiles[(int)directions].Clear();
-                for (int i = aNewPathManager.GetPathFromStart.Count - 1; i > 0; i--)
+                for (int i = myNewPathManager.GetPathFromStart.Count - 1; i > 0; i--)
                 {
-                    Debug.Log("Number of tiles added in exsiting list: " + i);
-                    myPathTiles[(int)directions].Add(aNewPathManager.GetPathFromStart[i]);
+                    myPathTiles[(int)directions].Add(myNewPathManager.GetPathFromStart[i]);
                 }
+                t = true;
             }
-            t = true;
         }
         else
         {
             if (aList.Count != 0)
             {
-                myPathTiles[(int)directions].Clear();
+                AddConetions();
+                Debug.Log("Copy list to: " + directions);
                 for (int i = aList.Count - 1; i > 0; i--)
                 {
-                    Debug.Log("Number of tiles added in exsiting list: " + i);
-                    myPathTiles[(int)directions].Add(aList[i]);
+                    //Debug.Log("Path list " + i + ". " + aList[i], gameObject);
+                    myPathTiles[(int)myNewPathManager.GetDirections].Add(aList[i]);
                 }
             }
             else
             {
+                AddConetions();
                 AddNewPathToIntersection(directions);
             }
         }
     }
+
     int GetInputDirection()
     {
         if (myPlayerController.transform.position.x < transform.position.x + 0.5f && myPlayerController.transform.position.x > transform.position.x - 0.5f)
@@ -199,7 +209,7 @@ public class PathTileIntersection : PathTile
 
     }
 
-    
+
     private void OnDrawGizmos()
     {
         for (int i = 0; i < myPathTiles.Length; i++)
@@ -226,12 +236,12 @@ public class PathTileIntersection : PathTile
                         Gizmos.DrawSphere(myPathTiles[i][j] + offset, 0.1f);
                         break;
                     case 3:
-                        Gizmos.color = Color.black;
+                        Gizmos.color = Color.cyan;
                         offset = new Vector3(0, 0.25f, 0);
                         Gizmos.DrawSphere(myPathTiles[i][j] + offset, 0.1f);
-                        break;         
+                        break;
                 }
-               
+
             }
         }
     }
