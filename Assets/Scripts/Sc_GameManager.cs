@@ -13,7 +13,6 @@ public class Sc_GameManager : MonoBehaviour
     private void Awake()
     {
         myInstance = this;
-
         SceneManager.LoadSceneAsync((int)Sc_SceneIndexes.eSceneIndexes.eMainMenu, LoadSceneMode.Additive);
     }
 
