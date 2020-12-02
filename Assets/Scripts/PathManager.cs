@@ -14,19 +14,18 @@ public class PathManager : MonoBehaviour
     PathTile myLastPlacedPathTile;
     [SerializeField]
     PathTile myEndTile;
-    List<PathTileIntersection> myPathIntersectionlist;
+   
     [SerializeField]
     List<Portals> myPortals = new List<Portals>();
     PathTile[,] myPathTiles;
 
-    public List<PathTileIntersection> PathTileIntersectionList { get { return myPathIntersectionlist; } set { myPathIntersectionlist = value; } }
+    List<PathTile> myPathList = new List<PathTile>(); 
     public PathTile[,] GetPathTileMap { get { return myPathTiles; } }
     public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
-    public List<Vector3> GetPathFromStart { get { return myPathList; } }
+    public List<PathTile> GetPathFromStart { get { return myPathList; } }
 
     public List<Portals> GetPortals { get { return myPortals; } }
 
-    List<Vector3> myPathList; 
 
 
 
@@ -45,10 +44,10 @@ public class PathManager : MonoBehaviour
     }
     void Start()
     {
-        myPathIntersectionlist = new List<PathTileIntersection>();
-        myPathList = new List<Vector3>();
+   
         myPlayerController.PlayerMoveList = myPathList;
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
+       
         myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
 
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
@@ -57,7 +56,7 @@ public class PathManager : MonoBehaviour
 
         InstantiateFirstPortalExitTile();
 
-        AddItemToMap(myStartPathTile, myPathList, null);
+        AddItemToMap(myStartPathTile);
 
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
     }
@@ -67,6 +66,7 @@ public class PathManager : MonoBehaviour
         for (int i = 0; i < myPortals.Count; i++)
         {
             PathTile temp = Instantiate(myPathTilePrefab, myPortals[i].GetExit() + myPortals[i].transform.position, Quaternion.identity);
+            temp.SetPathManager = this;
             temp.GetPathTilePosition = myPortals[i].GetExit() + myPortals[i].transform.position;
             GetPathTileMap[Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z)] = temp;
             AddItemToPortalMap(temp, i);
@@ -79,35 +79,20 @@ public class PathManager : MonoBehaviour
     {
         myPortals[index].AddVectorToMovementList(aPathTileToAdd);    }
 
-    public void AddItemToMap(PathTile aPathTileToAdd, List<Vector3> aList, PathTileIntersection pathTileIdeifier)
+    public void AddItemToMap(PathTile aPathTileToAdd)
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
         int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
 
         if (myPathTiles[x, z] != myEndTile)
         {
+         
             myPathTiles[x, z] = aPathTileToAdd;
-            aList.Add(aPathTileToAdd.transform.position);
-
-            if (aPathTileToAdd.GetType() != typeof(PathTileIntersection))
-            {
-                if (pathTileIdeifier != null)
-                {
-                    pathTileIdeifier.GetSetLastPlacedTile = aPathTileToAdd;
-                }
-                else
-                {
-                    myLastPlacedPathTile = aPathTileToAdd;
-                }
-            }
-            else
-            {
-                myPathIntersectionlist.Add((PathTileIntersection)aPathTileToAdd);
-            }
+            myPathList.Add(aPathTileToAdd);
         }
         else
         {
-            aList.Add(myEndTile.transform.position);
+            myPathList.Add(myEndTile);
             myPathTiles[x, z] = myEndTile;
         }
     }

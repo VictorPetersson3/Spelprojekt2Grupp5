@@ -5,20 +5,22 @@ using UnityEngine;
 public class Door : ObstructTileMap
 {
 
-
     int myX;
     int myZ;
 
     [Header("Buttons")]
     [SerializeField]
-    RailButton[] myRailButtons;
+    RailButton myRailButton;
     [SerializeField]
     PlayerController myPlayerController;
+
+    bool isOpen;
 
     public override void OnValidate()
     {
         myPlayerController = FindObjectOfType<PlayerController>();
         base.OnValidate();
+
     }
 
 
@@ -26,7 +28,8 @@ public class Door : ObstructTileMap
     {
         myX = Mathf.FloorToInt(transform.position.x);
         myZ = Mathf.FloorToInt(transform.position.z);
-        base.Start();
+        //base.Start();
+        isOpen = false;
     }
 
 
@@ -36,49 +39,37 @@ public class Door : ObstructTileMap
         //{
         //    CheckButtons();
         //}
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        print(isOpen);
+        if (myPlayerController != null)
         {
-            CheckButtons();
+            float distance = Vector3.Distance(myPlayerController.transform.position, transform.position);
+            if (distance < 0.9f && !isOpen)
+            {
+                print("hi");
+
+                Destroy(myPlayerController);
+            }
+
+            if (myRailButton.GetMySwitch)
+            {
+                Debug.Log("Door opened");
+                OpenDoor();
+            }
         }
+        
     }
     protected void CheckButtons()
     {
-       
-        bool buttonIsPressed = false;
-
-        if (myRailButtons.Length > 1)
+        if (myRailButton.GetMySwitch)
         {
-            for (int i = 0; i < myRailButtons.Length; i++)
-            {
-
-                Debug.Log(myRailButtons[i].GetMySwitch);
-                if (!myRailButtons[i].GetMySwitch)
-                {
-                    buttonIsPressed = false;
-                    break;
-                }
-                buttonIsPressed = true;
-
-            }
-            if (buttonIsPressed)
-            {
-                Debug.Log("Open door with buttons");
-                OpenDoor();
-            }
-        }
-        else
-        {
-            if (myRailButtons[0].GetMySwitch)
-            {
-                OpenDoor();
-                Debug.Log("Open door with one button");
-
-            }
+            Debug.Log("Door opened");
+            OpenDoor();
         }
     }
     public void OpenDoor()
     {
-        WorldController.Instance.GetWorld.SetTileState(myX, myZ, Tile.TileState.empty);
+        isOpen = true;
     }
     protected override void OnDrawGizmos()
     {
@@ -89,25 +80,21 @@ public class Door : ObstructTileMap
         Gizmos.DrawCube(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(0.65f, 0.2f, 0.65f));
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(0.7f, 0.2f, 0.7f));
-        if (myRailButtons != null)
+
+
+        if (myRailButton != null)
         {
-            for (int i = 0; i < myRailButtons.Length; i++)
+            if (myRailButton.GetMySwitch)
             {
-                if (myRailButtons[i] != null)
-                {
-                    if (myRailButtons[i].GetMySwitch)
-                    {
-                        Gizmos.color = Color.green;
-                    }
-                    else
-                    {
-                        Gizmos.color = Color.red;
-                    }
-
-                    Gizmos.DrawLine(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(Mathf.FloorToInt(myRailButtons[i].transform.position.x), 0, Mathf.FloorToInt(myRailButtons[i].transform.position.z)));
-
-                }
+                print("hi");
+                Gizmos.color = Color.green;
             }
+            else
+            {
+                Gizmos.color = Color.red;
+            }
+
+            Gizmos.DrawLine(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(Mathf.FloorToInt(myRailButton.transform.position.x), 0, Mathf.FloorToInt(myRailButton.transform.position.z)));
 
         }
 
