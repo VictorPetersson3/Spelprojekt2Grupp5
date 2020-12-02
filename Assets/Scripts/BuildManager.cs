@@ -6,7 +6,9 @@ using UnityEngine.Diagnostics;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager globalInstance;
-
+    [SerializeField]
+    [Header("Reference Settings")]
+    PathManager myPathManager;
     private void Awake()
     {
         if (globalInstance == null)
@@ -19,17 +21,24 @@ public class BuildManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void OnValidate()
+    {
+        myPathManager = FindObjectOfType<PathManager>();
 
+    }
+
+    [Header("Path Type Settings")]
     [SerializeField]
     private List<Pool> myPoolList;
-
     [System.Serializable]
     public class Pool
     {
-        public string myTileTag;
-        public GameObject myTilePrefab;
+
+        public int myTileId;
+        public PathTile myTilePrefab;
         public int myAmountOfTiles;
-        public List<GameObject> myTileList = new List<GameObject>();
+        [HideInInspector]
+        public List<PathTile> myTileList = new List<PathTile>();
     }
 
     [SerializeField]
@@ -42,28 +51,26 @@ public class BuildManager : MonoBehaviour
         {
             for (int y = 0; y < myPoolList[x].myAmountOfTiles; y++)
             {
-                GameObject gameObj = Instantiate(myPoolList[x].myTilePrefab);
+                PathTile gameObj = Instantiate(myPoolList[x].myTilePrefab);
                 gameObj.transform.parent = gameObject.transform;
-                gameObj.SetActive(false);
+                gameObj.gameObject.SetActive(false);
                 gameObj.transform.position = myOriginalSpawnPoolPosition;
+                gameObj.SetPathManager = myPathManager;
                 myPoolList[x].myTileList.Add(gameObj);
             }
         }
     }
-
-
-
-
-    public GameObject SpawnFromPool(string aTag, Quaternion aRotation)
+    public PathTile SpawnFromPool(int aTag, Quaternion aRotation, Vector3 aPosition)
     {
         for (int x = 0; x < myPoolList.Count; x++)
         {
             for (int y = 0; y < myPoolList[x].myTileList.Count; y++)
             {
-                if (myPoolList[x].myTileList[y].activeSelf == false && myPoolList[x].myTileTag == aTag)
+                if (myPoolList[x].myTileList[y].gameObject.activeSelf == false && myPoolList[x].myTileId == aTag)
                 {
-                    myPoolList[x].myTileList[y].SetActive(true);
-                    return myPoolList[x].myTileList[y].gameObject;
+                    myPoolList[x].myTileList[y].gameObject.SetActive(true);
+                    myPoolList[x].myTileList[y].transform.position = aPosition;
+                    return myPoolList[x].myTileList[y];
                 }
             }
         }
@@ -76,10 +83,10 @@ public class BuildManager : MonoBehaviour
         {
             for (int y = 0; y < myPoolList[x].myTileList.Count; y++)
             {
-                if (myPoolList[x].myTileList[y].activeSelf == true)
+                if (myPoolList[x].myTileList[y].gameObject.activeSelf == true)
                 {
                     myPoolList[x].myTileList[y].transform.position = myOriginalSpawnPoolPosition;
-                    myPoolList[x].myTileList[y].SetActive(false);
+                    myPoolList[x].myTileList[y].gameObject.SetActive(false);
                 }
             }
         }
