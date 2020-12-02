@@ -62,80 +62,80 @@ public class PathTileIntersection : PathTile
     void PassThroughPlayer()
     {
 
-        if (Vector3.Distance(transform.position, myPlayerController.transform.position) < 1.1f)
-        {
-            if (myOutDirection == Directions.right)
-            {
-                if (GetInputDirection() != (int)Directions.right)
-                {
-                    myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
+        //if (Vector3.Distance(transform.position, myPlayerController.transform.position) < 1.1f)
+        //{
+        //    if (myOutDirection == Directions.right)
+        //    {
+        //        if (GetInputDirection() != (int)Directions.right)
+        //        {
+        //            myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
                    
-                    Debug.Log("Set player list to right");
-                }
-            }
-            else if (myOutDirection == Directions.left)
-            {
-                if (GetInputDirection() != (int)Directions.left)
-                {
-                    myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
+        //            Debug.Log("Set player list to right");
+        //        }
+        //    }
+        //    else if (myOutDirection == Directions.left)
+        //    {
+        //        if (GetInputDirection() != (int)Directions.left)
+        //        {
+        //            myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
                    
-                    Debug.Log("Set player list to left");
-                }
-            }
-            else if (myOutDirection == Directions.up)
-            {
-                if (GetInputDirection() != (int)Directions.up)
-                {         
-                    myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
+        //            Debug.Log("Set player list to left");
+        //        }
+        //    }
+        //    else if (myOutDirection == Directions.up)
+        //    {
+        //        if (GetInputDirection() != (int)Directions.up)
+        //        {         
+        //            myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
                  
-                    Debug.Log("Set player list to up");
-                }
-            }
-            else // Down
-            {
-                if (GetInputDirection() != (int)Directions.down)
-                {
-                    Debug.Log("Set player list to down\nList To Copy from: " + myPathTiles[(int)myOutDirection].Count);
-                    myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
+        //            Debug.Log("Set player list to up");
+        //        }
+        //    }
+        //    else // Down
+        //    {
+        //        if (GetInputDirection() != (int)Directions.down)
+        //        {
+        //            Debug.Log("Set player list to down\nList To Copy from: " + myPathTiles[(int)myOutDirection].Count);
+        //            myPlayerController.PlayerMoveList = myPathTiles[(int)myOutDirection];
                  
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
     }
 
     void CheckIfPlacedNextToMe()
     {
-        int x = Mathf.FloorToInt(transform.position.x);
-        int z = Mathf.FloorToInt(transform.position.z);
+        //    int x = Mathf.FloorToInt(transform.position.x);
+        //    int z = Mathf.FloorToInt(transform.position.z);
 
-        if (x - 1 >= 0)
-        {
-            if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile && myPathTiles[0].Count == 0)
-            {
-                AddExitingListToIntersection(0, myPathManager.GetPathFromStart);
-            }
-        }
-        if (x + 1 < WorldController.Instance.GetWorldWidth)
-        {
-            if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile && myPathTiles[2].Count == 0)
-            {
-                AddExitingListToIntersection(2, myPathManager.GetPathFromStart);
-            }
-        }
-        if (z - 1 >= 0)
-        {
-            if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile && myPathTiles[3].Count == 0)
-            {
-                AddExitingListToIntersection(3, myPathManager.GetPathFromStart);
-            }
-        }
-        if (z + 1 < WorldController.Instance.GetWorldDepth)
-        {
-            if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile && myPathTiles[1].Count == 0)
-            {
-                AddExitingListToIntersection(1, myPathManager.GetPathFromStart);
-            }
-        }
+        //    if (x - 1 >= 0)
+        //    {
+        //        if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile && myPathTiles[0].Count == 0)
+        //        {
+        //            AddExitingListToIntersection(0, myPathManager.GetPathFromStart);
+        //        }
+        //    }
+        //    if (x + 1 < WorldController.Instance.GetWorldWidth)
+        //    {
+        //        if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile && myPathTiles[2].Count == 0)
+        //        {
+        //            AddExitingListToIntersection(2, myPathManager.GetPathFromStart);
+        //        }
+        //    }
+        //    if (z - 1 >= 0)
+        //    {
+        //        if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile && myPathTiles[3].Count == 0)
+        //        {
+        //            AddExitingListToIntersection(3, myPathManager.GetPathFromStart);
+        //        }
+        //    }
+        //    if (z + 1 < WorldController.Instance.GetWorldDepth)
+        //    {
+        //        if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile && myPathTiles[1].Count == 0)
+        //        {
+        //            AddExitingListToIntersection(1, myPathManager.GetPathFromStart);
+        //        }
+        //    }
     }
 
     public void AddExitingListToIntersection(int aIndex, List<Vector3> aPathTileList)
