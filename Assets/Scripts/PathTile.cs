@@ -4,77 +4,233 @@ using UnityEngine;
 
 public class PathTile : MonoBehaviour
 {
-    [SerializeField]
     bool isEndTile = false;
-    public PathManager myPathManager;
+    PathManager myPathManager;
     Vector3 myPosition;
+    public PathManager SetPathManager { set { myPathManager = value; } }
     public Vector3 GetPathTilePosition { get { return myPosition; } set { myPosition = value; } }
     public bool IsEndTile { get { return isEndTile; } }
+    public Neighbor GetNeighbor { get { return myNeigbor; } }
+
+
+    public GameObject myTurnRoad;
+    public GameObject myStraightRoad;
+
+    float mySpeed = 3f;
+    float myCurrentSpeed = 0;
+    bool myTemp = false;
+    [SerializeField]
+    ParticleSystem myPlacementEffect;
+    PathTile myPathTileNeighbors;
+
+    Neighbor myNeigbor = Neighbor.none;
+    public enum Neighbor
+    {
+        none,
+        left,
+        right,
+        up,
+        down
+    }
+
 
     public virtual void Start()
     {
-        myPathManager = FindObjectOfType<PathManager>();
         myPosition = new Vector3(Mathf.FloorToInt(transform.position.x), 0, Mathf.FloorToInt(transform.position.z));
         transform.position = myPosition;
-        CheckNeighbors();
+        if (myPathManager != null)
+        {
+            CheckNeighbors();
+
+        }
+
+        myPlacementEffect.transform.position = new Vector3(myPlacementEffect.transform.position.x, 0.1f, myPlacementEffect.transform.position.z);
+        myPlacementEffect.Play();
+
+
+
+
+
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
-    void CheckNeighbors()
+    private void Update()
     {
+        MoveObjectToPlaceDown(transform);
+    }
+    public void CheckNeighbors()
+    {
+        myTemp = false;
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
         int x = Mathf.FloorToInt(transform.position.x);
         int z = Mathf.FloorToInt(transform.position.z);
 
-        if (myPathManager.PathTileIntersectionList != null)
+        if (x - 1 >= 0)
         {
-            if (x - 1 >= 0)
+            if (myPathManager.GetPathTileMap[x - 1, z] != null)
             {
-                for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
+                if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile)
                 {
-                    if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.PathTileIntersectionList[i])
-                    {
-                        myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo.Add(transform.position);
-                        myPathManager.PathTileIntersectionList[i].GetSetLastPlacedTile = myPathManager.PathTileIntersectionList[i];
-
-                    }
+                    myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                    myNeigbor = Neighbor.left;
+                    CheckOldNeighborLeft();
+                    myPathManager.GetLastPlacedTile = this;
                 }
             }
-            if (x + 1 < WorldController.Instance.GetWorldWidth)
+        }
+        if (x + 1 < WorldController.Instance.GetWorldWidth)
+        {
+            if (myPathManager.GetPathTileMap[x + 1, z] != null)
             {
-                for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
+                if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile)
                 {
-                    if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile)
-                    {
-                        myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo.Add(transform.position);
-
-                        myPathManager.PathTileIntersectionList[i].GetSetLastPlacedTile = myPathManager.PathTileIntersectionList[i];
-                    }
+                    myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                    myNeigbor = Neighbor.right;
+                    CheckOldNeighborRight();
+                    myPathManager.GetLastPlacedTile = this;
                 }
             }
-            if (z - 1 >= 0)
+        }
+        if (z - 1 >= 0)
+        {
+            Debug.Log("Check down");
+            if (myPathManager.GetPathTileMap[x, z - 1] != null)
             {
-                for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
+                Debug.Log("Check down");
+                if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile)
                 {
-                    if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile)
-                    {
-                        myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo.Add(transform.position);
-                        myPathManager.PathTileIntersectionList[i].GetSetLastPlacedTile = myPathManager.PathTileIntersectionList[i];
-
-                    }
+                    myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                    myNeigbor = Neighbor.down;
+                    CheckOldNeighborDown();
+                    Debug.Log("Check down");
+                    myPathManager.GetLastPlacedTile = this;
                 }
             }
-            if (z + 1 < WorldController.Instance.GetWorldDepth)
+        }
+        if (z + 1 < WorldController.Instance.GetWorldDepth)
+        {
+            if (myPathManager.GetPathTileMap[x, z + 1] != null)
             {
-                for (int i = 0; i < myPathManager.PathTileIntersectionList.Count; i++)
+                if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile)
                 {
-                    if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile)
-                    {
-                        myPathManager.PathTileIntersectionList[i].ChooseListToAddTileTo.Add(transform.position);
-                        myPathManager.PathTileIntersectionList[i].GetSetLastPlacedTile = myPathManager.PathTileIntersectionList[i];
-                    }
+                    myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                    myNeigbor = Neighbor.up;
+                    CheckOldNeighborUp();
+                    myPathManager.GetLastPlacedTile = this;
                 }
             }
         }
     }
+    void CheckOldNeighborDown()
+    {
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.left)
+        {
+            // left down
+            myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+            myPathTileNeighbors.myStraightRoad.SetActive(false);
+            myPathTileNeighbors.myTurnRoad.SetActive(true);
+        }
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.right)
+        {
+            myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, 90, 0);
+            myPathTileNeighbors.myStraightRoad.SetActive(false);
+            myPathTileNeighbors.myTurnRoad.SetActive(true);
+            // right down
+        }
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.down)
+        {
+            myPathTileNeighbors.myStraightRoad.SetActive(true);
+            myPathTileNeighbors.myTurnRoad.SetActive(false);
+            // straight vertical
+        }
+        myStraightRoad.SetActive(true);
+        myTurnRoad.SetActive(false);
+    }
+    void CheckOldNeighborUp()
+    {
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.left)
+        {
+            // left down
+            myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, -90, 0);
+            myPathTileNeighbors.myStraightRoad.SetActive(false);
+            myPathTileNeighbors.myTurnRoad.SetActive(true);
+        }
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.right)
+        {
+            myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, -180, 0);
+            myPathTileNeighbors.myStraightRoad.SetActive(false);
+            myPathTileNeighbors.myTurnRoad.SetActive(true);
+            // right down
+        }
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.up)
+        {
+            myPathTileNeighbors.myStraightRoad.SetActive(true);
+            myPathTileNeighbors.myTurnRoad.SetActive(false);
+            // straight vertical
+        }
+        myStraightRoad.SetActive(true);
+        myTurnRoad.SetActive(false);
+    }
+    void CheckOldNeighborLeft()
+    {
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.up)
+        {
+            // left down
+            myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, 90, 0);
+            myPathTileNeighbors.myStraightRoad.SetActive(false);
+            myPathTileNeighbors.myTurnRoad.SetActive(true);
+        }
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.down)
+        {
+            myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, 180, 0);
+            myPathTileNeighbors.myStraightRoad.SetActive(false);
+            myPathTileNeighbors.myTurnRoad.SetActive(true);
+            // right down
+        }
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.left)
+        {
+            myPathTileNeighbors.myStraightRoad.SetActive(true);
+            myPathTileNeighbors.myTurnRoad.SetActive(false);
+            // straight vertical
+        }
+        myStraightRoad.SetActive(true);
+        myTurnRoad.SetActive(false);
+        myStraightRoad.transform.rotation = Quaternion.Euler(0, 90, 0);
+    }
+    void CheckOldNeighborRight()
+    {
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.up)
+        {
+            myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+            myPathTileNeighbors.myStraightRoad.SetActive(false);
+            myPathTileNeighbors.myTurnRoad.SetActive(true);
+        }
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.down)
+        {
+            myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, -90, 0);
+            myPathTileNeighbors.myStraightRoad.SetActive(false);
+            myPathTileNeighbors.myTurnRoad.SetActive(true);
 
+        }
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.right)
+        {
+            myPathTileNeighbors.myStraightRoad.SetActive(true);
+            myPathTileNeighbors.myTurnRoad.SetActive(false);
+
+        }
+        myStraightRoad.SetActive(true);
+        myTurnRoad.SetActive(false);
+        myStraightRoad.transform.rotation = Quaternion.Euler(0, 90, 0);
+    }
+   
+
+    void MoveObjectToPlaceDown(Transform aTransform)
+    {
+        myCurrentSpeed = mySpeed * mySpeed;
+        if (aTransform.position.y + (myCurrentSpeed * Time.deltaTime) > 0)
+        {
+            aTransform.position = Vector3.Lerp(aTransform.position, new Vector3(aTransform.position.x, 0, aTransform.position.z), myCurrentSpeed * Time.deltaTime); ;
+        }
+
+    }
 
 }
- 

@@ -22,8 +22,8 @@ public class LevelSelectCamera : MonoBehaviour
    [SerializeField] private float myMaxZoom = 10f;
 
    [Header("Top down camera pan range")]
-   [SerializeField] private Vector3 myMinPan = new Vector3(-10f, 0, -10f);
-   [SerializeField] private Vector3 myMaxPan = new Vector3(10f, 0, 10f);
+   [SerializeField] private Vector3 myMinPan = new Vector3(-25f, 0, -25f);
+   [SerializeField] private Vector3 myMaxPan = new Vector3(25f, 0, 25f);
 
    [Header("Default zoom of both cameras")]
    [SerializeField] private float myOrtographicSizeTopDown = 5f;
@@ -88,6 +88,26 @@ public class LevelSelectCamera : MonoBehaviour
          direction.y = 0;
          myTopDownFocus += direction * myCameraSpeed;
          transform.position += direction;  //gör kameran lite mer statisk i sitt följande
+      }
+
+      if (Camera.main.transform.position.x > myMaxPan.x)
+      {
+         myTopDownFocus.x = myMaxPan.x;
+      }
+      else if (Camera.main.transform.position.x < myMinPan.x)
+      {
+         myTopDownFocus.x = myMinPan.x;
+
+      }
+      if (Camera.main.transform.position.z > myMaxPan.z)
+      {
+         myTopDownFocus.z = myMaxPan.z;
+
+      }
+      else if (Camera.main.transform.position.z < myMinPan.z)
+      {
+         myTopDownFocus.z = myMinPan.z;
+
       }
    }
    public void SetFocus(GameObject aGameObject)

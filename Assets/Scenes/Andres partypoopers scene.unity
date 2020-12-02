@@ -634,6 +634,7 @@ GameObject:
   - component: {fileID: 1963332872}
   - component: {fileID: 1963332871}
   - component: {fileID: 1963332870}
+  - component: {fileID: 1963332874}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -672,11 +673,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPathManager: {fileID: 1963332870}
-  myBuildManager: {fileID: 0}
+  myBuildManager: {fileID: 1963332874}
   temp: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1, type: 3}
   intersection: {fileID: 4634362183230162746, guid: d6dadaffe965f3940965cffe19698131,
     type: 3}
-  placeIntersection: 0
 --- !u!114 &1963332872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +708,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1963332874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963332869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c778d57a8896a414a894daa609bb56ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPoolList:
+  - myTileId: 1
+    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
+      type: 3}
+    myAmountOfTiles: 150
+    myTileList: []
+  myOriginalSpawnPoolPosition: {x: 0, y: -100, z: 0}
 --- !u!1001 &2020022635
 PrefabInstance:
   m_ObjectHideFlags: 0
