@@ -207,10 +207,10 @@ public class GameManager : MonoBehaviour
                     myLevelList[myActiveScene].myAmountOfStars -= currentStars;
                     myLevelList[myActiveScene].myAmountOfStars += threeStars;
                 }
-                
+
             }
             Debug.Log("Finished LEVEL\nTHREE STARS");
-            
+
             //UI.ShowFailScreen(amountOfMoneyEarned, 1);
         }
         else if (amountOfMoneyEarned >= myTwoStarScore && amountOfMoneyEarned < myOneStarScore)
@@ -233,7 +233,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             Debug.Log("Finished Level!\nTWO STARS");
-            
+
             //UI.ShowWinScreen(amountOfMoneyEarned, 2);
         }
         else if (amountOfMoneyEarned >= myOneStarScore)
@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour
             }
 
             Debug.Log("Finished Level!\nONE STARS");
-            
+
             //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
