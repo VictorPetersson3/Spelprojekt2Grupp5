@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         public string myLevelName;
         public int myTwoStarScore;
-        public int myThreeStarScore;
+        public int myOneStarScore;
         public int myStartingMoney;
     }
 
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //LoadFile(1);
+        LoadFile(1);
 
 
     }
@@ -207,10 +207,10 @@ public class GameManager : MonoBehaviour
                     myLevelList[myActiveScene].myAmountOfStars -= currentStars;
                     myLevelList[myActiveScene].myAmountOfStars += threeStars;
                 }
-                
+
             }
             Debug.Log("Finished LEVEL\nTHREE STARS");
-            
+
             //UI.ShowFailScreen(amountOfMoneyEarned, 1);
         }
         else if (amountOfMoneyEarned >= myTwoStarScore && amountOfMoneyEarned < myOneStarScore)
@@ -233,7 +233,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             Debug.Log("Finished Level!\nTWO STARS");
-            
+
             //UI.ShowWinScreen(amountOfMoneyEarned, 2);
         }
         else if (amountOfMoneyEarned >= myOneStarScore)
@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour
             }
 
             Debug.Log("Finished Level!\nONE STARS");
-            
+
             //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
@@ -329,6 +329,7 @@ public class GameManager : MonoBehaviour
             {
                 myLevelName = myLevelList[i].myLevelName,
                 myTwoStarScore = myLevelList[i].myTwoStarScore,
+                myOneStarScore = myLevelList[i].myOneStarScore,
                 myStartingMoney = myLevelList[i].myStartingMoney
             };
 
@@ -476,6 +477,7 @@ public class GameManager : MonoBehaviour
                 {
                     myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
                     myLevelList[i].myTwoStarScore = levelListScore.LevelScores[i].myTwoStarScore;
+                    myLevelList[i].myOneStarScore = levelListScore.LevelScores[i].myOneStarScore;
                     myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
                     myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
                 }
