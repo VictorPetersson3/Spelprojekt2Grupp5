@@ -11,6 +11,8 @@ public class Placement : MonoBehaviour
     private Tile myTile;
     [SerializeField]
     PathTile temp;
+
+    public bool isPlaceablePortal = false;
     private void Update()
     {
         //LEFT CLICK INPUT
@@ -63,15 +65,36 @@ public class Placement : MonoBehaviour
         //myBuildManager.SpawnFromPool("Cube", Quaternion.identity).transform.position = myInputCoordinates;
         if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetLastPlacedTile))
         {
-            PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
+            if (isPlaceablePortal)
+            {
+                //PathTile path = myBuildManager.SpawnFromPool(2, Quaternion.identity, myInputCoordinates);
 
-            path.GetPathTilePosition = myInputCoordinates;
-            myPathManager.AddItemToMap(path);
-            path.CheckNeighbors();
-            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+                //path.GetPathTilePosition = myInputCoordinates;
+                //myPathManager.AddItemToMap(path);
+                //path.CheckNeighbors();
+                //WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+
+                PathTile path = myBuildManager.SpawnFromPool(2, Quaternion.identity, myInputCoordinates);
+
+                path.GetPathTilePosition = myInputCoordinates;
+                myPathManager.AddItemToMap(path);
+                path.CheckNeighbors();
+                WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+            }
+            else
+            {
+                PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
+
+                path.GetPathTilePosition = myInputCoordinates;
+                myPathManager.AddItemToMap(path);
+                path.CheckNeighbors();
+                WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+            }
+            
         }
         //Sätter tilen till obstructed
     }
+
 
     private void AddToPortalListLogic()
     {
@@ -79,12 +102,27 @@ public class Placement : MonoBehaviour
         {
             if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[i].GetSetLastPathTile) && myPathManager.GetPortals[i].GetSetLastPathTile != null)
             {
-                print(myPathManager.GetPortals[i].GetSetLastPathTile);
-                PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
-                path.GetPathTilePosition = myInputCoordinates;
-                myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
-                myPathManager.AddItemToPortalMap(path, i);
-                myPathManager.GetPortals[i].GetSetLastPathTile = path;
+                if (isPlaceablePortal)
+                {
+                    print(myPathManager.GetPortals[i].GetSetLastPathTile);
+                    //PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+                    PathTile path = myBuildManager.SpawnFromPool(2, Quaternion.identity, myInputCoordinates);
+                    path.GetPathTilePosition = myInputCoordinates;
+                    myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+                    myPathManager.AddItemToOneTilePortalMap(path, i);
+                    myPathManager.GetOneTilePortals[i].GetSetLastPathTile = path;
+                }
+                else
+                {
+                    print(myPathManager.GetPortals[i].GetSetLastPathTile);
+                    //PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+                    PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
+                    path.GetPathTilePosition = myInputCoordinates;
+                    myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+                    myPathManager.AddItemToPortalMap(path, i);
+                    myPathManager.GetPortals[i].GetSetLastPathTile = path;
+                }
+                
 
                 WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
             }

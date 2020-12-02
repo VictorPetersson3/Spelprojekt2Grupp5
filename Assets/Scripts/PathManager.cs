@@ -17,6 +17,7 @@ public class PathManager : MonoBehaviour
    
     [SerializeField]
     List<Portals> myPortals = new List<Portals>();
+    List<OneTilePortalJump> myOneTilePortals = new List<OneTilePortalJump>();
     PathTile[,] myPathTiles;
 
     List<PathTile> myPathList = new List<PathTile>(); 
@@ -25,6 +26,7 @@ public class PathManager : MonoBehaviour
     public List<PathTile> GetPathFromStart { get { return myPathList; } }
 
     public List<Portals> GetPortals { get { return myPortals; } }
+    public List<OneTilePortalJump> GetOneTilePortals { get { return myOneTilePortals; } }
 
 
 
@@ -77,7 +79,13 @@ public class PathManager : MonoBehaviour
 
     public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {
-        myPortals[index].AddVectorToMovementList(aPathTileToAdd);    }
+        myPortals[index].AddVectorToMovementList(aPathTileToAdd);    
+    }
+
+    public void AddItemToOneTilePortalMap(PathTile aPathTileToAdd, int index)
+    {
+        myOneTilePortals[index].AddVectorToMovementList(aPathTileToAdd);
+    }
 
     public void AddItemToMap(PathTile aPathTileToAdd)
     {
