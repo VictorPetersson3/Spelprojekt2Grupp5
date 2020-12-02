@@ -18,7 +18,7 @@ public class LevelSelect : MonoBehaviour
   
    private void Start()
    {
-      Unlock(myCurrentStars);
+      Unlock(GameManager.globalInstance.GetTotalStars());
       GenerateLines();
       mySelectedUI = myMainUI;
    }
