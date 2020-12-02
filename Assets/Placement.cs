@@ -9,8 +9,6 @@ public class Placement : MonoBehaviour
     [SerializeField] private BuildManager myBuildManager;
     private Vector3Int myInputCoordinates;
     private Tile myTile;
-    [SerializeField]
-    PathTile temp;
 
     public bool isPlaceablePortal = false;
     private void Update()
@@ -67,19 +65,21 @@ public class Placement : MonoBehaviour
         {
             if (isPlaceablePortal)
             {
-                //PathTile path = myBuildManager.SpawnFromPool(2, Quaternion.identity, myInputCoordinates);
-
-                //path.GetPathTilePosition = myInputCoordinates;
-                //myPathManager.AddItemToMap(path);
-                //path.CheckNeighbors();
-                //WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
-
                 PathTile path = myBuildManager.SpawnFromPool(2, Quaternion.identity, myInputCoordinates);
 
                 path.GetPathTilePosition = myInputCoordinates;
                 myPathManager.AddItemToMap(path);
                 path.CheckNeighbors();
                 WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+
+
+                //PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+                //PathTile path = myBuildManager.SpawnFromPool(2, Quaternion.identity, myInputCoordinates);
+                //path.GetPathTilePosition = myInputCoordinates;
+                //myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+                //myPathManager.AddItemToOneTilePortalMap(path, i);
+                //myPathManager.GetOneTilePortals[i].GetSetLastPathTile = path;
+
             }
             else
             {

@@ -84,7 +84,7 @@ public class PathManager : MonoBehaviour
 
     public void AddItemToOneTilePortalMap(PathTile aPathTileToAdd, int index)
     {
-        myOneTilePortals[index].AddVectorToMovementList(aPathTileToAdd);
+        //myOneTilePortals.Add(myOneTilePortals)
     }
 
     public void AddItemToMap(PathTile aPathTileToAdd)
