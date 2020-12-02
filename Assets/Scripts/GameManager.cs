@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         public string myLevelName;
         public int myTwoStarScore;
-        public int myThreeStarScore;
+        public int myOneStarScore;
         public int myStartingMoney;
     }
 
@@ -329,6 +329,7 @@ public class GameManager : MonoBehaviour
             {
                 myLevelName = myLevelList[i].myLevelName,
                 myTwoStarScore = myLevelList[i].myTwoStarScore,
+                myOneStarScore = myLevelList[i].myOneStarScore,
                 myStartingMoney = myLevelList[i].myStartingMoney
             };
 
@@ -476,6 +477,7 @@ public class GameManager : MonoBehaviour
                 {
                     myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
                     myLevelList[i].myTwoStarScore = levelListScore.LevelScores[i].myTwoStarScore;
+                    myLevelList[i].myOneStarScore = levelListScore.LevelScores[i].myOneStarScore;
                     myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
                     myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
                 }
