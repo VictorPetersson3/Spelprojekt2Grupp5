@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     Tile myCurrentTile;
     public Tile GetCurrectTile { get { return myCurrentTile; } }
 
-    public List<Vector3> PlayerMoveList
+    public List<PathTile> PlayerMoveList
     {
         get
         {
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     PathManager myPathManager;
-    List<Vector3> myMovementList;
+    List<PathTile> myMovementList;
     [SerializeField]
     ParticleSystem myDeathEffect;
     [SerializeField]
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        myMovementList = new List<Vector3>();
+        myMovementList = new List<PathTile>();
     }
 
     void Update()
@@ -56,8 +56,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, myMovementList[step], myMovementSpeed * Time.deltaTime);
-                Vector3 distanceToNextPos = myMovementList[step] - transform.position;
+                transform.position = Vector3.MoveTowards(transform.position, myMovementList[step].transform.position, myMovementSpeed * Time.deltaTime);
+                Vector3 distanceToNextPos = myMovementList[step].transform.position - transform.position;
 
                 if (distanceToNextPos.magnitude < 0.05f)
                 {
