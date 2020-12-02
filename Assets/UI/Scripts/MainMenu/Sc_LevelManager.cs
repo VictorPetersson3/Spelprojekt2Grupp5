@@ -16,8 +16,8 @@ public class Sc_LevelManager : MonoBehaviour
         if (myInstance == null)
         {
             myInstance = this;
-            SceneManager.LoadSceneAsync((int)Sc_SceneIndexes.eSceneIndexes.eMainMenu, LoadSceneMode.Additive);
-            myCurrentSceneIndex = (int)Sc_SceneIndexes.eSceneIndexes.eMainMenu;
+            SceneManager.LoadSceneAsync(3, LoadSceneMode.Additive);
+            myCurrentSceneIndex = 3;
         }
     }
 
