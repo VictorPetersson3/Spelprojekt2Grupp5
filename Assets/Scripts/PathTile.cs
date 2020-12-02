@@ -14,8 +14,13 @@ public class PathTile : MonoBehaviour
 
 
     public GameObject myTurnRoad;
-
     public GameObject myStraightRoad;
+
+    float mySpeed = 3f;
+    float myCurrentSpeed = 0;
+    bool myTemp = false;
+    [SerializeField]
+    ParticleSystem myPlacementEffect;
     PathTile myPathTileNeighbors;
 
     Neighbor myNeigbor = Neighbor.none;
@@ -36,10 +41,26 @@ public class PathTile : MonoBehaviour
         if (myPathManager != null)
         {
             CheckNeighbors();
+
         }
+
+        myPlacementEffect.transform.position = new Vector3(myPlacementEffect.transform.position.x, 0.1f, myPlacementEffect.transform.position.z);
+        myPlacementEffect.Play();
+
+
+
+
+
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+    }
+    private void Update()
+    {
+        MoveObjectToPlaceDown(transform);
     }
     public void CheckNeighbors()
     {
+        myTemp = false;
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
         int x = Mathf.FloorToInt(transform.position.x);
         int z = Mathf.FloorToInt(transform.position.z);
 
@@ -101,7 +122,7 @@ public class PathTile : MonoBehaviour
     }
     void CheckOldNeighborDown()
     {
-        if (myPathTileNeighbors.GetNeighbor == Neighbor.left )
+        if (myPathTileNeighbors.GetNeighbor == Neighbor.left)
         {
             // left down
             myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -188,17 +209,28 @@ public class PathTile : MonoBehaviour
             myPathTileNeighbors.myTurnRoad.transform.rotation = Quaternion.Euler(0, -90, 0);
             myPathTileNeighbors.myStraightRoad.SetActive(false);
             myPathTileNeighbors.myTurnRoad.SetActive(true);
-          
+
         }
         if (myPathTileNeighbors.GetNeighbor == Neighbor.right)
         {
             myPathTileNeighbors.myStraightRoad.SetActive(true);
             myPathTileNeighbors.myTurnRoad.SetActive(false);
-          
+
         }
         myStraightRoad.SetActive(true);
         myTurnRoad.SetActive(false);
         myStraightRoad.transform.rotation = Quaternion.Euler(0, 90, 0);
+    }
+   
+
+    void MoveObjectToPlaceDown(Transform aTransform)
+    {
+        myCurrentSpeed = mySpeed * mySpeed;
+        if (aTransform.position.y + (myCurrentSpeed * Time.deltaTime) > 0)
+        {
+            aTransform.position = Vector3.Lerp(aTransform.position, new Vector3(aTransform.position.x, 0, aTransform.position.z), myCurrentSpeed * Time.deltaTime); ;
+        }
+
     }
 
 }
