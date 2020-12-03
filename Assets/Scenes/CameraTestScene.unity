@@ -316,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.3
+      value: -40.2
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
@@ -373,6 +373,21 @@ PrefabInstance:
       propertyPath: myTargets.Array.data[0]
       value: 
       objectReference: {fileID: 1206889387}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: transitionSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: myZoomPaddingPortrait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: myZoomPaddingTopDownPortrait
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978415, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: m_Name

@@ -94,11 +94,8 @@ public class CameraController : MonoBehaviour
         {
             if (!Input.GetMouseButtonDown(0))
             {
-                LeanTween.moveX(this.gameObject, myWorldCenterPostion.x, transitionSpeed*Time.deltaTime).setEaseLinear();
-                LeanTween.moveZ(this.gameObject, myWorldCenterPostion.z, transitionSpeed * Time.deltaTime).setEaseLinear();
-
-                //transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime * transitionSpeed);
-                LeanTween.rotate(this.gameObject, new Vector3(90, 0, 0), Time.deltaTime * transitionSpeed);     
+                transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime * transitionSpeed);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime * transitionSpeed);     
                 switch(Screen.orientation)
                 {
                     case ScreenOrientation.Portrait:

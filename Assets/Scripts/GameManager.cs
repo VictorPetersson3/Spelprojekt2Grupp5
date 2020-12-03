@@ -9,6 +9,8 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private Sc_EndOfGameScreen myEndScreen;
     enum SaveSlot
     {
         Save1 = 1,
@@ -267,12 +269,8 @@ public class GameManager : MonoBehaviour
             //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
-
-        //UI.SetScore(myAmountOfMoney, myLevelList[myActiveScene].myAmountOfStars);
-
-
-        //UI.ShowEndScreen();
-
+        myEndScreen.GetLevelData(amountOfMoneyEarned, myLevelList[myActiveScene].myAmountOfStars);
+        myEndScreen.MoveUp();
     }
 
 
@@ -563,4 +561,8 @@ public class GameManager : MonoBehaviour
         return myLevelList[aLevelIndex].myAmountOfStars;
     }
 
+    public void LoadLevel()
+    {
+       
+    }
 }
