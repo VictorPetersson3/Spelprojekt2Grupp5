@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     int indexForNextPortalDistance = 0;
     bool myDontIncreaseIndexFirstTime = true;
-
+    [SerializeField]
     bool myMovementStart = false;
     public int SetPlayerStep
     {
