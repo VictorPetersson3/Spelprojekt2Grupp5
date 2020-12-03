@@ -103,8 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8058011032119383566}
   - component: {fileID: 4672840498732208381}
-  - component: {fileID: -2879274114409743497}
-  - component: {fileID: -4519360392647283200}
+  - component: {fileID: 7590037471296162824}
   m_Layer: 0
   m_Name: P_Start
   m_TagString: Untagged
@@ -139,13 +138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86703f7a2d38a5d41a39e9b37da76847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPathManager: {fileID: 4691777817341093538, guid: f279b5c223c71cb42a678617078c88ad,
-    type: 3}
-  myDeathEffect: {fileID: 3197179161082915403, guid: 9efb9e4180e8ed747aab3b11b72bf342,
-    type: 3}
+  myPathManager: {fileID: 0}
+  myDeathEffect: {fileID: 0}
   step: 1
   myMovementSpeed: 8
---- !u!114 &-2879274114409743497
+--- !u!114 &7590037471296162824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,48 +151,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3685176419776506889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ed3ddaf6de777419c25b51df0fd792, type: 3}
+  m_Script: {fileID: 11500000, guid: cc74239f63f7e2a40bcc18b4361c19a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLayerMask:
+  myMoneyMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!23 &-4519360392647283200
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685176419776506889}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 6216664e11f64b34884d65b1210d638a, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  myEndMask:
+    serializedVersion: 2
+    m_Bits: 512

@@ -11,6 +11,7 @@ public class MoneyValue : MonoBehaviour
 
     private void Start()
     {
+        gameObject.SetActive(true);
         myGameManager = GameManager.globalInstance;
     }
 
