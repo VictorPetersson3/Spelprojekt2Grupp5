@@ -128,10 +128,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        myLevelList[myActiveScene].myAmountOfMoney = myLevelList[myActiveScene].myStartingMoney;
-    }
+
 
     private void Update()
     {
@@ -564,4 +561,8 @@ public class GameManager : MonoBehaviour
         return myLevelList[aLevelIndex].myAmountOfStars;
     }
 
+    public void LoadLevel()
+    {
+       
+    }
 }
