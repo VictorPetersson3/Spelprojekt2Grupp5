@@ -118,24 +118,14 @@ public class GameManager : MonoBehaviour
         
         if (File.Exists(path))
         {
-            Debug.Log("re2");
             LoadFile(1);
         }
         else
         {
             LoadJsonFile();
         }
-
-        
-
-
     }
 
-
-    void Start()
-    {
-
-    }
 
 
     private void Update()
