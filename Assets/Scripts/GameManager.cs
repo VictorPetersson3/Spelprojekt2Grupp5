@@ -347,7 +347,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    FileUtil.CopyFileOrDirectory(path, backupPath);
+                    //FileUtil.CopyFileOrDirectory(path, backupPath);
                     break;
                 }
             }

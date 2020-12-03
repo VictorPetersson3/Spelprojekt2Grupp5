@@ -8,14 +8,14 @@ public class Sc_LevelSelect_GUI : MonoBehaviour
 {
     [SerializeField]
     TextMeshProUGUI myTotalScore;
-
+    [SerializeField]
+    GameManager myGameManager;
     private void OnValidate()
     {
-        SetScore();
+        //SetScore();
     }
-
     public void SetScore()
     {
-        myTotalScore.text = GameManager.globalInstance.GetTotalStars().ToString();
+        //myTotalScore.text = myGameManager.GetTotalStars().ToString();
     }
 }
