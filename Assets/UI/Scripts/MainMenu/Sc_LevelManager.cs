@@ -23,12 +23,12 @@ public class Sc_LevelManager : MonoBehaviour
     }
 
     
+    
     public void LoadGame(int aSceneIndex)
     {
         myLoadingScreen.gameObject.SetActive(true);
         SceneManager.UnloadSceneAsync((int)myCurrentSceneIndex);
         myCurrentSceneIndex = aSceneIndex;
-        //Invoke("DelaySpawn", 5.0f);
         StartCoroutine(CoRoutineLoad());
     }
     public void ReloadLevel()
