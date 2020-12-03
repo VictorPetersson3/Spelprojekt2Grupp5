@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Sc_InterfaceLevelManager : MonoBehaviour
 {
-
-   
-    // Start is called before the first frame update
-    public void LoadLevel(int aSceneIndex)
+        public void LoadLevel(int aSceneIndex)
     {
         GameManager.globalInstance.SetLevel(aSceneIndex);
         Sc_LevelManager.myInstance.LoadGame(aSceneIndex);
@@ -16,10 +13,9 @@ public class Sc_InterfaceLevelManager : MonoBehaviour
         Sc_LevelManager.myInstance.QuitApplication();
     }
 
-    public void RestartLevel(Sc_LevelElementData aLevelElementData)
+    public void RestartLevel()
     {
-        int aLevelIndex = aLevelElementData.GetLevelIndex();
-        LoadLevel(aLevelIndex);
+        Sc_LevelManager.myInstance.ReloadLevel();
     }
 
 }
