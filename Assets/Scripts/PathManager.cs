@@ -83,7 +83,16 @@ public class PathManager : MonoBehaviour
             WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z), Tile.TileState.obstructed);
         }
     }
-
+    public void ResetPath()
+    {
+        for (int i = 0; i < myPathList.Count; i++)
+        {
+            myPathList[i].ResetMe();
+            myBuildManager.ReturnToPool(myPathList[i]);
+            myLastPlacedPathTile = null;
+            myStartPathTile = null;
+        }
+    }
     public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);

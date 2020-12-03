@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Tile myCurrentTile;
     public Tile GetCurrectTile { get { return myCurrentTile; } }
-
+  
     public List<PathTile> PlayerMoveList
     {
         get
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         {
             if (myMovementList[step].IsEndTile)
             {
+                myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
             }
