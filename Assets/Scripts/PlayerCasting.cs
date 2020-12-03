@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddingMoney : MonoBehaviour
+public class PlayerCasting : MonoBehaviour
 {
     float myMaxDistance;
     bool myHitDetection;
 
     [SerializeField]
-    LayerMask myLayerMask;
+    LayerMask myMoneyMask;
+    [SerializeField]
+    LayerMask myEndMask;
     RaycastHit myHit;
     GameManager myGameManger;
 
@@ -20,7 +22,7 @@ public class AddingMoney : MonoBehaviour
 
     private void FixedUpdate()
     {
-        myHitDetection = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myHit, Quaternion.identity, myMaxDistance, myLayerMask);
+        myHitDetection = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myHit, Quaternion.identity, myMaxDistance, myMoneyMask);
 
         if (myHitDetection == true)
         {
