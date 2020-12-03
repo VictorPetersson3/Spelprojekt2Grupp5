@@ -27,12 +27,8 @@ public class PathManager : MonoBehaviour
     List<PathTile> myPathList = new List<PathTile>(); 
     public PathTile[,] GetPathTileMap { get { return myPathTiles; } }
     public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
-    
-
+   
     public List<Portals> GetPortals { get { return myPortals; } }
-
-
-
 
     void OnValidate()
     {
@@ -74,7 +70,6 @@ public class PathManager : MonoBehaviour
             PathTile temp = Instantiate(myPathTilePrefab, myPortals[i].GetExit() + myPortals[i].transform.position, Quaternion.identity);
             temp.SetPathManager = this;
             temp.GetPathTilePosition = myPortals[i].GetExit() + myPortals[i].transform.position;
-            GetPathTileMap[Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z)] = temp;
             AddItemToPortalMap(temp, i);
             GetPortals[i].myStartTile = temp;
             WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z), Tile.TileState.obstructed);
@@ -85,9 +80,14 @@ public class PathManager : MonoBehaviour
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
         int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
+       
         myPortals[index].AddVectorToMovementList(aPathTileToAdd);
         myPathTiles[x, z] = aPathTileToAdd;
         myLastPlacedPathTile = aPathTileToAdd;
+
+        myPlacementEffects.transform.position = aPathTileToAdd.transform.position;
+        myPlacementEffects.CheckPlacementIndicators();
+       
     }
 
     public void AddItemToMap(PathTile aPathTileToAdd)
@@ -134,34 +134,35 @@ public class PathManager : MonoBehaviour
 
             if (x - 1 >= 0)
             {
-                if (myPathTiles[x - 1, z] == aLastPlacedTile || myPathTiles[x - 1, z] == GetPortals[i].myStartTile)
+                if (myPathTiles[x - 1, z] == aLastPlacedTile)
                 {
                     return true;
                 }
             }
             if (x + 1 < WorldController.Instance.GetWorldWidth)
             {
-                if (myPathTiles[x + 1, z] == aLastPlacedTile || myPathTiles[x + 1, z] == GetPortals[i].myStartTile)
+                if (myPathTiles[x + 1, z] == aLastPlacedTile)
                 {
                     return true;
                 }
             }
             if (z - 1 >= 0)
             {
-                if (myPathTiles[x, z - 1] == aLastPlacedTile || myPathTiles[x, z - 1] == GetPortals[i].myStartTile)
+                if (myPathTiles[x, z - 1] == aLastPlacedTile)
                 {
                     return true;
                 }
             }
             if (z + 1 < WorldController.Instance.GetWorldDepth)
             {
-                if (myPathTiles[x, z + 1] == aLastPlacedTile || myPathTiles[x, z + 1] == GetPortals[i].myStartTile)
+                if (myPathTiles[x, z + 1] == aLastPlacedTile)
                 {
                     return true;
                 }
             }
 
         }
+        Debug.Log("Return false");
         return false;
 
     }
