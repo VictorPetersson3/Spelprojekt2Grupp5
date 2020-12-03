@@ -36,7 +36,7 @@ public class PathManager : MonoBehaviour
         if (!hasInited)
         {
 
-            Invoke("Init", 3);
+            Invoke("Init", 1.5f);
             hasInited = true;
         }
     }
