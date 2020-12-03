@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         public string myLevelName;
         public int myTwoStarScore;
-        public int myThreeStarScore;
+        public int myOneStarScore;
         public int myStartingMoney;
     }
 
@@ -109,16 +109,23 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        LoadFile(1);
+        string path = "";
 
-
+        if (SetSaveFile(1))
+        {
+            path = Application.persistentDataPath + "/" + mySaveSlot;
+        }
+        
+        if (File.Exists(path))
+        {
+            LoadFile(1);
+        }
+        else
+        {
+            LoadJsonFile();
+        }
     }
 
-
-    void Start()
-    {
-
-    }
 
 
     private void Update()
@@ -207,10 +214,10 @@ public class GameManager : MonoBehaviour
                     myLevelList[myActiveScene].myAmountOfStars -= currentStars;
                     myLevelList[myActiveScene].myAmountOfStars += threeStars;
                 }
-                
+
             }
             Debug.Log("Finished LEVEL\nTHREE STARS");
-            
+
             //UI.ShowFailScreen(amountOfMoneyEarned, 1);
         }
         else if (amountOfMoneyEarned >= myTwoStarScore && amountOfMoneyEarned < myOneStarScore)
@@ -233,7 +240,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             Debug.Log("Finished Level!\nTWO STARS");
-            
+
             //UI.ShowWinScreen(amountOfMoneyEarned, 2);
         }
         else if (amountOfMoneyEarned >= myOneStarScore)
@@ -256,40 +263,10 @@ public class GameManager : MonoBehaviour
             }
 
             Debug.Log("Finished Level!\nONE STARS");
-            
+
             //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
-
-
-        //for (int i = 0; i < (int)(Levels.Count - 1); i++)
-        //{
-        //    if (i == SceneManager.GetActiveScene().buildIndex)
-        //    {
-        //        if (aScore > myLevelList[i].myFinishedScore)
-        //        {
-        //            myLevelList[i].myFinishedScore = aScore;
-        //        }
-
-        //        //UI.SetScore(aScore)
-
-        //        if (aScore > myLevelList[i].myHighScore)
-        //        {
-        //            myLevelList[i].myFinishedLevel = false;
-        //            //UI.ShowFailScreen(aScore, 1);
-        //        }
-        //        else if (aScore >= myLevelList[i].myMediumScore && aScore <= myLevelList[i].myHighScore)
-        //        {
-        //            myLevelList[i].myFinishedLevel = true;
-        //            //UI.ShowWinScreen(aScore, 2);
-        //        }
-        //        else if (aScore < myLevelList[i].myMinScore && myLevelList[i].myFinishedScore >= myLevelList[i].myMinScore && myLevelList[i].myFinishedScore < myLevelList[i].myMediumScore)
-        //        {
-        //            myLevelList[i].myFinishedLevel = true;
-        //            //UI.ShowWinScreen(aScore, 3);
-        //        }
-        //    }
-        //}
     }
 
 
@@ -329,6 +306,7 @@ public class GameManager : MonoBehaviour
             {
                 myLevelName = myLevelList[i].myLevelName,
                 myTwoStarScore = myLevelList[i].myTwoStarScore,
+                myOneStarScore = myLevelList[i].myOneStarScore,
                 myStartingMoney = myLevelList[i].myStartingMoney
             };
 
@@ -370,10 +348,23 @@ public class GameManager : MonoBehaviour
     {
         string path = "";
 
+#if UNITY_STANDALONE_WIN
+
         if (SetSaveFile(aSaveIndex))
         {
             path = Application.streamingAssetsPath + "/" + mySaveSlot;
         }
+
+#endif
+
+#if UNITY_ANDROID
+
+        if (SetSaveFile(aSaveIndex))
+        {
+            path = Application.persistentDataPath + "/" + mySaveSlot;
+        }
+
+#endif
 
         BinaryFormatter formatter = new BinaryFormatter();
 
@@ -388,10 +379,23 @@ public class GameManager : MonoBehaviour
     {
         string path = "";
 
+#if UNITY_STANDALONE_WIN
+
         if (SetSaveFile(aLoadedFileIndex))
         {
             path = Application.streamingAssetsPath + "/" + mySaveSlot;
         }
+
+#endif
+
+#if UNITY_ANDROID
+
+        if (SetSaveFile(aLoadedFileIndex))
+        {
+            path = Application.persistentDataPath + "/" + mySaveSlot;
+        }
+
+#endif
 
         if (File.Exists(path))
         {
@@ -461,8 +465,11 @@ public class GameManager : MonoBehaviour
         myLevelList[myActiveScene].myAmountOfMoney = myTotalMoney;
     }
 
-    public void LoadAllScores()
+    public void LoadJsonFile()
     {
+#if UNITY_STANDALONE_WIN
+
+
         AllLevelScores levelListScore;
         string path = Application.streamingAssetsPath + "/levelscores.txt";
         if (File.Exists(path))
@@ -476,6 +483,7 @@ public class GameManager : MonoBehaviour
                 {
                     myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
                     myLevelList[i].myTwoStarScore = levelListScore.LevelScores[i].myTwoStarScore;
+                    myLevelList[i].myOneStarScore = levelListScore.LevelScores[i].myOneStarScore;
                     myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
                     myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
                 }
@@ -486,19 +494,26 @@ public class GameManager : MonoBehaviour
             Debug.Log("NO FILE PATH DETECTED AT: " + path);
         }
 
-        //AllLevelScores levelListScore;
-        //TextAsset file = Resources.Load("levelscores") as TextAsset;
-        //string json = file.ToString();
+#endif
 
-        //levelListScore = JsonUtility.FromJson<AllLevelScores>(json);
-        //for (int i = 0; i < levelListScore.LevelScores.Count; i++)
-        //{
-        //    myLevelList[i].myMinScore = levelListScore.LevelScores[i].myMinScore;
-        //    myLevelList[i].myMediumScore = levelListScore.LevelScores[i].myMediumScore;
-        //    myLevelList[i].myHighScore = levelListScore.LevelScores[i].myHighScore;
-        //    myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
-        //    myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
-        //}
+#if UNITY_ANDROID
+
+
+        AllLevelScores levelListScore;
+        TextAsset file = Resources.Load("levelscores") as TextAsset;
+        string json = file.ToString();
+
+        levelListScore = JsonUtility.FromJson<AllLevelScores>(json);
+        for (int i = 0; i < levelListScore.LevelScores.Count; i++)
+        {
+            myLevelList[i].myLevelName = levelListScore.LevelScores[i].myLevelName;
+            myLevelList[i].myTwoStarScore = levelListScore.LevelScores[i].myTwoStarScore;
+            myLevelList[i].myOneStarScore = levelListScore.LevelScores[i].myOneStarScore;
+            myLevelList[i].myStartingMoney = levelListScore.LevelScores[i].myStartingMoney;
+            myLevelList[i].myAmountOfMoney = myLevelList[i].myStartingMoney;
+        }
+
+#endif
 
     }
 
