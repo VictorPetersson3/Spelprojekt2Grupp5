@@ -13,7 +13,8 @@ public class PlayerCasting : MonoBehaviour
     LayerMask myMoneyMask;
     [SerializeField]
     LayerMask myEndMask;
-    RaycastHit myHit;
+    RaycastHit myMoneyHit;
+    RaycastHit myEndHit;
     GameManager myGameManger;
 
     private void Start()
@@ -25,19 +26,19 @@ public class PlayerCasting : MonoBehaviour
 
     private void FixedUpdate()
     {
-        myMoneyDetection = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myHit, Quaternion.identity, myMaxDistance, myMoneyMask);
-        myEndGameDetection = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myHit, Quaternion.identity, myMaxDistance, myEndMask);
+        myMoneyDetection = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myMoneyHit, Quaternion.identity, myMaxDistance, myMoneyMask);
+        myEndGameDetection = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myEndHit, Quaternion.identity, myMaxDistance, myEndMask);
 
         if (myMoneyDetection == true)
         {
-            myHit.transform.GetComponent<MoneyValue>().AddingMoney();
-            Debug.Log("HIT " + myHit.collider.name);
+            Debug.Log("HIT " + myMoneyHit.collider.name);
+            myMoneyHit.transform.GetComponent<MoneyValue>().AddingMoney();
         }
 
         if (myEndGameDetection == true && myFinishedLevel == false)
         {
-            Debug.Log("HIT " + myHit.collider.name);
-            //myGameManger.SetFinishedLevel();
+            Debug.Log("HIT " + myEndHit.collider.name);
+            myGameManger.SetFinishedLevel();
             myFinishedLevel = true;
         }
 
