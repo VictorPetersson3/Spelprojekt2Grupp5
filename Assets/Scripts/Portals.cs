@@ -17,7 +17,7 @@ public class Portals : ObstructTileMap
     public PathTile GetSetLastPathTile { get { return myLastPlacedTile; } set { myLastPlacedTile = value; } }
 
 
-    List<PathTile> myContinuingPath;
+    public List<PathTile> myContinuingPath = new List<PathTile>();
 
     public Portals SetSecondPortal { set { mySecondPortal = value; } }
 
