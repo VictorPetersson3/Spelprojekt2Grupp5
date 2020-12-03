@@ -138,33 +138,69 @@ public class PathManager : MonoBehaviour
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
 
-
-        if (x - 1 >= 0)
+        if (myPortals.Count != 0)
         {
-            if (myPathTiles[x - 1, z] == aLastPlacedTile)
+            for (int i = 0; i < myPortals.Count; i++)
             {
-                return true;
+                if (x - 1 >= 0)
+                {
+                    if (myPathTiles[x - 1, z] == aLastPlacedTile)
+                    {
+                        return true;
+                    }
+                }
+                if (x + 1 < WorldController.Instance.GetWorldWidth)
+                {
+                    if (myPathTiles[x + 1, z] == aLastPlacedTile)
+                    {
+                        return true;
+                    }
+                }
+                if (z - 1 >= 0)
+                {
+                    if (myPathTiles[x, z - 1] == aLastPlacedTile)
+                    {
+                        return true;
+                    }
+                }
+                if (z + 1 < WorldController.Instance.GetWorldDepth)
+                {
+                    if (myPathTiles[x, z + 1] == aLastPlacedTile)
+                    {
+                        return true;
+                    }
+                }
             }
         }
-        if (x + 1 < WorldController.Instance.GetWorldWidth)
+        else
         {
-            if (myPathTiles[x + 1, z] == aLastPlacedTile)
+            if (x - 1 >= 0)
             {
-                return true;
+                if (myPathTiles[x - 1, z] == aLastPlacedTile)
+                {
+                    return true;
+                }
             }
-        }
-        if (z - 1 >= 0)
-        {
-            if (myPathTiles[x, z - 1] == aLastPlacedTile)
+            if (x + 1 < WorldController.Instance.GetWorldWidth)
             {
-                return true;
+                if (myPathTiles[x + 1, z] == aLastPlacedTile)
+                {
+                    return true;
+                }
             }
-        }
-        if (z + 1 < WorldController.Instance.GetWorldDepth)
-        {
-            if (myPathTiles[x, z + 1] == aLastPlacedTile)
+            if (z - 1 >= 0)
             {
-                return true;
+                if (myPathTiles[x, z - 1] == aLastPlacedTile)
+                {
+                    return true;
+                }
+            }
+            if (z + 1 < WorldController.Instance.GetWorldDepth)
+            {
+                if (myPathTiles[x, z + 1] == aLastPlacedTile)
+                {
+                    return true;
+                }
             }
         }
 
