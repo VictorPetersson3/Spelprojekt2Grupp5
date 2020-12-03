@@ -267,6 +267,8 @@ public class GameManager : MonoBehaviour
             //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
+        //UI.ShowEndScreen();
+
     }
 
 
