@@ -14,7 +14,7 @@ public class BuildManager : MonoBehaviour
         if (globalInstance == null)
         {
             globalInstance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (globalInstance != this)
         {
