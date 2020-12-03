@@ -13,8 +13,7 @@ public class Portals : ObstructTileMap
     [SerializeField]
     Vector3 myEntryAndExitDirection;
 
-    public PathTile myLastPlacedTile;
-    public PathTile GetSetLastPathTile { get { return myLastPlacedTile; } set { myLastPlacedTile = value; } }
+    public PathTile myStartTile;
 
 
     public List<PathTile> myContinuingPath = new List<PathTile>();
@@ -58,19 +57,14 @@ public class Portals : ObstructTileMap
     public void AddVectorToMovementList(PathTile aTilePos)
     {
         myContinuingPath.Add(aTilePos);
-        print(aTilePos.transform.position + "Added aTilePos To MovementList");
+
     }
     public override void Start()
     {
         //base.Start();
         myContinuingPath = new List<PathTile>();
-        
+    }
 
-    }
-    public override void Update()
-    {
-        //base.Update();
-    }
 
     public Vector3 GetExit()
     {
