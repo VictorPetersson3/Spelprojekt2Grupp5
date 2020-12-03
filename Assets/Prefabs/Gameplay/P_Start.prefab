@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8058011032119383566}
   - component: {fileID: 4672840498732208381}
-  - component: {fileID: -2879274114409743497}
+  - component: {fileID: 7590037471296162824}
   m_Layer: 0
   m_Name: P_Start
   m_TagString: Untagged
@@ -142,7 +142,7 @@ MonoBehaviour:
   myDeathEffect: {fileID: 0}
   step: 1
   myMovementSpeed: 8
---- !u!114 &-2879274114409743497
+--- !u!114 &7590037471296162824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,9 +151,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3685176419776506889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ed3ddaf6de777419c25b51df0fd792, type: 3}
+  m_Script: {fileID: 11500000, guid: cc74239f63f7e2a40bcc18b4361c19a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLayerMask:
+  myMoneyMask:
     serializedVersion: 2
     m_Bits: 256
+  myEndMask:
+    serializedVersion: 2
+    m_Bits: 512
