@@ -27,34 +27,41 @@ public class LevelSelect : MonoBehaviour
    void Update()
    {
 
-      if (Input.GetMouseButtonDown(0) && Input.touchCount <= 1)
+      if (Input.GetMouseButtonUp(0) && Input.touchCount <= 1)
       {
 
          mySelectedLevel = WhatDidIHit();
 
          if (mySelectedLevel != myBackground)
          {
-            Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(mySelectedLevel);
-         }
-         else
-         {
-            Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(null);
-         }
-      }
-      else if (Input.GetMouseButtonUp(0) && Input.touchCount <= 1)
-      {
-         if (mySelectedLevel != myBackground)
-         {
             myMainUI.SetActive(false);
             mySelectedUI = mySelectedLevel.transform.parent.GetChild(0).gameObject;
             mySelectedUI.SetActive(true);
+            Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(mySelectedLevel);
          }
          else
          {
             mySelectedUI.SetActive(false);
             myMainUI.SetActive(true);
+            StartCoroutine(CoRoutineLoad());
          }
+      //}
+      //else if (Input.GetMouseButtonUp(0) && Input.touchCount <= 1)
+      //{
+      //   if (mySelectedLevel != myBackground)
+      //   {
+      //   }
+      //   else
+      //   {
+            
+      //   }
       }
+   }
+   IEnumerator CoRoutineLoad()
+   {
+      yield return new WaitForSeconds(0.1f);
+      
+      Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(null);
    }
    public GameObject WhatDidIHit()
    {
