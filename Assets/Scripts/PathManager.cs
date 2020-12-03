@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     PlayerController myPlayerController;
 
     [SerializeField]
@@ -14,20 +14,20 @@ public class PathManager : MonoBehaviour
     PathTile myLastPlacedPathTile;
     [SerializeField]
     PathTile myEndTile;
-   
+
     [SerializeField]
     List<Portals> myPortals = new List<Portals>();
     PathTile[,] myPathTiles;
     [SerializeField]
     PlacementIndicator myPlacementEffects;
-   
+
     [SerializeField]
     BuildManager myBuildManager;
-    
-    List<PathTile> myPathList = new List<PathTile>(); 
+
+    List<PathTile> myPathList = new List<PathTile>();
     public PathTile[,] GetPathTileMap { get { return myPathTiles; } }
     public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
-   
+
     public List<Portals> GetPortals { get { return myPortals; } }
 
     void OnValidate()
@@ -43,8 +43,9 @@ public class PathManager : MonoBehaviour
             }
         }
     }
-    public void init()
+    void Start()
     {
+
         myPlayerController.PlayerMoveList = myPathList;
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
 
@@ -52,20 +53,17 @@ public class PathManager : MonoBehaviour
 
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
 
-
-        InstantiateFirstPortalExitTile();
+        if (myPortals.Count != 0)
+        {
+            InstantiateFirstPortalExitTile();
+        }
         AddItemToMap(myStartPathTile);
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
         myLastPlacedPathTile = myStartPathTile;
     }
-    void Start()
-    {
-   
-      
-    }
     private void Update()
     {
-     
+
     }
     private void InstantiateFirstPortalExitTile()
     {
@@ -84,14 +82,14 @@ public class PathManager : MonoBehaviour
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
         int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
-       
+
         myPortals[index].AddVectorToMovementList(aPathTileToAdd);
         myPathTiles[x, z] = aPathTileToAdd;
         myLastPlacedPathTile = aPathTileToAdd;
 
         myPlacementEffects.transform.position = aPathTileToAdd.transform.position;
         myPlacementEffects.CheckPlacementIndicators();
-       
+
     }
 
     public void AddItemToMap(PathTile aPathTileToAdd)
@@ -117,7 +115,7 @@ public class PathManager : MonoBehaviour
     {
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
-       
+
         if (myPathTiles[x, z] == myLastPlacedPathTile)
         {
             myLastPlacedPathTile.ResetMe();
