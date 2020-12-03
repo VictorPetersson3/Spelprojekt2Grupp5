@@ -10,8 +10,6 @@ public class Sc_LevelManager : MonoBehaviour
     public GameObject myLoadingScreen;
     public GameManager myGameManager;
 
-    [SerializeField]
-    private GameObject myLevelSelectGUI;
     private int myCurrentSceneIndex;
 
     private void Awake()
@@ -34,14 +32,7 @@ public class Sc_LevelManager : MonoBehaviour
 
         myCurrentSceneIndex = aSceneIndex;
         StartCoroutine(CoRoutineLoad());
-        if(myCurrentSceneIndex == 3)
-        {
-            myLevelSelectGUI.SetActive(true);
-        }
-        else
-        {
-            myLevelSelectGUI.SetActive(false);
-        }
+       
     }
     public void ReloadLevel()
     {
