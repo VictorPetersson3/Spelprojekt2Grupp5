@@ -92,6 +92,7 @@ public class PathManager : MonoBehaviour
             myLastPlacedPathTile = null;
             myStartPathTile = null;
         }
+        myBuildManager.ResetTiles();
     }
     public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {

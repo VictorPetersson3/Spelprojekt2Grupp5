@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     bool myDontIncreaseIndexFirstTime = true;
     [SerializeField]
     bool myMovementStart = false;
+
     GameManager myGameManger;
     public int SetPlayerStep
     {
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
                 myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
+                myMovementStart = false;
             }
             else
             {
