@@ -31,10 +31,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myMovementSpeed = 12;
 
+    [SerializeField]
+    GameObject myPlayerModel;
     int indexForNextPortalDistance = 0;
     bool myDontIncreaseIndexFirstTime = true;
     [SerializeField]
     bool myMovementStart = false;
+
     GameManager myGameManger;
     public int SetPlayerStep
     {
@@ -61,11 +64,21 @@ public class PlayerController : MonoBehaviour
         
         if (myMovementStart)
         {
-            if (myMovementList[step].IsEndTile)
+            if (step > myMovementList.Count - 1)
+            {
+                myDeathEffect.transform.position = transform.position;
+                myDeathEffect.Play();
+                myPlayerModel.SetActive(false);
+                myMovementStart = false;
+                myPathManager.ResetPath();
+                myGameManger.SetFinishedLevel();
+            } 
+            else if (myMovementList[step].IsEndTile)
             {
                 myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
+                myMovementStart = false;
             }
             else
             {

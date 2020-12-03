@@ -92,6 +92,7 @@ public class PathManager : MonoBehaviour
             myLastPlacedPathTile = null;
             myStartPathTile = null;
         }
+        myBuildManager.ResetTiles();
     }
     public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {
@@ -135,6 +136,7 @@ public class PathManager : MonoBehaviour
         {
             myLastPlacedPathTile.ResetMe();
             myBuildManager.ReturnToPool(myLastPlacedPathTile);
+            myBuildManager.ReturnMoney();
             myPathList.Remove(myLastPlacedPathTile);
             myLastPlacedPathTile = myPathList[myPathList.Count - 1];
             WorldController.Instance.GetWorld.SetTileState(x, z, Tile.TileState.empty);
