@@ -22,7 +22,7 @@ public class Sc_EndOfGameScreen : MonoBehaviour
     [SerializeField]
     Sc_ScoreSymbol my3Star;
 
-    private Vector3 myStartPosition = new Vector3(0.0f, -800.0f, 0.0f);
+    private Vector3 myStartPosition = new Vector3(0.0f, -1000.0f, 0.0f);
     private Vector3 myEndPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
     public void GetLevelData(int aAmountOfMoney, int aAmountOfStars)
@@ -36,9 +36,12 @@ public class Sc_EndOfGameScreen : MonoBehaviour
                 my1Star.UnlockScore();
                 break;
             case 2:
+                my1Star.UnlockScore();
                 my2Star.UnlockScore();
                 break;
             case 3:
+                my1Star.UnlockScore();
+                my2Star.UnlockScore();
                 my3Star.UnlockScore();
                 break;
         }
