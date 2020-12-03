@@ -675,8 +675,6 @@ MonoBehaviour:
   myPathManager: {fileID: 1963332870}
   myBuildManager: {fileID: 1963332874}
   temp: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1, type: 3}
-  intersection: {fileID: 4634362183230162746, guid: d6dadaffe965f3940965cffe19698131,
-    type: 3}
 --- !u!114 &1963332872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c778d57a8896a414a894daa609bb56ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myPathManager: {fileID: 1963332870}
   myPoolList:
   - myTileId: 1
     myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
@@ -742,7 +741,7 @@ PrefabInstance:
     - target: {fileID: 4353293028645901086, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4353293028645901086, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
@@ -797,7 +796,7 @@ PrefabInstance:
     - target: {fileID: 4447080133774544321, guid: 50905d5fbafca994392b6fc065f26d20,
         type: 3}
       propertyPath: myEntryAndExitDirection.x
-      value: 3
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50905d5fbafca994392b6fc065f26d20, type: 3}
