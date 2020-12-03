@@ -7992,8 +7992,7 @@ MonoBehaviour:
   myPathTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
     type: 3}
   myEndTile: {fileID: 1586140579}
-  myPortals:
-  - {fileID: 0}
+  myPortals: []
   myPlacementEffects: {fileID: 1736912638}
   myBuildManager: {fileID: 1963332874}
 --- !u!114 &1963332871
@@ -8720,7 +8719,7 @@ PrefabInstance:
     - target: {fileID: 4773248973371576302, guid: 53ea471b916f7e3428fd702bf78f8385,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4773248973371576302, guid: 53ea471b916f7e3428fd702bf78f8385,
         type: 3}
