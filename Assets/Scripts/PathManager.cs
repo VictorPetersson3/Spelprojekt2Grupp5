@@ -85,7 +85,10 @@ public class PathManager : MonoBehaviour
 
     public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {
-        myPortals[index].AddVectorToMovementList(aPathTileToAdd);    
+        int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
+        int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
+        myPortals[index].AddVectorToMovementList(aPathTileToAdd);
+        myPathTiles[x, z] = aPathTileToAdd;
     }
 
     public void AddItemToMap(PathTile aPathTileToAdd)
@@ -111,7 +114,26 @@ public class PathManager : MonoBehaviour
     {
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
+        for (int i = 0; i < myPortals.Count; i++)
+        {
+            if (myPortals[i].GetSetLastPathTile == myPathTiles[x, z])
+            {
+                myPortals[i].GetSetLastPathTile.ResetMe();
+                myBuildManager.ReturnToPool(myPortals[i].GetSetLastPathTile);
+                
+                
+                myPortals[i].GetMovementList().Remove(myPortals[i].GetSetLastPathTile);
+                myPortals[i].GetSetLastPathTile = myPortals[i].GetMovementList()[myPortals[i].GetMovementList().Count - 1];
+                
+                WorldController.Instance.GetWorld.SetTileState(x, z, Tile.TileState.empty);
+               
+                
+                myPlacementEffects.transform.position = myPortals[i].GetMovementList()[myPortals[i].GetMovementList().Count - 1].transform.position;
+                myPlacementEffects.CheckPlacementIndicators();
+            }
+        }
         
+
         if (myPathTiles[x, z] == myPathList[myPathList.Count - 1])
         {
             myPathList[myPathList.Count - 1].ResetMe();
