@@ -270,9 +270,13 @@ public class GameManager : MonoBehaviour
         }
 
         myEndScreen.GetLevelData(amountOfMoneyEarned, myLevelList[myActiveScene].myAmountOfStars);
-        myEndScreen.MoveUp();
+        if (!hasMoved)
+        {
+            myEndScreen.MoveUp();
+            hasMoved = true;
+        }
     }
-
+    bool hasMoved = false;
 
     public void ResetPlayerProgress()
     {

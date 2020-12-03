@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4773248973371576303}
   - component: {fileID: 4773248973371576304}
   - component: {fileID: 4773248973371576305}
+  - component: {fileID: 6997046230388152911}
   m_Layer: 0
   m_Name: P_Player
   m_TagString: Untagged
@@ -97,6 +98,22 @@ MonoBehaviour:
   myDeathEffect: {fileID: 0}
   step: 1
   myMovementSpeed: 4.82
+  myMovementStart: 0
+--- !u!114 &6997046230388152911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4773248973371576306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc74239f63f7e2a40bcc18b4361c19a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myMoneyMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &3614558061654482689
 PrefabInstance:
   m_ObjectHideFlags: 0
