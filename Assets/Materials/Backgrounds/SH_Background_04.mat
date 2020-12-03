@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SH_Background_03
+  m_Name: SH_Background_04
   m_Shader: {fileID: -6465566751694194690, guid: 61f461d651d7e0a419d55f4a7bef4a76,
     type: 3}
   m_ShaderKeywords: 
@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _PatternTexture:
-        m_Texture: {fileID: 2800000, guid: 7af5e5ec0d855184895ab358b9b2099a, type: 3}
+        m_Texture: {fileID: 2800000, guid: cda225b0353288049abfa851246884e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -54,6 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_AB45C39D: 1
+    - Vector1_11D1926C: -2.14
     - Vector1_8B28000C: -0.025
     - Vector1_8F8F277B: 1
     - Vector1_B339A6F1: 7
