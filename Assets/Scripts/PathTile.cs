@@ -358,15 +358,21 @@ public class PathTile : MonoBehaviour
     }
     public void ResetMe()
     {
-        myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
-        myStraightRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (myTurnRoad != null)
+        {
+            myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+            myTurnRoad.SetActive(false);
+        }
+        if (myStraightRoad != null)
+        {
+            myStraightRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+            myStraightRoad.SetActive(false);
+        }
         if (myPathTileNeighbors != null)
         {
             myPathTileNeighbors.GetNeighbor = Neighbor.none;
             myPathTileNeighbors = null;
         }
-        myStraightRoad.SetActive(false);
-        myTurnRoad.SetActive(false);
         myNeigbor = Neighbor.none;
 
 
