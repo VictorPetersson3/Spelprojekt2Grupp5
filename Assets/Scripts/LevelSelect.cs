@@ -45,16 +45,6 @@ public class LevelSelect : MonoBehaviour
             myMainUI.SetActive(true);
             StartCoroutine(CoRoutineLoad());
          }
-      //}
-      //else if (Input.GetMouseButtonUp(0) && Input.touchCount <= 1)
-      //{
-      //   if (mySelectedLevel != myBackground)
-      //   {
-      //   }
-      //   else
-      //   {
-            
-      //   }
       }
    }
    IEnumerator CoRoutineLoad()
