@@ -38,24 +38,80 @@ public class PathTile : MonoBehaviour
     {
         myPosition = new Vector3(Mathf.FloorToInt(transform.position.x), 0, Mathf.FloorToInt(transform.position.z));
         transform.position = myPosition;
-        if (myPathManager != null)
-        {
-            CheckNeighbors();
-
-        }
 
         myPlacementEffect.transform.position = new Vector3(myPlacementEffect.transform.position.x, 0.1f, myPlacementEffect.transform.position.z);
-        myPlacementEffect.Play();
-
-
-
-
-
+        //myPlacementEffect.Play();
         transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
     private void Update()
     {
         MoveObjectToPlaceDown(transform);
+    }
+    public void CheckNeighborsFromPortal()
+    {
+        myTemp = false;
+        transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+        int x = Mathf.FloorToInt(transform.position.x);
+        int z = Mathf.FloorToInt(transform.position.z);
+        for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+        {
+            if (x - 1 >= 0)
+            {
+                if (myPathManager.GetPathTileMap[x - 1, z] != null)
+                {
+                    if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetPortals[i].GetSetLastPathTile)
+                    {
+                        myPathTileNeighbors = myPathManager.GetPortals[i].GetSetLastPathTile;
+                        myNeigbor = Neighbor.left;
+                        CheckOldNeighborLeft();
+                        myPathManager.GetPortals[i].GetSetLastPathTile = this;
+                    }
+                }
+            }
+            if (x + 1 < WorldController.Instance.GetWorldWidth)
+            {
+                if (myPathManager.GetPathTileMap[x + 1, z] != null)
+                {
+                    if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetPortals[i].GetSetLastPathTile)
+                    {
+                        myPathTileNeighbors = myPathManager.GetPortals[i].GetSetLastPathTile;
+                        myNeigbor = Neighbor.right;
+                        CheckOldNeighborRight();
+                        myPathManager.GetPortals[i].GetSetLastPathTile = this;
+                    }
+                }
+            }
+            if (z - 1 >= 0)
+            {
+                Debug.Log("Check down");
+                if (myPathManager.GetPathTileMap[x, z - 1] != null)
+                {
+                    Debug.Log("Check down");
+                    if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetPortals[i].GetSetLastPathTile)
+                    {
+                        myPathTileNeighbors = myPathManager.GetPortals[i].GetSetLastPathTile;
+                        myNeigbor = Neighbor.down;
+                        CheckOldNeighborDown();
+                        Debug.Log("Check down");
+                        myPathManager.GetPortals[i].GetSetLastPathTile = this;
+                    }
+                }
+            }
+            if (z + 1 < WorldController.Instance.GetWorldDepth)
+            {
+                if (myPathManager.GetPathTileMap[x, z + 1] != null)
+                {
+                    if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetPortals[i].GetSetLastPathTile)
+                    {
+                        myPathTileNeighbors = myPathManager.GetPortals[i].GetSetLastPathTile;
+                        myNeigbor = Neighbor.up;
+                        CheckOldNeighborUp();
+                        myPathManager.GetPortals[i].GetSetLastPathTile = this;
+                    }
+                }
+            }
+        }
+        myPlacementEffect.Play();
     }
     public void CheckNeighbors()
     {
@@ -234,6 +290,8 @@ public class PathTile : MonoBehaviour
     }
     public void ResetMe()
     {
+        myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+        myStraightRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
         myPathTileNeighbors.GetNeighbor = Neighbor.none;
         myPathTileNeighbors = null;
         myStraightRoad.SetActive(false);
