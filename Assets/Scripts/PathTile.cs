@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PathTile : MonoBehaviour
 {
+    [SerializeField]
     bool isEndTile = false;
     PathManager myPathManager;
     Vector3 myPosition;
     public PathManager SetPathManager { set { myPathManager = value; } }
     public Vector3 GetPathTilePosition { get { return myPosition; } set { myPosition = value; } }
     public bool IsEndTile { get { return isEndTile; } }
-    public Neighbor GetNeighbor { get { return myNeigbor; } }
+    public Neighbor GetNeighbor { get { return myNeigbor; } set { myNeigbor = value; } }
 
 
     public GameObject myTurnRoad;
@@ -41,22 +42,16 @@ public class PathTile : MonoBehaviour
         if (myPathManager != null)
         {
             CheckNeighbors();
-
         }
-
         myPlacementEffect.transform.position = new Vector3(myPlacementEffect.transform.position.x, 0.1f, myPlacementEffect.transform.position.z);
-        myPlacementEffect.Play();
-
-
-
-
-
+        //myPlacementEffect.Play();
         transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
     private void Update()
     {
         MoveObjectToPlaceDown(transform);
     }
+    
     public void CheckNeighbors()
     {
         myTemp = false;
@@ -119,6 +114,7 @@ public class PathTile : MonoBehaviour
                 }
             }
         }
+        myPlacementEffect.Play();
     }
     void CheckOldNeighborDown()
     {
@@ -220,9 +216,8 @@ public class PathTile : MonoBehaviour
         myStraightRoad.SetActive(true);
         myTurnRoad.SetActive(false);
         myStraightRoad.transform.rotation = Quaternion.Euler(0, 90, 0);
+      
     }
-   
-
     void MoveObjectToPlaceDown(Transform aTransform)
     {
         myCurrentSpeed = mySpeed * mySpeed;
@@ -230,6 +225,18 @@ public class PathTile : MonoBehaviour
         {
             aTransform.position = Vector3.Lerp(aTransform.position, new Vector3(aTransform.position.x, 0, aTransform.position.z), myCurrentSpeed * Time.deltaTime); ;
         }
+
+    }
+    public void ResetMe()
+    {
+        myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+        myStraightRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+        myPathTileNeighbors.GetNeighbor = Neighbor.none;
+        myPathTileNeighbors = null;
+        myStraightRoad.SetActive(false);
+        myTurnRoad.SetActive(false);
+        myNeigbor = Neighbor.none;
+
 
     }
 

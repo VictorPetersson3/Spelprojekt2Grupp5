@@ -15,7 +15,11 @@ public class Sc_LevelElementData : MonoBehaviour
     [SerializeField]
     Image myLevelImage;
     [SerializeField]
+    Image myInLevelImage;
+    [SerializeField]
     TextMeshProUGUI myLevelNameTMP;
+    [SerializeField]
+    TextMeshProUGUI myLevelSceneNameTMP;
     [SerializeField]
     TextMeshProUGUI myLevelSpendGoalTMP;
 
@@ -26,13 +30,18 @@ public class Sc_LevelElementData : MonoBehaviour
 
     private bool myActive;
     private Sprite myConvertedImageSprite;
-    private Vector3 myMin = new Vector3(200.0f, 0.0f, 0.0f);
+    private Vector3 myMin = new Vector3(400.0f, 0.0f, 0.0f);
     Sc_InterfaceLevelManager myLevelManagerInterface;
 
     private void Start()
     {
         myLevelNameTMP.text = GameManager.globalInstance.GetName(myLevelIndex);
+        myLevelSceneNameTMP.text = GameManager.globalInstance.GetName(myLevelIndex);
         myLevelSpendGoalTMP.text = GameManager.globalInstance.GetHighestScore(myLevelIndex).ToString();
+        myActive = false;
+        myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+        myLevelImage.sprite = myConvertedImageSprite;
+        myInLevelImage.sprite = myConvertedImageSprite;
     } 
     private void OnValidate()
     {
@@ -41,6 +50,7 @@ public class Sc_LevelElementData : MonoBehaviour
         myActive = false;
         myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
         myLevelImage.sprite = myConvertedImageSprite;
+        myInLevelImage.sprite = myConvertedImageSprite;
         //myLevelNameTMP.text = myLevelName;
         //myLevelSpendGoalTMP.text = mySpendGoal.ToString("0");
     }
@@ -63,11 +73,15 @@ public class Sc_LevelElementData : MonoBehaviour
     }
     void MoveMenuDown()
     {
-        LeanTween.move(myLevelMenuRect, new Vector3(200, -340.0f, 0), 1.0f).setEase(LeanTweenType.easeInCubic);
+        LeanTween.move(myLevelMenuRect, new Vector3(400, -650.0f, 0), 1.0f).setEase(LeanTweenType.easeInCubic);
     }
     public void StartLevel()
     {
         myLevelManagerInterface.LoadLevel(myLevelIndex);
+    }
+    public int GetLevelIndex()
+    {
+        return myLevelIndex;
     }
 
 }

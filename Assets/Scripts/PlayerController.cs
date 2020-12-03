@@ -50,8 +50,9 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.Space))
         {
-            if (step == myMovementList.Count)
+            if (myMovementList[step].IsEndTile)
             {
+
                 Debug.Log("You win");
             }
             else
