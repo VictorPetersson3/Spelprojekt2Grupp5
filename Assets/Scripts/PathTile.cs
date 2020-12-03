@@ -360,8 +360,11 @@ public class PathTile : MonoBehaviour
     {
         myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
         myStraightRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
-        myPathTileNeighbors.GetNeighbor = Neighbor.none;
-        myPathTileNeighbors = null;
+        if (myPathTileNeighbors != null)
+        {
+            myPathTileNeighbors.GetNeighbor = Neighbor.none;
+            myPathTileNeighbors = null;
+        }
         myStraightRoad.SetActive(false);
         myTurnRoad.SetActive(false);
         myNeigbor = Neighbor.none;
