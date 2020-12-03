@@ -184,7 +184,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 750887420612463053, guid: 18a462b2586d37d4aa1409806808bbe9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
       objectReference: {fileID: 7518463318908742591}
+    - target: {fileID: 750887420612463053, guid: 18a462b2586d37d4aa1409806808bbe9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 750887420612463053, guid: 18a462b2586d37d4aa1409806808bbe9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 750887420612463053, guid: 18a462b2586d37d4aa1409806808bbe9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1396505231324882442, guid: 18a462b2586d37d4aa1409806808bbe9,
         type: 3}
       propertyPath: m_AnchorMin.y
