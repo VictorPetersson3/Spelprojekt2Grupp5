@@ -267,6 +267,10 @@ public class GameManager : MonoBehaviour
             //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
+
+        //UI.SetScore(myAmountOfMoney, myLevelList[myActiveScene].myAmountOfStars);
+
+
         //UI.ShowEndScreen();
 
     }
