@@ -42,16 +42,12 @@ public class Placement : MonoBehaviour
             //Kollar om en tile är upptagen
             if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
             {
-                GameObject temp = WhatDidIHit(myInputCoordinates);
-
-                if (temp.tag == "Cube" || temp.tag == "Sphere")
-                {
-                    //Sätter tilen till empty
-                    WorldController.Instance.GetWorld.SetTileState((int)temp.transform.position.x, (int)temp.transform.position.z, Tile.TileState.empty);
-
-                    //Reset:ar tile-objektet
-                    myBuildManager.ReturnToPool(temp);
-                }
+               
+                myPathManager.DeleteTile(myInputCoordinates);
+                //Sätter tilen till empty
+                WorldController.Instance.GetWorld.SetTileState((int)temp.transform.position.x, (int)temp.transform.position.z, Tile.TileState.empty);
+                //Reset:ar tile-objektet
+             
             }
         }
     }

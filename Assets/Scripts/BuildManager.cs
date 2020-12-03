@@ -93,9 +93,9 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public void ReturnToPool(GameObject aPooledGameObject)
+    public void ReturnToPool(PathTile aPooledGameObject)
     {
-        aPooledGameObject.SetActive(false);
+        aPooledGameObject.gameObject.SetActive(false);
         aPooledGameObject.transform.position = myOriginalSpawnPoolPosition;
         GameManager.globalInstance.ChangeMoney(-1);
     }

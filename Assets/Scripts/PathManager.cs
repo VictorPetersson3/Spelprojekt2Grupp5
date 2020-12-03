@@ -107,13 +107,17 @@ public class PathManager : MonoBehaviour
             myPathTiles[x, z] = myEndTile;
         }
     }
-    void DeleteTile(Vector3 aPosition)
+    public void DeleteTile(Vector3 aPosition)
     {
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
+        
         if (myPathTiles[x, z] == myLastPlacedPathTile)
         {
-            myBuildManager.ReturnToPool()
+            myLastPlacedPathTile.ResetMe();
+            myBuildManager.ReturnToPool(myLastPlacedPathTile);
+            myPathList.Remove(myLastPlacedPathTile);
+            myLastPlacedPathTile = myPathList[myPathList.Count - 1];
         }
     }
     public bool CheckPlacement(Vector3 aPosition, PathTile aLastPlacedTile)

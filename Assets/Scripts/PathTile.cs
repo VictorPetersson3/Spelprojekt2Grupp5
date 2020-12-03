@@ -221,8 +221,6 @@ public class PathTile : MonoBehaviour
         myTurnRoad.SetActive(false);
         myStraightRoad.transform.rotation = Quaternion.Euler(0, 90, 0);
     }
-   
-
     void MoveObjectToPlaceDown(Transform aTransform)
     {
         myCurrentSpeed = mySpeed * mySpeed;
@@ -231,6 +229,13 @@ public class PathTile : MonoBehaviour
             aTransform.position = Vector3.Lerp(aTransform.position, new Vector3(aTransform.position.x, 0, aTransform.position.z), myCurrentSpeed * Time.deltaTime); ;
         }
 
+    }
+    public void ResetMe()
+    {
+        myPathTileNeighbors = null;
+        myStraightRoad.SetActive(false);
+        myTurnRoad.SetActive(false);
+        myNeigbor = Neighbor.none;
     }
 
 }
