@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour
     public Renderer[] myTargets;
 
     public float targetCameraWidth = 35f;
-    public Text debugText;
 
     [SerializeField]
     float myZoomPaddingPortrait = -20f;
@@ -31,8 +30,14 @@ public class CameraController : MonoBehaviour
     float transitionSpeed = 5f;
     [SerializeField]
     Vector3 myWorldCenterPostion = Vector3.zero;
-
-    Plane[] frustumPlanes;
+    [SerializeField]
+    float maxX;
+    [SerializeField]
+    float minX;
+    [SerializeField]
+    float maxY;
+    [SerializeField]
+    float minY;
 
     float startingCameraWidth;
 
@@ -45,31 +50,16 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originalPosition = transform.position;
+        originalPosition = Camera.main.transform.position;
         originalRotation = transform.rotation;
 
         targetCameraWidth = (Mathf.Abs(Mathf.Sqrt(Mathf.Pow(myTargets[0].bounds.size.x, 2) + Mathf.Pow(myTargets[0].bounds.size.z, 2))) / 1.86f);
         startingCameraWidth = targetCameraWidth;
 
-        frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-
-
-        // Debug.developerConsoleVisible = true;
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Gizmos.matrix = Camera.main.transform.localToWorldMatrix;
-        //Gizmos.DrawFrustum(new Vector3(0,0,Camera.main.nearClipPlane), Camera.main.)
     }
 
     private void LateUpdate()
-    {
-
-        bool Intersects = GeometryUtility.TestPlanesAABB(frustumPlanes, myTargets[0].bounds);
-
-        Debug.Log(Intersects);
-
+    {    
 
         if (Screen.orientation == ScreenOrientation.LandscapeLeft||Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
         {
@@ -104,8 +94,23 @@ public class CameraController : MonoBehaviour
         {
             if (!Input.GetMouseButtonDown(0))
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime * transitionSpeed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime * transitionSpeed);                              
+                LeanTween.moveX(this.gameObject, myWorldCenterPostion.x, transitionSpeed*Time.deltaTime).setEaseLinear();
+                LeanTween.moveZ(this.gameObject, myWorldCenterPostion.z, transitionSpeed * Time.deltaTime).setEaseLinear();
+
+                //transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime * transitionSpeed);
+                LeanTween.rotate(this.gameObject, new Vector3(90, 0, 0), Time.deltaTime * transitionSpeed);     
+                switch(Screen.orientation)
+                {
+                    case ScreenOrientation.Portrait:
+                        Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingTopDownPortrait;
+                        break;
+                    case ScreenOrientation.LandscapeLeft:
+                        Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingTopDownLandscape;
+                        break;
+                    case ScreenOrientation.LandscapeRight:
+                        Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingTopDownLandscape;
+                        break;
+                }
             }
         }
 
@@ -120,7 +125,7 @@ public class CameraController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && Input.touchCount>1)
+        if (Input.GetKeyDown(KeyCode.Space) /*&& Input.touchCount>1*/)
         {
             MoveToTopDownView();
         }
@@ -133,20 +138,11 @@ public class CameraController : MonoBehaviour
         else if(Input.GetMouseButton(0))
         {
             Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Camera.main.transform.position += direction;
-        }
+            transform.position += direction;
+         
 
-        if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
-        {
-            //Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) + myZoomPaddingLandscape);
-            //Debug.Log("In landscape mode");
+            //transform.localPosition = new Vector3(Mathf.Clamp(transform.position.x+direction.x,originalPosition.x+minX,originalPosition.x+maxX),(Mathf.Clamp(transform.position.y + direction.y, originalPosition.x + minY, originalPosition.x + maxY)),transform.position.z+direction.z);
 
-            currentPadding = myZoomPaddingLandscape;
-        }
-        else if (Screen.orientation == ScreenOrientation.Portrait && !shouldMoveToTopDownView)
-        {
-            //Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) - myZoomPaddingPortrait);
-            currentPadding = myZoomPaddingPortrait;
         }
     }
 
