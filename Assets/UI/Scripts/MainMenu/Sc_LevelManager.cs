@@ -36,6 +36,7 @@ public class Sc_LevelManager : MonoBehaviour
     }
     public void ReloadLevel()
     {
+        myGameManager.ResetAmountOfMoney();
         LoadGame(myCurrentSceneIndex);
     }
     public void LoadMainMenu()
