@@ -12,6 +12,5 @@ public class Sc_LevelSelect_GUI : MonoBehaviour
     public void SetScore(int aScore)
     {
         myTotalScore.text = aScore.ToString();
-
     }
 }

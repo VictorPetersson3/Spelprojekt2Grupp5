@@ -7,6 +7,7 @@ public class Sc_LevelManager : MonoBehaviour
 {
     public static Sc_LevelManager myInstance;
     public GameObject myLoadingScreen;
+    public GameManager myGameManager;
 
     private int myCurrentSceneIndex;
     
@@ -29,6 +30,14 @@ public class Sc_LevelManager : MonoBehaviour
         myCurrentSceneIndex = aSceneIndex;
         //Invoke("DelaySpawn", 5.0f);
         StartCoroutine(CoRoutineLoad());
+    }
+    public void ReloadLevel()
+    {
+        LoadGame(myCurrentSceneIndex);
+    }
+    public void LoadMainMenu()
+    {
+        LoadGame(3);
     }
     IEnumerator CoRoutineLoad()
     {
