@@ -45,7 +45,7 @@ public class Placement : MonoBehaviour
                
                 myPathManager.DeleteTile(myInputCoordinates);
                 //Sätter tilen till empty
-                WorldController.Instance.GetWorld.SetTileState((int)temp.transform.position.x, (int)temp.transform.position.z, Tile.TileState.empty);
+              
                 //Reset:ar tile-objektet
              
             }

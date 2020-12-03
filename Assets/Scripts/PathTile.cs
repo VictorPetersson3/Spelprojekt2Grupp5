@@ -10,7 +10,7 @@ public class PathTile : MonoBehaviour
     public PathManager SetPathManager { set { myPathManager = value; } }
     public Vector3 GetPathTilePosition { get { return myPosition; } set { myPosition = value; } }
     public bool IsEndTile { get { return isEndTile; } }
-    public Neighbor GetNeighbor { get { return myNeigbor; } }
+    public Neighbor GetNeighbor { get { return myNeigbor; } set { myNeigbor = value; } }
 
 
     public GameObject myTurnRoad;
@@ -119,6 +119,7 @@ public class PathTile : MonoBehaviour
                 }
             }
         }
+        myPlacementEffect.Play();
     }
     void CheckOldNeighborDown()
     {
@@ -220,6 +221,7 @@ public class PathTile : MonoBehaviour
         myStraightRoad.SetActive(true);
         myTurnRoad.SetActive(false);
         myStraightRoad.transform.rotation = Quaternion.Euler(0, 90, 0);
+      
     }
     void MoveObjectToPlaceDown(Transform aTransform)
     {
@@ -232,10 +234,13 @@ public class PathTile : MonoBehaviour
     }
     public void ResetMe()
     {
+        myPathTileNeighbors.GetNeighbor = Neighbor.none;
         myPathTileNeighbors = null;
         myStraightRoad.SetActive(false);
         myTurnRoad.SetActive(false);
         myNeigbor = Neighbor.none;
+
+
     }
 
 }

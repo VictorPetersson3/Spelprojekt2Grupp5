@@ -112,12 +112,15 @@ public class PathManager : MonoBehaviour
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
         
-        if (myPathTiles[x, z] == myLastPlacedPathTile)
+        if (myPathTiles[x, z] == myPathList[myPathList.Count - 1])
         {
-            myLastPlacedPathTile.ResetMe();
-            myBuildManager.ReturnToPool(myLastPlacedPathTile);
-            myPathList.Remove(myLastPlacedPathTile);
+            myPathList[myPathList.Count - 1].ResetMe();
+            myBuildManager.ReturnToPool(myPathList[myPathList.Count - 1]);
+            myPathList.Remove(myPathList[myPathList.Count - 1]);
             myLastPlacedPathTile = myPathList[myPathList.Count - 1];
+            WorldController.Instance.GetWorld.SetTileState(x, z, Tile.TileState.empty);
+            myPlacementEffects.transform.position = myPathList[myPathList.Count - 1].transform.position;
+            myPlacementEffects.CheckPlacementIndicators();
         }
     }
     public bool CheckPlacement(Vector3 aPosition, PathTile aLastPlacedTile)
