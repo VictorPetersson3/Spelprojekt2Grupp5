@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+        //Application.targetFrameRate = 60;
         if (myMovementStart)
         {
             if (step > myMovementList.Count - 1)
