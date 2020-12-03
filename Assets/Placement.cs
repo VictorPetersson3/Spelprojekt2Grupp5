@@ -79,8 +79,7 @@ public class Placement : MonoBehaviour
         {
             if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[i].GetSetLastPathTile) && myPathManager.GetPortals[i].GetSetLastPathTile != null)
             {
-                print(myPathManager.GetPortals[i].GetSetLastPathTile);
-                PathTile path = Instantiate(temp, myInputCoordinates, transform.rotation);
+                PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
                 path.GetPathTilePosition = myInputCoordinates;
                 myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
                 myPathManager.AddItemToPortalMap(path, i);
