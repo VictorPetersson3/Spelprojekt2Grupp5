@@ -31,7 +31,7 @@ public class LevelSelect : MonoBehaviour
       {
 
          mySelectedLevel = WhatDidIHit();
-
+         Debug.Log(mySelectedLevel);
          if (mySelectedLevel != myBackground)
          {
             myMainUI.SetActive(false);
