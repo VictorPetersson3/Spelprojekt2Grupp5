@@ -10,10 +10,11 @@ public class Sc_LevelManager : MonoBehaviour
     public GameManager myGameManager;
 
     private int myCurrentSceneIndex;
-    
-    
+    private PathManager myPathManager;
+    private bool myHasLoaded = false;
     private void Awake()
     {
+        myPathManager = null;
         if (myInstance == null)
         {
             myInstance = this;
@@ -28,8 +29,36 @@ public class Sc_LevelManager : MonoBehaviour
     {
         myLoadingScreen.gameObject.SetActive(true);
         SceneManager.UnloadSceneAsync((int)myCurrentSceneIndex);
+        if (myPathManager != null)
+        {
+            myPathManager = null;
+        }
         myCurrentSceneIndex = aSceneIndex;
         StartCoroutine(CoRoutineLoad());
+        Invoke("InitGame", 1.40f);
+
+
+    }
+
+    IEnumerator CoRoutineLoad()
+    {
+        AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(myCurrentSceneIndex, LoadSceneMode.Additive);
+        while (!loadingOperation.isDone)
+        {
+            yield return null;
+        }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(myCurrentSceneIndex));
+        Debug.LogError("We have set an active Scene.");
+        if (myPathManager == null)
+        {
+            myPathManager = FindObjectOfType<PathManager>();
+        }
+        yield return new WaitForSecondsRealtime(1);
+        myLoadingScreen.gameObject.SetActive(false);
+    }
+    public void QuitApplication()
+    {
+        Application.Quit();
     }
     public void ReloadLevel()
     {
@@ -39,20 +68,13 @@ public class Sc_LevelManager : MonoBehaviour
     {
         LoadGame(3);
     }
-    IEnumerator CoRoutineLoad()
+    void InitGame()
     {
-        AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(myCurrentSceneIndex, LoadSceneMode.Additive);
-        while (!loadingOperation.isDone)
+        if (myPathManager != null)
         {
-            yield return null;
+            Debug.LogError("We have Inited myPathManager.");
+            myPathManager.init();
+            myLoadingScreen.gameObject.SetActive(false);
         }
-        yield return new WaitForSecondsRealtime(1);
-        myLoadingScreen.gameObject.SetActive(false);
-
     }
-    public void QuitApplication()
-    {
-        Application.Quit();
-    }
-    
 }

@@ -43,12 +43,11 @@ public class PathManager : MonoBehaviour
             }
         }
     }
-    void Start()
+    public void init()
     {
-   
         myPlayerController.PlayerMoveList = myPathList;
         myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
-       
+
         myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
 
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
@@ -58,6 +57,11 @@ public class PathManager : MonoBehaviour
         AddItemToMap(myStartPathTile);
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
         myLastPlacedPathTile = myStartPathTile;
+    }
+    void Start()
+    {
+   
+      
     }
     private void Update()
     {
