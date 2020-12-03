@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     bool myDontIncreaseIndexFirstTime = true;
     [SerializeField]
     bool myMovementStart = false;
+    GameManager myGameManger;
     public int SetPlayerStep
     {
         set
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        myGameManger = GameManager.globalInstance;
         myMovementList = new List<PathTile>();
         myMovementStart = false;
     }
@@ -61,13 +63,17 @@ public class PlayerController : MonoBehaviour
         {
             if (myMovementList[step].IsEndTile)
             {
-
+                myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
             }
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, myMovementList[step].transform.position, myMovementSpeed * Time.deltaTime);
                 Vector3 distanceToNextPos = myMovementList[step].transform.position - transform.position;
+
+                Quaternion lookAtRotation = Quaternion.LookRotation(myMovementList[step].transform.position - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.1f);
+
 
                 if (distanceToNextPos.magnitude < 0.05f)
                 {
@@ -85,19 +91,19 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-            for (int i = 0; i < myPathManager.GetPortals.Count; i++)
-            {
-                float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
-                if (distance < 0.1f)
-                {
-                    transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
+            //for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+            //{
+            //    float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
+            //    if (distance < 0.1f)
+            //    {
+            //        transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
 
-                    myMovementList = myPathManager.GetPortals[i].GetMovementList();
-                    step = 1;
+            //        myMovementList = myPathManager.GetPortals[i].GetMovementList();
+            //        step = 1;
 
-                }
+            //    }
 
-            }
+            //}
         }
     }
 }

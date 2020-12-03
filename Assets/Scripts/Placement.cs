@@ -65,28 +65,28 @@ public class Placement : MonoBehaviour
     }
     void PlacementLogic()
     {
-        if (!isPlaceingByPortal)
-        {
-            AddToPortalListLogic();
+        //if (!isPlaceingByPortal)
+        //{
+        //    AddToPortalListLogic();
 
-        }
+        //}
 
         if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetLastPlacedTile))
         {
             PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
             path.GetPathTilePosition = myInputCoordinates;
-            if (isPlaceingByPortal)
-            {
-                for (int i = 0; i < myPathManager.GetPortals.Count; i++)
-                {
-                    myPathManager.AddItemToPortalMap(path, i);
-                    path.CheckNeighbors();
-                }
-            }
-            else
-            {
-                myPathManager.AddItemToMap(path);
-            }
+            //if (isPlaceingByPortal)
+            //{
+            //    for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+            //    {
+            //        myPathManager.AddItemToPortalMap(path, i);
+            //        path.CheckNeighbors();
+            //    }
+            //}
+            //else
+            //{
+            myPathManager.AddItemToMap(path);
+            //}
             path.CheckNeighbors();
 
             WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
@@ -101,7 +101,7 @@ public class Placement : MonoBehaviour
                 PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
                 path.GetPathTilePosition = myInputCoordinates;
                 //myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
-                myPathManager.AddItemToPortalMap(path, i);  
+                myPathManager.AddItemToPortalMap(path, i);
                 path.CheckNeighbors();
                 Debug.Log("Add item to portal list");
                 WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
