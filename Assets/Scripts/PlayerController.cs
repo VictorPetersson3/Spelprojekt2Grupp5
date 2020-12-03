@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     int indexForNextPortalDistance = 0;
     bool myDontIncreaseIndexFirstTime = true;
+
+    bool myMovementStart = false;
     public int SetPlayerStep
     {
         set
@@ -40,18 +42,26 @@ public class PlayerController : MonoBehaviour
             step = value;
         }
     }
+
+    public void ToggleStart()
+    {
+        myMovementStart = !myMovementStart;
+    }
+
     void Start()
     {
         myMovementList = new List<PathTile>();
+        myMovementStart = false;
     }
 
     void Update()
     {
         
-        if (Input.GetKey(KeyCode.Space))
+        if (myMovementStart)
         {
-            if (step == myMovementList.Count)
+            if (myMovementList[step].IsEndTile)
             {
+
                 Debug.Log("You win");
             }
             else

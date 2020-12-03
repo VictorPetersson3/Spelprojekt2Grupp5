@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8825547335115634832
+--- !u!1 &4691777817341093550
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8825547335115634834}
-  - component: {fileID: 8825547335115634835}
+  - component: {fileID: 4691777817341093548}
+  - component: {fileID: 4691777817341093551}
+  - component: {fileID: 4691777817341093538}
+  - component: {fileID: 4691777817341093539}
+  - component: {fileID: 4691777817341093549}
   m_Layer: 0
   m_Name: WorldController
   m_TagString: Untagged
@@ -17,34 +20,87 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8825547335115634834
+--- !u!4 &4691777817341093548
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8825547335115634832}
+  m_GameObject: {fileID: 4691777817341093550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.15782452, y: -1.1094413, z: 0.61880064}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8825547335115634835
+--- !u!114 &4691777817341093551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8825547335115634832}
+  m_GameObject: {fileID: 4691777817341093550}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91541f00b4fd57a418b7db1114310f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myWidth: 10
-  myDepth: 10
-  myObstructedTilesColor: {r: 0, g: 0, b: 0, a: 0}
-  myEmptyTilesColor: {r: 0, g: 0, b: 0, a: 0}
+  myDepth: 6
+  myObstructedTilesColor: {r: 1, g: 0, b: 0.15225315, a: 1}
+  myEmptyTilesColor: {r: 0.13124222, g: 1, b: 0.0141509175, a: 1}
   myAlpha: 0.5
+--- !u!114 &4691777817341093538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691777817341093550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2647cd2d5aaa1649910000bb9612fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPlayerController: {fileID: 0}
+  myPathTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
+    type: 3}
+  myEndTile: {fileID: 8715672335633948374, guid: efadb6205c1e10241af034c7301c8d8d,
+    type: 3}
+  myPortals: []
+--- !u!114 &4691777817341093539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691777817341093550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11c133f01331754ebabd131241e9390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPathManager: {fileID: 4691777817341093538}
+  myBuildManager: {fileID: 4691777817341093549}
+  temp: {fileID: 0}
+--- !u!114 &4691777817341093549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691777817341093550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c778d57a8896a414a894daa609bb56ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myPathManager: {fileID: 0}
+  myPoolList:
+  - myTileId: 1
+    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
+      type: 3}
+    myAmountOfTiles: 60
+    myTileList: []
+  myOriginalSpawnPoolPosition: {x: 0, y: 0, z: 0}

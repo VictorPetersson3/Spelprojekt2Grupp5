@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PathTile : MonoBehaviour
 {
+    [SerializeField]
     bool isEndTile = false;
     PathManager myPathManager;
     Vector3 myPosition;
@@ -41,22 +42,16 @@ public class PathTile : MonoBehaviour
         if (myPathManager != null)
         {
             CheckNeighbors();
-
         }
-
         myPlacementEffect.transform.position = new Vector3(myPlacementEffect.transform.position.x, 0.1f, myPlacementEffect.transform.position.z);
-        myPlacementEffect.Play();
-
-
-
-
-
+        //myPlacementEffect.Play();
         transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
     }
     private void Update()
     {
         MoveObjectToPlaceDown(transform);
     }
+    
     public void CheckNeighbors()
     {
         myTemp = false;
@@ -234,6 +229,8 @@ public class PathTile : MonoBehaviour
     }
     public void ResetMe()
     {
+        myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+        myStraightRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
         myPathTileNeighbors.GetNeighbor = Neighbor.none;
         myPathTileNeighbors = null;
         myStraightRoad.SetActive(false);
