@@ -18,11 +18,12 @@ public class PathManager : MonoBehaviour
     [SerializeField]
     List<Portals> myPortals = new List<Portals>();
     PathTile[,] myPathTiles;
-
+    [SerializeField]
+    Transform myPlacementEffects;
     List<PathTile> myPathList = new List<PathTile>(); 
     public PathTile[,] GetPathTileMap { get { return myPathTiles; } }
     public PathTile GetLastPlacedTile { get { return myLastPlacedPathTile; } set { myLastPlacedPathTile = value; } }
-    public List<PathTile> GetPathFromStart { get { return myPathList; } }
+    
 
     public List<Portals> GetPortals { get { return myPortals; } }
 
@@ -60,7 +61,10 @@ public class PathManager : MonoBehaviour
 
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
     }
-
+    private void Update()
+    {
+     
+    }
     private void InstantiateFirstPortalExitTile()
     {
         for (int i = 0; i < myPortals.Count; i++)
@@ -86,7 +90,8 @@ public class PathManager : MonoBehaviour
 
         if (myPathTiles[x, z] != myEndTile)
         {
-         
+
+            myPlacementEffects.transform.position = aPathTileToAdd.transform.position;
             myPathTiles[x, z] = aPathTileToAdd;
             myPathList.Add(aPathTileToAdd);
         }
@@ -96,6 +101,7 @@ public class PathManager : MonoBehaviour
             myPathTiles[x, z] = myEndTile;
         }
     }
+    
     public bool CheckPlacement(Vector3 aPosition, PathTile aLastPlacedTile)
     {
         int x = Mathf.FloorToInt(aPosition.x);
