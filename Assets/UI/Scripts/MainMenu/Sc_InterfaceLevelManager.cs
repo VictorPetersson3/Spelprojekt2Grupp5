@@ -15,4 +15,11 @@ public class Sc_InterfaceLevelManager : MonoBehaviour
     {
         Sc_LevelManager.myInstance.QuitApplication();
     }
+
+    public void GetLevelElement_LevelData(Sc_LevelElementData aLevelElementData)
+    {
+        int aLevelIndex = aLevelElementData.GetLevelIndex();
+        LoadLevel(aLevelIndex);
+    }
+
 }

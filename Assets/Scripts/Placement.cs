@@ -40,7 +40,7 @@ public class Placement : MonoBehaviour
             myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
             //Kollar om en tile är upptagen
-            if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.obstructed)
+            if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
             {
                
                 myPathManager.DeleteTile(myInputCoordinates);
@@ -64,7 +64,7 @@ public class Placement : MonoBehaviour
             path.GetPathTilePosition = myInputCoordinates;
             myPathManager.AddItemToMap(path);
             path.CheckNeighbors();
-            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
         }
         //Sätter tilen till obstructed
     }
@@ -81,6 +81,7 @@ public class Placement : MonoBehaviour
                 myPathManager.AddItemToPortalMap(path, i);
                 myPathManager.GetPortals[i].GetSetLastPathTile = path;
 
+                path.CheckNeighborsFromPortal();
                 WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.obstructed);
             }
         }

@@ -79,5 +79,9 @@ public class Sc_LevelElementData : MonoBehaviour
     {
         myLevelManagerInterface.LoadLevel(myLevelIndex);
     }
+    public int GetLevelIndex()
+    {
+        return myLevelIndex;
+    }
 
 }
