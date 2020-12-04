@@ -21,6 +21,8 @@ public class WorldController : MonoBehaviour
     [Range(0.1f, 1)]
     [SerializeField]
     float myAlpha = 0.5f;
+    [SerializeField]
+    GameObject myMapBoarder;
 
     World myWorld;
     public World GetWorld { get {return myWorld; } }
@@ -35,7 +37,10 @@ public class WorldController : MonoBehaviour
             Debug.LogError("There should never be two world controllers.");
         
         Instance = this;
+        ScaleBoarder();
+
     }
+    
     public Tile GetTileAtPosition(float aX, float aZ)
     {
 
@@ -44,7 +49,18 @@ public class WorldController : MonoBehaviour
         return this.myWorld.GetTileAt(x, z);
     }
 
+    void ScaleBoarder()
+    {
+        float zNormalized = myDepth * 0.105f;
+        float xNormalized = myWidth * 0.105f;
+        
+        float xPos = myWidth / 2;
+        float zPos = myDepth / 2;
+        
+        GameObject obj =  Instantiate(myMapBoarder, new Vector3(xPos, 0.2f, zPos), Quaternion.identity);
+        obj.transform.localScale = new Vector3(xNormalized, 1, zNormalized);
 
+    }
     [ExecuteInEditMode]
     private void OnDrawGizmos()
     {
