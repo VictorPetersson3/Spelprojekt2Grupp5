@@ -56,8 +56,8 @@ public class WorldController : MonoBehaviour
         
         float xPos = myWidth / 2;
         float zPos = myDepth / 2;
-        
-        GameObject obj =  Instantiate(myMapBoarder, new Vector3(xPos, 0.2f, zPos), Quaternion.identity);
+
+        GameObject obj = Instantiate(myMapBoarder, new Vector3(xPos, 0, zPos), Quaternion.Euler(-90, 0, 0));
         obj.transform.localScale = new Vector3(xNormalized, 1, zNormalized);
 
     }
