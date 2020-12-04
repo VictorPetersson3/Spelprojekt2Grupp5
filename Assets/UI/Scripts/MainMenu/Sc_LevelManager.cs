@@ -17,7 +17,7 @@ public class Sc_LevelManager : MonoBehaviour
         if (myInstance == null)
         {
             myInstance = this;
-            SceneManager.LoadSceneAsync(3, LoadSceneMode.Additive);
+            SceneManager.LoadScene(3, LoadSceneMode.Additive);
             myCurrentSceneIndex = 3;
         }
     }
@@ -28,7 +28,7 @@ public class Sc_LevelManager : MonoBehaviour
         myLoadingScreen.gameObject.SetActive(true);
         SceneManager.UnloadSceneAsync((int)myCurrentSceneIndex);
         myCurrentSceneIndex = aSceneIndex;
-        AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(myCurrentSceneIndex, LoadSceneMode.Additive);
+        SceneManager.LoadScene(myCurrentSceneIndex, LoadSceneMode.Additive);
         Invoke("LoadAfterXTime", 0.80f);
         //StartCoroutine(CoRoutineLoad());
        
