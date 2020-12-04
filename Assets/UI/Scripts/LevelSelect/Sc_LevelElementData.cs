@@ -30,7 +30,9 @@ public class Sc_LevelElementData : MonoBehaviour
 
     private bool myActive;
     private Sprite myConvertedImageSprite;
-    private Vector3 myMin = new Vector3(400.0f, 0.0f, 0.0f);
+    private Vector3 myMin = new Vector3(-100.0f, 100.0f, 0.0f);
+
+    [SerializeField]
     Sc_InterfaceLevelManager myLevelManagerInterface;
 
     private void Start()
@@ -73,7 +75,7 @@ public class Sc_LevelElementData : MonoBehaviour
     }
     void MoveMenuDown()
     {
-        LeanTween.move(myLevelMenuRect, new Vector3(400, -650.0f, 0), 1.0f).setEase(LeanTweenType.easeInCubic);
+        LeanTween.move(myLevelMenuRect, new Vector3(-100, -800.0f, 0), 1.0f).setEase(LeanTweenType.easeInCubic);
     }
     public void StartLevel()
     {

@@ -36,7 +36,7 @@ public class PathManager : MonoBehaviour
         if (!hasInited)
         {
 
-            Invoke("Init", 3);
+            Invoke("Init", 1.5f);
             hasInited = true;
         }
     }
@@ -83,7 +83,17 @@ public class PathManager : MonoBehaviour
             WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z), Tile.TileState.obstructed);
         }
     }
-
+    public void ResetPath()
+    {
+        for (int i = 0; i < myPathList.Count; i++)
+        {
+            myPathList[i].ResetMe();
+            myBuildManager.ReturnToPool(myPathList[i]);
+            myLastPlacedPathTile = null;
+            myStartPathTile = null;
+        }
+        myBuildManager.ResetTiles();
+    }
     public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
@@ -126,6 +136,7 @@ public class PathManager : MonoBehaviour
         {
             myLastPlacedPathTile.ResetMe();
             myBuildManager.ReturnToPool(myLastPlacedPathTile);
+            myBuildManager.ReturnMoney();
             myPathList.Remove(myLastPlacedPathTile);
             myLastPlacedPathTile = myPathList[myPathList.Count - 1];
             WorldController.Instance.GetWorld.SetTileState(x, z, Tile.TileState.empty);
@@ -138,33 +149,69 @@ public class PathManager : MonoBehaviour
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
 
-
-        if (x - 1 >= 0)
+        if (myPortals.Count != 0)
         {
-            if (myPathTiles[x - 1, z] == aLastPlacedTile)
+            for (int i = 0; i < myPortals.Count; i++)
             {
-                return true;
+                if (x - 1 >= 0)
+                {
+                    if (myPathTiles[x - 1, z] == aLastPlacedTile)
+                    {
+                        return true;
+                    }
+                }
+                if (x + 1 < WorldController.Instance.GetWorldWidth)
+                {
+                    if (myPathTiles[x + 1, z] == aLastPlacedTile)
+                    {
+                        return true;
+                    }
+                }
+                if (z - 1 >= 0)
+                {
+                    if (myPathTiles[x, z - 1] == aLastPlacedTile)
+                    {
+                        return true;
+                    }
+                }
+                if (z + 1 < WorldController.Instance.GetWorldDepth)
+                {
+                    if (myPathTiles[x, z + 1] == aLastPlacedTile)
+                    {
+                        return true;
+                    }
+                }
             }
         }
-        if (x + 1 < WorldController.Instance.GetWorldWidth)
+        else
         {
-            if (myPathTiles[x + 1, z] == aLastPlacedTile)
+            if (x - 1 >= 0)
             {
-                return true;
+                if (myPathTiles[x - 1, z] == aLastPlacedTile)
+                {
+                    return true;
+                }
             }
-        }
-        if (z - 1 >= 0)
-        {
-            if (myPathTiles[x, z - 1] == aLastPlacedTile)
+            if (x + 1 < WorldController.Instance.GetWorldWidth)
             {
-                return true;
+                if (myPathTiles[x + 1, z] == aLastPlacedTile)
+                {
+                    return true;
+                }
             }
-        }
-        if (z + 1 < WorldController.Instance.GetWorldDepth)
-        {
-            if (myPathTiles[x, z + 1] == aLastPlacedTile)
+            if (z - 1 >= 0)
             {
-                return true;
+                if (myPathTiles[x, z - 1] == aLastPlacedTile)
+                {
+                    return true;
+                }
+            }
+            if (z + 1 < WorldController.Instance.GetWorldDepth)
+            {
+                if (myPathTiles[x, z + 1] == aLastPlacedTile)
+                {
+                    return true;
+                }
             }
         }
 

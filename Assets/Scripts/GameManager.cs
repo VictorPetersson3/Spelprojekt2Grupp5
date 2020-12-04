@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+
         int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index + 1);
         //ResetAmountOfMoney(index - 1);
@@ -278,6 +279,10 @@ public class GameManager : MonoBehaviour
     }
     bool hasMoved = false;
 
+    public void ResetGameManager()
+    {
+        hasMoved = false;
+    }
     public void ResetPlayerProgress()
     {
         for (int i = 1; i < myAllLevels; i++)
@@ -342,7 +347,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    FileUtil.CopyFileOrDirectory(path, backupPath);
+                    //FileUtil.CopyFileOrDirectory(path, backupPath);
                     break;
                 }
             }

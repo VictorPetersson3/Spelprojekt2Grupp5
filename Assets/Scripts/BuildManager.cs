@@ -14,7 +14,7 @@ public class BuildManager : MonoBehaviour
         if (globalInstance == null)
         {
             globalInstance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (globalInstance != this)
         {
@@ -93,10 +93,14 @@ public class BuildManager : MonoBehaviour
         }
     }
 
+    public void ReturnMoney()
+    {
+        GameManager.globalInstance.ChangeMoney(-1);
+    }
+
     public void ReturnToPool(PathTile aPooledGameObject)
     {
         aPooledGameObject.gameObject.SetActive(false);
         aPooledGameObject.transform.position = myOriginalSpawnPoolPosition;
-        GameManager.globalInstance.ChangeMoney(-1);
     }
 }

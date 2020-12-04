@@ -56,98 +56,192 @@ public class PathTile : MonoBehaviour
 
         int x = Mathf.FloorToInt(transform.position.x);
         int z = Mathf.FloorToInt(transform.position.z);
-
-        //for (int i = 0; i < myPathManager.GetPortals.Count; i++)
-        //{
-        if (x - 1 >= 0)
-        {
-            if (myPathManager.GetPathTileMap[x - 1, z] != null)
-            {
-                if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile)
-                {
-                    myPathTileNeighbors = myPathManager.GetLastPlacedTile;
-                    myNeigbor = Neighbor.left;
-                    CheckOldNeighborLeft();
-                    myPathManager.GetLastPlacedTile = this;
-                }
-                //if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetPortals[i].myStartTile)
-                //{
-                //    Debug.Log("Found Start Tile");
-                //    myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
-                //    myNeigbor = Neighbor.left;
-                //    CheckOldNeighborLeft();
-                //    myPathManager.GetLastPlacedTile = this;
-                //}
-            }
-        }
-        if (x + 1 < WorldController.Instance.GetWorldWidth)
-        {
-            if (myPathManager.GetPathTileMap[x + 1, z] != null)
-            {
-                if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile)
-                {
-                    myPathTileNeighbors = myPathManager.GetLastPlacedTile;
-                    myNeigbor = Neighbor.right;
-                    CheckOldNeighborRight();
-                    myPathManager.GetLastPlacedTile = this;
-                }
-                //if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetPortals[i].myStartTile)
-                //{
-                //    Debug.Log("Found Start Tile");
-
-                //    myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
-                //    myNeigbor = Neighbor.right;
-                //    CheckOldNeighborRight();
-                //    myPathManager.GetLastPlacedTile = this;
-                //}
-            }
-        }
-        if (z - 1 >= 0)
+        if (myPathManager.GetPortals.Count != 0)
         {
 
-            if (myPathManager.GetPathTileMap[x, z - 1] != null)
+            for (int i = 0; i < myPathManager.GetPortals.Count; i++)
             {
-
-                if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile)
+                if (x - 1 >= 0)
                 {
-                    myPathTileNeighbors = myPathManager.GetLastPlacedTile;
-                    myNeigbor = Neighbor.down;
-                    CheckOldNeighborDown();
-
-                    myPathManager.GetLastPlacedTile = this;
+                    if (myPathManager.GetPathTileMap[x - 1, z] != null)
+                    {
+                        if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile)
+                        {
+                            myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                            myNeigbor = Neighbor.left;
+                            CheckOldNeighborLeft();
+                            myPathManager.GetLastPlacedTile = this;
+                        }
+                        if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetPortals[i].myStartTile)
+                        {
+                            Debug.Log("Found Start Tile");
+                            myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                            myNeigbor = Neighbor.left;
+                            CheckOldNeighborLeft();
+                            myPathManager.GetLastPlacedTile = this;
+                        }
+                    }
                 }
-                //if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetPortals[i].myStartTile)
-                //{
-                //    Debug.Log("Found Start Tile");
+                if (x + 1 < WorldController.Instance.GetWorldWidth)
+                {
+                    if (myPathManager.GetPathTileMap[x + 1, z] != null)
+                    {
+                        if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile)
+                        {
+                            myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                            myNeigbor = Neighbor.right;
+                            CheckOldNeighborRight();
+                            myPathManager.GetLastPlacedTile = this;
+                        }
+                        if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetPortals[i].myStartTile)
+                        {
+                            Debug.Log("Found Start Tile");
 
-                //    myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
-                //    myNeigbor = Neighbor.down;
-                //    CheckOldNeighborDown();
-                //    myPathManager.GetLastPlacedTile = this;
-                //}
+                            myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                            myNeigbor = Neighbor.right;
+                            CheckOldNeighborRight();
+                            myPathManager.GetLastPlacedTile = this;
+                        }
+                    }
+                }
+                if (z - 1 >= 0)
+                {
+
+                    if (myPathManager.GetPathTileMap[x, z - 1] != null)
+                    {
+
+                        if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile)
+                        {
+                            myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                            myNeigbor = Neighbor.down;
+                            CheckOldNeighborDown();
+
+                            myPathManager.GetLastPlacedTile = this;
+                        }
+                        if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetPortals[i].myStartTile)
+                        {
+                            Debug.Log("Found Start Tile");
+
+                            myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                            myNeigbor = Neighbor.down;
+                            CheckOldNeighborDown();
+                            myPathManager.GetLastPlacedTile = this;
+                        }
+                    }
+                }
+                if (z + 1 < WorldController.Instance.GetWorldDepth)
+                {
+                    if (myPathManager.GetPathTileMap[x, z + 1] != null)
+                    {
+                        if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile)
+                        {
+                            myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                            myNeigbor = Neighbor.up;
+                            CheckOldNeighborUp();
+                            myPathManager.GetLastPlacedTile = this;
+                        }
+                        if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetPortals[i].myStartTile)
+                        {
+                            myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                            myNeigbor = Neighbor.up;
+                            CheckOldNeighborUp();
+                            myPathManager.GetLastPlacedTile = this;
+                        }
+                    }
+                }
             }
         }
-        if (z + 1 < WorldController.Instance.GetWorldDepth)
+        else
         {
-            if (myPathManager.GetPathTileMap[x, z + 1] != null)
+            if (x - 1 >= 0)
             {
-                if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile)
+                if (myPathManager.GetPathTileMap[x - 1, z] != null)
                 {
-                    myPathTileNeighbors = myPathManager.GetLastPlacedTile;
-                    myNeigbor = Neighbor.up;
-                    CheckOldNeighborUp();
-                    myPathManager.GetLastPlacedTile = this;
+                    if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile)
+                    {
+                        myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                        myNeigbor = Neighbor.left;
+                        CheckOldNeighborLeft();
+                        myPathManager.GetLastPlacedTile = this;
+                    }
+                    //if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetPortals[i].myStartTile)
+                    //{
+                    //    Debug.Log("Found Start Tile");
+                    //    myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                    //    myNeigbor = Neighbor.left;
+                    //    CheckOldNeighborLeft();
+                    //    myPathManager.GetLastPlacedTile = this;
+                    //}
                 }
-                //if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetPortals[i].myStartTile)
-                //{
-                //    myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
-                //    myNeigbor = Neighbor.up;
-                //    CheckOldNeighborUp();
-                //    myPathManager.GetLastPlacedTile = this;
-                //}
+            }
+            if (x + 1 < WorldController.Instance.GetWorldWidth)
+            {
+                if (myPathManager.GetPathTileMap[x + 1, z] != null)
+                {
+                    if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile)
+                    {
+                        myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                        myNeigbor = Neighbor.right;
+                        CheckOldNeighborRight();
+                        myPathManager.GetLastPlacedTile = this;
+                    }
+                    //if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetPortals[i].myStartTile)
+                    //{
+                    //    Debug.Log("Found Start Tile");
+
+                    //    myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                    //    myNeigbor = Neighbor.right;
+                    //    CheckOldNeighborRight();
+                    //    myPathManager.GetLastPlacedTile = this;
+                    //}
+                }
+            }
+            if (z - 1 >= 0)
+            {
+
+                if (myPathManager.GetPathTileMap[x, z - 1] != null)
+                {
+
+                    if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile)
+                    {
+                        myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                        myNeigbor = Neighbor.down;
+                        CheckOldNeighborDown();
+
+                        myPathManager.GetLastPlacedTile = this;
+                    }
+                    //if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetPortals[i].myStartTile)
+                    //{
+                    //    Debug.Log("Found Start Tile");
+
+                    //    myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                    //    myNeigbor = Neighbor.down;
+                    //    CheckOldNeighborDown();
+                    //    myPathManager.GetLastPlacedTile = this;
+                    //}
+                }
+            }
+            if (z + 1 < WorldController.Instance.GetWorldDepth)
+            {
+                if (myPathManager.GetPathTileMap[x, z + 1] != null)
+                {
+                    if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile)
+                    {
+                        myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                        myNeigbor = Neighbor.up;
+                        CheckOldNeighborUp();
+                        myPathManager.GetLastPlacedTile = this;
+                    }
+                    //if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetPortals[i].myStartTile)
+                    //{
+                    //    myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                    //    myNeigbor = Neighbor.up;
+                    //    CheckOldNeighborUp();
+                    //    myPathManager.GetLastPlacedTile = this;
+                    //}
+                }
             }
         }
-        //}
         Debug.Log("Play placement effect");
         myPlacementEffect.Play();
     }
@@ -264,12 +358,21 @@ public class PathTile : MonoBehaviour
     }
     public void ResetMe()
     {
-        myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
-        myStraightRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
-        myPathTileNeighbors.GetNeighbor = Neighbor.none;
-        myPathTileNeighbors = null;
-        myStraightRoad.SetActive(false);
-        myTurnRoad.SetActive(false);
+        if (myTurnRoad != null)
+        {
+            myTurnRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+            myTurnRoad.SetActive(false);
+        }
+        if (myStraightRoad != null)
+        {
+            myStraightRoad.transform.rotation = Quaternion.Euler(0, 0, 0);
+            myStraightRoad.SetActive(false);
+        }
+        if (myPathTileNeighbors != null)
+        {
+            myPathTileNeighbors.GetNeighbor = Neighbor.none;
+            myPathTileNeighbors = null;
+        }
         myNeigbor = Neighbor.none;
 
 

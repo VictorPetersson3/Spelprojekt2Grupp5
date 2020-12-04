@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Tile myCurrentTile;
     public Tile GetCurrectTile { get { return myCurrentTile; } }
-
+  
     public List<PathTile> PlayerMoveList
     {
         get
@@ -31,10 +31,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myMovementSpeed = 12;
 
+    [SerializeField]
+    GameObject myPlayerModel;
     int indexForNextPortalDistance = 0;
     bool myDontIncreaseIndexFirstTime = true;
     [SerializeField]
     bool myMovementStart = false;
+
     GameManager myGameManger;
     public int SetPlayerStep
     {
@@ -58,20 +61,31 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
+        //Application.targetFrameRate = 60;
         if (myMovementStart)
         {
-            if (myMovementList[step].IsEndTile)
+            if (step > myMovementList.Count - 1)
             {
+                myDeathEffect.transform.position = transform.position;
+                myDeathEffect.Play();
+                myPlayerModel.SetActive(false);
+                myMovementStart = false;
+                myPathManager.ResetPath();
+                myGameManger.SetFinishedLevel();
+            } 
+            else if (myMovementList[step].IsEndTile)
+            {
+                myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
+                myMovementStart = false;
             }
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, myMovementList[step].transform.position, myMovementSpeed * Time.deltaTime);
                 Vector3 distanceToNextPos = myMovementList[step].transform.position - transform.position;
                 Quaternion lookAtRotation = Quaternion.LookRotation(myMovementList[step].transform.position - transform.position);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.2f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.05f);
 
                 if (distanceToNextPos.magnitude < 0.05f)
                 {
