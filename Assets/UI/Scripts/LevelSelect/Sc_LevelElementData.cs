@@ -31,6 +31,8 @@ public class Sc_LevelElementData : MonoBehaviour
     private bool myActive;
     private Sprite myConvertedImageSprite;
     private Vector3 myMin = new Vector3(-100.0f, 100.0f, 0.0f);
+
+    [SerializeField]
     Sc_InterfaceLevelManager myLevelManagerInterface;
 
     private void Start()
