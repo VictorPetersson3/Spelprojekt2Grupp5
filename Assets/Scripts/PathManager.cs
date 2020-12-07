@@ -53,6 +53,10 @@ public class PathManager : MonoBehaviour
             }
         }
     }
+    private void Start()
+    {
+        Init();
+    }
     void Init()
     {
         myPlayerController.PlayerMoveList = myPathList;
@@ -101,7 +105,7 @@ public class PathManager : MonoBehaviour
 
         myPortals[index].AddVectorToMovementList(aPathTileToAdd);
         myPathTiles[x, z] = aPathTileToAdd;
-        myLastPlacedPathTile = aPathTileToAdd;
+        
 
         myPlacementEffects.transform.position = aPathTileToAdd.transform.position;
         myPlacementEffects.CheckPlacementIndicators();

@@ -80,6 +80,7 @@ public class Placement : MonoBehaviour
                 for (int i = 0; i < myPathManager.GetPortals.Count; i++)
                 {
                     myPathManager.AddItemToPortalMap(path, i);
+                   
                     path.CheckNeighbors();
                 }
             }
