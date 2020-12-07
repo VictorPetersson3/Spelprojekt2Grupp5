@@ -12,4 +12,9 @@ public class Sc_ScoreSymbol : MonoBehaviour
     {
         myHasGottenScore.SetActive(true);
     }
+
+    public void LockScore()
+    {
+        myHasGottenScore.SetActive(false);
+    }
 }
