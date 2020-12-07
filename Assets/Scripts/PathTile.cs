@@ -65,20 +65,23 @@ public class PathTile : MonoBehaviour
                 {
                     if (myPathManager.GetPathTileMap[x - 1, z] != null)
                     {
+                        Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
+
+                        Debug.Log("Found Normal Tile");
                         if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile)
                         {
                             myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                            myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.left;
                             CheckOldNeighborLeft();
-                            myPathManager.GetLastPlacedTile = this;
                         }
                         if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetPortals[i].myStartTile)
                         {
                             Debug.Log("Found Start Tile");
                             myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                            myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.left;
                             CheckOldNeighborLeft();
-                            myPathManager.GetLastPlacedTile = this;
                         }
                     }
                 }
@@ -86,21 +89,22 @@ public class PathTile : MonoBehaviour
                 {
                     if (myPathManager.GetPathTileMap[x + 1, z] != null)
                     {
+                        Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject) ;
                         if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile)
                         {
                             myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                            myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.right;
                             CheckOldNeighborRight();
-                            myPathManager.GetLastPlacedTile = this;
                         }
                         if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetPortals[i].myStartTile)
                         {
                             Debug.Log("Found Start Tile");
 
                             myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                            myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.right;
                             CheckOldNeighborRight();
-                            myPathManager.GetLastPlacedTile = this;
                         }
                     }
                 }
@@ -109,23 +113,25 @@ public class PathTile : MonoBehaviour
 
                     if (myPathManager.GetPathTileMap[x, z - 1] != null)
                     {
+                      
+                        Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
 
                         if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile)
                         {
                             myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                            myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.down;
                             CheckOldNeighborDown();
 
-                            myPathManager.GetLastPlacedTile = this;
                         }
                         if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetPortals[i].myStartTile)
                         {
                             Debug.Log("Found Start Tile");
 
                             myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                            myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.down;
                             CheckOldNeighborDown();
-                            myPathManager.GetLastPlacedTile = this;
                         }
                     }
                 }
@@ -133,19 +139,22 @@ public class PathTile : MonoBehaviour
                 {
                     if (myPathManager.GetPathTileMap[x, z + 1] != null)
                     {
+                        Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
+
+                        Debug.Log("Found Normal Tile");
                         if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile)
                         {
                             myPathTileNeighbors = myPathManager.GetLastPlacedTile;
+                            myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.up;
                             CheckOldNeighborUp();
-                            myPathManager.GetLastPlacedTile = this;
                         }
                         if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetPortals[i].myStartTile)
                         {
                             myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
+                            myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.up;
                             CheckOldNeighborUp();
-                            myPathManager.GetLastPlacedTile = this;
                         }
                     }
                 }
@@ -242,7 +251,6 @@ public class PathTile : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Play placement effect");
         myPlacementEffect.Play();
     }
     void CheckOldNeighborDown()

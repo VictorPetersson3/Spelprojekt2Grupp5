@@ -45,7 +45,6 @@ public class Enemy : MonoBehaviour
         {
             if (myTimerToWait >= myTimeToWait)
             {
-
                 if (myStep + 1 >= myPositionsToWalkTo.Length)
                 {
                     myStep = 0;
