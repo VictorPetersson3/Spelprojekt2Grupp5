@@ -28,12 +28,17 @@ public class Sc_LevelElementData : MonoBehaviour
     [SerializeField]
     RectTransform myLevelMenuRect;
 
+
+
     private bool myActive;
     private Sprite myConvertedImageSprite;
     private Vector3 myMin = new Vector3(-100.0f, 100.0f, 0.0f);
 
     [SerializeField]
     Sc_InterfaceLevelManager myLevelManagerInterface;
+
+    [SerializeField]
+    Sc_LevelSelect_GiveScore myLevelTotalScore;
 
     private void Start()
     {
@@ -44,6 +49,7 @@ public class Sc_LevelElementData : MonoBehaviour
         myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
         myLevelImage.sprite = myConvertedImageSprite;
         myInLevelImage.sprite = myConvertedImageSprite;
+        myLevelTotalScore.GetLevelData(GameManager.globalInstance.GetLevelStars(myLevelIndex)) ;
     } 
     private void OnValidate()
     {
