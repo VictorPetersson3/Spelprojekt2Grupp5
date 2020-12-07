@@ -278,7 +278,11 @@ public class GameManager : MonoBehaviour
         {
             myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myTwoStarScore);
         }
-        else if (amountOfMoneySpent >= myTwoStarScore)
+        else if (amountOfMoneySpent >= myTwoStarScore && amountOfMoneySpent < myOneStarScore)
+        {
+            myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myTwoStarScore);
+        }
+        else
         {
             myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myOneStarScore);
         }
