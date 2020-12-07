@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     bool myDontIncreaseIndexFirstTime = true;
     [SerializeField]
     bool myMovementStart = false;
+    [SerializeField]
+    Animator myAnimator;
 
     GameManager myGameManger;
     public int SetPlayerStep
@@ -64,6 +66,7 @@ public class PlayerController : MonoBehaviour
         //Application.targetFrameRate = 60;
         if (myMovementStart)
         {
+            myAnimator.SetBool("isWalking", true);
             if (step > myMovementList.Count - 1)
             {
                 myDeathEffect.transform.position = transform.position;
@@ -96,9 +99,12 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        myDeathEffect.transform.position = transform.position;
-                        gameObject.SetActive(false);
-                        myDeathEffect.Play();
+                        //myDeathEffect.transform.position = transform.position;
+                        //gameObject.SetActive(false);
+                        //myDeathEffect.Play();
+                        myAnimator.SetBool("isWalking", false);
+                        myAnimator.SetBool("isOffRoad", true);
+
                     }
                 }
             }
