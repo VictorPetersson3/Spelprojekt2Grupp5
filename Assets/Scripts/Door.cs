@@ -48,7 +48,7 @@ public class Door : ObstructTileMap
             {
                 print("hi");
 
-                Destroy(myPlayerController);
+                myPlayerController.SetPlayerStep = myPlayerController.PlayerMoveList.Count;
             }
 
             if (myRailButton.GetMySwitch)

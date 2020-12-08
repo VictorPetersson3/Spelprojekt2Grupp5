@@ -68,7 +68,7 @@ public class BuildManager : MonoBehaviour
             {
                 if (myPoolList[x].myTileList[y].gameObject.activeSelf == false && myPoolList[x].myTileId == aTag)
                 {
-                    GameManager.globalInstance.ChangeMoney(1);
+                    //GameManager.globalInstance.ChangeMoney(1);
                     myPoolList[x].myTileList[y].gameObject.SetActive(true);
                     myPoolList[x].myTileList[y].transform.position = aPosition;
                     return myPoolList[x].myTileList[y];

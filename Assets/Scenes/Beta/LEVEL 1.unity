@@ -2343,7 +2343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791216284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.2231445, y: -0.6616211, z: 5.8378906}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3416,6 +3416,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1511201486 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6473851599320867668, guid: 53ea471b916f7e3428fd702bf78f8385,
+    type: 3}
+  m_PrefabInstance: {fileID: 4773248973263468255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1542410809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4850,6 +4856,16 @@ PrefabInstance:
       propertyPath: myDeathEffect
       value: 
       objectReference: {fileID: 688291469}
+    - target: {fileID: 4773248973371576305, guid: 53ea471b916f7e3428fd702bf78f8385,
+        type: 3}
+      propertyPath: myAnimator
+      value: 
+      objectReference: {fileID: 1511201486}
+    - target: {fileID: 4773248973371576305, guid: 53ea471b916f7e3428fd702bf78f8385,
+        type: 3}
+      propertyPath: myMovementSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4773248973371576306, guid: 53ea471b916f7e3428fd702bf78f8385,
         type: 3}
       propertyPath: m_Name
@@ -4875,5 +4891,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.61
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4773248973371576304, guid: 53ea471b916f7e3428fd702bf78f8385, type: 3}
+    - {fileID: 4773248973371576303, guid: 53ea471b916f7e3428fd702bf78f8385, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 53ea471b916f7e3428fd702bf78f8385, type: 3}
