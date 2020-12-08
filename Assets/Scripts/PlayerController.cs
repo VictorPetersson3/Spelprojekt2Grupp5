@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         {
             myAnimator.SetBool("isWalking", true);
             if (step > myMovementList.Count - 1)
-            {
+            { 
                 myDeathEffect.transform.position = transform.position;
                 myDeathEffect.Play();
                 myPlayerModel.SetActive(false);
@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
                 myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
                 myMovementStart = false;
+
             }
             else
             {
@@ -108,20 +109,21 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-            
-            //for (int i = 0; i < myPathManager.GetPortals.Count; i++)
-            //{
-            //    float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
-            //    if (distance < 0.1f)
-            //    {
-            //        transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
+            if (myPathManager.GetPortals.Count != 0)
+            {
+               for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+               {
+                   float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
+                   if (distance < 0.1f)
+                   {
+                       transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
 
-            //        myMovementList = myPathManager.GetPortals[i].GetMovementList();
-            //        step = 1;
+                       myMovementList = myPathManager.GetPortals[i].GetMovementList();
+                       step = 1;
 
-            //    }
-
-            //}
+                   }
+               }
+            }
         }
     }
 }
