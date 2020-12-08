@@ -11,54 +11,55 @@ public class Sc_LevelElementData : MonoBehaviour
     int myLevelIndex;
     [SerializeField]
     Texture2D myImage;
+    [Space(10, order = 0)]
+    [Header("Do not touch these beneath here:", order = 1)]
+    [Space(40, order = 2)]
 
     [SerializeField]
     Image myLevelImage;
     [SerializeField]
-    Image myInLevelImage;
-    [SerializeField]
     TextMeshProUGUI myLevelNameTMP;
     [SerializeField]
-    TextMeshProUGUI myLevelSceneNameTMP;
-    [SerializeField]
     TextMeshProUGUI myLevelSpendGoalTMP;
-
     [SerializeField]
     GameObject myUIElement;
     [SerializeField]
     RectTransform myLevelMenuRect;
-
-
-
-    private bool myActive;
-    private Sprite myConvertedImageSprite;
-    private Vector3 myMin = new Vector3(-100.0f, 100.0f, 0.0f);
+    [SerializeField]
+    Sc_LevelSelect_WorldUI_Data myLevelSelect_WorldUI;
 
     [SerializeField]
     Sc_InterfaceLevelManager myLevelManagerInterface;
 
     [SerializeField]
     Sc_LevelSelect_GiveScore myLevelTotalScore;
+    
+    private bool myActive;
+    private Sprite myConvertedImageSprite;
+    private Vector3 myMin = new Vector3(-100.0f, 100.0f, 0.0f);
+
 
     private void Start()
     {
+        myLevelSelect_WorldUI.SetMyLevelName(GameManager.globalInstance.GetName(myLevelIndex));
+        myLevelSelect_WorldUI.SetMyLevelImage(myConvertedImageSprite);
+        //myLevelSelect_WorldUI.SetRequiredScore(GameManager.globalInstance.Get);
+
         myLevelNameTMP.text = GameManager.globalInstance.GetName(myLevelIndex);
-        myLevelSceneNameTMP.text = GameManager.globalInstance.GetName(myLevelIndex);
         myLevelSpendGoalTMP.text = GameManager.globalInstance.GetHighestScore(myLevelIndex).ToString();
         myActive = false;
         myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
         myLevelImage.sprite = myConvertedImageSprite;
-        myInLevelImage.sprite = myConvertedImageSprite;
-        myLevelTotalScore.GetLevelData(GameManager.globalInstance.GetLevelStars(myLevelIndex)) ;
+        myLevelTotalScore.GetLevelData(GameManager.globalInstance.GetLevelStars(myLevelIndex));
     } 
     private void OnValidate()
     {
         myLevelManagerInterface = FindObjectOfType<Sc_InterfaceLevelManager>();
 
-        myActive = false;
-        myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
-        myLevelImage.sprite = myConvertedImageSprite;
-        myInLevelImage.sprite = myConvertedImageSprite;
+        //myActive = false;
+        //myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+        //myLevelImage.sprite = myConvertedImageSprite;
+        //myInLevelImage.sprite = myConvertedImageSprite;
         //myLevelNameTMP.text = myLevelName;
         //myLevelSpendGoalTMP.text = mySpendGoal.ToString("0");
     }
