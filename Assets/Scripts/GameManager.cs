@@ -188,18 +188,21 @@ public class GameManager : MonoBehaviour
         int twoStars = 2;
         int threeStars = 3;
 
+        int achievedStars = 0;
+
+
         int myOneStarScore = myLevelList[myActiveScene].myOneStarScore;
         int myTwoStarScore = myLevelList[myActiveScene].myTwoStarScore;
 
-        int amountOfMoneyEarned = myLevelList[myActiveScene].myAmountOfMoney;
+        int amountOfMoneySpent = myLevelList[myActiveScene].myAmountOfMoney;
 
 
-        if (amountOfMoneyEarned < myLevelList[myActiveScene].myFinishedScore)
+        if (amountOfMoneySpent < myLevelList[myActiveScene].myFinishedScore)
         {
             myLevelList[myActiveScene].myFinishedScore = myLevelList[myActiveScene].myAmountOfMoney;
         }
 
-        if (amountOfMoneyEarned > 0 && amountOfMoneyEarned < myTwoStarScore)
+        if (amountOfMoneySpent > 0 && amountOfMoneySpent < myTwoStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
@@ -219,11 +222,12 @@ public class GameManager : MonoBehaviour
                 }
 
             }
+
+            achievedStars = 3;
             Debug.Log("Finished LEVEL\nTHREE STARS");
 
-            //UI.ShowFailScreen(amountOfMoneyEarned, 1);
         }
-        else if (amountOfMoneyEarned >= myTwoStarScore && amountOfMoneyEarned < myOneStarScore)
+        else if (amountOfMoneySpent >= myTwoStarScore && amountOfMoneySpent < myOneStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
@@ -242,11 +246,11 @@ public class GameManager : MonoBehaviour
                     myLevelList[myActiveScene].myAmountOfStars += twoStars;
                 }
             }
+            achievedStars = 2;
             Debug.Log("Finished Level!\nTWO STARS");
 
-            //UI.ShowWinScreen(amountOfMoneyEarned, 2);
         }
-        else if (amountOfMoneyEarned >= myOneStarScore)
+        else if (amountOfMoneySpent >= myOneStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
@@ -265,14 +269,28 @@ public class GameManager : MonoBehaviour
                 }
             }
 
+            achievedStars = 1;
             Debug.Log("Finished Level!\nONE STARS");
 
-            //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
-        myEndScreen.GetLevelData(amountOfMoneyEarned, myLevelList[myActiveScene].myAmountOfStars);
+        if (amountOfMoneySpent > 0 && amountOfMoneySpent < myTwoStarScore)
+        {
+            myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myTwoStarScore);
+        }
+        else if (amountOfMoneySpent >= myTwoStarScore && amountOfMoneySpent < myOneStarScore)
+        {
+            myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myTwoStarScore);
+        }
+        else
+        {
+            myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myOneStarScore);
+        }
+            
+
         if (!hasMoved)
         {
+            //SaveFile(1);
             myEndScreen.MoveUp();
             hasMoved = true;
         }
@@ -570,8 +588,4 @@ public class GameManager : MonoBehaviour
         return myLevelList[aLevelIndex].myAmountOfStars;
     }
 
-    public void LoadLevel()
-    {
-       
-    }
 }
