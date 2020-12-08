@@ -8,8 +8,17 @@ public class AudioManager : MonoBehaviour
 {
    public static AudioManager ourInstance;
 
+   [SerializeField] private AudioMixer myAudioMixer;
+
+   [SerializeField] private AudioSource[] myAmbience;
+   [SerializeField] private AudioSource[] myEffects;
    [SerializeField] private AudioSource[] myMusic;
-   [SerializeField] private AudioSource myTilePlacementSound;
+   [SerializeField] private AudioSource[] myUI;
+
+   public enum EAmbience { CHIMES, WIND };
+   public enum EEffects { COIN, FOOTSTEPS, LOSS, PORTAL, PRESSUREPLATE, DOOR, PLACE, REMOVE, WIN };
+   public enum EMusic { SYNTH, FUJU };
+   public enum EUI { UI1, UI2, UI3 };
 
    private List<AudioSource> myAudioSources = new List<AudioSource>();
    private List<bool> myAudioWasPlaying = new List<bool>();
@@ -51,14 +60,23 @@ public class AudioManager : MonoBehaviour
    }
 
    //Play-metoder
-   public void PlayMusic()
+   public void PlayAmbience(EAmbience anEnum)
    {
-      switch(SceneManager.GetActiveScene().buildIndex)
-      {
-         default:
-            myMusic[0].Play();
-            break;
-      }
+      myAmbience[(int)anEnum].Play();
    }
+   public void PlayEffect(EEffects anEnum)
+   {
+      myEffects[(int)anEnum].Play();
+   }
+   public void PlayMusic(EMusic anEnum)
+   {
+      //switch(SceneManager.GetActiveScene().buildIndex)
+      myMusic[(int)anEnum].Play();
+   }
+   public void PlayUI(EUI anEnum)
+   {
+      myUI[(int)anEnum].Play();
+   }
+
 
 }
