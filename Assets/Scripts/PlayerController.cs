@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Tile myCurrentTile;
     public Tile GetCurrectTile { get { return myCurrentTile; } }
-  
+
     public List<PathTile> PlayerMoveList
     {
         get
@@ -65,14 +65,14 @@ public class PlayerController : MonoBehaviour
         if (myMovementStart)
         {
             if (step > myMovementList.Count - 1)
-            { 
+            {
                 myDeathEffect.transform.position = transform.position;
                 myDeathEffect.Play();
                 myPlayerModel.SetActive(false);
                 myMovementStart = false;
                 myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
-            } 
+            }
             else if (myMovementList[step].IsEndTile)
             {
                 myPathManager.ResetPath();
@@ -105,18 +105,19 @@ public class PlayerController : MonoBehaviour
             }
             if (myPathManager.GetPortals.Count != 0)
             {
-               for (int i = 0; i < myPathManager.GetPortals.Count; i++)
-               {
-                   float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
-                   if (distance < 0.1f)
-                   {
-                       transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
+                for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+                {
+                    float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
 
-                       myMovementList = myPathManager.GetPortals[i].GetMovementList();
-                       step = 1;
+                    if (distance < 0.1f)
+                    {
+                        transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
 
-                   }
-               }
+                        myMovementList = myPathManager.GetPortals[i].GetMovementList();
+                        step = 1;
+
+                    }
+                }
             }
         }
     }
