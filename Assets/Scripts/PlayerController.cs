@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myMovementSpeed = 12;
 
-    [SerializeField]
-    GameObject myPlayerModel;
+    //[SerializeField]
+    //GameObject myPlayerModel;
     int indexForNextPortalDistance = 0;
     bool myDontIncreaseIndexFirstTime = true;
     [SerializeField]
@@ -67,12 +67,15 @@ public class PlayerController : MonoBehaviour
         if (myMovementStart)
         {
             myAnimator.SetBool("isWalking", true);
+            myAnimator.SetBool("isOffRoad", false);
             if (step > myMovementList.Count - 1)
             { 
                 myDeathEffect.transform.position = transform.position;
                 myDeathEffect.Play();
-                myPlayerModel.SetActive(false);
+                //myPlayerModel.SetActive(false);
                 myMovementStart = false;
+                myAnimator.SetBool("isWalking", false);
+                myAnimator.SetBool("isOffRoad", true);
                 myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
             } 
@@ -81,6 +84,8 @@ public class PlayerController : MonoBehaviour
                 myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
+                myAnimator.SetBool("isWalking", false);
+                myAnimator.SetBool("isInGoal", true);
                 myMovementStart = false;
 
             }
@@ -103,8 +108,7 @@ public class PlayerController : MonoBehaviour
                         //myDeathEffect.transform.position = transform.position;
                         //gameObject.SetActive(false);
                         //myDeathEffect.Play();
-                        myAnimator.SetBool("isWalking", false);
-                        myAnimator.SetBool("isOffRoad", true);
+                        
 
                     }
                 }
