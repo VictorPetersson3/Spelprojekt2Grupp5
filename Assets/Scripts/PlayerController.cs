@@ -81,11 +81,12 @@ public class PlayerController : MonoBehaviour
             } 
             else if (myMovementList[step].IsEndTile)
             {
+                myAnimator.SetBool("isWalking", false);
+                myAnimator.SetBool("isInGoal", true);
                 myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
-                myAnimator.SetBool("isWalking", false);
-                myAnimator.SetBool("isInGoal", true);
+                
                 myMovementStart = false;
 
             }
