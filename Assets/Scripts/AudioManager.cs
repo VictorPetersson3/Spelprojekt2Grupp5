@@ -21,12 +21,11 @@ public class AudioManager : MonoBehaviour
    public enum EUI { UI1, UI2, UI3 };
 
    private List<AudioSource> myAudioSources = new List<AudioSource>();
-   private List<bool> myAudioWasPlaying = new List<bool>();
+   //private List<bool> myAudioWasPlaying = new List<bool>();
    //private float myLastTimeScale;
 
    private void Awake()
    {
-
       if (ourInstance == null)
       {
          ourInstance = this;
@@ -41,7 +40,7 @@ public class AudioManager : MonoBehaviour
          {
             AudioSource audioSource = child.GetComponent<AudioSource>();
             myAudioSources.Add(audioSource);
-            myAudioWasPlaying.Add(false);
+            //myAudioWasPlaying.Add(false);
          }
       }
       //myLastTimeScale = Time.timeScale;
