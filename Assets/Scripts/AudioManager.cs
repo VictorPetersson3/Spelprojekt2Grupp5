@@ -8,16 +8,24 @@ public class AudioManager : MonoBehaviour
 {
    public static AudioManager ourInstance;
 
+   [SerializeField] private AudioMixer myAudioMixer;
+
+   [SerializeField] private AudioSource[] myAmbience;
+   [SerializeField] private AudioSource[] myEffects;
    [SerializeField] private AudioSource[] myMusic;
-   [SerializeField] private AudioSource myTilePlacementSound;
+   [SerializeField] private AudioSource[] myUI;
+
+   public enum EAmbience { CHIMES, WIND };
+   public enum EEffects { COIN, FOOTSTEPS, LOSS, PORTAL, PRESSUREPLATE, DOOR, PLACE, REMOVE, WIN };
+   public enum EMusic { SYNTH, FUJU };
+   public enum EUI { UI1, UI2, UI3 };
 
    private List<AudioSource> myAudioSources = new List<AudioSource>();
-   private List<bool> myAudioWasPlaying = new List<bool>();
+   //private List<bool> myAudioWasPlaying = new List<bool>();
    //private float myLastTimeScale;
 
    private void Awake()
    {
-
       if (ourInstance == null)
       {
          ourInstance = this;
@@ -32,14 +40,18 @@ public class AudioManager : MonoBehaviour
          {
             AudioSource audioSource = child.GetComponent<AudioSource>();
             myAudioSources.Add(audioSource);
-            myAudioWasPlaying.Add(false);
+            //myAudioWasPlaying.Add(false);
          }
       }
       //myLastTimeScale = Time.timeScale;
    }
-   public void VolumeSettings(float aVolume)
+   public void MasterVolume(float aVolume)
    {
-      AudioListener.volume = aVolume;
+      myAudioMixer.SetFloat("MasterVolume", aVolume);
+   }
+   public void MusicVolume(float aVolume)
+   {
+      myAudioMixer.SetFloat("MasterVolume", aVolume);
    }
    //private void CheckPause()
    //{
@@ -51,14 +63,23 @@ public class AudioManager : MonoBehaviour
    }
 
    //Play-metoder
-   public void PlayMusic()
+   public void PlayAmbience(EAmbience anEnum)
    {
-      switch(SceneManager.GetActiveScene().buildIndex)
-      {
-         default:
-            myMusic[0].Play();
-            break;
-      }
+      myAmbience[(int)anEnum].Play();
    }
+   public void PlayEffect(EEffects anEnum)
+   {
+      myEffects[(int)anEnum].Play();
+   }
+   public void PlayMusic(EMusic anEnum)
+   {
+      //switch(SceneManager.GetActiveScene().buildIndex)
+      myMusic[(int)anEnum].Play();
+   }
+   public void PlayUI(EUI anEnum)
+   {
+      myUI[(int)anEnum].Play();
+   }
+
 
 }
