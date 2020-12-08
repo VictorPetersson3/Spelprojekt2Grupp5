@@ -46,9 +46,13 @@ public class AudioManager : MonoBehaviour
       }
       //myLastTimeScale = Time.timeScale;
    }
-   public void VolumeSettings(float aVolume)
+   public void MasterVolume(float aVolume)
    {
-      AudioListener.volume = aVolume;
+      myAudioMixer.SetFloat("MasterVolume", aVolume);
+   }
+   public void MusicVolume(float aVolume)
+   {
+      myAudioMixer.SetFloat("MasterVolume", aVolume);
    }
    //private void CheckPause()
    //{
