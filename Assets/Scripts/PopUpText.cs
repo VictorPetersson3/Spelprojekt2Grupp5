@@ -23,12 +23,14 @@ public class PopUpText : MonoBehaviour
 
     void Update()
     {
-        myTextMeshTransform.rotation = Quaternion.LookRotation(myTextMeshTransform.position - Camera.main.transform.position);
+        Vector3 cameraPos = Camera.main.transform.position;
+        cameraPos.z = cameraPos.z - 10f;
+        myTextMeshTransform.rotation = Quaternion.LookRotation(myTextMeshTransform.position - cameraPos);
     }
 
     public void StartPopUp(int aMoneyValue, Vector3 aPosition)
     {
-       
+
         gameObject.transform.GetComponent<TextMeshProUGUI>().text = aMoneyValue.ToString();
         gameObject.SetActive(true);
 
@@ -43,7 +45,7 @@ public class PopUpText : MonoBehaviour
         }
         else
         {
-            LeanTween.moveZ(gameObject, aPosition.z + myTextPosition, myTextFadingOut);
+            LeanTween.moveZ(gameObject, aPosition.z + 0.2f, myTextFadingOut);
         }
 
         Invoke("ClosePopUp", myTextFadingOut);
