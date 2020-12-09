@@ -25,7 +25,7 @@ public class PlayerCasting : MonoBehaviour
         if (myMoneyDetection == true)
         {
             Debug.Log("HIT " + myMoneyHit.collider.name);
-            myMoneyHit.transform.GetComponent<MoneyValue>().AddingMoney();
+            myMoneyHit.transform.GetComponent<CoinScript>().AddingMoney();
         }
     }
 }
