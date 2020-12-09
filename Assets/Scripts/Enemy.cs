@@ -5,10 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-
+    [Header("Way Points")]
     [SerializeField]
     Transform[] myPositionsToWalkTo;
 
+    [Header("Enemy Points")]
     [Range(0.1f, 10)]
     [SerializeField]
     float mySpeed = 1;
@@ -51,7 +52,6 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Add to step");
                     ++myStep;
 
                 }

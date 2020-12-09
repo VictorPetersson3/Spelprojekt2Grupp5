@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
    [SerializeField] private AudioSource[] myUI;
 
    public enum EAmbience { CHIMES, WIND };
-   public enum EEffects { COIN, FOOTSTEPS, LOSS, PORTAL, PRESSUREPLATE, DOOR, PLACE, REMOVE, WIN };
+   public enum EEffects { COIN, FOOTSTEPS, LOSS, PORTAL, PRESSUREPLATE, OPENDOOR, CLOSEDOOR, PLACE, REMOVE, WIN };
    public enum EMusic { SYNTH, FUJU };
    public enum EUI { UI1, UI2, UI3 };
 
