@@ -10,7 +10,7 @@ public class Door : ObstructTileMap
 
     [Header("Buttons")]
     [SerializeField]
-    RailButton myRailButton;
+    List<RailButton> myRailButtons = new List<RailButton>();
     [SerializeField]
     PlayerController myPlayerController;
 
@@ -50,21 +50,19 @@ public class Door : ObstructTileMap
 
                 myPlayerController.SetPlayerStep = myPlayerController.PlayerMoveList.Count;
             }
+            CheckIfDoorOpened();
+        }
+    }
 
-            if (myRailButton.GetMySwitch)
+    private void CheckIfDoorOpened()
+    {
+        foreach (RailButton button in myRailButtons)
+        {
+            if (button.GetMySwitch)
             {
                 Debug.Log("Door opened");
                 OpenDoor();
             }
-        }
-        
-    }
-    protected void CheckButtons()
-    {
-        if (myRailButton.GetMySwitch)
-        {
-            Debug.Log("Door opened");
-            OpenDoor();
         }
     }
     public void OpenDoor()
@@ -81,22 +79,25 @@ public class Door : ObstructTileMap
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(0.7f, 0.2f, 0.7f));
 
-
-        if (myRailButton != null)
+        foreach (RailButton button in myRailButtons)
         {
-            if (myRailButton.GetMySwitch)
+            if (button != null)
             {
-                print("hi");
-                Gizmos.color = Color.green;
-            }
-            else
-            {
-                Gizmos.color = Color.red;
-            }
+                if (button.GetMySwitch)
+                {
+                    print("hi");
+                    Gizmos.color = Color.green;
+                }
+                else
+                {
+                    Gizmos.color = Color.red;
+                }
 
-            Gizmos.DrawLine(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(Mathf.FloorToInt(myRailButton.transform.position.x), 0, Mathf.FloorToInt(myRailButton.transform.position.z)));
+                Gizmos.DrawLine(new Vector3(Mathf.FloorToInt(transform.position.x), 0.1f, Mathf.FloorToInt(transform.position.z)), new Vector3(Mathf.FloorToInt(button.transform.position.x), 0, Mathf.FloorToInt(button.transform.position.z)));
 
+            }
         }
+        
 
     }
 }
