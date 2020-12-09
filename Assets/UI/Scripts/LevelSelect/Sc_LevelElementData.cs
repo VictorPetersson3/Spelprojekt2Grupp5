@@ -11,6 +11,9 @@ public class Sc_LevelElementData : MonoBehaviour
     int myLevelIndex;
     [SerializeField]
     Texture2D myImage;
+    [SerializeField]
+    LevelSelect myLevelSelectScript;
+
     [Space(10, order = 0)]
     [Header("Do not touch these beneath here:", order = 1)]
     [Space(40, order = 2)]
@@ -33,6 +36,7 @@ public class Sc_LevelElementData : MonoBehaviour
 
     [SerializeField]
     Sc_LevelSelect_GiveScore myLevelTotalScore;
+   
     
     private bool myActive;
     private Sprite myConvertedImageSprite;
@@ -41,15 +45,17 @@ public class Sc_LevelElementData : MonoBehaviour
 
     private void Start()
     {
+        myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+        myLevelImage.sprite = myConvertedImageSprite;
         myLevelSelect_WorldUI.SetMyLevelName(GameManager.globalInstance.GetName(myLevelIndex));
         myLevelSelect_WorldUI.SetMyLevelImage(myConvertedImageSprite);
-        //myLevelSelect_WorldUI.SetRequiredScore(GameManager.globalInstance.Get);
+        myLevelSelect_WorldUI.SetRequiredScore(
+            myLevelSelectScript.GetStarRequirements()[myLevelIndex - 1],
+            GameManager.globalInstance.GetTotalStars());
 
         myLevelNameTMP.text = GameManager.globalInstance.GetName(myLevelIndex);
         myLevelSpendGoalTMP.text = GameManager.globalInstance.GetHighestScore(myLevelIndex).ToString();
         myActive = false;
-        myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
-        myLevelImage.sprite = myConvertedImageSprite;
         myLevelTotalScore.GetLevelData(GameManager.globalInstance.GetLevelStars(myLevelIndex));
     } 
     private void OnValidate()

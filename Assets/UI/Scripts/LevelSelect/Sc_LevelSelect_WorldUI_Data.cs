@@ -26,13 +26,17 @@ public class Sc_LevelSelect_WorldUI_Data : MonoBehaviour
     {
         myInLevelImage.sprite = aImage;
     }
-    public void SetRequiredScore(int aScore)
+    public void SetRequiredScore(int aScore, int aCurrentScore)
     {
         myAmountToUnlock.text = aScore.ToString();
+        if(aCurrentScore >= aScore)
+        {
+            HideRequiredScore();
+        }
     }
     public void HideRequiredScore()
     {
-        LeanTween.scale(myLevelTransform, new Vector3(0.06f, 0.06f, 0.06f), 1.2f).setEase(LeanTweenType.punch);
+        LeanTween.scale(myScoreTransform, new Vector3(0.06f, 0.06f, 0.06f), 1.2f).setEase(LeanTweenType.punch);
         LeanTween.alphaCanvas(myScoreCanvasGroup, 0.0f, 1.0f).setEase(LeanTweenType.easeInExpo);
         LeanTween.scale(myScoreTransform, new Vector3(0,0,0), 2.0f).setEase(LeanTweenType.easeInExpo);
     }
