@@ -31,12 +31,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float myMovementSpeed = 12;
 
-    [SerializeField]
-    GameObject myPlayerModel;
+    //[SerializeField]
+    //GameObject myPlayerModel;
     int indexForNextPortalDistance = 0;
     bool myDontIncreaseIndexFirstTime = true;
     [SerializeField]
     bool myMovementStart = false;
+    [SerializeField]
+    Animator myAnimator;
 
     GameManager myGameManger;
     public int SetPlayerStep
@@ -64,21 +66,29 @@ public class PlayerController : MonoBehaviour
         //Application.targetFrameRate = 60;
         if (myMovementStart)
         {
+            myAnimator.SetBool("isWalking", true);
+            myAnimator.SetBool("isOffRoad", false);
             if (step > myMovementList.Count - 1)
-            {
+            { 
                 myDeathEffect.transform.position = transform.position;
                 myDeathEffect.Play();
-                myPlayerModel.SetActive(false);
+                //myPlayerModel.SetActive(false);
                 myMovementStart = false;
+                myAnimator.SetBool("isWalking", false);
+                myAnimator.SetBool("isOffRoad", true);
                 myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
             } 
             else if (myMovementList[step].IsEndTile)
             {
+                myAnimator.SetBool("isWalking", false);
+                myAnimator.SetBool("isInGoal", true);
                 myPathManager.ResetPath();
                 myGameManger.SetFinishedLevel();
                 Debug.Log("You win");
+                
                 myMovementStart = false;
+
             }
             else
             {
@@ -96,26 +106,29 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        myDeathEffect.transform.position = transform.position;
-                        gameObject.SetActive(false);
-                        myDeathEffect.Play();
+                        //myDeathEffect.transform.position = transform.position;
+                        //gameObject.SetActive(false);
+                        //myDeathEffect.Play();
+                        
+
                     }
                 }
             }
-            
-            //for (int i = 0; i < myPathManager.GetPortals.Count; i++)
-            //{
-            //    float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
-            //    if (distance < 0.1f)
-            //    {
-            //        transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
+            if (myPathManager.GetPortals.Count != 0)
+            {
+               for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+               {
+                   float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
+                   if (distance < 0.1f)
+                   {
+                       transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
 
-            //        myMovementList = myPathManager.GetPortals[i].GetMovementList();
-            //        step = 1;
+                       myMovementList = myPathManager.GetPortals[i].GetMovementList();
+                       step = 1;
 
-            //    }
-
-            //}
+                   }
+               }
+            }
         }
     }
 }
