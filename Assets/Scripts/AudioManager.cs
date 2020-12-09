@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour
    public enum EMusic { SYNTH, FUJU };
    public enum EUI { UI1, UI2, UI3 };
 
+   [SerializeField] private EMusic myPlayingMusic;
+
    private List<AudioSource> myAudioSources = new List<AudioSource>();
    //private List<bool> myAudioWasPlaying = new List<bool>();
    //private float myLastTimeScale;
@@ -49,6 +51,10 @@ public class AudioManager : MonoBehaviour
       }
       //myLastTimeScale = Time.timeScale;
    }
+   private void Start()
+   {
+      PlayMusic(myPlayingMusic);
+   }
    public void MasterVolume()
    {
       float vol = myScollbar.value;
@@ -59,7 +65,7 @@ public class AudioManager : MonoBehaviour
       if (myMusicStatus)
       {
          myAudioMixer.SetFloat("MusicVolume", -80.0f);
-         myMusicStatus = false; 
+         myMusicStatus = false;
       }
       else
       {
