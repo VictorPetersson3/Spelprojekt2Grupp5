@@ -68,7 +68,6 @@ MonoBehaviour:
   myDeathEffect: {fileID: 0}
   step: 1
   myMovementSpeed: 4.82
-  myPlayerModel: {fileID: 0}
   myMovementStart: 0
   myAnimator: {fileID: 6473851599320867668}
 --- !u!114 &6997046230388152911
@@ -163,11 +162,71 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -7823203700802028158, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: -5431971433833984594, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: -4784525479681496398, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: -3816994238703528058, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: -3779759062782331514, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: -3366660281892682264, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: -3278217741319953277, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: -1498032173291309673, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: -1183566297130766435, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
     - target: {fileID: 919132149155446097, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
         type: 3}
       propertyPath: m_Name
       value: A_player
       objectReference: {fileID: 0}
+    - target: {fileID: 2848843233363098162, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: 3320637928624138203, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
+    - target: {fileID: 8787014564700656394, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c20e2c6e7c31a649a04d961cdf11663, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ab6ccac4ccab4742b1d7f0ee71dd5ed, type: 3}
 --- !u!1 &4391636566366233542 stripped
