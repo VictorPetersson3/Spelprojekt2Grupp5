@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,9 @@ public class AudioManager : MonoBehaviour
    [SerializeField] private AudioSource[] myMusic;
    [SerializeField] private AudioSource[] myUI;
 
+   [SerializeField] private Scrollbar myScollbar;
+
+   private bool myMusicStatus = true;
    public enum EAmbience { CHIMES, WIND };
    public enum EEffects { COIN, FOOTSTEPS, LOSS, PORTAL, PRESSUREPLATE, OPENDOOR, CLOSEDOOR, PLACE, REMOVE, WIN };
    public enum EMusic { SYNTH, FUJU };
@@ -45,21 +49,32 @@ public class AudioManager : MonoBehaviour
       }
       //myLastTimeScale = Time.timeScale;
    }
-   public void MasterVolume(float aVolume)
+   public void MasterVolume()
    {
-      myAudioMixer.SetFloat("MasterVolume", aVolume);
+      float vol = myScollbar.value;
+      myAudioMixer.SetFloat("MasterVolume", vol);
    }
-   public void MusicVolume(float aVolume)
+   public void MusicVolume()
    {
-      myAudioMixer.SetFloat("MasterVolume", aVolume);
+      if (myMusicStatus)
+      {
+         myAudioMixer.SetFloat("MusicVolume", -80.0f);
+         myMusicStatus = false; 
+      }
+      else
+      {
+         myAudioMixer.SetFloat("MusicVolume", 0);
+         myMusicStatus = true;
+      }
    }
+
    //private void CheckPause()
    //{
 
    //}
    private void Update()
    {
-      //CheckPause();   
+      MasterVolume();
    }
 
    //Play-metoder
