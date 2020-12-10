@@ -51,7 +51,6 @@ public class CoinScript : MonoBehaviour
     public void SetPopUp()
     {
         GameObject foundGameObject = GameObject.Find("P_PopUpText(Clone)");
-        Debug.Log(foundGameObject);
         GameObject textObject = Instantiate(myTextObject, foundGameObject.transform);
         Vector3 myNewPosition = gameObject.transform.position;
         myNewPosition.y = myNewPosition.y + 1f;
