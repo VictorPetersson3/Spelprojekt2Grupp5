@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MA_LevelGradients 2
+  m_Name: MA_GradientDecor
   m_Shader: {fileID: -6465566751694194690, guid: 202df0d89a35cb54fac9f92c9ea9bdf1,
     type: 3}
   m_ShaderKeywords: FRESNEL_ON
@@ -74,6 +74,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimStrength: 0.25
+    - _SampleGI: 0
     - _Smoothness: 0.12
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -89,7 +90,7 @@ Material:
     - _EmissionColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 0, g: 0, b: 0, a: 0}
-    - _Tint: {r: 0.54152507, g: 0.55616087, b: 0.9183972, a: 1}
+    - _Tint: {r: 0.5411765, g: 0.5568628, b: 1, a: 1}
 --- !u!114 &7093863592690812804
 MonoBehaviour:
   m_ObjectHideFlags: 11
