@@ -381,6 +381,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 384281993533331207, guid: 81555027a4ef5ac4d8bd60443924f73c,
+        type: 3}
+      propertyPath: m_BlockingObjects
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 384281993533331256, guid: 81555027a4ef5ac4d8bd60443924f73c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -486,6 +491,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 384281993533331257, guid: 81555027a4ef5ac4d8bd60443924f73c,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 384281993533331257, guid: 81555027a4ef5ac4d8bd60443924f73c,
+        type: 3}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1257312184341469099, guid: 81555027a4ef5ac4d8bd60443924f73c,
         type: 3}
       propertyPath: myLevelManager
@@ -504,6 +519,11 @@ PrefabInstance:
     - target: {fileID: 3414502079906314242, guid: 81555027a4ef5ac4d8bd60443924f73c,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3414502079906314242, guid: 81555027a4ef5ac4d8bd60443924f73c,
+        type: 3}
+      propertyPath: m_BlocksRaycasts
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4478581454930601773, guid: 81555027a4ef5ac4d8bd60443924f73c,
