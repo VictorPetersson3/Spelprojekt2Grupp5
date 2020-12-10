@@ -102,5 +102,10 @@ public class AudioManager : MonoBehaviour
       myUI[(int)anEnum].Play();
    }
 
+    public void StopWalkingEffect()
+    {
+        myEffects[(int)EEffects.FOOTSTEPS].Stop();
+    }
+
 
 }
