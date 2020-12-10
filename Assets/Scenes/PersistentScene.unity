@@ -155,6 +155,11 @@ PrefabInstance:
       propertyPath: myEndScreen
       value: 
       objectReference: {fileID: 1955278943}
+    - target: {fileID: 7943136357689003459, guid: 9c9b3c94d6e42d84092024e89c0b6a35,
+        type: 3}
+      propertyPath: myGameOverScreen
+      value: 
+      objectReference: {fileID: 1268156894}
     - target: {fileID: 7943136357689003468, guid: 9c9b3c94d6e42d84092024e89c0b6a35,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -486,6 +491,11 @@ PrefabInstance:
       propertyPath: myLevelManager
       value: 
       objectReference: {fileID: 545642577}
+    - target: {fileID: 1257312184341469099, guid: 81555027a4ef5ac4d8bd60443924f73c,
+        type: 3}
+      propertyPath: myUIObject
+      value: 
+      objectReference: {fileID: 1268156892}
     - target: {fileID: 3414502079906314242, guid: 81555027a4ef5ac4d8bd60443924f73c,
         type: 3}
       propertyPath: m_Alpha
@@ -618,6 +628,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81555027a4ef5ac4d8bd60443924f73c, type: 3}
+--- !u!1 &1268156892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 384281993533331204, guid: 81555027a4ef5ac4d8bd60443924f73c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1005911170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1268156894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1257312184341469099, guid: 81555027a4ef5ac4d8bd60443924f73c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1005911170}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268156892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436f88ec6a935e648ac0bc9f7b700194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1442478485
 PrefabInstance:
   m_ObjectHideFlags: 0

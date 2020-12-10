@@ -9,8 +9,9 @@ public class Sc_EndGameOver : MonoBehaviour
     Sc_LevelManager myLevelManager;
     [SerializeField]
     CanvasGroup myCanvas;
+    [SerializeField]
+    private GameObject myUIObject;
 
-   
     public void FadeIn()
     {
         TurnOnMenu();
@@ -34,10 +35,10 @@ public class Sc_EndGameOver : MonoBehaviour
     }
     private void TurnOffMenu()
     {
-        this.gameObject.SetActive(false);
+        myUIObject.SetActive(false);
     }
     private void TurnOnMenu()
     {
-        this.gameObject.SetActive(true);
+        myUIObject.SetActive(true);
     }
 }
