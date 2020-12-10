@@ -23,14 +23,14 @@ public class Sc_EndGameOver : MonoBehaviour
     }
     public void CloseGame()
     {
-        FadeOut();
         myLevelManager.LoadMainMenu();
+        FadeOut();
         Invoke("TurnOffMenu", 1.0f);
     }
     public void RetryGame()
     {
-        FadeOut();
         myLevelManager.ReloadLevel();
+        FadeOut();
         Invoke("TurnOffMenu", 1.0f);
     }
     private void TurnOffMenu()
