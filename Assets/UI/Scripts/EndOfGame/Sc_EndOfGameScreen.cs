@@ -25,9 +25,10 @@ public class Sc_EndOfGameScreen : MonoBehaviour
     private Vector3 myStartPosition = new Vector3(0.0f, -1000.0f, 0.0f);
     private Vector3 myEndPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
-    public void GetLevelData(int aAmountOfMoney, int aAmountOfStars)
+    public void GetLevelData(int aAmountOfMoney, int aAmountOfStars, int aAmountOfRequiredMoney)
     {
         myAmountOfMoneySpent_TMP.text = aAmountOfMoney.ToString();
+        myAmountOfMoneyRequired_TMP.text = aAmountOfRequiredMoney.ToString();
         switch (aAmountOfStars)
         {
             case 0:
@@ -53,6 +54,7 @@ public class Sc_EndOfGameScreen : MonoBehaviour
     }
     public void MoveDown()
     {
+        Invoke("ResetScoreSymbols", 1.0f);
         LeanTween.move(myEndMenuRect, myStartPosition, 0.50f).setEase(LeanTweenType.easeInCubic);
     }
     public void CloseGame()
@@ -64,5 +66,12 @@ public class Sc_EndOfGameScreen : MonoBehaviour
     {
         MoveDown();
         myLevelManager.ReloadLevel();
+    }
+
+    private void ResetScoreSymbols()
+    {
+        my1Star.LockScore();
+        my2Star.LockScore();
+        my3Star.LockScore();
     }
 }
