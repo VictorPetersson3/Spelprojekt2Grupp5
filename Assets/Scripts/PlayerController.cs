@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public void ToggleStart()
     {
         myMovementStart = !myMovementStart;
+        AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.FOOTSTEPS);
     }
 
     void Start()
@@ -70,6 +71,8 @@ public class PlayerController : MonoBehaviour
             myAnimator.SetBool("isOffRoad", false);
             if (step > myMovementList.Count - 1)
             {
+                AudioManager.ourInstance.StopWalkingEffect();
+                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.LOSS);
                 myDeathEffect.transform.position = transform.position;
                 myDeathEffect.Play();
                 //myPlayerModel.SetActive(false);
@@ -81,6 +84,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (myMovementList[step].IsEndTile)
             {
+                AudioManager.ourInstance.StopWalkingEffect();
+                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.WIN);
                 myAnimator.SetBool("isWalking", false);
                 myAnimator.SetBool("isInGoal", true);
                 myPathManager.ResetPath();
@@ -122,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
                     if (distance < 0.1f)
                     {
+                        AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PORTAL);
                         transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
 
                         myMovementList = myPathManager.GetPortals[i].GetMovementList();
