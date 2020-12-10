@@ -37,7 +37,7 @@ public class WorldController : MonoBehaviour
             Debug.LogError("There should never be two world controllers.");
         
         Instance = this;
-        ScaleBoarder();
+        Invoke("ScaleBorder", 1.0f);
 
     }
     
@@ -49,7 +49,7 @@ public class WorldController : MonoBehaviour
         return this.myWorld.GetTileAt(x, z);
     }
 
-    void ScaleBoarder()
+    void ScaleBorder()
     {
         float zNormalized = myDepth * 0.105f;
         float xNormalized = myWidth * 0.105f;
@@ -59,7 +59,6 @@ public class WorldController : MonoBehaviour
 
         GameObject obj = Instantiate(myMapBoarder, new Vector3(xPos, 0, zPos), Quaternion.Euler(-90, 0, 0));
         obj.transform.localScale = new Vector3(xNormalized, 1, zNormalized);
-
     }
     [ExecuteInEditMode]
     private void OnDrawGizmos()
