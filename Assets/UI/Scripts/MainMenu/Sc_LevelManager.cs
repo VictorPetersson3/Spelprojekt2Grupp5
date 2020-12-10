@@ -17,14 +17,15 @@ public class Sc_LevelManager : MonoBehaviour
         if (myInstance == null)
         {
             myInstance = this;
-            SceneManager.LoadScene(3, LoadSceneMode.Additive);
-            myCurrentSceneIndex = 3;
+            SceneManager.LoadScene(5, LoadSceneMode.Additive);
+            myCurrentSceneIndex = 5;
         }
     }
 
     public void LoadGame(int aSceneIndex)
     {
         myGameManager.ResetGameManager();
+        myGameManager.ResetAmountOfMoney();
         myLoadingScreen.gameObject.SetActive(true);
         SceneManager.UnloadSceneAsync((int)myCurrentSceneIndex);
         myCurrentSceneIndex = aSceneIndex;
@@ -47,7 +48,7 @@ public class Sc_LevelManager : MonoBehaviour
     }
     public void LoadMainMenu()
     {
-        LoadGame(3);
+        LoadGame(5);
     }
     IEnumerator CoRoutineLoad()
     {
