@@ -26,7 +26,7 @@ public class CoinScript : MonoBehaviour
         LeanTween.rotateAround(gameObject, Vector3.up, 360, myRotatingSpeed).setLoopClamp();
         myGameManager = GameManager.globalInstance;
 
-        if (GameObject.Find("PopUpText(Clone)") == false)
+        if (GameObject.Find("P_PopUpText(Clone)") == false)
         {
             myCanvasObject = Instantiate(myParentedObject);
             SceneManager.MoveGameObjectToScene(myCanvasObject, SceneManager.GetSceneAt(1));
@@ -50,7 +50,8 @@ public class CoinScript : MonoBehaviour
 
     public void SetPopUp()
     {
-        GameObject foundGameObject = GameObject.Find("PopUpText(Clone)");
+        GameObject foundGameObject = GameObject.Find("P_PopUpText(Clone)");
+        Debug.Log(foundGameObject);
         GameObject textObject = Instantiate(myTextObject, foundGameObject.transform);
         Vector3 myNewPosition = gameObject.transform.position;
         myNewPosition.y = myNewPosition.y + 1f;
