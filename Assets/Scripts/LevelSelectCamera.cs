@@ -36,10 +36,11 @@ public class LevelSelectCamera : MonoBehaviour
    [Header("Default offset for top down camera")]
    [SerializeField] private Vector3 myTopDownPosition = new Vector3(0, 10, -3);
    [SerializeField] private Quaternion myTopDownRotation = Quaternion.Euler(75, 0, 0);
+    [Header("UI Camera")]
+    [SerializeField] private Camera myUICamera;
 
 
-
-   private GameObject myObjectInFocus = null;
+    private GameObject myObjectInFocus = null;
 
    private void Start()
    {
@@ -49,6 +50,7 @@ public class LevelSelectCamera : MonoBehaviour
    }
    void Update()
    {
+        myUICamera.orthographicSize = Camera.main.orthographicSize;
       if (myObjectInFocus != null)
       {
          myTopDownFocus = myObjectInFocus.transform.position + myTopDownOffset;
