@@ -18,10 +18,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 523
+    x: 673
     y: -133
-    width: 845
-    height: 2216
+    width: 692
+    height: 1756
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -941,7 +941,7 @@ VisualEffectResource:
         - m_ExpressionIndex: 4
           m_Value: {x: 0, y: 0, z: 0}
         - m_ExpressionIndex: 5
-          m_Value: {x: 0, y: -0.41990876, z: 0}
+          m_Value: {x: 0, y: -0.27, z: 0}
         - m_ExpressionIndex: 6
           m_Value: {x: 1.5, y: -1, z: 0}
         - m_ExpressionIndex: 8
@@ -1891,7 +1891,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614595}
-  m_UIPosition: {x: 944, y: 877}
+  m_UIPosition: {x: 939, y: 668}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1929,7 +1929,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614593}
   - {fileID: 8926484042661614656}
   - {fileID: 8926484042661614698}
-  m_UIPosition: {x: 935, y: 1332}
+  m_UIPosition: {x: 939, y: 872}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2197,7 +2197,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Vector, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"vector":{"x":0.0,"y":-0.4199087619781494,"z":0.0}}'
+      m_SerializableObject: '{"vector":{"x":0.0,"y":-0.27000001072883608,"z":0.0}}'
     m_Space: 0
   m_Property:
     name: Force
@@ -3278,7 +3278,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614682}
       inputSlot: {fileID: 8926484042661614594}
-    position: {x: 523, y: 1758}
+    position: {x: 673, y: 1275}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614682
