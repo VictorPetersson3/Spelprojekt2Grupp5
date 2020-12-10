@@ -39,6 +39,8 @@ public class RailButton : ObstructTileMap
             if (distance < 0.05f)
             {
                 mySwitch = true;
+                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PRESSUREPLATE);
+                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.OPENDOOR);
             }
         }
     }

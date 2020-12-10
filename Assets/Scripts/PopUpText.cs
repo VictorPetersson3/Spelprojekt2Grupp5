@@ -24,7 +24,7 @@ public class PopUpText : MonoBehaviour
     void Update()
     {
         Vector3 cameraPos = Camera.main.transform.position;
-        cameraPos.z = cameraPos.z - 10f;
+        cameraPos.z = cameraPos.z - 15f;
         myTextMeshTransform.rotation = Quaternion.LookRotation(myTextMeshTransform.position - cameraPos);
     }
 

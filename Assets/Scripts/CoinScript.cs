@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CoinScript : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class CoinScript : MonoBehaviour
     [SerializeField]
     private float myRotatingSpeed;
 
+    GameObject myCanvasObject;
+
     GameManager myGameManager;
     PopUpText myPopUpText;
 
@@ -22,6 +25,13 @@ public class CoinScript : MonoBehaviour
         gameObject.SetActive(true);
         LeanTween.rotateAround(gameObject, Vector3.up, 360, myRotatingSpeed).setLoopClamp();
         myGameManager = GameManager.globalInstance;
+
+        if (GameObject.Find("P_PopUpText(Clone)") == false)
+        {
+            myCanvasObject = Instantiate(myParentedObject);
+            SceneManager.MoveGameObjectToScene(myCanvasObject, SceneManager.GetSceneAt(1));
+        }   
+
         SetPopUp();
     }
 
@@ -40,8 +50,8 @@ public class CoinScript : MonoBehaviour
 
     public void SetPopUp()
     {
-        GameObject canvasObject = Instantiate(myParentedObject);
-        GameObject textObject = Instantiate(myTextObject, canvasObject.transform);
+        GameObject foundGameObject = GameObject.Find("P_PopUpText(Clone)");
+        GameObject textObject = Instantiate(myTextObject, foundGameObject.transform);
         Vector3 myNewPosition = gameObject.transform.position;
         myNewPosition.y = myNewPosition.y + 1f;
         textObject.transform.position = myNewPosition;
