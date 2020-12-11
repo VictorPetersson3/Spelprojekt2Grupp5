@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
    [SerializeField] private AudioSource[] myMusic;
    [SerializeField] private AudioSource[] myUI;
 
-   [SerializeField] private Scrollbar myScollbar;
+   //[SerializeField] private Scrollbar myScollbar;
 
    private bool myMusicStatus = true;
    public enum EAmbience { CHIMES, WIND };
@@ -57,8 +57,8 @@ public class AudioManager : MonoBehaviour
    }
    public void MasterVolume()
    {
-      float vol = myScollbar.value;
-      myAudioMixer.SetFloat("MasterVolume", vol);
+      //float vol = myScollbar.value;
+      //myAudioMixer.SetFloat("MasterVolume", vol);
    }
    public void MusicVolume()
    {

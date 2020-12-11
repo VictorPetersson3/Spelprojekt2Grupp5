@@ -55,7 +55,7 @@ public class PathManager : MonoBehaviour
     }
     private void Start()
     {
-        Init();
+        //Init();
     }
     void Init()
     {
