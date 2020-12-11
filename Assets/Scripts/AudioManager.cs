@@ -16,7 +16,6 @@ public class AudioManager : MonoBehaviour
    [SerializeField] private AudioSource[] myMusic;
    [SerializeField] private AudioSource[] myUI;
 
-   [SerializeField] private Scrollbar myScollbar;
 
    private bool myMusicStatus = true;
    public enum EAmbience { CHIMES, WIND };
@@ -26,6 +25,7 @@ public class AudioManager : MonoBehaviour
 
    [SerializeField] private EMusic myPlayingMusic;
 
+   private float myVolume = 1;
    private List<AudioSource> myAudioSources = new List<AudioSource>();
    //private List<bool> myAudioWasPlaying = new List<bool>();
    //private float myLastTimeScale;
@@ -57,20 +57,18 @@ public class AudioManager : MonoBehaviour
    }
    public void MasterVolume()
    {
-      float vol = myScollbar.value;
-      myAudioMixer.SetFloat("MasterVolume", vol);
+        myVolume = 40.0f * myVolume  - 40.0f;
+      myAudioMixer.SetFloat("MasterVolume", myVolume);
    }
    public void MusicVolume()
    {
       if (myMusicStatus)
       {
          myAudioMixer.SetFloat("MusicVolume", -80.0f);
-         myMusicStatus = false;
       }
       else
       {
          myAudioMixer.SetFloat("MusicVolume", 0);
-         myMusicStatus = true;
       }
    }
 
@@ -80,10 +78,12 @@ public class AudioManager : MonoBehaviour
    //}
    private void Update()
    {
+      GetAudioStats();
       MasterVolume();
-   }
+      MusicVolume();
+    }
 
-   //Play-metoder
+    //Play-metoder
    public void PlayAmbience(EAmbience anEnum)
    {
       myAmbience[(int)anEnum].Play();
@@ -107,5 +107,9 @@ public class AudioManager : MonoBehaviour
         myEffects[(int)EEffects.FOOTSTEPS].Stop();
     }
 
-
+    private void GetAudioStats()
+    {
+        myVolume = GameManager.globalInstance.GetAudioVolume();
+        myMusicStatus = GameManager.globalInstance.GetPlayMusic();
+    }
 }

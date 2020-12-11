@@ -26,11 +26,12 @@ public class GameManager : MonoBehaviour
     private SaveSlot mySaveSlot;
     private bool myLoadedLevel;
     private bool myMusicIsPlaying = true;
+    bool myMusicBoolOn = true;
+
     private int myAllLevels = 40;
     private int myActiveScene;
     private float mySoundVolume = 1;
-
-
+    private Scrollbar myScrollBar;
     public static GameManager globalInstance;
     //[SerializeField] Text myMoneyText;
     //[SerializeField] Text myLevelText;
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        
+        myScrollBar = myOptionsMenu.GetScrollbar();
 
         if (globalInstance == null)
         {
@@ -145,6 +146,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        mySoundVolume = myScrollBar.value;
         //if (SceneManager.GetActiveScene().buildIndex != 0)
         //{
         //    CheckTextStatus();
@@ -629,12 +631,18 @@ public class GameManager : MonoBehaviour
     {
         return myMusicIsPlaying;
     }
-    public void SetAudioVolume(float aVolume)
+   
+    public void SetMusicIsPlaying()
     {
-        mySoundVolume = aVolume;
-    }
-    public void SetMusicIsPlaying(bool aMusicSwitch)
-    {
-        myMusicIsPlaying = aMusicSwitch;
+        if (myMusicBoolOn)
+        {
+            myMusicIsPlaying = true;
+            myMusicBoolOn = false;
+        }
+        else
+        {
+            myMusicIsPlaying = false;
+            myMusicBoolOn = true;
+        }
     }
 }
