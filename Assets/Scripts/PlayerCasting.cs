@@ -26,6 +26,7 @@ public class PlayerCasting : MonoBehaviour
         {
             Debug.Log("HIT " + myMoneyHit.collider.name);
             myMoneyHit.transform.GetComponent<CoinScript>().AddingMoney();
+            AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.COIN);
         }
     }
 }

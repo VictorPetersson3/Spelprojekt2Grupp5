@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     //[SerializeField] Text myMoneyText;
     //[SerializeField] Text myLevelText;
 
+    public List<Scene> myListOfScenes = new List<Scene>();
 
     [SerializeField] short myFirstActTransition, mySecondActTransition;
 
@@ -586,6 +587,11 @@ public class GameManager : MonoBehaviour
     public int GetLevelStars(int aLevelIndex)
     {
         return myLevelList[aLevelIndex].myAmountOfStars;
+    }
+
+    public int GetActiveScene()
+    {
+        return myActiveScene;
     }
 
 }
