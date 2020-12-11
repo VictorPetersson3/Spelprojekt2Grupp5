@@ -17,8 +17,8 @@ public class Sc_LevelManager : MonoBehaviour
         if (myInstance == null)
         {
             myInstance = this;
-            SceneManager.LoadScene(5, LoadSceneMode.Additive);
-            myCurrentSceneIndex = 5;
+            SceneManager.LoadScene(6, LoadSceneMode.Additive);
+            myCurrentSceneIndex = 6;
         }
     }
 
@@ -48,7 +48,7 @@ public class Sc_LevelManager : MonoBehaviour
     }
     public void LoadMainMenu()
     {
-        LoadGame(5);
+        LoadGame(6);
     }
     IEnumerator CoRoutineLoad()
     {
