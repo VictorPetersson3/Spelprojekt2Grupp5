@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         public int myTwoStarScore;
         public int myOneStarScore;
         public int myStartingMoney;
+        public int myCoinValue;
     }
 
 
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
         public int myTwoStarScore;
         public int myOneStarScore;
         public int myStartingMoney;
+        public int myCoinValue;
         [Header("\nPlayer Progress\n")]
         public int myAmountOfMoney;
         public int myAmountOfStars;
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
 
         if (globalInstance == null)
         {
@@ -110,9 +113,11 @@ public class GameManager : MonoBehaviour
                 level.myTwoStarScore = 0;
                 level.myAmountOfStars = 0;
                 level.myFinishedLevel = false;
+                level.myCoinValue = 0;
                 myLevelList.Add(level);
             }
         }
+
 
         string path = "";
 
@@ -346,7 +351,8 @@ public class GameManager : MonoBehaviour
                 myLevelName = myLevelList[i].myLevelName,
                 myTwoStarScore = myLevelList[i].myTwoStarScore,
                 myOneStarScore = myLevelList[i].myOneStarScore,
-                myStartingMoney = myLevelList[i].myStartingMoney
+                myStartingMoney = myLevelList[i].myStartingMoney,
+                myCoinValue = myLevelList[i].myCoinValue
             };
 
 
