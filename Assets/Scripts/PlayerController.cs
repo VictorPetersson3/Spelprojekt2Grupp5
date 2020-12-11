@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
                 myAnimator.SetBool("isWalking", false);
                 myAnimator.SetBool("isOffRoad", true);
                 myPathManager.ResetPath();
-                myGameManger.SetFinishedLevel();
+                myGameManger.LoseGame();
             }
             else if (myMovementList[step].IsEndTile)
             {
