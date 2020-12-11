@@ -9,6 +9,10 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private Sc_EndOfGameScreen myEndScreen;
+    [SerializeField]
+    private Sc_EndGameOver myGameOverScreen;
     enum SaveSlot
     {
         Save1 = 1,
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
     //[SerializeField] Text myMoneyText;
     //[SerializeField] Text myLevelText;
 
+    public List<Scene> myListOfScenes = new List<Scene>();
 
     [SerializeField] short myFirstActTransition, mySecondActTransition;
 
@@ -118,24 +123,14 @@ public class GameManager : MonoBehaviour
         
         if (File.Exists(path))
         {
-            Debug.Log("re2");
             LoadFile(1);
         }
         else
         {
             LoadJsonFile();
         }
-
-        
-
-
     }
 
-
-    void Start()
-    {
-
-    }
 
 
     private void Update()
@@ -160,6 +155,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+
         int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index + 1);
         //ResetAmountOfMoney(index - 1);
@@ -195,18 +191,21 @@ public class GameManager : MonoBehaviour
         int twoStars = 2;
         int threeStars = 3;
 
+        int achievedStars = 0;
+
+
         int myOneStarScore = myLevelList[myActiveScene].myOneStarScore;
         int myTwoStarScore = myLevelList[myActiveScene].myTwoStarScore;
 
-        int amountOfMoneyEarned = myLevelList[myActiveScene].myAmountOfMoney;
+        int amountOfMoneySpent = myLevelList[myActiveScene].myAmountOfMoney;
 
 
-        if (amountOfMoneyEarned < myLevelList[myActiveScene].myFinishedScore)
+        if (amountOfMoneySpent < myLevelList[myActiveScene].myFinishedScore)
         {
             myLevelList[myActiveScene].myFinishedScore = myLevelList[myActiveScene].myAmountOfMoney;
         }
 
-        if (amountOfMoneyEarned > 0 && amountOfMoneyEarned < myTwoStarScore)
+        if (amountOfMoneySpent > 0 && amountOfMoneySpent < myTwoStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
@@ -226,11 +225,12 @@ public class GameManager : MonoBehaviour
                 }
 
             }
+
+            achievedStars = 3;
             Debug.Log("Finished LEVEL\nTHREE STARS");
 
-            //UI.ShowFailScreen(amountOfMoneyEarned, 1);
         }
-        else if (amountOfMoneyEarned >= myTwoStarScore && amountOfMoneyEarned < myOneStarScore)
+        else if (amountOfMoneySpent >= myTwoStarScore && amountOfMoneySpent < myOneStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
@@ -249,11 +249,11 @@ public class GameManager : MonoBehaviour
                     myLevelList[myActiveScene].myAmountOfStars += twoStars;
                 }
             }
+            achievedStars = 2;
             Debug.Log("Finished Level!\nTWO STARS");
 
-            //UI.ShowWinScreen(amountOfMoneyEarned, 2);
         }
-        else if (amountOfMoneyEarned >= myOneStarScore)
+        else if (amountOfMoneySpent >= myOneStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
@@ -272,14 +272,43 @@ public class GameManager : MonoBehaviour
                 }
             }
 
+            achievedStars = 1;
             Debug.Log("Finished Level!\nONE STARS");
 
-            //UI.ShowWinScreen(amountOfMoneyEarned, 3);
         }
 
+        if (amountOfMoneySpent > 0 && amountOfMoneySpent < myTwoStarScore)
+        {
+            myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myTwoStarScore);
+        }
+        else if (amountOfMoneySpent >= myTwoStarScore && amountOfMoneySpent < myOneStarScore)
+        {
+            myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myTwoStarScore);
+        }
+        else
+        {
+            myEndScreen.GetLevelData(amountOfMoneySpent, achievedStars, myLevelList[myActiveScene].myOneStarScore);
+        }
+            
+
+        if (!hasMoved)
+        {
+            //SaveFile(1);
+            myEndScreen.MoveUp();
+            hasMoved = true;
+        }
+    }
+    bool hasMoved = false;
+
+    public void LoseGame()
+    {
+        myGameOverScreen.FadeIn();
     }
 
-
+    public void ResetGameManager()
+    {
+        hasMoved = false;
+    }
     public void ResetPlayerProgress()
     {
         for (int i = 1; i < myAllLevels; i++)
@@ -344,7 +373,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    FileUtil.CopyFileOrDirectory(path, backupPath);
+                    //FileUtil.CopyFileOrDirectory(path, backupPath);
                     break;
                 }
             }
@@ -565,6 +594,11 @@ public class GameManager : MonoBehaviour
     public int GetLevelStars(int aLevelIndex)
     {
         return myLevelList[aLevelIndex].myAmountOfStars;
+    }
+
+    public int GetActiveScene()
+    {
+        return myActiveScene;
     }
 
 }

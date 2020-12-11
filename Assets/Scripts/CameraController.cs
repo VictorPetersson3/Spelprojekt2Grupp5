@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
@@ -15,17 +16,30 @@ public class CameraController : MonoBehaviour
 
     public Renderer[] myTargets;
 
+    public float targetCameraWidth = 35f;
+
     [SerializeField]
     float myZoomPaddingPortrait = -20f;
     [SerializeField]
     float myZoomPaddingLandscape = 2f;
     [SerializeField]
-    float myZoomPaddingTopDown = 22f;
+    float myZoomPaddingTopDownPortrait = 22f;
+    [SerializeField]
+    float myZoomPaddingTopDownLandscape = 22f;
     [SerializeField]
     float transitionSpeed = 5f;
     [SerializeField]
     Vector3 myWorldCenterPostion = Vector3.zero;
+    [SerializeField]
+    float maxX;
+    [SerializeField]
+    float minX;
+    [SerializeField]
+    float maxY;
+    [SerializeField]
+    float minY;
 
+    float startingCameraWidth;
 
     float currentPadding;
 
@@ -36,34 +50,40 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originalPosition = transform.position;
+        originalPosition = Camera.main.transform.position;
         originalRotation = transform.rotation;
+
+        targetCameraWidth = (Mathf.Abs(Mathf.Sqrt(Mathf.Pow(myTargets[0].bounds.size.x, 2) + Mathf.Pow(myTargets[0].bounds.size.z, 2))) / 1.86f);
+        startingCameraWidth = targetCameraWidth;
+
     }
 
     private void LateUpdate()
-    {               
-        if(Screen.orientation == ScreenOrientation.LandscapeLeft||Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
+    {    
+
+        if (Screen.orientation == ScreenOrientation.LandscapeLeft||Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
         {
-            if(myTargets[0] != null)
+            if (myTargets[0] != null && !shouldMoveToTopDownView)
             {
-                Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) + myZoomPaddingLandscape);
+                targetCameraWidth = (Mathf.Abs(Mathf.Sqrt(Mathf.Pow(myTargets[0].bounds.size.x, 2) + Mathf.Pow(myTargets[0].bounds.size.z, 2))) / 1.86f);
+
+                Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingLandscape;
+
+                Debug.Log(targetCameraWidth);
             }
-            else
-            {
-                Camera.main.orthographicSize = ((Camera.main.aspect) + myZoomPaddingLandscape);
-            }
-            //Debug.Log("In landscape mode");
+           
         }
         else if (Screen.orientation == ScreenOrientation.Portrait && !shouldMoveToTopDownView)
         {
             if (myTargets[0] != null)
             {
-                Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) - myZoomPaddingPortrait);
-            }
-            else
-            {
-                Camera.main.orthographicSize = ((Camera.main.aspect) + myZoomPaddingPortrait);
-            }
+                Debug.Log(targetCameraWidth);
+
+                targetCameraWidth = (Mathf.Abs(Mathf.Sqrt(Mathf.Pow(myTargets[0].bounds.size.x, 2) + Mathf.Pow(myTargets[0].bounds.size.z, 2)))/1.86f);
+
+
+                Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingPortrait;
+            }            
         }
     }
 
@@ -72,18 +92,37 @@ public class CameraController : MonoBehaviour
     {
         if(shouldMoveToTopDownView)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime* transitionSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime* transitionSpeed);
-            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, myZoomPaddingTopDown, Time.deltaTime * transitionSpeed);
+            if (!Input.GetMouseButtonDown(0))
+            {
+                transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime * transitionSpeed);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(90, 0, 0), Time.deltaTime * transitionSpeed);     
+                switch(Screen.orientation)
+                {
+                    case ScreenOrientation.Portrait:
+                        Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingTopDownPortrait;
+                        break;
+                    case ScreenOrientation.LandscapeLeft:
+                        Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingTopDownLandscape;
+                        break;
+                    case ScreenOrientation.LandscapeRight:
+                        Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingTopDownLandscape;
+                        break;
+                }
+            }
         }
 
         if (!shouldMoveToTopDownView)
         {
-            transform.position = Vector3.Lerp(transform.position, originalPosition, Time.deltaTime * transitionSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * transitionSpeed);
+            if(!Input.GetMouseButtonDown(0))
+            {
+                transform.position = Vector3.Lerp(transform.position, originalPosition, Time.deltaTime * transitionSpeed);
+
+                transform.rotation = Quaternion.Lerp(transform.rotation, originalRotation, Time.deltaTime * transitionSpeed);             
+            }
+
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) /*&& Input.touchCount>1*/)
         {
             MoveToTopDownView();
         }
@@ -96,20 +135,11 @@ public class CameraController : MonoBehaviour
         else if(Input.GetMouseButton(0))
         {
             Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Camera.main.transform.position += direction;
-        }
+            transform.position += direction;
+         
 
-        if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
-        {
-            //Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) + myZoomPaddingLandscape);
-            //Debug.Log("In landscape mode");
+            //transform.localPosition = new Vector3(Mathf.Clamp(transform.position.x+direction.x,originalPosition.x+minX,originalPosition.x+maxX),(Mathf.Clamp(transform.position.y + direction.y, originalPosition.x + minY, originalPosition.x + maxY)),transform.position.z+direction.z);
 
-            currentPadding = myZoomPaddingLandscape;
-        }
-        else if (Screen.orientation == ScreenOrientation.Portrait && !shouldMoveToTopDownView)
-        {
-            //Camera.main.orthographicSize = ((myTargets[0].bounds.size.z / Camera.main.aspect) - myZoomPaddingPortrait);
-            currentPadding = myZoomPaddingPortrait;
         }
     }
 

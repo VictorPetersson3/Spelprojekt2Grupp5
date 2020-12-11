@@ -5,30 +5,47 @@ using UnityEngine.SceneManagement;
 
 public class Sc_LevelManager : MonoBehaviour
 {
+
     public static Sc_LevelManager myInstance;
     public GameObject myLoadingScreen;
+    public GameManager myGameManager;
 
     private int myCurrentSceneIndex;
-    
-    
+
     private void Awake()
     {
         if (myInstance == null)
         {
             myInstance = this;
-            SceneManager.LoadSceneAsync(3, LoadSceneMode.Additive);
-            myCurrentSceneIndex = 3;
+            SceneManager.LoadScene(6, LoadSceneMode.Additive);
+            myCurrentSceneIndex = 6;
         }
     }
 
-    
     public void LoadGame(int aSceneIndex)
     {
+        myGameManager.ResetGameManager();
+        myGameManager.ResetAmountOfMoney();
         myLoadingScreen.gameObject.SetActive(true);
         SceneManager.UnloadSceneAsync((int)myCurrentSceneIndex);
         myCurrentSceneIndex = aSceneIndex;
-        //Invoke("DelaySpawn", 5.0f);
-        StartCoroutine(CoRoutineLoad());
+        SceneManager.LoadScene(myCurrentSceneIndex, LoadSceneMode.Additive);
+        Invoke("LoadAfterXTime", 0.80f);
+        //StartCoroutine(CoRoutineLoad());
+    }
+    void LoadAfterXTime()
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(myCurrentSceneIndex));
+        myLoadingScreen.gameObject.SetActive(false);
+    }
+    public void ReloadLevel()
+    {
+        myGameManager.ResetAmountOfMoney();
+        LoadGame(myCurrentSceneIndex);
+    }
+    public void LoadMainMenu()
+    {
+        LoadGame(6);
     }
     IEnumerator CoRoutineLoad()
     {
@@ -37,13 +54,14 @@ public class Sc_LevelManager : MonoBehaviour
         {
             yield return null;
         }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(myCurrentSceneIndex));
+
         yield return new WaitForSecondsRealtime(1);
         myLoadingScreen.gameObject.SetActive(false);
-
     }
     public void QuitApplication()
     {
         Application.Quit();
     }
-    
+
 }

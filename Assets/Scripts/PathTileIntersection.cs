@@ -59,6 +59,8 @@ public class PathTileIntersection : PathTile
             myPathTiles[(int)myOutDirection] = value;
         }
     }
+   
+
     void PassThroughPlayer()
     {
 

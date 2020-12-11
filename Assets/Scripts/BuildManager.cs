@@ -14,7 +14,7 @@ public class BuildManager : MonoBehaviour
         if (globalInstance == null)
         {
             globalInstance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (globalInstance != this)
         {
@@ -33,7 +33,6 @@ public class BuildManager : MonoBehaviour
     [System.Serializable]
     public class Pool
     {
-
         public int myTileId;
         public PathTile myTilePrefab;
         public int myAmountOfTiles;
@@ -60,6 +59,7 @@ public class BuildManager : MonoBehaviour
             }
         }
     }
+
     public PathTile SpawnFromPool(int aTag, Quaternion aRotation, Vector3 aPosition)
     {
         for (int x = 0; x < myPoolList.Count; x++)
@@ -68,6 +68,7 @@ public class BuildManager : MonoBehaviour
             {
                 if (myPoolList[x].myTileList[y].gameObject.activeSelf == false && myPoolList[x].myTileId == aTag)
                 {
+                    GameManager.globalInstance.ChangeMoney(1);
                     myPoolList[x].myTileList[y].gameObject.SetActive(true);
                     myPoolList[x].myTileList[y].transform.position = aPosition;
                     return myPoolList[x].myTileList[y];
@@ -92,9 +93,14 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public void ReturnToPool(GameObject aPooledGameObject)
+    public void ReturnMoney()
     {
-        aPooledGameObject.SetActive(false);
+        GameManager.globalInstance.ChangeMoney(-1);
+    }
+
+    public void ReturnToPool(PathTile aPooledGameObject)
+    {
+        aPooledGameObject.gameObject.SetActive(false);
         aPooledGameObject.transform.position = myOriginalSpawnPoolPosition;
     }
 }

@@ -16,7 +16,7 @@ public class LevelSelect : MonoBehaviour
     private GameObject mySelectedUI;
     private int myCurrentStars;
     [SerializeField] private int[] myStarRequirement;
-
+    [SerializeField] private GameObject myBackground;
 
     private void Start()
     {
@@ -27,28 +27,31 @@ public class LevelSelect : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0) && Input.touchCount <= 1)
+        if (Input.GetMouseButtonUp(0) && Input.touchCount <= 1)
         {
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                mySelectedLevel = WhatDidIHit();
-            }
 
-            Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(mySelectedLevel);
-
-            if (mySelectedLevel != null)
+            mySelectedLevel = WhatDidIHit();
+            Debug.Log(mySelectedLevel);
+            if (mySelectedLevel != myBackground)
             {
-                mySelectedUI.SetActive(false);
+                myMainUI.SetActive(false);
                 mySelectedUI = mySelectedLevel.transform.parent.GetChild(0).gameObject;
                 mySelectedUI.SetActive(true);
+                Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(mySelectedLevel);
             }
             else
             {
                 mySelectedUI.SetActive(false);
-                mySelectedUI = myMainUI;
-                mySelectedUI.SetActive(true);
+                myMainUI.SetActive(true);
+                StartCoroutine(CoRoutineLoad());
             }
         }
+    }
+    IEnumerator CoRoutineLoad()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Camera.main.gameObject.GetComponent<LevelSelectCamera>().SetFocus(null);
     }
     public GameObject WhatDidIHit()
     {
@@ -138,4 +141,9 @@ public class LevelSelect : MonoBehaviour
             }
         }
     }
+    public int[] GetStarRequirements()
+    {
+        return myStarRequirement;
+    }
+
 }
