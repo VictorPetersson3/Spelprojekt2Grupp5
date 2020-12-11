@@ -15,7 +15,7 @@ public class Sc_ScoreCounter : MonoBehaviour
     }
     void SetScoreText()
     {
-        myScore.text = GameManager.globalInstance.GetUpdatedScore().ToString();
+        //myScore.text = GameManager.globalInstance.GetUpdatedScore().ToString();
     }
 
 }

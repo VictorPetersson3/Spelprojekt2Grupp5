@@ -29,7 +29,7 @@ public class CoinScript : MonoBehaviour
         if (GameObject.Find("P_PopUpText(Clone)") == false)
         {
             myCanvasObject = Instantiate(myParentedObject);
-            SceneManager.MoveGameObjectToScene(myCanvasObject, SceneManager.GetSceneAt(1));
+            //SceneManager.MoveGameObjectToScene(myCanvasObject, SceneManager.GetSceneAt(1));
         }   
 
         SetPopUp();
