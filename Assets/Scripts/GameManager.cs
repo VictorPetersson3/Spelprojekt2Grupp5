@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     private Sc_EndOfGameScreen myEndScreen;
     [SerializeField]
     private Sc_EndGameOver myGameOverScreen;
+    [SerializeField]
+    private Sc_OptionsMenu myOptionsMenu;
+
     enum SaveSlot
     {
         Save1 = 1,
@@ -22,9 +25,11 @@ public class GameManager : MonoBehaviour
 
     private SaveSlot mySaveSlot;
     private bool myLoadedLevel;
-
+    private bool myMusicIsPlaying = true;
     private int myAllLevels = 40;
     private int myActiveScene;
+    private float mySoundVolume = 1;
+
 
     public static GameManager globalInstance;
     //[SerializeField] Text myMoneyText;
@@ -607,4 +612,29 @@ public class GameManager : MonoBehaviour
         return myActiveScene;
     }
 
+    public void ShowOptionsMenu()
+    {
+        myOptionsMenu.ShowOptionsMenu();
+    }
+    public void HideOptionsMenu()
+    {
+        myOptionsMenu.HideOptionsMenu();
+    }
+    public float GetAudioVolume()
+    {
+        return mySoundVolume;
+    }
+
+    public bool GetPlayMusic()
+    {
+        return myMusicIsPlaying;
+    }
+    public void SetAudioVolume(float aVolume)
+    {
+        mySoundVolume = aVolume;
+    }
+    public void SetMusicIsPlaying(bool aMusicSwitch)
+    {
+        myMusicIsPlaying = aMusicSwitch;
+    }
 }
