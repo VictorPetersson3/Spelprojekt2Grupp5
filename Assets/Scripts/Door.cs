@@ -13,6 +13,8 @@ public class Door : ObstructTileMap
     List<RailButton> myRailButtons = new List<RailButton>();
     [SerializeField]
     PlayerController myPlayerController;
+    [SerializeField]
+    Animator myAnimator;
 
     bool isOpen;
 
@@ -68,6 +70,8 @@ public class Door : ObstructTileMap
     public void OpenDoor()
     {
         isOpen = true;
+        myAnimator.SetBool("isOpen", true);
+
     }
     protected override void OnDrawGizmos()
     {
