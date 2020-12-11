@@ -17,8 +17,8 @@ public class Sc_LevelManager : MonoBehaviour
         if (myInstance == null)
         {
             myInstance = this;
-            SceneManager.LoadScene(6, LoadSceneMode.Additive);
-            myCurrentSceneIndex = 6;
+            SceneManager.LoadScene(16, LoadSceneMode.Additive);
+            myCurrentSceneIndex = 16;
         }
     }
 
@@ -32,14 +32,11 @@ public class Sc_LevelManager : MonoBehaviour
         SceneManager.LoadScene(myCurrentSceneIndex, LoadSceneMode.Additive);
         Invoke("LoadAfterXTime", 0.80f);
         //StartCoroutine(CoRoutineLoad());
-       
     }
     void LoadAfterXTime()
     {
-
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(myCurrentSceneIndex));
         myLoadingScreen.gameObject.SetActive(false);
-
     }
     public void ReloadLevel()
     {
@@ -48,7 +45,7 @@ public class Sc_LevelManager : MonoBehaviour
     }
     public void LoadMainMenu()
     {
-        LoadGame(6);
+        LoadGame(16);
     }
     IEnumerator CoRoutineLoad()
     {
@@ -61,8 +58,6 @@ public class Sc_LevelManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1);
         myLoadingScreen.gameObject.SetActive(false);
-
-
     }
     public void QuitApplication()
     {

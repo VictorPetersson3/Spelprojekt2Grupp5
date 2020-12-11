@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private Sc_EndOfGameScreen myEndScreen;
+    [SerializeField]
+    private Sc_EndGameOver myGameOverScreen;
     enum SaveSlot
     {
         Save1 = 1,
@@ -297,6 +299,11 @@ public class GameManager : MonoBehaviour
         }
     }
     bool hasMoved = false;
+
+    public void LoseGame()
+    {
+        myGameOverScreen.FadeIn();
+    }
 
     public void ResetGameManager()
     {
