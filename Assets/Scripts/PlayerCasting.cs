@@ -21,6 +21,7 @@ public class PlayerCasting : MonoBehaviour
     GameManager myGameManager;
     Animator myAnimator;
     PlayerController myPlayerController;
+    Placement myPlacement;
 
 
     private void Start()
@@ -29,6 +30,7 @@ public class PlayerCasting : MonoBehaviour
         myPlayerController = GetComponent<PlayerController>();
         myPathManager = myPlayerController.GetManager();
         myAnimator = myPlayerController.GetAnimator();
+        myPlacement = GameObject.Find("World").GetComponent<Placement>();
         myMaxDistance = 0.3f;
       
     }
@@ -48,6 +50,7 @@ public class PlayerCasting : MonoBehaviour
 
         if (myEndDetection == true)
         {
+            myPlacement.GetSetIsEnded = true;
             myPlayerController.SetStopWalking();
             AudioManager.ourInstance.StopWalkingEffect();
             AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.WIN);
