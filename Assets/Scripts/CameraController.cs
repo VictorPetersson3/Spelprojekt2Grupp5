@@ -9,11 +9,6 @@ public class CameraController : MonoBehaviour
     Vector3 originalPosition;
     Quaternion originalRotation;
 
-    //[SerializeField]
-    //float myZoomOutMin = 1;
-    //[SerializeField]
-    //float myZoomOutMax = 8;
-
     public Renderer[] myTargets;
 
     public float targetCameraWidth = 35f;
@@ -55,12 +50,10 @@ public class CameraController : MonoBehaviour
 
         targetCameraWidth = (Mathf.Abs(Mathf.Sqrt(Mathf.Pow(myTargets[0].bounds.size.x, 2) + Mathf.Pow(myTargets[0].bounds.size.z, 2))) / 1.86f);
         startingCameraWidth = targetCameraWidth;
-
     }
 
     private void LateUpdate()
     {    
-
         if (Screen.orientation == ScreenOrientation.LandscapeLeft||Screen.orientation == ScreenOrientation.LandscapeRight && !shouldMoveToTopDownView)
         {
             if (myTargets[0] != null && !shouldMoveToTopDownView)
@@ -122,10 +115,12 @@ public class CameraController : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) /*&& Input.touchCount>1*/)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             MoveToTopDownView();
         }
+
+
 
         if(Input.GetMouseButtonDown(0))
         {
@@ -136,15 +131,16 @@ public class CameraController : MonoBehaviour
         {
             Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position += direction;
-         
-
-            //transform.localPosition = new Vector3(Mathf.Clamp(transform.position.x+direction.x,originalPosition.x+minX,originalPosition.x+maxX),(Mathf.Clamp(transform.position.y + direction.y, originalPosition.x + minY, originalPosition.x + maxY)),transform.position.z+direction.z);
-
         }
     }
 
     public void MoveToTopDownView()
     {
         shouldMoveToTopDownView = !shouldMoveToTopDownView;
+    }
+
+    public void StopMovingToTopDownView()
+    {
+        shouldMoveToTopDownView = false;
     }
 }
