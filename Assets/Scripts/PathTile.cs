@@ -5,12 +5,12 @@ using UnityEngine;
 public class PathTile : MonoBehaviour
 {
     [SerializeField]
-    bool isEndTile = false;
+    //bool isEndTile = false;
     PathManager myPathManager;
     Vector3 myPosition;
     public PathManager SetPathManager { set { myPathManager = value; } }
     public Vector3 GetPathTilePosition { get { return myPosition; } set { myPosition = value; } }
-    public bool IsEndTile { get { return isEndTile; } }
+    //public bool IsEndTile { get { return isEndTile; } }
     public Neighbor GetNeighbor { get { return myNeigbor; } set { myNeigbor = value; } }
 
 
