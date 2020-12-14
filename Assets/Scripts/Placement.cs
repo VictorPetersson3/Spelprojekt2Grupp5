@@ -5,6 +5,9 @@ using UnityEngine;
 public class Placement : MonoBehaviour
 {
     bool isPlaceingByPortal = false;
+
+    List<bool> myBooleansPortal = new List<bool>();
+
     [SerializeField]
     PathManager myPathManager;
     [SerializeField] private BuildManager myBuildManager;
@@ -12,6 +15,15 @@ public class Placement : MonoBehaviour
     private Tile myTile;
     [SerializeField]
     PathTile temp;
+
+    private void Start()
+    {
+        for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+        {
+            myBooleansPortal.Add(isPlaceingByPortal);
+        }
+    }
+
     private void Update()
     {
         //LEFT CLICK INPUT
@@ -67,32 +79,36 @@ public class Placement : MonoBehaviour
     }
     void PlacementLogic()
     {
-        if (!isPlaceingByPortal)
+        for (int i = 0; i < myBooleansPortal.Count; i++)
         {
-           AddToPortalListLogic();
-
+            if (myBooleansPortal[i] == false)
+            {
+                AddToPortalListLogic();
+            }
         }
+
 
         if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetLastPlacedTile))
         {
             PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
             path.GetPathTilePosition = myInputCoordinates;
-            if (isPlaceingByPortal)
+
+            for (int i = 0; i < myBooleansPortal.Count; i++)
             {
-                for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+                if (myBooleansPortal[i] == true)
                 {
                     myPathManager.AddItemToPortalMap(path, i);
-                   
                     path.CheckNeighbors();
                 }
-            }
-            else
-            {
-                myPathManager.AddItemToMap(path);
-            }
-            path.CheckNeighbors();
+                else
+                {
+                    myPathManager.AddItemToMap(path);
+                }
+                path.CheckNeighbors();
 
-            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
+                WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
+            }
+
         }
     }
     void AddToPortalListLogic()
@@ -108,7 +124,13 @@ public class Placement : MonoBehaviour
                 path.CheckNeighbors();
                 Debug.Log("Add item to portal list");
                 WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
-                isPlaceingByPortal = true;
+                
+                if (myBooleansPortal[i] == false)
+                {
+                    myBooleansPortal[i] = true;
+                }
+
+                //isPlaceingByPortal = true;
             }
         }
     }

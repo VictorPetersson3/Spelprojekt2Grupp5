@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PathManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PathManager : MonoBehaviour
     PlayerController myPlayerController;
 
     [SerializeField]
-    PathTile myPathTilePrefab;
+    GameObject myPathTilePrefab;
 
     PathTile myStartPathTile;
     PathTile myLastPlacedPathTile;
@@ -30,13 +31,14 @@ public class PathManager : MonoBehaviour
 
     public List<Portals> GetPortals { get { return myPortals; } }
 
+    int Testing = 0;
+
     bool hasInited = false;
     private void Update()
     {
         if (!hasInited)
         {
-
-            Invoke("Init", 1.5f);
+            Invoke("Init", 0.5f);
             hasInited = true;
         }
     }
@@ -55,14 +57,15 @@ public class PathManager : MonoBehaviour
     }
     private void Start()
     {
-        Init();
+        //Init();
     }
     void Init()
     {
         myPlayerController.PlayerMoveList = myPathList;
-        myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
+        GameObject myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
+        SceneManager.MoveGameObjectToScene(myStartPathTile, SceneManager.GetSceneAt(1));
 
-        myStartPathTile.GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z));
+        myStartPathTile.GetComponent<PathTile>().GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)); 
 
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
 
@@ -70,21 +73,25 @@ public class PathManager : MonoBehaviour
         {
             InstantiateFirstPortalExitTile();
         }
-        AddItemToMap(myStartPathTile);
+
+        AddItemToMap(myStartPathTile.GetComponent<PathTile>());
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
-        myLastPlacedPathTile = myStartPathTile;
+        myLastPlacedPathTile = myStartPathTile.GetComponent<PathTile>();
+
     }
 
     private void InstantiateFirstPortalExitTile()
     {
         for (int i = 0; i < myPortals.Count; i++)
         {
-            PathTile temp = Instantiate(myPathTilePrefab, myPortals[i].GetExit() + myPortals[i].transform.position, Quaternion.identity);
-            temp.SetPathManager = this;
-            temp.GetPathTilePosition = myPortals[i].GetExit() + myPortals[i].transform.position;
-            AddItemToPortalMap(temp, i);
-            GetPortals[i].myStartTile = temp;
+            GameObject temp = Instantiate(myPathTilePrefab, myPortals[i].GetExit() + myPortals[i].transform.position, Quaternion.identity);
+            SceneManager.MoveGameObjectToScene(temp, SceneManager.GetSceneAt(1));
+            temp.GetComponent<PathTile>().SetPathManager = this;
+            temp.GetComponent<PathTile>().GetPathTilePosition = myPortals[i].GetExit() + myPortals[i].transform.position;
+            AddItemToPortalMap(temp.GetComponent<PathTile>(), i);
+            GetPortals[i].myStartTile = temp.GetComponent<PathTile>();
             WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z), Tile.TileState.obstructed);
+            
         }
     }
     public void ResetPath()
@@ -98,14 +105,17 @@ public class PathManager : MonoBehaviour
         }
         myBuildManager.ResetTiles();
     }
+
     public void AddItemToPortalMap(PathTile aPathTileToAdd, int index)
     {
+        Debug.Log(index);
         int x = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.x);
         int z = Mathf.FloorToInt(aPathTileToAdd.GetPathTilePosition.z);
 
-        myPortals[index].AddVectorToMovementList(aPathTileToAdd);
         myPathTiles[x, z] = aPathTileToAdd;
+        myPortals[index].AddVectorToMovementList(aPathTileToAdd);
         
+        //Debug.Log(Testing);
 
         myPlacementEffects.transform.position = aPathTileToAdd.transform.position;
         myPlacementEffects.CheckPlacementIndicators();
@@ -152,6 +162,12 @@ public class PathManager : MonoBehaviour
     {
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
+
+        //Debug.Log("X: " + x + " Y: " + z);
+        //Debug.Log(aLastPlacedTile.GetPathTilePosition);
+
+
+        //Debug.Log(myPortals.Count);
 
         if (myPortals.Count != 0)
         {
@@ -220,7 +236,7 @@ public class PathManager : MonoBehaviour
         }
 
 
-        Debug.Log("Return false");
+        //Debug.Log("Return false");
         return false;
 
     }
