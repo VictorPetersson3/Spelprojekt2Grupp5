@@ -11,7 +11,8 @@ public class Sc_OptionsMenu : MonoBehaviour
     RectTransform myOptionsTransform;
     [SerializeField]
     GameObject myOptionsGameObject;
-
+    [SerializeField]
+    Scrollbar myScrollbar;
     public void ShowOptionsMenu()
     {
         myOptionsGameObject.SetActive(true);
@@ -27,5 +28,9 @@ public class Sc_OptionsMenu : MonoBehaviour
     private void DeactivateObject()
     {
         myOptionsGameObject.SetActive(false);
+    }
+    public Scrollbar GetScrollbar()
+    {
+        return myScrollbar;
     }
 }

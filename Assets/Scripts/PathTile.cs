@@ -252,6 +252,7 @@ public class PathTile : MonoBehaviour
             }
         }
         myPlacementEffect.Play();
+        AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PLACE);
     }
     void CheckOldNeighborDown()
     {

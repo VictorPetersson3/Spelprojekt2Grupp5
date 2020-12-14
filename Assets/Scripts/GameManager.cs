@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     private Sc_EndOfGameScreen myEndScreen;
     [SerializeField]
     private Sc_EndGameOver myGameOverScreen;
+    [SerializeField]
+    private Sc_OptionsMenu myOptionsMenu;
+
     enum SaveSlot
     {
         Save1 = 1,
@@ -22,10 +25,13 @@ public class GameManager : MonoBehaviour
 
     private SaveSlot mySaveSlot;
     private bool myLoadedLevel;
+    private bool myMusicIsPlaying = true;
+    bool myMusicBoolOn = true;
 
     private int myAllLevels = 40;
     private int myActiveScene;
-
+    private float mySoundVolume = 1;
+    private Scrollbar myScrollBar;
     public static GameManager globalInstance;
     //[SerializeField] Text myMoneyText;
     //[SerializeField] Text myLevelText;
@@ -49,6 +55,7 @@ public class GameManager : MonoBehaviour
         public int myTwoStarScore;
         public int myOneStarScore;
         public int myStartingMoney;
+        public int myCoinValue;
     }
 
 
@@ -60,6 +67,7 @@ public class GameManager : MonoBehaviour
         public int myTwoStarScore;
         public int myOneStarScore;
         public int myStartingMoney;
+        public int myCoinValue;
         [Header("\nPlayer Progress\n")]
         public int myAmountOfMoney;
         public int myAmountOfStars;
@@ -69,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        myScrollBar = myOptionsMenu.GetScrollbar();
 
         if (globalInstance == null)
         {
@@ -110,9 +119,11 @@ public class GameManager : MonoBehaviour
                 level.myTwoStarScore = 0;
                 level.myAmountOfStars = 0;
                 level.myFinishedLevel = false;
+                level.myCoinValue = 0;
                 myLevelList.Add(level);
             }
         }
+
 
         string path = "";
 
@@ -135,6 +146,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        mySoundVolume = myScrollBar.value;
         //if (SceneManager.GetActiveScene().buildIndex != 0)
         //{
         //    CheckTextStatus();
@@ -346,7 +358,8 @@ public class GameManager : MonoBehaviour
                 myLevelName = myLevelList[i].myLevelName,
                 myTwoStarScore = myLevelList[i].myTwoStarScore,
                 myOneStarScore = myLevelList[i].myOneStarScore,
-                myStartingMoney = myLevelList[i].myStartingMoney
+                myStartingMoney = myLevelList[i].myStartingMoney,
+                myCoinValue = myLevelList[i].myCoinValue
             };
 
 
@@ -601,4 +614,35 @@ public class GameManager : MonoBehaviour
         return myActiveScene;
     }
 
+    public void ShowOptionsMenu()
+    {
+        myOptionsMenu.ShowOptionsMenu();
+    }
+    public void HideOptionsMenu()
+    {
+        myOptionsMenu.HideOptionsMenu();
+    }
+    public float GetAudioVolume()
+    {
+        return mySoundVolume;
+    }
+
+    public bool GetPlayMusic()
+    {
+        return myMusicIsPlaying;
+    }
+   
+    public void SetMusicIsPlaying()
+    {
+        if (myMusicBoolOn)
+        {
+            myMusicIsPlaying = true;
+            myMusicBoolOn = false;
+        }
+        else
+        {
+            myMusicIsPlaying = false;
+            myMusicBoolOn = true;
+        }
+    }
 }
