@@ -1522,12 +1522,18 @@ MonoBehaviour:
   myWidth: 3
   myDepth: 1
   myWorldController: {fileID: 1963332872}
---- !u!1 &373742172 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7897701026364978415, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+--- !u!114 &373742173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
     type: 3}
   m_PrefabInstance: {fileID: 638512635}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07edbcd1181bf3e44819a56892e1e495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &373811658 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 365119265224325176, guid: 261e1a63a1c499c458b230a882705d25,
@@ -2122,7 +2128,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 72538cb39c668074f8770ea7c00051c1, type: 2}
+      objectReference: {fileID: 2100000, guid: 65c10ecd138c2be47b9368c638ff1c6d, type: 2}
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2131,7 +2137,7 @@ PrefabInstance:
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.7
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
@@ -2911,7 +2917,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 373742172}
+      objectReference: {fileID: 373742173}
+    - target: {fileID: 1132214175621773411, guid: 2f1d2771cef4502458145c0bf8859226,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: MoveToTopDownView
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132214175621773411, guid: 2f1d2771cef4502458145c0bf8859226,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1132214175636054927, guid: 2f1d2771cef4502458145c0bf8859226,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -5773,8 +5789,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9082,7 +9097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayerController: {fileID: 160594222}
-  myPathTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
+  myPathTilePrefab: {fileID: 5804999507025660233, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
     type: 3}
   myEndTile: {fileID: 1586140579}
   myPortals:

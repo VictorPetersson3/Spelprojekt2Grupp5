@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5804999507025660212}
   - component: {fileID: 5804999507025660215}
   - component: {fileID: 9182429334331682645}
-  m_Layer: 0
+  - component: {fileID: 4155990654624588457}
+  m_Layer: 9
   m_Name: PathTileEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,4 +93,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8896da5c7c68168419f27e8e6c84ea9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEndTile: 1
+  myPathManager: {fileID: 0}
+  myTurnRoad: {fileID: 0}
+  myStraightRoad: {fileID: 0}
+  myPlacementEffect: {fileID: 0}
+--- !u!65 &4155990654624588457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5804999507025660233}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7782321, y: 0.30806637, z: 0.75795555}
+  m_Center: {x: -0.0036466122, y: 1.619, z: 0.006617546}
