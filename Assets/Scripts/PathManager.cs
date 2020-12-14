@@ -36,11 +36,11 @@ public class PathManager : MonoBehaviour
     bool hasInited = false;
     private void Update()
     {
-        if (!hasInited)
-        {
-            Invoke("Init", 0.5f);
-            hasInited = true;
-        }
+        //if (!hasInited)
+        //{
+        //    Invoke("Init", 0.5f);
+        //    hasInited = true;
+        //}
     }
     void OnValidate()
     {
@@ -57,7 +57,7 @@ public class PathManager : MonoBehaviour
     }
     private void Start()
     {
-        //Init();
+        Init();
     }
     void Init()
     {
