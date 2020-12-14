@@ -6,6 +6,7 @@ public class Placement : MonoBehaviour
 {
     bool isPlaceingByPortal = false;
     bool myIsEnded = false;
+    List<bool> myValidPlacement = new List<bool>();
 
     List<bool> myBooleansPortal = new List<bool>();
 
@@ -23,6 +24,7 @@ public class Placement : MonoBehaviour
         for (int i = 0; i < myPathManager.GetPortals.Count; i++)
         {
             myBooleansPortal.Add(isPlaceingByPortal);
+            myValidPlacement.Add(isPlaceingByPortal);
         }
     }
 
@@ -131,20 +133,25 @@ public class Placement : MonoBehaviour
     {
         for (int i = 0; i < myPathManager.GetPortals.Count; i++)
         {
+            
             if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[i].myStartTile))
             {
-                PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
-                path.GetPathTilePosition = myInputCoordinates;
-                //myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
-                myPathManager.AddItemToPortalMap(path, i);
-                path.CheckNeighbors();
-                Debug.Log("Add item to portal list");
-                WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
-                
-                if (myBooleansPortal[i] == false)
+                if (myValidPlacement[i] == true)
                 {
-                    myBooleansPortal[i] = true;
+                    PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
+                    path.GetPathTilePosition = myInputCoordinates;
+                    //myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+                    myPathManager.AddItemToPortalMap(path, i);
+                    path.CheckNeighbors();
+                    Debug.Log("Add item to portal list");
+                    WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
+
+                    if (myBooleansPortal[i] == false)
+                    {
+                        myBooleansPortal[i] = true;
+                    }
                 }
+                
 
                 //isPlaceingByPortal = true;
             }
@@ -192,4 +199,10 @@ public class Placement : MonoBehaviour
 
         return input;
     }
+
+    public void SetValidPlacement(int index)
+    {
+        myValidPlacement[index] = true;
+    }
+
 }

@@ -32,7 +32,8 @@ public class PlayerCasting : MonoBehaviour
         myAnimator = myPlayerController.GetAnimator();
         myPlacement = GameObject.Find("World").GetComponent<Placement>();
         myMaxDistance = 0.3f;
-      
+        myMoneyDetection = false;
+        myEndDetection = false;
     }
 
     private void FixedUpdate()
@@ -40,7 +41,6 @@ public class PlayerCasting : MonoBehaviour
         myMoneyDetection = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myMoneyHit, Quaternion.identity, myMaxDistance, myMoneyMask);
         myEndDetection = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myEndGameHit, Quaternion.identity, myMaxDistance, myEndMask);
 
-        
 
         if (myMoneyDetection == true)
         {
