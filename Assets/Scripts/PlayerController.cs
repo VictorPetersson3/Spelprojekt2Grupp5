@@ -62,8 +62,25 @@ public class PlayerController : MonoBehaviour
         myMovementStart = false;
     }
 
+    private void OnTriggerEnter(Collider aTrigger)
+    {
+        if (aTrigger.tag == "Finish")
+        {
+
+            AudioManager.ourInstance.StopWalkingEffect();
+            AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.WIN);
+            myAnimator.SetBool("isWalking", false);
+            myAnimator.SetBool("isInGoal", true);
+            myPathManager.ResetPath();
+            myGameManger.SetFinishedLevel();
+            Debug.Log("You win");
+
+            myMovementStart = false;
+        }
+    }
     void Update()
     {
+        
         //Application.targetFrameRate = 60;
         if (myMovementStart)
         {
@@ -82,19 +99,19 @@ public class PlayerController : MonoBehaviour
                 myPathManager.ResetPath();
                 myGameManger.LoseGame();
             }
-            else if (myMovementList[step].IsEndTile)
-            {
-                AudioManager.ourInstance.StopWalkingEffect();
-                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.WIN);
-                myAnimator.SetBool("isWalking", false);
-                myAnimator.SetBool("isInGoal", true);
-                myPathManager.ResetPath();
-                myGameManger.SetFinishedLevel();
-                Debug.Log("You win");
+            //else if (myMovementList[step].IsEndTile)
+            //{
+            //    AudioManager.ourInstance.StopWalkingEffect();
+            //    AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.WIN);
+            //    myAnimator.SetBool("isWalking", false);
+            //    myAnimator.SetBool("isInGoal", true);
+            //    myPathManager.ResetPath();
+            //    myGameManger.SetFinishedLevel();
+            //    Debug.Log("You win");
                 
-                myMovementStart = false;
+            //    myMovementStart = false;
 
-            }
+            //}
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, myMovementList[step].transform.position, myMovementSpeed * Time.deltaTime);
