@@ -15,7 +15,7 @@ public class Sc_OptionsMenu : MonoBehaviour
     Scrollbar myScrollbar;
     public void ShowOptionsMenu()
     {
-        myOptionsGameObject.SetActive(true);
+        //myOptionsGameObject.SetActive(true);
         LeanTween.alphaCanvas(myOptionsCanvasGroup, 1.0f, 0.50f).setEase(LeanTweenType.easeInExpo);
         LeanTween.scale(myOptionsTransform, new Vector3(1.0f, 1.0f, 1.0f), 0.30f).setEase(LeanTweenType.easeInExpo);
     }
@@ -27,7 +27,7 @@ public class Sc_OptionsMenu : MonoBehaviour
     }
     private void DeactivateObject()
     {
-        myOptionsGameObject.SetActive(false);
+        //myOptionsGameObject.SetActive(false);
     }
     public Scrollbar GetScrollbar()
     {
