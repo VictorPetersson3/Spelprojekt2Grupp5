@@ -6,19 +6,19 @@ public class Portals : ObstructTileMap
 {
     [SerializeField]
     Portals mySecondPortal;
-    [SerializeField]
-    PlayerController myPlayerController;
 
     [Header("Enter/Exit Settings")]
     [SerializeField]
     Vector3 myEntryAndExitDirection;
 
     public PathTile myStartTile;
-
+    PathTile myCurrentEndTile;
 
     public List<PathTile> myContinuingPath = new List<PathTile>();
 
     public Portals SetSecondPortal { set { mySecondPortal = value; } }
+    public PathTile GetSetCurrentEndTile { get { return myCurrentEndTile; } set { myCurrentEndTile = value; } }
+
 
     public override void OnValidate()
     {
@@ -39,8 +39,6 @@ public class Portals : ObstructTileMap
             }
         }
 
-
-        myPlayerController = FindObjectOfType<PlayerController>();
         base.OnValidate();
     }
 

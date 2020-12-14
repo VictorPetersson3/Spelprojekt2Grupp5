@@ -70,26 +70,17 @@ public class Placement : MonoBehaviour
             }
         }
     }
-    bool CheckForPortal()
-    {
-        for (int i = 0; i < myPathManager.GetPortals.Count; i++)
-        {
-            if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[i].myStartTile))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
     void PlacementLogic()
     {
         for (int i = 0; i < myBooleansPortal.Count; i++)
         {
             if (myBooleansPortal[i] == false)
             {
-                AddToPortalListLogic();
+               AddToPortalListLogic();
             }
         }
+
+
 
 
         if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetLastPlacedTile))
@@ -131,11 +122,15 @@ public class Placement : MonoBehaviour
     {
         for (int i = 0; i < myPathManager.GetPortals.Count; i++)
         {
-            if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[i].myStartTile))
+            print(myPathManager.GetPortals[i].GetSetCurrentEndTile.GetPathTilePosition.x);
+            print(myPathManager.GetPortals[i].GetSetCurrentEndTile.GetPathTilePosition.y);
+
+            if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[i].GetSetCurrentEndTile))
             {
                 PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
                 path.GetPathTilePosition = myInputCoordinates;
                 //myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+                myPathManager.GetPortals[i].GetSetCurrentEndTile = path;
                 myPathManager.AddItemToPortalMap(path, i);
                 path.CheckNeighbors();
                 Debug.Log("Add item to portal list");

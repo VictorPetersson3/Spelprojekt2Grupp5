@@ -91,6 +91,7 @@ public class PathManager : MonoBehaviour
             temp.GetComponent<PathTile>().GetPathTilePosition = myPortals[i].GetExit() + myPortals[i].transform.position;
             AddItemToPortalMap(temp.GetComponent<PathTile>(), i);
             GetPortals[i].myStartTile = temp.GetComponent<PathTile>();
+            GetPortals[i].GetSetCurrentEndTile = temp.GetComponent<PathTile>();
             WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myPortals[i].GetExit().x + myPortals[i].transform.position.x), Mathf.FloorToInt(myPortals[i].GetExit().z + myPortals[i].transform.position.z), Tile.TileState.obstructed);
             
         }
@@ -115,7 +116,6 @@ public class PathManager : MonoBehaviour
 
         myPathTiles[x, z] = aPathTileToAdd;
         myPortals[index].AddVectorToMovementList(aPathTileToAdd);
-        
 
         myPlacementEffects.transform.position = aPathTileToAdd.transform.position;
         myPlacementEffects.CheckPlacementIndicators();
