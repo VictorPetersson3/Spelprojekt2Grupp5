@@ -23,11 +23,17 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     PlayerController myPlayerController;
-
+    [SerializeField]
+    Sc_EndGameOver myGameOver;
+    [SerializeField]
+    PathManager myPathManager;
 
     void OnValidate()
     {
+        myPathManager = FindObjectOfType<PathManager>();
         myPlayerController = FindObjectOfType<PlayerController>();
+        myGameOver = FindObjectOfType<Sc_EndGameOver>();
+
     }
    
 
@@ -73,6 +79,9 @@ public class Enemy : MonoBehaviour
         Vector3 distanceToPlayer = myPlayerController.transform.position - transform.position;
         if (distanceToPlayer.magnitude < myDistanceToKill) 
         {
+            myGameOver.FadeIn();
+            myPathManager.ResetPath();
+
             // Kill player
         }
     }
