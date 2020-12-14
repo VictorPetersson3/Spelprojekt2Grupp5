@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         Quaternion lookAtRotation = Quaternion.LookRotation(myPositionsToWalkTo[myStep].position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.05f);
        
-        if (dist.magnitude < 1f) 
+        if (dist.magnitude < .01f) 
         {
             if (myTimerToWait >= myTimeToWait)
             {
