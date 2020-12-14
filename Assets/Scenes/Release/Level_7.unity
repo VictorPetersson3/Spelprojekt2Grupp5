@@ -7187,13 +7187,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081963904}
-  m_LocalRotation: {x: 0.7596618, y: -0.45709047, z: -0.2425863, w: 0.39387086}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.6566018, y: -0.46338567, z: -0.046816546, w: 0.59325886}
+  m_LocalPosition: {x: 0.55, y: 5.08, z: 3.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 22.126001, y: -128.13501, z: -107.066}
+  m_LocalEulerAnglesHint: {x: 47.365, y: -115.51, z: -78.644005}
 --- !u!4 &1114992076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5996881806983062248, guid: df837f59042349d409b8f701d3141ed6,
@@ -11770,8 +11770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayerController: {fileID: 160594222}
-  myPathTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-    type: 3}
+  myPathTilePrefab: {fileID: 0}
   myEndTile: {fileID: 1586140579}
   myPortals: []
   myPlacementEffects: {fileID: 1736912638}
