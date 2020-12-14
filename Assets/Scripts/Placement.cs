@@ -39,7 +39,6 @@ public class Placement : MonoBehaviour
             //Kollar om en tile är upptagen
             if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
             {
-                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PLACE);
                 PlacementLogic();
             }
         }
@@ -93,21 +92,33 @@ public class Placement : MonoBehaviour
             PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
             path.GetPathTilePosition = myInputCoordinates;
 
-            for (int i = 0; i < myBooleansPortal.Count; i++)
+            if (myBooleansPortal.Count > 0)
             {
-                if (myBooleansPortal[i] == true)
+                for (int i = 0; i < myBooleansPortal.Count; i++)
                 {
-                    myPathManager.AddItemToPortalMap(path, i);
+                    if (myBooleansPortal[i] == true)
+                    {
+                        myPathManager.AddItemToPortalMap(path, i);
+                        path.CheckNeighbors();
+                    }
+                    else
+                    {
+                        myPathManager.AddItemToMap(path);
+                    }
                     path.CheckNeighbors();
-                }
-                else
-                {
-                    myPathManager.AddItemToMap(path);
-                }
-                path.CheckNeighbors();
 
-                WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
+                    WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
+                }
             }
+            else
+            {
+                myPathManager.AddItemToMap(path);
+            }
+            path.CheckNeighbors();
+
+            WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
+
+
 
         }
     }
