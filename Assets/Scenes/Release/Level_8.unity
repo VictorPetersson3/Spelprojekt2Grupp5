@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1909,8 +1909,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPositionsToWalkTo: []
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -1948,6 +1949,7 @@ MonoBehaviour:
   - {fileID: 62293560}
   mySpeed: 1
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -2383,7 +2385,8 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5548,8 +5551,9 @@ MonoBehaviour:
   - {fileID: 699098722}
   - {fileID: 353158380}
   - {fileID: 1852170850}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -9153,6 +9157,7 @@ GameObject:
   - component: {fileID: 1963332871}
   - component: {fileID: 1963332870}
   - component: {fileID: 1963332874}
+  - component: {fileID: 1963332875}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -9247,6 +9252,21 @@ MonoBehaviour:
     myAmountOfTiles: 150
     myTileList: []
   myOriginalSpawnPoolPosition: {x: 0, y: -100, z: 0}
+--- !u!114 &1963332875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963332869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06a0a7669b97668448a8e18d5f26a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myListOfEnemy:
+  - {fileID: 922587743}
+  - {fileID: 307188014}
 --- !u!1 &1965922751
 GameObject:
   m_ObjectHideFlags: 0
