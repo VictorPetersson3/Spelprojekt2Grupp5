@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
 
     private bool myMultiTouch = false;
 
-    bool shouldMoveToTopDownView = false;
+    bool shouldMoveToTopDownView = true;
 
     // Start is called before the first frame update
     void Start()
@@ -120,16 +120,16 @@ public class CameraController : MonoBehaviour
 
 
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            myTouchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-
-        else if(Input.GetMouseButton(0))
-        {
-            Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position += direction;
-        }
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //    myTouchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //}
+        //
+        //else if(Input.GetMouseButton(0))
+        //{
+        //    Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    transform.position += direction;
+        //}
     }
 
     public void MoveToTopDownView()

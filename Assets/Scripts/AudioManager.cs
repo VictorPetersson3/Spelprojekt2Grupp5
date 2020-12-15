@@ -55,7 +55,7 @@ public class AudioManager : MonoBehaviour
    }
    public void MasterVolume()
    {
-        myVolume = 40.0f * myVolume  - 40.0f;
+      myVolume = 40.0f * myVolume - 40.0f;
       myAudioMixer.SetFloat("MasterVolume", myVolume);
    }
    public void MusicVolume()
@@ -74,9 +74,9 @@ public class AudioManager : MonoBehaviour
       GetAudioStats();
       MasterVolume();
       MusicVolume();
-    }
+   }
 
-    //Play-metoder
+   //Play-metoder
    public void PlayAmbience(EAmbience anEnum)
    {
       if (anEnum == EAmbience.NONE) return;
@@ -91,19 +91,26 @@ public class AudioManager : MonoBehaviour
       if (anEnum == EMusic.NONE) return;
       myMusic[(int)anEnum].Play();
    }
-   public void PlayUI(EUI anEnum)
+   public void PlayUI1()
    {
-      myUI[(int)anEnum].Play();
+      myUI[(int)EUI.UI1].Play();
+   }
+   public void PlayUI2()
+   {
+      myUI[(int)EUI.UI2].Play();
+   }
+   public void PlayUI3()
+   {
+      myUI[(int)EUI.UI3].Play();
+   }
+   public void StopWalkingEffect()
+   {
+      myEffects[(int)EEffects.FOOTSTEPS].Stop();
    }
 
-    public void StopWalkingEffect()
-    {
-        myEffects[(int)EEffects.FOOTSTEPS].Stop();
-    }
-
-    private void GetAudioStats()
-    {
-        myVolume = GameManager.globalInstance.GetAudioVolume();
-        myMusicStatus = GameManager.globalInstance.GetPlayMusic();
-    }
+   private void GetAudioStats()
+   {
+      myVolume = GameManager.globalInstance.GetAudioVolume();
+      myMusicStatus = GameManager.globalInstance.GetPlayMusic();
+   }
 }
