@@ -17,6 +17,7 @@ public class LevelSelect : MonoBehaviour
     private int myCurrentStars;
     [SerializeField] private int[] myStarRequirement;
     [SerializeField] private GameObject myBackground;
+    [SerializeField] private GameObject myLines;
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class LevelSelect : MonoBehaviour
             Debug.Log(mySelectedLevel);
             if (mySelectedLevel != myBackground)
             {
+                myLines.SetActive(false);
                 myMainUI.SetActive(false);
                 mySelectedUI = mySelectedLevel.transform.parent.GetChild(0).gameObject;
                 mySelectedUI.SetActive(true);
@@ -41,6 +43,7 @@ public class LevelSelect : MonoBehaviour
             }
             else
             {
+                myLines.SetActive(true);
                 mySelectedUI.SetActive(false);
                 myMainUI.SetActive(true);
                 StartCoroutine(CoRoutineLoad());
