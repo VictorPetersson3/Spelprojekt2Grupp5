@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour
             myLevelList[myActiveScene].myFinishedScore = myLevelList[myActiveScene].myAmountOfMoney;
         }
 
-        if (amountOfMoneySpent > -100 && amountOfMoneySpent <= myTwoStarScore)
+        if (amountOfMoneySpent <= myTwoStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
