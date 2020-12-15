@@ -42,7 +42,7 @@ public class Door : ObstructTileMap
         //    CheckButtons();
         //}
 
-        print(isOpen);
+        //print(isOpen);
         if (myPlayerController != null)
         {
             float distance = Vector3.Distance(myPlayerController.transform.position, transform.position);

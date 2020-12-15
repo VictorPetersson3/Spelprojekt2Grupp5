@@ -40,7 +40,7 @@ public class Sc_LevelElementData : MonoBehaviour
     
     private bool myActive;
     private Sprite myConvertedImageSprite;
-    private Vector3 myMin = new Vector3(-100.0f, 100.0f, 0.0f);
+    private Vector3 myMin = new Vector3(-60.0f, 40.0f, 0.0f);
 
 
     private void Start()
@@ -79,7 +79,7 @@ public class Sc_LevelElementData : MonoBehaviour
         if(!myUIElement.activeSelf && myActive)
         {
             MoveMenuDown();
-            myActive = false;
+            Invoke("TurnOffMenu", 1.0f);
         }
     }
     void MoveMenuUp()
@@ -88,7 +88,7 @@ public class Sc_LevelElementData : MonoBehaviour
     }
     void MoveMenuDown()
     {
-        LeanTween.move(myLevelMenuRect, new Vector3(-100, -800.0f, 0), 1.0f).setEase(LeanTweenType.easeInCubic);
+        LeanTween.move(myLevelMenuRect, new Vector3(-60, -1040.0f, 0), 1.0f).setEase(LeanTweenType.easeInCubic);
     }
     public void StartLevel()
     {
@@ -97,6 +97,10 @@ public class Sc_LevelElementData : MonoBehaviour
     public int GetLevelIndex()
     {
         return myLevelIndex;
+    }
+    private void TurnOffMenu()
+    {
+        myActive = false;
     }
 
 }

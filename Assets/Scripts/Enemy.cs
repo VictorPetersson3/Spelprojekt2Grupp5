@@ -27,12 +27,18 @@ public class Enemy : MonoBehaviour
     Sc_EndGameOver myGameOver;
     [SerializeField]
     PathManager myPathManager;
+    GameManager myGameManager;
+
+    Vector3 myOriginalPosition;
 
     void OnValidate()
     {
         myPathManager = FindObjectOfType<PathManager>();
         myPlayerController = FindObjectOfType<PlayerController>();
         myGameOver = FindObjectOfType<Sc_EndGameOver>();
+        //myEnemyController = gameObject.GetComponent<EnemyController>();
+        myGameManager = GameManager.globalInstance;
+        myOriginalPosition = gameObject.transform.position;
 
     }
    
@@ -48,7 +54,7 @@ public class Enemy : MonoBehaviour
         Quaternion lookAtRotation = Quaternion.LookRotation(myPositionsToWalkTo[myStep].position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.05f);
        
-        if (dist.magnitude < 1f) 
+        if (dist.magnitude < .01f) 
         {
             if (myTimerToWait >= myTimeToWait)
             {
@@ -79,10 +85,17 @@ public class Enemy : MonoBehaviour
         Vector3 distanceToPlayer = myPlayerController.transform.position - transform.position;
         if (distanceToPlayer.magnitude < myDistanceToKill) 
         {
-            myGameOver.FadeIn();
+            myGameManager.LoseGame();
             myPathManager.ResetPath();
 
             // Kill player
         }
     }
+
+    public void ResetEnemy()
+    {
+        gameObject.transform.position = myOriginalPosition;
+    }
+
+
 }

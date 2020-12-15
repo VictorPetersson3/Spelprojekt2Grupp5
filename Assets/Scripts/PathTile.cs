@@ -5,12 +5,13 @@ using UnityEngine;
 public class PathTile : MonoBehaviour
 {
     [SerializeField]
-    bool isEndTile = false;
+    //bool isEndTile = false;
     PathManager myPathManager;
     Vector3 myPosition;
     public PathManager SetPathManager { set { myPathManager = value; } }
+    public Placement myPlacement;
     public Vector3 GetPathTilePosition { get { return myPosition; } set { myPosition = value; } }
-    public bool IsEndTile { get { return isEndTile; } }
+    //public bool IsEndTile { get { return isEndTile; } }
     public Neighbor GetNeighbor { get { return myNeigbor; } set { myNeigbor = value; } }
 
 
@@ -20,9 +21,22 @@ public class PathTile : MonoBehaviour
     float mySpeed = 3f;
     float myCurrentSpeed = 0;
     bool myTemp = false;
+    bool myCheckForPortal = false;
+
     [SerializeField]
     ParticleSystem myPlacementEffect;
     PathTile myPathTileNeighbors;
+
+    [SerializeField]
+    LayerMask myPortalMask;
+
+    [SerializeField]
+    PlacementIndicator myPlacementIndicator;
+
+    RaycastHit myPortalHit;
+
+    
+
 
     Neighbor myNeigbor = Neighbor.none;
     public enum Neighbor
@@ -37,6 +51,9 @@ public class PathTile : MonoBehaviour
 
     public virtual void Start()
     {
+
+        CheckForPortal();
+
         myPosition = new Vector3(Mathf.FloorToInt(transform.position.x), 0, Mathf.FloorToInt(transform.position.z));
         transform.position = myPosition;
 
@@ -65,9 +82,9 @@ public class PathTile : MonoBehaviour
                 {
                     if (myPathManager.GetPathTileMap[x - 1, z] != null)
                     {
-                        Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
+                        //Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
 
-                        Debug.Log("Found Normal Tile");
+                        //Debug.Log("Found Normal Tile");
                         if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetLastPlacedTile)
                         {
                             myPathTileNeighbors = myPathManager.GetLastPlacedTile;
@@ -77,7 +94,7 @@ public class PathTile : MonoBehaviour
                         }
                         if (myPathManager.GetPathTileMap[x - 1, z] == myPathManager.GetPortals[i].myStartTile)
                         {
-                            Debug.Log("Found Start Tile");
+                            //Debug.Log("Found Start Tile");
                             myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
                             myPathManager.GetLastPlacedTile = this;
                             myNeigbor = Neighbor.left;
@@ -89,7 +106,7 @@ public class PathTile : MonoBehaviour
                 {
                     if (myPathManager.GetPathTileMap[x + 1, z] != null)
                     {
-                        Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject) ;
+                        //Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject) ;
                         if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetLastPlacedTile)
                         {
                             myPathTileNeighbors = myPathManager.GetLastPlacedTile;
@@ -99,7 +116,7 @@ public class PathTile : MonoBehaviour
                         }
                         if (myPathManager.GetPathTileMap[x + 1, z] == myPathManager.GetPortals[i].myStartTile)
                         {
-                            Debug.Log("Found Start Tile");
+                            //Debug.Log("Found Start Tile");
 
                             myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
                             myPathManager.GetLastPlacedTile = this;
@@ -114,7 +131,7 @@ public class PathTile : MonoBehaviour
                     if (myPathManager.GetPathTileMap[x, z - 1] != null)
                     {
                       
-                        Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
+                        //Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
 
                         if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetLastPlacedTile)
                         {
@@ -126,7 +143,7 @@ public class PathTile : MonoBehaviour
                         }
                         if (myPathManager.GetPathTileMap[x, z - 1] == myPathManager.GetPortals[i].myStartTile)
                         {
-                            Debug.Log("Found Start Tile");
+                            //Debug.Log("Found Start Tile");
 
                             myPathTileNeighbors = myPathManager.GetPortals[i].myStartTile;
                             myPathManager.GetLastPlacedTile = this;
@@ -139,9 +156,9 @@ public class PathTile : MonoBehaviour
                 {
                     if (myPathManager.GetPathTileMap[x, z + 1] != null)
                     {
-                        Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
+                        //Debug.Log("Last placed tile pos: " + myPathManager.GetLastPlacedTile.transform.position, myPathManager.GetLastPlacedTile.gameObject);
 
-                        Debug.Log("Found Normal Tile");
+                        //Debug.Log("Found Normal Tile");
                         if (myPathManager.GetPathTileMap[x, z + 1] == myPathManager.GetLastPlacedTile)
                         {
                             myPathTileNeighbors = myPathManager.GetLastPlacedTile;
@@ -252,6 +269,7 @@ public class PathTile : MonoBehaviour
             }
         }
         myPlacementEffect.Play();
+        AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PLACE);
     }
     void CheckOldNeighborDown()
     {
@@ -386,4 +404,33 @@ public class PathTile : MonoBehaviour
 
     }
 
+
+    public void CheckForPortal()
+    {
+        myCheckForPortal = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myPortalHit, Quaternion.identity, 1f, myPortalMask);
+
+        Debug.Log(myCheckForPortal);
+
+        if (myCheckForPortal == true)
+        {
+            PathManager pathManager = FindObjectOfType<PathManager>();
+
+            List<Portals> portals = pathManager.GetPortals;
+
+            for (int i = 0; i < portals.Count; i++)
+            {
+                if (portals[i].name == myPortalHit.collider.gameObject.name)
+                {
+                    myPlacement = FindObjectOfType<Placement>();
+                    myPlacement.SetValidPlacement(i);
+                    myPlacementIndicator = FindObjectOfType<PlacementIndicator>();
+                    myPlacementIndicator.transform.position = portals[i].GetExit() + gameObject.transform.position;
+                    myPlacementIndicator.CheckPlacementIndicators();
+                    break;
+                }
+            }
+
+        }
+
+    }
 }

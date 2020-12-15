@@ -5,6 +5,11 @@ using UnityEngine;
 public class Placement : MonoBehaviour
 {
     bool isPlaceingByPortal = false;
+    bool myIsEnded = false;
+    List<bool> myValidPlacement = new List<bool>();
+
+    List<bool> myBooleansPortal = new List<bool>();
+
     [SerializeField]
     PathManager myPathManager;
     [SerializeField] private BuildManager myBuildManager;
@@ -12,45 +17,58 @@ public class Placement : MonoBehaviour
     private Tile myTile;
     [SerializeField]
     PathTile temp;
+
+    public bool GetSetIsEnded { get { return myIsEnded; } set { myIsEnded = value; } }
+    private void Start()
+    {
+        for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+        {
+            myBooleansPortal.Add(isPlaceingByPortal);
+            myValidPlacement.Add(isPlaceingByPortal);
+        }
+    }
+
     private void Update()
     {
-        //LEFT CLICK INPUT
-        if (Input.GetMouseButton(0))
+        if (!myIsEnded)
         {
-
-            //Avrundar spelarens input till integers
-            myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
-            myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
-
-            myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(WorldController.Instance.GetWorldWidth - 1, 0, WorldController.Instance.GetWorldDepth - 1));
-
-            //Kollar om en tile är upptagen
-            if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
+            //LEFT CLICK INPUT
+            if (Input.GetMouseButton(0))
             {
-                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PLACE);
-                PlacementLogic();
+
+                //Avrundar spelarens input till integers
+                myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
+                myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
+
+                myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(WorldController.Instance.GetWorldWidth - 1, 0, WorldController.Instance.GetWorldDepth - 1));
+
+                //Kollar om en tile är upptagen
+                if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
+                {
+                    PlacementLogic();
+                }
             }
-        }
 
-        //RIGHT CLICK INPUT
-        if (Input.GetMouseButton(1))
-        {
-            //Avrundar spelarens input till integers
-            myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
-            myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
-
-            myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
-
-            //Kollar om en tile är upptagen
-            if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
+            //RIGHT CLICK INPUT
+            if (Input.GetMouseButton(1))
             {
-                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
+                //Avrundar spelarens input till integers
+                myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
+                myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
 
-                myPathManager.DeleteTile(myInputCoordinates);
-                //Sätter tilen till empty
+                myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
-                //Reset:ar tile-objektet
+                //Kollar om en tile är upptagen
+                if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
+                {
+                    AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
 
+                    myPathManager.DeleteTile(myInputCoordinates);
+                    //Sätter tilen till empty
+
+                    //Reset:ar tile-objektet
+
+                }
             }
         }
     }
@@ -67,23 +85,36 @@ public class Placement : MonoBehaviour
     }
     void PlacementLogic()
     {
-        if (!isPlaceingByPortal)
+        for (int i = 0; i < myBooleansPortal.Count; i++)
         {
-           AddToPortalListLogic();
-
+            if (myBooleansPortal[i] == false)
+            {
+                AddToPortalListLogic();
+            }
         }
+
 
         if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetLastPlacedTile))
         {
             PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
             path.GetPathTilePosition = myInputCoordinates;
-            if (isPlaceingByPortal)
+
+            if (myBooleansPortal.Count > 0)
             {
-                for (int i = 0; i < myPathManager.GetPortals.Count; i++)
+                for (int i = 0; i < myBooleansPortal.Count; i++)
                 {
-                    myPathManager.AddItemToPortalMap(path, i);
-                   
+                    if (myBooleansPortal[i] == true)
+                    {
+                        myPathManager.AddItemToPortalMap(path, i);
+                        path.CheckNeighbors();
+                    }
+                    else
+                    {
+                        myPathManager.AddItemToMap(path);
+                    }
                     path.CheckNeighbors();
+
+                    WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
                 }
             }
             else
@@ -93,22 +124,36 @@ public class Placement : MonoBehaviour
             path.CheckNeighbors();
 
             WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
+
+
+
         }
     }
     void AddToPortalListLogic()
     {
         for (int i = 0; i < myPathManager.GetPortals.Count; i++)
         {
+            
             if (myPathManager.CheckPlacement(myInputCoordinates, myPathManager.GetPortals[i].myStartTile))
             {
-                PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
-                path.GetPathTilePosition = myInputCoordinates;
-                //myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
-                myPathManager.AddItemToPortalMap(path, i);
-                path.CheckNeighbors();
-                Debug.Log("Add item to portal list");
-                WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
-                isPlaceingByPortal = true;
+                if (myValidPlacement[i] == true)
+                {
+                    PathTile path = myBuildManager.SpawnFromPool(1, Quaternion.identity, myInputCoordinates);
+                    path.GetPathTilePosition = myInputCoordinates;
+                    //myPathManager.GetPathTileMap[myInputCoordinates.x, myInputCoordinates.z] = path;
+                    myPathManager.AddItemToPortalMap(path, i);
+                    path.CheckNeighbors();
+                    Debug.Log("Add item to portal list");
+                    WorldController.Instance.GetWorld.SetTileState(myInputCoordinates.x, myInputCoordinates.z, Tile.TileState.road);
+
+                    if (myBooleansPortal[i] == false)
+                    {
+                        myBooleansPortal[i] = true;
+                    }
+                }
+                
+
+                //isPlaceingByPortal = true;
             }
         }
     }
@@ -154,4 +199,10 @@ public class Placement : MonoBehaviour
 
         return input;
     }
+
+    public void SetValidPlacement(int index)
+    {
+        myValidPlacement[index] = true;
+    }
+
 }
