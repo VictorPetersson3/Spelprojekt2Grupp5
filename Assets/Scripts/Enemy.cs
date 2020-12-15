@@ -31,17 +31,15 @@ public class Enemy : MonoBehaviour
 
     Vector3 myOriginalPosition;
 
-    void OnValidate()
+    private void Start()
     {
         myPathManager = FindObjectOfType<PathManager>();
         myPlayerController = FindObjectOfType<PlayerController>();
         myGameOver = FindObjectOfType<Sc_EndGameOver>();
-        //myEnemyController = gameObject.GetComponent<EnemyController>();
         myGameManager = GameManager.globalInstance;
         myOriginalPosition = gameObject.transform.position;
-
     }
-   
+
 
     void Update()
     {
