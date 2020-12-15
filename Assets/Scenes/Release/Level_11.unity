@@ -2068,7 +2068,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337869780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 6}
+  m_LocalPosition: {x: 6, y: 0, z: 7.915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 975910283}
@@ -2088,9 +2088,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPositionsToWalkTo:
-  - {fileID: 1341219894}
-  - {fileID: 955938745}
   - {fileID: 310084306}
+  - {fileID: 955938745}
+  - {fileID: 1341219894}
   - {fileID: 1334592582}
   mySpeed: 2
   myTimeToWait: 0
