@@ -10,7 +10,7 @@ public class GridShader : MonoBehaviour
 
     private void Start()
     {
-        Invoke("GenerateGridMapTexture", 1.5f);
+        GenerateGridMapTexture();
     }
     private void OnValidate()
     {
@@ -35,7 +35,7 @@ public class GridShader : MonoBehaviour
             {
                 colors[Mathf.FloorToInt( z * w + x)] = Color.black;
              
-                if (x > WorldController.Instance.GetWorldWidth || z > WorldController.Instance.GetWorldDepth)
+                if (x >= WorldController.Instance.GetWorldWidth || z >= WorldController.Instance.GetWorldDepth)
                 {
                     colors[Mathf.FloorToInt(z * w + x)] = Color.white;
 
