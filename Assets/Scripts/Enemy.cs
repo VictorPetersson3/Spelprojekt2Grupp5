@@ -18,7 +18,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     float myTimeToWait;
     float myTimerToWait;
-    float myDistanceToKill = 0.6f;
+    [SerializeField]
+    float myDistanceToKill = 0.65f;
     int myStep = 0;
 
     [SerializeField]
