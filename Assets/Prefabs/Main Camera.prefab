@@ -107,7 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -130,8 +130,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myTargets:
   - {fileID: 0}
+  targetCameraWidth: 35
   myZoomPaddingPortrait: 10
   myZoomPaddingLandscape: 2
-  myZoomPaddingTopDown: 22
+  myZoomPaddingTopDownPortrait: 22
+  myZoomPaddingTopDownLandscape: 22
   transitionSpeed: 5
   myWorldCenterPostion: {x: 0, y: 0, z: 0}
+  maxX: 0
+  minX: 0
+  maxY: 0
+  minY: 0

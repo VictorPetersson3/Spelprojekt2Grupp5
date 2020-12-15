@@ -18,17 +18,16 @@ public class AudioManager : MonoBehaviour
 
 
    private bool myMusicStatus = true;
-   public enum EAmbience { CHIMES, WIND };
+   public enum EAmbience { CHIMES, WIND, NONE };
    public enum EEffects { COIN, FOOTSTEPS, LOSS, PORTAL, PRESSUREPLATE, OPENDOOR, CLOSEDOOR, PLACE, REMOVE, WIN };
-   public enum EMusic { SYNTH, FUJU };
+   public enum EMusic { SYNTH, FUJU, NONE };
    public enum EUI { UI1, UI2, UI3 };
 
    [SerializeField] private EMusic myPlayingMusic;
+   [SerializeField] private EAmbience myPlayingAmbience;
 
    private float myVolume = 1;
    private List<AudioSource> myAudioSources = new List<AudioSource>();
-   //private List<bool> myAudioWasPlaying = new List<bool>();
-   //private float myLastTimeScale;
 
    private void Awake()
    {
@@ -46,18 +45,17 @@ public class AudioManager : MonoBehaviour
          {
             AudioSource audioSource = child.GetComponent<AudioSource>();
             myAudioSources.Add(audioSource);
-            //myAudioWasPlaying.Add(false);
          }
       }
-      //myLastTimeScale = Time.timeScale;
    }
    private void Start()
    {
       PlayMusic(myPlayingMusic);
+      PlayAmbience(myPlayingAmbience);
    }
    public void MasterVolume()
    {
-        myVolume = 40.0f * myVolume  - 40.0f;
+      myVolume = 40.0f * myVolume - 40.0f;
       myAudioMixer.SetFloat("MasterVolume", myVolume);
    }
    public void MusicVolume()
@@ -71,21 +69,17 @@ public class AudioManager : MonoBehaviour
          myAudioMixer.SetFloat("MusicVolume", 0);
       }
    }
-
-   //private void CheckPause()
-   //{
-
-   //}
    private void Update()
    {
       GetAudioStats();
       MasterVolume();
       MusicVolume();
-    }
+   }
 
-    //Play-metoder
+   //Play-metoder
    public void PlayAmbience(EAmbience anEnum)
    {
+      if (anEnum == EAmbience.NONE) return;
       myAmbience[(int)anEnum].Play();
    }
    public void PlayEffect(EEffects anEnum)
@@ -94,22 +88,29 @@ public class AudioManager : MonoBehaviour
    }
    public void PlayMusic(EMusic anEnum)
    {
-      //switch(SceneManager.GetActiveScene().buildIndex)
+      if (anEnum == EMusic.NONE) return;
       myMusic[(int)anEnum].Play();
    }
-   public void PlayUI(EUI anEnum)
+   public void PlayUI1()
    {
-      myUI[(int)anEnum].Play();
+      myUI[(int)EUI.UI1].Play();
+   }
+   public void PlayUI2()
+   {
+      myUI[(int)EUI.UI2].Play();
+   }
+   public void PlayUI3()
+   {
+      myUI[(int)EUI.UI3].Play();
+   }
+   public void StopWalkingEffect()
+   {
+      myEffects[(int)EEffects.FOOTSTEPS].Stop();
    }
 
-    public void StopWalkingEffect()
-    {
-        myEffects[(int)EEffects.FOOTSTEPS].Stop();
-    }
-
-    private void GetAudioStats()
-    {
-        myVolume = GameManager.globalInstance.GetAudioVolume();
-        myMusicStatus = GameManager.globalInstance.GetPlayMusic();
-    }
+   private void GetAudioStats()
+   {
+      myVolume = GameManager.globalInstance.GetAudioVolume();
+      myMusicStatus = GameManager.globalInstance.GetPlayMusic();
+   }
 }

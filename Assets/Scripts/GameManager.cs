@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour
             myLevelList[myActiveScene].myFinishedScore = myLevelList[myActiveScene].myAmountOfMoney;
         }
 
-        if (amountOfMoneySpent > 0 && amountOfMoneySpent < myTwoStarScore)
+        if (amountOfMoneySpent <= myTwoStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Finished LEVEL\nTHREE STARS");
 
         }
-        else if (amountOfMoneySpent >= myTwoStarScore && amountOfMoneySpent < myOneStarScore)
+        else if (amountOfMoneySpent > myTwoStarScore && amountOfMoneySpent <= myOneStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {
@@ -265,7 +265,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Finished Level!\nTWO STARS");
 
         }
-        else if (amountOfMoneySpent >= myOneStarScore)
+        else if (amountOfMoneySpent > myOneStarScore)
         {
             if (myLevelList[myActiveScene].myFinishedLevel == false)
             {

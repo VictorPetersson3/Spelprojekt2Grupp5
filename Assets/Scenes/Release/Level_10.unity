@@ -2971,12 +2971,12 @@ PrefabInstance:
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: myWorldCenterPostion.x
-      value: 5.2
+      value: 4.96
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: myWorldCenterPostion.z
-      value: 4
+      value: -6.51
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
@@ -7171,6 +7171,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 998033eeb9a53ca478b47e8216c50f4f, type: 3}
+--- !u!1 &1465814669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1465814671}
+  - component: {fileID: 1465814670}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1465814670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465814669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: deb833aead229884592ddf1807794d40, type: 2}
+--- !u!4 &1465814671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465814669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.0917475, y: 6.055782, z: 1.1538619}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1499476453
 GameObject:
   m_ObjectHideFlags: 0
@@ -9215,541 +9263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPathManager: {fileID: 1963332870}
   myPoolList:
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
-  - myTileId: 1
-    myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
-      type: 3}
-    myAmountOfTiles: 150
-    myTileList: []
   - myTileId: 1
     myTilePrefab: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1,
       type: 3}

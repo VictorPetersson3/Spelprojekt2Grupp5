@@ -67,7 +67,7 @@ MonoBehaviour:
   myPathManager: {fileID: 0}
   myDeathEffect: {fileID: 0}
   step: 1
-  myMovementSpeed: 4.82
+  myMovementSpeed: 2
   myMovementStart: 0
   myAnimator: {fileID: 6473851599320867668}
 --- !u!114 &6997046230388152911
@@ -85,6 +85,9 @@ MonoBehaviour:
   myMoneyMask:
     serializedVersion: 2
     m_Bits: 256
+  myEndMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1001 &3473211965964099223
 PrefabInstance:
   m_ObjectHideFlags: 0

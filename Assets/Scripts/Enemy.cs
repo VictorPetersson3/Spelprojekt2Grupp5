@@ -18,18 +18,40 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     float myTimeToWait;
     float myTimerToWait;
-    float myDistanceToKill = 0.5f;
+    [SerializeField]
+    float myDistanceToKill = 0.65f;
     int myStep = 0;
 
     [SerializeField]
     PlayerController myPlayerController;
+    [SerializeField]
+    Sc_EndGameOver myGameOver;
+    [SerializeField]
+    PathManager myPathManager;
+    GameManager myGameManager;
+
+    Vector3 myOriginalPosition;
+    Vector3 myOriginalDistance;
+    Quaternion myOrignalRotation;
 
 
-    void OnValidate()
+
+    private void Start()
     {
+        //myOriginalDistance = transform.position - myPositionsToWalkTo[myStep].position;
+        //myOrignalRotation = Quaternion.LookRotation(myPositionsToWalkTo[myStep].position - transform.position);
+        Vector3 yPosition = gameObject.transform.position;
+        yPosition.y = myPositionsToWalkTo[0].position.y;
+
+        gameObject.transform.position = myPositionsToWalkTo[0].position;
+        myPathManager = FindObjectOfType<PathManager>();
         myPlayerController = FindObjectOfType<PlayerController>();
+        myGameOver = FindObjectOfType<Sc_EndGameOver>();
+        myGameManager = GameManager.globalInstance;
+        myOriginalPosition = yPosition;
+        gameObject.transform.position = yPosition;
     }
-   
+
 
     void Update()
     {
@@ -42,7 +64,7 @@ public class Enemy : MonoBehaviour
         Quaternion lookAtRotation = Quaternion.LookRotation(myPositionsToWalkTo[myStep].position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.05f);
        
-        if (dist.magnitude < 1f) 
+        if (dist.magnitude < .01f) 
         {
             if (myTimerToWait >= myTimeToWait)
             {
@@ -71,9 +93,26 @@ public class Enemy : MonoBehaviour
     void CheckPlayer()
     {
         Vector3 distanceToPlayer = myPlayerController.transform.position - transform.position;
-        if (distanceToPlayer.magnitude < myDistanceToKill) 
+        if (distanceToPlayer.magnitude < myDistanceToKill && myPlayerController.GetWalking() == true) 
         {
+            AudioManager.ourInstance.StopWalkingEffect();
+            AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.LOSS);
+            myPlayerController.GetAnimator().SetBool("isWalking", false);
+            myPlayerController.GetAnimator().SetBool("isOffRoad", true);
+            myPlayerController.SetStopWalking();
+            myPlayerController.GetParticleSystem().transform.position = transform.position;
+            myPlayerController.GetParticleSystem().Play();
+            myGameManager.LoseGame();
+
             // Kill player
         }
     }
+
+    public void ResetEnemy()
+    {
+        gameObject.transform.position = myOriginalPosition;
+        myStep = 0;
+    }
+
+
 }

@@ -42,7 +42,7 @@ public class Door : ObstructTileMap
         //    CheckButtons();
         //}
 
-        print(isOpen);
+        //print(isOpen);
         if (myPlayerController != null)
         {
             float distance = Vector3.Distance(myPlayerController.transform.position, transform.position);
@@ -58,12 +58,28 @@ public class Door : ObstructTileMap
 
     private void CheckIfDoorOpened()
     {
-        foreach (RailButton button in myRailButtons)
+        if (myRailButtons.Count == 1)
         {
-            if (button.GetMySwitch)
+            if (myRailButtons[0].GetMySwitch)
             {
                 Debug.Log("Door opened");
                 OpenDoor();
+            }
+        }
+        else
+        {
+            int count = 0;
+            foreach (RailButton button in myRailButtons)
+            {
+                if (button.GetMySwitch)
+                {
+                    count++;
+                    if (count == myRailButtons.Count)
+                    {
+                        Debug.Log("Door opened");
+                        OpenDoor();
+                    }
+                }
             }
         }
     }

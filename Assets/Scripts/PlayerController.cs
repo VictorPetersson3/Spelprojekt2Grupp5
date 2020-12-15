@@ -35,12 +35,14 @@ public class PlayerController : MonoBehaviour
     //GameObject myPlayerModel;
     int indexForNextPortalDistance = 0;
     bool myDontIncreaseIndexFirstTime = true;
+
     [SerializeField]
     bool myMovementStart = false;
+
     [SerializeField]
     Animator myAnimator;
-
     GameManager myGameManger;
+
     public int SetPlayerStep
     {
         set
@@ -79,22 +81,22 @@ public class PlayerController : MonoBehaviour
                 myMovementStart = false;
                 myAnimator.SetBool("isWalking", false);
                 myAnimator.SetBool("isOffRoad", true);
-                myPathManager.ResetPath();
+                //myPathManager.ResetPath();
                 myGameManger.LoseGame();
             }
-            else if (myMovementList[step].IsEndTile)
-            {
-                AudioManager.ourInstance.StopWalkingEffect();
-                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.WIN);
-                myAnimator.SetBool("isWalking", false);
-                myAnimator.SetBool("isInGoal", true);
-                myPathManager.ResetPath();
-                myGameManger.SetFinishedLevel();
-                Debug.Log("You win");
+            //else if (myMovementList[step].IsEndTile)
+            //{
+            //    AudioManager.ourInstance.StopWalkingEffect();
+            //    AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.WIN);
+            //    myAnimator.SetBool("isWalking", false);
+            //    myAnimator.SetBool("isInGoal", true);
+            //    myPathManager.ResetPath();
+            //    myGameManger.SetFinishedLevel();
+            //    Debug.Log("You win");
                 
-                myMovementStart = false;
+            //    myMovementStart = false;
 
-            }
+            //}
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, myMovementList[step].transform.position, myMovementSpeed * Time.deltaTime);
@@ -138,4 +140,31 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+
+    public PathManager GetManager()
+    {
+        return myPathManager;
+    }
+
+    public Animator GetAnimator()
+    {
+        return myAnimator;
+    }
+
+    public bool GetWalking()
+    {
+        return myMovementStart;
+    }
+
+    public void SetStopWalking()
+    {
+        myMovementStart = false;
+    }
+
+    public ParticleSystem GetParticleSystem()
+    {
+        return myDeathEffect;
+    }
+
 }
