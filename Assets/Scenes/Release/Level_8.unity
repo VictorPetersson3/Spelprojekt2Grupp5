@@ -1852,6 +1852,8 @@ MonoBehaviour:
   mySpeed: 1
   myTimeToWait: 0
   myPlayerController: {fileID: 160594222}
+  myGameOver: {fileID: 0}
+  myPathManager: {fileID: 1963332870}
 --- !u!114 &307188015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1887,6 +1889,8 @@ MonoBehaviour:
   mySpeed: 1
   myTimeToWait: 0
   myPlayerController: {fileID: 160594222}
+  myGameOver: {fileID: 0}
+  myPathManager: {fileID: 1963332870}
 --- !u!1001 &321893122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2295,7 +2299,8 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3124,12 +3129,12 @@ PrefabInstance:
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.3
+      value: -38
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.7
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
@@ -3181,6 +3186,41 @@ PrefabInstance:
       propertyPath: myTargets.Array.data[0]
       value: 
       objectReference: {fileID: 821921805}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: targetCameraWidth
+      value: 9.364725
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: myZoomPaddingPortrait
+      value: -3.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: myZoomPaddingLandscape
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: myZoomPaddingTopDownPortrait
+      value: -4.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: myZoomPaddingTopDownLandscape
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: myWorldCenterPostion.x
+      value: 4.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
+        type: 3}
+      propertyPath: myWorldCenterPostion.z
+      value: -9.59
+      objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978415, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: m_Name
@@ -5323,6 +5363,8 @@ MonoBehaviour:
   mySpeed: 1
   myTimeToWait: 0
   myPlayerController: {fileID: 160594222}
+  myGameOver: {fileID: 0}
+  myPathManager: {fileID: 1963332870}
 --- !u!4 &955469935 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1274638495278576308, guid: b927cca8794cdb3489f31f48a11ca7f5,
