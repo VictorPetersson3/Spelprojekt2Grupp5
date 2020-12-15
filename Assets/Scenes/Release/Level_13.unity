@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -237,8 +237,9 @@ MonoBehaviour:
   myPositionsToWalkTo:
   - {fileID: 353094308}
   - {fileID: 142163387}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -4754,8 +4755,9 @@ MonoBehaviour:
   myPositionsToWalkTo:
   - {fileID: 230709510}
   - {fileID: 1735820471}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -5498,8 +5500,9 @@ MonoBehaviour:
   myPositionsToWalkTo:
   - {fileID: 1777993799}
   - {fileID: 1317820600}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -5848,8 +5851,9 @@ MonoBehaviour:
   myPositionsToWalkTo:
   - {fileID: 1317406911}
   - {fileID: 1331503492}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}

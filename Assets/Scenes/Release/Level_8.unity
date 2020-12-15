@@ -1909,8 +1909,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPositionsToWalkTo: []
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -1948,6 +1949,7 @@ MonoBehaviour:
   - {fileID: 62293560}
   mySpeed: 1
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -2383,7 +2385,8 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5548,8 +5551,9 @@ MonoBehaviour:
   - {fileID: 699098722}
   - {fileID: 353158380}
   - {fileID: 1852170850}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}

@@ -1505,8 +1505,9 @@ MonoBehaviour:
   - {fileID: 723693250}
   - {fileID: 672494462}
   - {fileID: 1446614923}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -8051,7 +8052,7 @@ PrefabInstance:
     - target: {fileID: 5941589472150444419, guid: 130604f9529b5764baf02e1c9bf570f6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8300189841689694130, guid: 130604f9529b5764baf02e1c9bf570f6,
         type: 3}
@@ -10075,8 +10076,9 @@ MonoBehaviour:
   - {fileID: 516767877}
   - {fileID: 2003504189}
   - {fileID: 392579637}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -10744,7 +10746,7 @@ PrefabInstance:
     - target: {fileID: 5941589472150444419, guid: 130604f9529b5764baf02e1c9bf570f6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8300189841689694130, guid: 130604f9529b5764baf02e1c9bf570f6,
         type: 3}

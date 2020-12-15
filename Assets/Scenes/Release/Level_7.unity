@@ -1442,8 +1442,9 @@ MonoBehaviour:
   - {fileID: 318003225}
   - {fileID: 1798987631}
   - {fileID: 38261300}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -1524,8 +1525,9 @@ MonoBehaviour:
   myPositionsToWalkTo:
   - {fileID: 1965912542}
   - {fileID: 212374393}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -2155,8 +2157,9 @@ MonoBehaviour:
   myPositionsToWalkTo:
   - {fileID: 166055336}
   - {fileID: 1770792731}
-  mySpeed: 1
+  mySpeed: 2
   myTimeToWait: 0
+  myDistanceToKill: 0.65
   myPlayerController: {fileID: 160594222}
   myGameOver: {fileID: 0}
   myPathManager: {fileID: 1963332870}
@@ -13167,6 +13170,11 @@ PrefabInstance:
       propertyPath: myDeathEffect
       value: 
       objectReference: {fileID: 688291469}
+    - target: {fileID: 4773248973371576305, guid: 53ea471b916f7e3428fd702bf78f8385,
+        type: 3}
+      propertyPath: myMovementSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4773248973371576306, guid: 53ea471b916f7e3428fd702bf78f8385,
         type: 3}
       propertyPath: m_Name
