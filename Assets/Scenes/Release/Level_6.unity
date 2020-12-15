@@ -1352,7 +1352,8 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 10
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2581,7 +2582,7 @@ PrefabInstance:
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.3
+      value: -38.1
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978413, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
@@ -2646,27 +2647,27 @@ PrefabInstance:
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: myZoomPaddingPortrait
-      value: 0
+      value: -6.21
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: myZoomPaddingLandscape
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: myZoomPaddingTopDownPortrait
-      value: 0
+      value: -6.83
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: myWorldCenterPostion.x
-      value: 3.88
+      value: 4.08
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
       propertyPath: myWorldCenterPostion.z
-      value: 1.8
+      value: -8.81
       objectReference: {fileID: 0}
     - target: {fileID: 7897701026364978414, guid: e1197a62c5cba9d4b8c0fdba63c1193f,
         type: 3}
@@ -8108,6 +8109,8 @@ MonoBehaviour:
   mySpeed: 1
   myTimeToWait: 0
   myPlayerController: {fileID: 160594222}
+  myGameOver: {fileID: 0}
+  myPathManager: {fileID: 1963332870}
 --- !u!4 &1783472070
 Transform:
   m_ObjectHideFlags: 0
@@ -9306,6 +9309,8 @@ MonoBehaviour:
   mySpeed: 1
   myTimeToWait: 0
   myPlayerController: {fileID: 160594222}
+  myGameOver: {fileID: 0}
+  myPathManager: {fileID: 1963332870}
 --- !u!1001 &2107364992
 PrefabInstance:
   m_ObjectHideFlags: 0
