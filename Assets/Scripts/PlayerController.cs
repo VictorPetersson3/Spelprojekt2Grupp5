@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
                 myMovementStart = false;
                 myAnimator.SetBool("isWalking", false);
                 myAnimator.SetBool("isOffRoad", true);
-                myPathManager.ResetPath();
+                //myPathManager.ResetPath();
                 myGameManger.LoseGame();
             }
             //else if (myMovementList[step].IsEndTile)
@@ -152,9 +152,19 @@ public class PlayerController : MonoBehaviour
         return myAnimator;
     }
 
+    public bool GetWalking()
+    {
+        return myMovementStart;
+    }
+
     public void SetStopWalking()
     {
         myMovementStart = false;
+    }
+
+    public ParticleSystem GetParticleSystem()
+    {
+        return myDeathEffect;
     }
 
 }

@@ -48,7 +48,7 @@ public class PlayerCasting : MonoBehaviour
             AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.COIN);
         }
 
-        if (myEndDetection == true)
+        if (myEndDetection == true && myPlayerController.GetWalking() == true)
         {
             myPlacement.GetSetIsEnded = true;
             myPlayerController.SetStopWalking();
@@ -56,7 +56,7 @@ public class PlayerCasting : MonoBehaviour
             AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.WIN);
             myAnimator.SetBool("isWalking", false);
             myAnimator.SetBool("isInGoal", true);
-            myPathManager.ResetPath();
+            //myPathManager.ResetPath();
             myGameManager.SetFinishedLevel();
             Debug.Log("You win");
 
