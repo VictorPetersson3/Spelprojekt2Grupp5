@@ -9840,8 +9840,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5960474, y: 0.20881867, z: 0.6626009}
-  m_Center: {x: -0.06344682, y: 1.1987242, z: -0.026266038}
+  m_Size: {x: 0.4460826, y: 0.20881867, z: 0.4384895}
+  m_Center: {x: -0.027465284, y: 1.1987242, z: 0.015880197}
 --- !u!1 &5257242005792037433
 GameObject:
   m_ObjectHideFlags: 0
@@ -9958,7 +9958,8 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14811,6 +14812,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P_ToriiGatePortal2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721396584960435863, guid: c8fcb9b6ef821e949af1bfed6e8769b0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5200130776257310349, guid: c8fcb9b6ef821e949af1bfed6e8769b0,
         type: 3}
