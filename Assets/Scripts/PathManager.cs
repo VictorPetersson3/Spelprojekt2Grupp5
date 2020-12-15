@@ -44,27 +44,28 @@ public class PathManager : MonoBehaviour
     }
     void OnValidate()
     {
-        myPlayerController = FindObjectOfType<PlayerController>();
-        PathTile[] objects = FindObjectsOfType<PathTile>();
-        for (int i = 0; i < objects.Length; i++)
-        {
-            if (objects[i].IsEndTile)
-            {
-                myEndTile = objects[i];
-                break;
-            }
-        }
+        //myPlayerController = FindObjectOfType<PlayerController>();
+        //PathTile[] objects = FindObjectsOfType<PathTile>();
+        //for (int i = 0; i < objects.Length; i++)
+        //{
+        //    if (objects[i].IsEndTile)
+        //    {
+        //        myEndTile = objects[i];
+        //        break;
+        //    }
+        //}
     }
     private void Start()
     {
         Init();
     }
+
     void Init()
     {
         myPlayerController.PlayerMoveList = myPathList;
         GameObject myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
         SceneManager.MoveGameObjectToScene(myStartPathTile, SceneManager.GetSceneAt(1));
-
+        myPlacementEffects.transform.position = new Vector3(0, -100, 0);
         myStartPathTile.GetComponent<PathTile>().GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)); 
 
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
@@ -115,7 +116,6 @@ public class PathManager : MonoBehaviour
         myPathTiles[x, z] = aPathTileToAdd;
         myPortals[index].AddVectorToMovementList(aPathTileToAdd);
         
-        //Debug.Log(Testing);
 
         myPlacementEffects.transform.position = aPathTileToAdd.transform.position;
         myPlacementEffects.CheckPlacementIndicators();
@@ -163,11 +163,6 @@ public class PathManager : MonoBehaviour
         int x = Mathf.FloorToInt(aPosition.x);
         int z = Mathf.FloorToInt(aPosition.z);
 
-        //Debug.Log("X: " + x + " Y: " + z);
-        //Debug.Log(aLastPlacedTile.GetPathTilePosition);
-
-
-        //Debug.Log(myPortals.Count);
 
         if (myPortals.Count != 0)
         {
@@ -240,5 +235,7 @@ public class PathManager : MonoBehaviour
         return false;
 
     }
+
+
 
 }

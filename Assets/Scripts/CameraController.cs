@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
 
     private bool myMultiTouch = false;
 
-    bool shouldMoveToTopDownView = false;
+    bool shouldMoveToTopDownView = true;
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +62,6 @@ public class CameraController : MonoBehaviour
 
                 Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingLandscape;
 
-                Debug.Log(targetCameraWidth);
             }
            
         }
@@ -70,7 +69,6 @@ public class CameraController : MonoBehaviour
         {
             if (myTargets[0] != null)
             {
-                Debug.Log(targetCameraWidth);
 
                 targetCameraWidth = (Mathf.Abs(Mathf.Sqrt(Mathf.Pow(myTargets[0].bounds.size.x, 2) + Mathf.Pow(myTargets[0].bounds.size.z, 2)))/1.86f);
 
@@ -88,7 +86,7 @@ public class CameraController : MonoBehaviour
             if (!Input.GetMouseButtonDown(0))
             {
                 transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime * transitionSpeed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(65, 0, 0), Time.deltaTime * transitionSpeed);     
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(65, 15, 0), Time.deltaTime * transitionSpeed);     
                 switch(Screen.orientation)
                 {
                     case ScreenOrientation.Portrait:
@@ -122,16 +120,16 @@ public class CameraController : MonoBehaviour
 
 
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            myTouchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-
-        else if(Input.GetMouseButton(0))
-        {
-            Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position += direction;
-        }
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //    myTouchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //}
+        //
+        //else if(Input.GetMouseButton(0))
+        //{
+        //    Vector3 direction = myTouchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    transform.position += direction;
+        //}
     }
 
     public void MoveToTopDownView()
