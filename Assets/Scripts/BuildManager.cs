@@ -5,6 +5,8 @@ using UnityEngine.Diagnostics;
 
 public class BuildManager : MonoBehaviour
 {
+    Vector3 myVectorCheck;
+
     public static BuildManager globalInstance;
     [SerializeField]
     [Header("Reference Settings")]
@@ -68,10 +70,19 @@ public class BuildManager : MonoBehaviour
             {
                 if (myPoolList[x].myTileList[y].gameObject.activeSelf == false && myPoolList[x].myTileId == aTag)
                 {
-                    GameManager.globalInstance.ChangeMoney(1);
-                    myPoolList[x].myTileList[y].gameObject.SetActive(true);
-                    myPoolList[x].myTileList[y].transform.position = aPosition;
-                    return myPoolList[x].myTileList[y];
+                    if (myVectorCheck == aPosition)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        GameManager.globalInstance.ChangeMoney(1);
+                        myPoolList[x].myTileList[y].gameObject.SetActive(true);
+                        myPoolList[x].myTileList[y].transform.position = aPosition;
+                        myVectorCheck = aPosition;
+                        return myPoolList[x].myTileList[y];
+                    }
+                    
                 }
             }
         }
@@ -102,5 +113,10 @@ public class BuildManager : MonoBehaviour
     {
         aPooledGameObject.gameObject.SetActive(false);
         aPooledGameObject.transform.position = myOriginalSpawnPoolPosition;
+    }
+
+    public void ResetTilesPositionRemoval()
+    {
+        myVectorCheck = new Vector3(0, 0, 0);
     }
 }
