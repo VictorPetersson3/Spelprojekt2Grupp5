@@ -62,7 +62,6 @@ public class CameraController : MonoBehaviour
 
                 Camera.main.orthographicSize = targetCameraWidth / Camera.main.aspect + myZoomPaddingLandscape;
 
-                Debug.Log(targetCameraWidth);
             }
            
         }
@@ -70,7 +69,6 @@ public class CameraController : MonoBehaviour
         {
             if (myTargets[0] != null)
             {
-                Debug.Log(targetCameraWidth);
 
                 targetCameraWidth = (Mathf.Abs(Mathf.Sqrt(Mathf.Pow(myTargets[0].bounds.size.x, 2) + Mathf.Pow(myTargets[0].bounds.size.z, 2)))/1.86f);
 
