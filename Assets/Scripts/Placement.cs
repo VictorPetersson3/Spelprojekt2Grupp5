@@ -65,17 +65,17 @@ public class Placement : MonoBehaviour
                     myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
                     //Kollar om en tile är upptagen
-                    if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
-                    {
+                    //if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
+                    //{
                         
-                        //AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
-                        //myBuildManager.ResetTilesPositionRemoval();
-                        //myPathManager.DeleteTile(myInputCoordinates);
-                        //Sätter tilen till empty
+                    //    AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
+                    //    myBuildManager.ResetTilesPositionRemoval();
+                    //    myPathManager.DeleteTile(myInputCoordinates);
+                    //    //Sätter tilen till empty
 
-                        //Reset:ar tile-objektet
+                    //    //Reset:ar tile-objektet
 
-                    }
+                    //}
                 }
             }
         }
