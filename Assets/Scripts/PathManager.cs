@@ -65,7 +65,7 @@ public class PathManager : MonoBehaviour
         myPlayerController.PlayerMoveList = myPathList;
         GameObject myStartPathTile = Instantiate(myPathTilePrefab, new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)), Quaternion.identity);
         SceneManager.MoveGameObjectToScene(myStartPathTile, SceneManager.GetSceneAt(1));
-
+        myPlacementEffects.transform.position = new Vector3(0, -100, 0);
         myStartPathTile.GetComponent<PathTile>().GetPathTilePosition = new Vector3(Mathf.FloorToInt(myPlayerController.transform.position.x), 0, Mathf.FloorToInt(myPlayerController.transform.position.z)); 
 
         myPathTiles = new PathTile[WorldController.Instance.GetWorldWidth, WorldController.Instance.GetWorldDepth];
