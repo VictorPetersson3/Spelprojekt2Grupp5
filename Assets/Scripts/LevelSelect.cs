@@ -35,7 +35,7 @@ public class LevelSelect : MonoBehaviour
             Debug.Log(mySelectedLevel);
             if (mySelectedLevel != myBackground)
             {
-                myLines.SetActive(false);
+                Invoke("DeactivateLines", 0.1f);
                 myMainUI.SetActive(false);
                 mySelectedUI = mySelectedLevel.transform.parent.GetChild(0).gameObject;
                 mySelectedUI.SetActive(true);
@@ -43,7 +43,7 @@ public class LevelSelect : MonoBehaviour
             }
             else
             {
-                myLines.SetActive(true);
+                Invoke("ActivateLines", 0.1f);
                 mySelectedUI.SetActive(false);
                 myMainUI.SetActive(true);
                 StartCoroutine(CoRoutineLoad());
@@ -148,5 +148,12 @@ public class LevelSelect : MonoBehaviour
     {
         return myStarRequirement;
     }
-
+    private void DeactivateLines()
+    {
+        myLines.SetActive(false);
+    }
+    private void ActivateLines()
+    {
+        myLines.SetActive(true);
+    }
 }
