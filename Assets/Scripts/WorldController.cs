@@ -62,7 +62,7 @@ public class WorldController : MonoBehaviour
         GameObject obj = Instantiate(myMapBoarder, new Vector3(xPos, 0, zPos), Quaternion.Euler(-90, 0, 0));
         obj.transform.localScale = new Vector3(xNormalized, 1, zNormalized);
 
-        Instantiate(myGrid, new Vector3(6f, 0.01f, 6f), Quaternion.Euler(90, 0, 0), transform);
+        Instantiate(myGrid, new Vector3(6.5f, 0.01f, 6.5f), Quaternion.Euler(90, 0, 0), transform);
 
     }
     [ExecuteInEditMode]

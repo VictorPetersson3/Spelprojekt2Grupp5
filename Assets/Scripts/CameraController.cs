@@ -86,7 +86,7 @@ public class CameraController : MonoBehaviour
             if (!Input.GetMouseButtonDown(0))
             {
                 transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime * transitionSpeed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(65, 0, 0), Time.deltaTime * transitionSpeed);     
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(65, 40, 0), Time.deltaTime * transitionSpeed);     
                 switch(Screen.orientation)
                 {
                     case ScreenOrientation.Portrait:
