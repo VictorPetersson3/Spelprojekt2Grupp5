@@ -17,7 +17,8 @@ public class Placement : MonoBehaviour
     private Tile myTile;
     [SerializeField]
     PathTile temp;
-
+    [SerializeField]
+    Sc_shopUIVertical myShopOption;
     public bool GetSetIsEnded { get { return myIsEnded; } set { myIsEnded = value; } }
     private void Start()
     {
@@ -27,47 +28,53 @@ public class Placement : MonoBehaviour
             myValidPlacement.Add(isPlaceingByPortal);
         }
     }
-
+    private void OnValidate()
+    {
+        myShopOption = FindObjectOfType<Sc_shopUIVertical>();
+    }
     private void Update()
     {
         if (!myIsEnded)
         {
-            //LEFT CLICK INPUT
-            if (Input.GetMouseButton(0))
+            if(myShopOption.GetIsPlacingTiles())
             {
-
-                //Avrundar spelarens input till integers
-                myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
-                myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
-
-                myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(WorldController.Instance.GetWorldWidth - 1, 0, WorldController.Instance.GetWorldDepth - 1));
-
-                //Kollar om en tile är upptagen
-                if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
+                if (Input.GetMouseButton(0))
                 {
-                    PlacementLogic();
+
+                    //Avrundar spelarens input till integers
+                    myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
+                    myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
+
+                    myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(WorldController.Instance.GetWorldWidth - 1, 0, WorldController.Instance.GetWorldDepth - 1));
+
+                    //Kollar om en tile är upptagen
+                    if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.empty)
+                    {
+                        PlacementLogic();
+                    }
                 }
             }
-
-            //RIGHT CLICK INPUT
-            if (Input.GetMouseButton(1))
+            else
             {
-                //Avrundar spelarens input till integers
-                myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
-                myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
-
-                myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
-
-                //Kollar om en tile är upptagen
-                if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
+                if (Input.GetMouseButton(0))
                 {
-                    AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
-                    myBuildManager.ResetTilesPositionRemoval();
-                    myPathManager.DeleteTile(myInputCoordinates);
-                    //Sätter tilen till empty
+                    //Avrundar spelarens input till integers
+                    myInputCoordinates.x = Mathf.RoundToInt(GetClickCoordinates().x);
+                    myInputCoordinates.z = Mathf.RoundToInt(GetClickCoordinates().z);
 
-                    //Reset:ar tile-objektet
+                    myInputCoordinates.Clamp(new Vector3Int(0, 0, 0), new Vector3Int(10, 0, 10));
 
+                    //Kollar om en tile är upptagen
+                    if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
+                    {
+                        AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
+                        myBuildManager.ResetTilesPositionRemoval();
+                        myPathManager.DeleteTile(myInputCoordinates);
+                        //Sätter tilen till empty
+
+                        //Reset:ar tile-objektet
+
+                    }
                 }
             }
         }
