@@ -67,9 +67,10 @@ public class Placement : MonoBehaviour
                     //Kollar om en tile är upptagen
                     if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
                     {
-                        AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
-                        myBuildManager.ResetTilesPositionRemoval();
-                        myPathManager.DeleteTile(myInputCoordinates);
+                        
+                        //AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
+                        //myBuildManager.ResetTilesPositionRemoval();
+                        //myPathManager.DeleteTile(myInputCoordinates);
                         //Sätter tilen till empty
 
                         //Reset:ar tile-objektet
