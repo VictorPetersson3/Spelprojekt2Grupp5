@@ -114,4 +114,9 @@ public class BuildManager : MonoBehaviour
         aPooledGameObject.gameObject.SetActive(false);
         aPooledGameObject.transform.position = myOriginalSpawnPoolPosition;
     }
+
+    public void ResetTilesPositionRemoval()
+    {
+        myVectorCheck = new Vector3(0, 0, 0);
+    }
 }

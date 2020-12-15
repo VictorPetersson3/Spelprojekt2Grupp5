@@ -62,7 +62,7 @@ public class Placement : MonoBehaviour
                 if (WorldController.Instance.GetTileAtPosition(myInputCoordinates.x, myInputCoordinates.z).GetSetTileState == Tile.TileState.road)
                 {
                     AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.REMOVE);
-
+                    myBuildManager.ResetTilesPositionRemoval();
                     myPathManager.DeleteTile(myInputCoordinates);
                     //Sätter tilen till empty
 
