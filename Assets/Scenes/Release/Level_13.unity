@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3345,7 +3345,7 @@ PrefabInstance:
     - target: {fileID: 1132214175188174711, guid: 2f1d2771cef4502458145c0bf8859226,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1132214175188174711, guid: 2f1d2771cef4502458145c0bf8859226,
         type: 3}
@@ -3370,6 +3370,31 @@ PrefabInstance:
     - target: {fileID: 1132214175188174711, guid: 2f1d2771cef4502458145c0bf8859226,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132214175188174711, guid: 2f1d2771cef4502458145c0bf8859226,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132214175188174711, guid: 2f1d2771cef4502458145c0bf8859226,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132214175188174711, guid: 2f1d2771cef4502458145c0bf8859226,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1963332875}
+    - target: {fileID: 1132214175188174711, guid: 2f1d2771cef4502458145c0bf8859226,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ResetEnemies
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132214175188174711, guid: 2f1d2771cef4502458145c0bf8859226,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1132214175209090550, guid: 2f1d2771cef4502458145c0bf8859226,
@@ -10570,6 +10595,7 @@ GameObject:
   - component: {fileID: 1963332871}
   - component: {fileID: 1963332870}
   - component: {fileID: 1963332874}
+  - component: {fileID: 1963332875}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -11199,6 +11225,23 @@ MonoBehaviour:
     myAmountOfTiles: 150
     myTileList: []
   myOriginalSpawnPoolPosition: {x: 0, y: -100, z: 0}
+--- !u!114 &1963332875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963332869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06a0a7669b97668448a8e18d5f26a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myListOfEnemy:
+  - {fileID: 731202172}
+  - {fileID: 17365640}
+  - {fileID: 964907623}
+  - {fileID: 893609755}
 --- !u!1 &2041864336
 GameObject:
   m_ObjectHideFlags: 0

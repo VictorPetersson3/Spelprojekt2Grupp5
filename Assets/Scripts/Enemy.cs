@@ -30,9 +30,15 @@ public class Enemy : MonoBehaviour
     GameManager myGameManager;
 
     Vector3 myOriginalPosition;
+    Vector3 myOriginalDistance;
+    Quaternion myOrignalRotation;
+
+
 
     private void Start()
     {
+        //myOriginalDistance = transform.position - myPositionsToWalkTo[myStep].position;
+        //myOrignalRotation = Quaternion.LookRotation(myPositionsToWalkTo[myStep].position - transform.position);
         Vector3 yPosition = gameObject.transform.position;
         yPosition.y = myPositionsToWalkTo[0].position.y;
 
@@ -104,6 +110,7 @@ public class Enemy : MonoBehaviour
     public void ResetEnemy()
     {
         gameObject.transform.position = myOriginalPosition;
+        myStep = 0;
     }
 
 
