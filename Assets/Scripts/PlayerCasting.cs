@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerCasting : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerCasting : MonoBehaviour
     LayerMask myMoneyMask;
     [SerializeField]
     LayerMask myEndMask;
+    [SerializeField]
+    VisualEffect myFireWorks;
 
     RaycastHit myMoneyHit;
     RaycastHit myEndGameHit;
@@ -26,6 +29,7 @@ public class PlayerCasting : MonoBehaviour
 
     private void Start()
     {
+        myFireWorks.Stop();
         myGameManager = GameManager.globalInstance;
         myPlayerController = GetComponent<PlayerController>();
         myPathManager = myPlayerController.GetManager();
@@ -50,6 +54,7 @@ public class PlayerCasting : MonoBehaviour
 
         if (myEndDetection == true && myPlayerController.GetWalking() == true)
         {
+            myFireWorks.Play();
             myPlacement.GetSetIsEnded = true;
             myPlayerController.SetStopWalking();
             AudioManager.ourInstance.StopWalkingEffect();
