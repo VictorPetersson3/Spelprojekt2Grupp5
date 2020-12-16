@@ -65,7 +65,7 @@ public class WorldController : MonoBehaviour
         Instantiate(myGrid, new Vector3(6, 0.001f, 6), Quaternion.Euler(90, 0, 0), transform);
 
     }
-    [ExecuteInEditMode]
+    /*[ExecuteInEditMode]
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -121,6 +121,7 @@ public class WorldController : MonoBehaviour
 
 
     }
+    */
     private void Update()
     {
     }
