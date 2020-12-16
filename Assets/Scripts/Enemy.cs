@@ -23,12 +23,17 @@ public class Enemy : MonoBehaviour
     int myStep = 0;
 
     [SerializeField]
+    LineRenderer myLineRender;
+
+    [SerializeField]
     PlayerController myPlayerController;
     [SerializeField]
     Sc_EndGameOver myGameOver;
     [SerializeField]
     PathManager myPathManager;
     GameManager myGameManager;
+
+
 
     Vector3 myOriginalPosition;
     Vector3 myOriginalDistance;
@@ -43,18 +48,34 @@ public class Enemy : MonoBehaviour
         Vector3 yPosition = gameObject.transform.position;
         yPosition.y = myPositionsToWalkTo[0].position.y;
 
-        gameObject.transform.position = myPositionsToWalkTo[0].position;
         myPathManager = FindObjectOfType<PathManager>();
         myPlayerController = FindObjectOfType<PlayerController>();
         myGameOver = FindObjectOfType<Sc_EndGameOver>();
+        gameObject.transform.position = myPositionsToWalkTo[0].position;
         myGameManager = GameManager.globalInstance;
         myOriginalPosition = yPosition;
         gameObject.transform.position = yPosition;
+        
+        AddTransformsToLineRender();
     }
 
+    void AddTransformsToLineRender()
+    {
+
+        Instantiate(myLineRender, transform.position, Quaternion.identity);
+
+        myLineRender.positionCount = myPositionsToWalkTo.Length;
+
+        for (int i = 0; i < myPositionsToWalkTo.Length; i++)
+        {
+            myLineRender.SetPosition(i, myPositionsToWalkTo[i].position);
+        }         
+
+    }
 
     void Update()
     {
+       
         Movement();
         CheckPlayer();
     }
