@@ -56,8 +56,8 @@ public class WorldController : MonoBehaviour
         float zNormalized = myDepth * 0.105f;
         float xNormalized = myWidth * 0.105f;
         
-        float xPos = myWidth / 2.0f;
-        float zPos = myDepth / 2.0f;
+        float xPos = Mathf.Floor(myWidth / 2.0f);
+        float zPos = Mathf.Floor(myDepth / 2.0f);
 
         GameObject obj = Instantiate(myMapBoarder, new Vector3(xPos, 0, zPos), Quaternion.Euler(-90, 0, 0));
         obj.transform.localScale = new Vector3(xNormalized, 1, zNormalized);
