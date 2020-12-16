@@ -36,8 +36,6 @@ public class Placement : MonoBehaviour
     {
         if (!myIsEnded)
         {
-            if(myShopOption.GetIsPlacingTiles())
-            {
                 if (Input.GetMouseButton(0))
                 {
 
@@ -53,7 +51,6 @@ public class Placement : MonoBehaviour
                         PlacementLogic();
                     }
                 }
-            }
             else
             {
                 if (Input.GetMouseButton(0))
