@@ -83,11 +83,14 @@ public class Door : ObstructTileMap
             }
         }
     }
-    public void OpenDoor()
+    private void OpenDoor()
     {
-        isOpen = true;
-        myAnimator.SetBool("isOpen", true);
-
+        if (isOpen == false)
+        {
+            isOpen = true;
+            myAnimator.SetBool("isOpen", true);
+            AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.OPENDOOR);
+        }
     }
     protected override void OnDrawGizmos()
     {

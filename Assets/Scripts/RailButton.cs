@@ -40,7 +40,6 @@ public class RailButton : ObstructTileMap
             {
                 mySwitch = true;
                 AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PRESSUREPLATE);
-                AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.OPENDOOR);
             }
         }
     }
