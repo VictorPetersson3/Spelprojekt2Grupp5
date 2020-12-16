@@ -75,6 +75,7 @@ public class PathManager : MonoBehaviour
             InstantiateFirstPortalExitTile();
         }
 
+        WorldController.Instance.GetWorld.SetTileState(Mathf.FloorToInt(myStartPathTile.transform.position.x), Mathf.FloorToInt(myStartPathTile.transform.position.z), Tile.TileState.obstructed);
         AddItemToMap(myStartPathTile.GetComponent<PathTile>());
         myPathTiles[(int)myEndTile.GetPathTilePosition.x, (int)myEndTile.GetPathTilePosition.z] = myEndTile;
         myLastPlacedPathTile = myStartPathTile.GetComponent<PathTile>();
