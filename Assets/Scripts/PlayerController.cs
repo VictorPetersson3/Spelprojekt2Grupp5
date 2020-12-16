@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 Quaternion lookAtRotation = Quaternion.LookRotation(myMovementList[step].transform.position - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.05f);
 
-                if (distanceToNextPos.magnitude < 0.05f)
+                if (distanceToNextPos.magnitude < 0.2f)
                 {
                     if (step <= myMovementList.Count)
                     {
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
                 {
                     float distance = Vector3.Distance(myPathManager.GetPortals[i].GetPos(), transform.position);
 
-                    if (distance < 0.1f)
+                    if (distance < 0.2f)
                     {
                         myPortalEffect.Play();
                         AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PORTAL);

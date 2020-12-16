@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private bool myMusicIsPlaying = true;
     bool myMusicBoolOn = true;
 
-    private int myAllLevels = 40;
+    private int myAllLevels = 16;
     private int myActiveScene;
     private float mySoundVolume = 1;
     private Scrollbar myScrollBar;
@@ -307,7 +307,7 @@ public class GameManager : MonoBehaviour
 
         if (!hasMoved)
         {
-            //SaveFile(1);
+            SaveFile(1);
             myEndScreen.MoveUp();
             hasMoved = true;
         }
