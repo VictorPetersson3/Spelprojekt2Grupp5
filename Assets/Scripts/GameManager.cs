@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         myScrollBar = myOptionsMenu.GetScrollbar();
+        SetMusicIsPlaying();
+        SetMusicIsPlaying();
 
         if (globalInstance == null)
         {
