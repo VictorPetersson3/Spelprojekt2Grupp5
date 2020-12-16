@@ -36,6 +36,8 @@ public class Sc_LevelElementData : MonoBehaviour
 
     [SerializeField]
     Sc_LevelSelect_GiveScore myLevelTotalScore;
+    [SerializeField]
+    Sc_InWorld_LevelScore sc_InWorld_LevelScore;
    
     
     private bool myActive;
@@ -56,18 +58,13 @@ public class Sc_LevelElementData : MonoBehaviour
         myLevelNameTMP.text = GameManager.globalInstance.GetName(myLevelIndex);
         myLevelSpendGoalTMP.text = GameManager.globalInstance.GetHighestScore(myLevelIndex).ToString();
         myActive = false;
+
         myLevelTotalScore.GetLevelData(GameManager.globalInstance.GetLevelStars(myLevelIndex));
+        sc_InWorld_LevelScore.SetScore(GameManager.globalInstance.GetLevelStars(myLevelIndex));
     } 
     private void OnValidate()
     {
         myLevelManagerInterface = FindObjectOfType<Sc_InterfaceLevelManager>();
-
-        //myActive = false;
-        //myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
-        //myLevelImage.sprite = myConvertedImageSprite;
-        //myInLevelImage.sprite = myConvertedImageSprite;
-        //myLevelNameTMP.text = myLevelName;
-        //myLevelSpendGoalTMP.text = mySpendGoal.ToString("0");
     }
     private void Update()
     {
