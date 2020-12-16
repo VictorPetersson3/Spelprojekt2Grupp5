@@ -1623,7 +1623,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myLevelManagerInterface
       value: 
-      objectReference: {fileID: 1712347762}
+      objectReference: {fileID: 2065317525}
     - target: {fileID: 7518463318908742591, guid: c1d80597135f82f46817f19684f5e092,
         type: 3}
       propertyPath: myLevelIndex
@@ -1638,7 +1638,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myImage
       value: 
-      objectReference: {fileID: 2800000, guid: b4bd9343dead19e40bd59115ff44e3b3, type: 3}
+      objectReference: {fileID: 2800000, guid: 9e228e6141313404d9dc254848b380fd, type: 3}
     - target: {fileID: 8142928317010590641, guid: c1d80597135f82f46817f19684f5e092,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2144,7 +2144,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myLevelManagerInterface
       value: 
-      objectReference: {fileID: 1712347762}
+      objectReference: {fileID: 2065317525}
     - target: {fileID: 7518463318908742591, guid: c1d80597135f82f46817f19684f5e092,
         type: 3}
       propertyPath: myLevelIndex
@@ -2159,7 +2159,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myImage
       value: 
-      objectReference: {fileID: 2800000, guid: 9e228e6141313404d9dc254848b380fd, type: 3}
+      objectReference: {fileID: 2800000, guid: 4cb780978d7a98843a67f3c97d01aed2, type: 3}
     - target: {fileID: 8142928317010590641, guid: c1d80597135f82f46817f19684f5e092,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3780,7 +3780,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myLevelManagerInterface
       value: 
-      objectReference: {fileID: 1712347762}
+      objectReference: {fileID: 2065317525}
     - target: {fileID: 7518463318908742591, guid: c1d80597135f82f46817f19684f5e092,
         type: 3}
       propertyPath: myLevelIndex
@@ -3795,7 +3795,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myImage
       value: 
-      objectReference: {fileID: 2800000, guid: 4cb780978d7a98843a67f3c97d01aed2, type: 3}
+      objectReference: {fileID: 2800000, guid: b4bd9343dead19e40bd59115ff44e3b3, type: 3}
     - target: {fileID: 8142928317010590641, guid: c1d80597135f82f46817f19684f5e092,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -5083,6 +5083,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2065317523}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2065317525 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4939747749906651006, guid: c1d80597135f82f46817f19684f5e092,
+    type: 3}
+  m_PrefabInstance: {fileID: 2065317523}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83943940630b96e4c9a065f8c33f7392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2079619411
 GameObject:
   m_ObjectHideFlags: 0
