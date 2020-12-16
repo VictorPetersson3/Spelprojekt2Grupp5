@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
         myOriginalPosition = yPosition;
         gameObject.transform.position = yPosition;
 
-        Invoke(" AddTransformsToLineRender", 0.25f);
+        Invoke("AddTransformsToLineRender", 0.25f);
     }
 
     void AddTransformsToLineRender()
