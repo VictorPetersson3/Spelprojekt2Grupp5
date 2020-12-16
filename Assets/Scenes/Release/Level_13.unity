@@ -6352,6 +6352,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_ToriiGates
       objectReference: {fileID: 0}
+    - target: {fileID: 4893230189547991817, guid: 9b9f9fe8bb5daee48b36b4f49835afc1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893230189547991817, guid: 9b9f9fe8bb5daee48b36b4f49835afc1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.51
+      objectReference: {fileID: 0}
     - target: {fileID: 5200130776257310349, guid: 9b9f9fe8bb5daee48b36b4f49835afc1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6412,6 +6422,12 @@ PrefabInstance:
 --- !u!4 &950879573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5200130776257310349, guid: 9b9f9fe8bb5daee48b36b4f49835afc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 950879572}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &950879574 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 303449652889401590, guid: 9b9f9fe8bb5daee48b36b4f49835afc1,
     type: 3}
   m_PrefabInstance: {fileID: 950879572}
   m_PrefabAsset: {fileID: 0}
@@ -13145,5 +13161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6997046230388152911, guid: 53ea471b916f7e3428fd702bf78f8385,
+        type: 3}
+      propertyPath: myFireworks
+      value: 
+      objectReference: {fileID: 950879574}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53ea471b916f7e3428fd702bf78f8385, type: 3}

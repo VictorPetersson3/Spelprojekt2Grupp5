@@ -2169,6 +2169,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b9f9fe8bb5daee48b36b4f49835afc1, type: 3}
+--- !u!2083052967 &351659677 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 303449652889401590, guid: 9b9f9fe8bb5daee48b36b4f49835afc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 351659676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &376928562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15943,5 +15949,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6997046230388152911, guid: 53ea471b916f7e3428fd702bf78f8385,
+        type: 3}
+      propertyPath: myFireworks
+      value: 
+      objectReference: {fileID: 351659677}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53ea471b916f7e3428fd702bf78f8385, type: 3}
