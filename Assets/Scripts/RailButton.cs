@@ -36,7 +36,7 @@ public class RailButton : ObstructTileMap
         if (myPlayerController != null)
         {
             float distance = Vector3.Distance(myPlayerController.transform.position, transform.position);
-            if (distance < 0.11f)
+            if (distance < 0.2f)
             {
                 mySwitch = true;
                 AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PRESSUREPLATE);
