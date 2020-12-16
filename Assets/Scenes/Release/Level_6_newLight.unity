@@ -3770,6 +3770,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f1d2771cef4502458145c0bf8859226, type: 3}
+--- !u!114 &642803069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5526267388698976451, guid: 2f1d2771cef4502458145c0bf8859226,
+    type: 3}
+  m_PrefabInstance: {fileID: 642803068}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51ee62e760505b44b70cd380e868b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &660052353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8108,7 +8120,12 @@ MonoBehaviour:
   - {fileID: 530691001}
   mySpeed: 1
   myTimeToWait: 0
+  myDistanceToKill: 0.65
+  myLineRender: {fileID: 3841281060122033692, guid: 071e12994a346934c835c3b096800783,
+    type: 3}
   myPlayerController: {fileID: 160594222}
+  myGameOver: {fileID: 0}
+  myPathManager: {fileID: 0}
 --- !u!4 &1783472070
 Transform:
   m_ObjectHideFlags: 0
@@ -8680,6 +8697,7 @@ MonoBehaviour:
   myPathManager: {fileID: 1963332870}
   myBuildManager: {fileID: 1963332874}
   temp: {fileID: 9182429334331682645, guid: 15eb4f6ee62a9844ca099c141e0a32f1, type: 3}
+  myShopOption: {fileID: 642803069}
 --- !u!114 &1963332872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8698,6 +8716,7 @@ MonoBehaviour:
   myEmptyTilesColor: {r: 0, g: 1, b: 0.07337785, a: 0}
   myAlpha: 0.5
   myMapBoarder: {fileID: 1338285660}
+  myGrid: {fileID: 0}
 --- !u!4 &1963332873
 Transform:
   m_ObjectHideFlags: 0
@@ -9306,7 +9325,12 @@ MonoBehaviour:
   - {fileID: 1602471710}
   mySpeed: 1
   myTimeToWait: 0
+  myDistanceToKill: 0.65
+  myLineRender: {fileID: 3841281060122033692, guid: 071e12994a346934c835c3b096800783,
+    type: 3}
   myPlayerController: {fileID: 160594222}
+  myGameOver: {fileID: 0}
+  myPathManager: {fileID: 0}
 --- !u!1001 &2107364992
 PrefabInstance:
   m_ObjectHideFlags: 0
