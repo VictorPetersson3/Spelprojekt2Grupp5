@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 Quaternion lookAtRotation = Quaternion.LookRotation(myMovementList[step].transform.position - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.05f);
 
-                if (distanceToNextPos.magnitude < 0.05f)
+                if (distanceToNextPos.magnitude < 0.1f)
                 {
                     if (step <= myMovementList.Count)
                     {
