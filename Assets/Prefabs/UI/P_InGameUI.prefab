@@ -844,8 +844,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5526267388698976451}
-        m_MethodName: SwitchIconOnPlaceTiles
+      - m_Target: {fileID: 2805858893942419453}
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'BUILD
+  m_text: 'Restart
 
 '
   m_isRightToLeft: 0
@@ -1371,7 +1371,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70.6
+  m_fontSize: 46.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3397,7 +3397,6 @@ GameObject:
   - component: {fileID: 1132214176152457895}
   - component: {fileID: 1132214176152457897}
   - component: {fileID: 1132214176152457894}
-  - component: {fileID: 5526267388698976451}
   m_Layer: 5
   m_Name: Build
   m_TagString: Untagged
@@ -3463,21 +3462,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.4
---- !u!114 &5526267388698976451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1132214176152457892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f51ee62e760505b44b70cd380e868b9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  easeType: 0
-  myRemoveTiles: {fileID: 9011867356911958725}
-  myPlaceTiles: {fileID: 1132214175068460654}
 --- !u!1 &1132214176294322850
 GameObject:
   m_ObjectHideFlags: 0
