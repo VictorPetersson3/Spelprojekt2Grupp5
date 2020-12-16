@@ -34,14 +34,7 @@ public class PathManager : MonoBehaviour
     int Testing = 0;
 
     bool hasInited = false;
-    private void Update()
-    {
-        //if (!hasInited)
-        //{
-        //    Invoke("Init", 1.5f);
-        //    hasInited = true;
-        //}
-    }
+
     void OnValidate()
     {
         //myPlayerController = FindObjectOfType<PlayerController>();
@@ -57,7 +50,8 @@ public class PathManager : MonoBehaviour
     }
     private void Start()
     {
-        Init();
+        Invoke("Init", 0.55f);
+        //Init();
     }
 
     void Init()
