@@ -48,8 +48,6 @@ public class Enemy : MonoBehaviour
         Vector3 yPosition = gameObject.transform.position;
         yPosition.y = myPositionsToWalkTo[0].position.y;
 
-        myPathManager = FindObjectOfType<PathManager>();
-        myPlayerController = FindObjectOfType<PlayerController>();
         myGameOver = FindObjectOfType<Sc_EndGameOver>();
         gameObject.transform.position = myPositionsToWalkTo[0].position;
         myGameManager = GameManager.globalInstance;
@@ -111,6 +109,7 @@ public class Enemy : MonoBehaviour
     void CheckPlayer()
     {
         Vector3 distanceToPlayer = myPlayerController.transform.position - transform.position;
+
         if (distanceToPlayer.magnitude < myDistanceToKill && myPlayerController.GetWalking() == true) 
         {
             AudioManager.ourInstance.StopWalkingEffect();

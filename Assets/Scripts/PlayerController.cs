@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     ParticleSystem myDeathEffect;
     [SerializeField]
+    ParticleSystem myPortalEffect;
+    [SerializeField]
     int step = 1;
     [Range(1, 12)]
     [SerializeField]
@@ -129,9 +131,9 @@ public class PlayerController : MonoBehaviour
 
                     if (distance < 0.1f)
                     {
+                        myPortalEffect.Play();
                         AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.PORTAL);
                         transform.position = myPathManager.GetPortals[i].GetExit() + myPathManager.GetPortals[i].transform.position;
-
                         myMovementList = myPathManager.GetPortals[i].GetMovementList();
                         step = 1;
 
