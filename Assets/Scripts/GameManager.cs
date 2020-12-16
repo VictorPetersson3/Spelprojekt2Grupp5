@@ -186,7 +186,6 @@ public class GameManager : MonoBehaviour
 
     public void ResetAmountOfMoney()
     {
-        Debug.Log(myActiveScene);
         myLevelList[myActiveScene].myAmountOfMoney = myLevelList[myActiveScene].myStartingMoney;
         //BuildManager.globalInstance.ResetTiles();
     }
