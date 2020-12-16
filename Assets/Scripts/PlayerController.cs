@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleStart()
     {
-        myMovementStart = !myMovementStart;
+        myMovementStart = true;
         AudioManager.ourInstance.PlayEffect(AudioManager.EEffects.FOOTSTEPS);
     }
 
