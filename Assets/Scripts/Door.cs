@@ -62,7 +62,6 @@ public class Door : ObstructTileMap
         {
             if (myRailButtons[0].GetMySwitch)
             {
-                Debug.Log("Door opened");
                 OpenDoor();
             }
         }
@@ -76,7 +75,6 @@ public class Door : ObstructTileMap
                     count++;
                     if (count == myRailButtons.Count)
                     {
-                        Debug.Log("Door opened");
                         OpenDoor();
                     }
                 }

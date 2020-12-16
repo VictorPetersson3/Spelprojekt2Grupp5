@@ -32,7 +32,6 @@ public class LevelSelect : MonoBehaviour
         {
 
             mySelectedLevel = WhatDidIHit();
-            Debug.Log(mySelectedLevel);
             if (mySelectedLevel != myBackground)
             {
                 Invoke("DeactivateLines", 0.1f);

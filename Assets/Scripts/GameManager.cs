@@ -578,7 +578,6 @@ public class GameManager : MonoBehaviour
 
     public int GetUpdatedScore()
     {
-        Debug.Log(myActiveScene);
         return myLevelList[myActiveScene].myAmountOfMoney;
     }
     public string GetName(int aLevelIndex)

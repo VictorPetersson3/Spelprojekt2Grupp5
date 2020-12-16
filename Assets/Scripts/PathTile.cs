@@ -409,8 +409,6 @@ public class PathTile : MonoBehaviour
     {
         myCheckForPortal = Physics.BoxCast(gameObject.transform.position, transform.localScale / 2, transform.up, out myPortalHit, Quaternion.identity, 1f, myPortalMask);
 
-        Debug.Log(myCheckForPortal);
-
         if (myCheckForPortal == true)
         {
             PathManager pathManager = FindObjectOfType<PathManager>();

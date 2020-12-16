@@ -1240,7 +1240,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2820539849938557299}
   - component: {fileID: 7977230303586151615}
-  - component: {fileID: 3138075825409383189}
   - component: {fileID: 845870375548283203}
   m_Layer: 0
   m_Name: Credits Camera
@@ -1306,14 +1305,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3138075825409383189
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4702664646447362099}
-  m_Enabled: 1
 --- !u!114 &845870375548283203
 MonoBehaviour:
   m_ObjectHideFlags: 0
