@@ -24,10 +24,10 @@ public class Sc_LevelManager : MonoBehaviour
 
     public void LoadGame(int aSceneIndex)
     {
+        myLoadingScreen.gameObject.SetActive(true);
         myGameManager.ResetGameManager();
         myGameManager.ResetAmountOfMoney();
-        myLoadingScreen.gameObject.SetActive(true);
-        SceneManager.UnloadSceneAsync((int)myCurrentSceneIndex);
+        SceneManager.UnloadSceneAsync(myCurrentSceneIndex);
         myCurrentSceneIndex = aSceneIndex;
         SceneManager.LoadScene(myCurrentSceneIndex, LoadSceneMode.Additive);
         Invoke("LoadAfterXTime", 0.80f);

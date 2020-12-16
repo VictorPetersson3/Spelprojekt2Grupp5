@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         myScrollBar = myOptionsMenu.GetScrollbar();
+        SetMusicIsPlaying();
+        SetMusicIsPlaying();
 
         if (globalInstance == null)
         {
@@ -305,7 +307,7 @@ public class GameManager : MonoBehaviour
 
         if (!hasMoved)
         {
-            //SaveFile(1);
+            SaveFile(1);
             myEndScreen.MoveUp();
             hasMoved = true;
         }
