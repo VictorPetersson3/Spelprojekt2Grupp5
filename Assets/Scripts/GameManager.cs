@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private bool myMusicIsPlaying = true;
     bool myMusicBoolOn = true;
 
-    private int myAllLevels = 16;
+    private int myAllLevels = 17;
     private int myActiveScene;
     private float mySoundVolume = 1;
     private Scrollbar myScrollBar;
@@ -186,6 +186,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetAmountOfMoney()
     {
+        Debug.Log(myActiveScene);
         myLevelList[myActiveScene].myAmountOfMoney = myLevelList[myActiveScene].myStartingMoney;
         //BuildManager.globalInstance.ResetTiles();
     }
@@ -578,6 +579,7 @@ public class GameManager : MonoBehaviour
 
     public int GetUpdatedScore()
     {
+        Debug.Log(myActiveScene);
         return myLevelList[myActiveScene].myAmountOfMoney;
     }
     public string GetName(int aLevelIndex)
