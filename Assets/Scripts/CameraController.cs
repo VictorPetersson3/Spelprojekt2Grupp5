@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
 
     public float targetCameraWidth = 35f;
 
+
+
     [SerializeField]
     float myZoomPaddingPortrait = -20f;
     [SerializeField]
@@ -25,14 +27,9 @@ public class CameraController : MonoBehaviour
     float transitionSpeed = 5f;
     [SerializeField]
     Vector3 myWorldCenterPostion = Vector3.zero;
+
     [SerializeField]
-    float maxX;
-    [SerializeField]
-    float minX;
-    [SerializeField]
-    float maxY;
-    [SerializeField]
-    float minY;
+    float myCameraYRotation = 0;
 
     float startingCameraWidth;
 
@@ -86,7 +83,7 @@ public class CameraController : MonoBehaviour
             if (!Input.GetMouseButtonDown(0))
             {
                 transform.position = Vector3.Lerp(transform.position, new Vector3(myWorldCenterPostion.x, transform.position.y, myWorldCenterPostion.z), Time.deltaTime * transitionSpeed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(65, 0, 0), Time.deltaTime * transitionSpeed);     
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(65, myCameraYRotation, 0), Time.deltaTime * transitionSpeed);     
                 switch(Screen.orientation)
                 {
                     case ScreenOrientation.Portrait:

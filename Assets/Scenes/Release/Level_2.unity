@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 47ceeb6dc8cb7f74399c6785afa3d016,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3263,13 +3263,10 @@ MonoBehaviour:
   myZoomPaddingPortrait: -14.98
   myZoomPaddingLandscape: -1.5
   myZoomPaddingTopDownPortrait: -17.82
-  myZoomPaddingTopDownLandscape: -2.75
+  myZoomPaddingTopDownLandscape: -1.45
   transitionSpeed: 5
   myWorldCenterPostion: {x: 4.91, y: 2.45, z: -6.89}
-  maxX: 10
-  minX: -10
-  maxY: 10
-  minY: -10
+  myCameraYRotation: 0
 --- !u!4 &560652083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5200130776257310349, guid: 9b9f9fe8bb5daee48b36b4f49835afc1,
