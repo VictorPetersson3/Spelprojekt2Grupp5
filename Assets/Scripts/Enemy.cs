@@ -61,17 +61,13 @@ public class Enemy : MonoBehaviour
 
     void AddTransformsToLineRender()
     {
-
-        Instantiate(myLineRender, Vector3.zero, Quaternion.identity);
-
-        myLineRender.positionCount = myPositionsToWalkTo.Length + 1;
-
-
+        LineRenderer temp =  Instantiate(myLineRender, Vector3.zero, Quaternion.identity);
+        temp.positionCount = myPositionsToWalkTo.Length + 1;
         for (int i = 0; i < myPositionsToWalkTo.Length; i++)
         {
-            myLineRender.SetPosition(i, new Vector3( myPositionsToWalkTo[i].position.x, 0.01f ,myPositionsToWalkTo[i].position.z));
+            temp.SetPosition(i, new Vector3( myPositionsToWalkTo[i].position.x, 0.01f ,myPositionsToWalkTo[i].position.z));
         }
-        myLineRender.SetPosition(myLineRender.positionCount - 1, new Vector3(myPositionsToWalkTo[0].position.x, 0.01f, myPositionsToWalkTo[0].position.z));
+        temp.SetPosition(temp.positionCount - 1, new Vector3(myPositionsToWalkTo[0].position.x, 0.01f, myPositionsToWalkTo[0].position.z));
     }
 
     void Update()
