@@ -63,7 +63,38 @@ VisualEffect:
     m_AnimationCurve:
       m_Array: []
     m_Gradient:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 0, g: 10.680629, b: 3.1163073, a: 0}
+          key1: {r: 1.3647059, g: 1.7333333, b: 2, a: 1}
+          key2: {r: 0, g: 0, b: 0, a: 1}
+          key3: {r: 0, g: 0, b: 0, a: 0}
+          key4: {r: 0, g: 0, b: 0, a: 0}
+          key5: {r: 0, g: 0, b: 0, a: 0}
+          key6: {r: 0, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 0
+          ctime1: 65535
+          ctime2: 0
+          ctime3: 0
+          ctime4: 0
+          ctime5: 0
+          ctime6: 0
+          ctime7: 0
+          atime0: 0
+          atime1: 6554
+          atime2: 52428
+          atime3: 65535
+          atime4: 0
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_NumColorKeys: 2
+          m_NumAlphaKeys: 4
+        m_Name: New Gradient
+        m_Overridden: 1
     m_NamedObject:
       m_Array: []
     m_Bool:
@@ -183,7 +214,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.752047, g: 0.9433962, b: 0.9001883, a: 1}
+  m_Color: {r: 0.5990566, g: 1, b: 0.7093281, a: 1}
   m_Intensity: 5
   m_Range: 1.15
   m_SpotAngle: 30
@@ -4942,8 +4973,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79128c9748deb6441a86b5ffa69035ab, type: 2}
-  - {fileID: 2100000, guid: 79128c9748deb6441a86b5ffa69035ab, type: 2}
+  - {fileID: 2100000, guid: a253abba8b136c24cb9ff161dfb6642f, type: 2}
+  - {fileID: 2100000, guid: a253abba8b136c24cb9ff161dfb6642f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
