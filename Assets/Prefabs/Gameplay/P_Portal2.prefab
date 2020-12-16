@@ -9701,7 +9701,7 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 0, g: 10.680629, b: 3.1163073, a: 0}
+          key0: {r: 0, g: 5.3403144, b: 1.5657465, a: 0}
           key1: {r: 1.3647059, g: 1.7333333, b: 2, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 1}
           key3: {r: 0, g: 0, b: 0, a: 0}
@@ -9840,8 +9840,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4460826, y: 0.20881867, z: 0.4384895}
-  m_Center: {x: -0.027465284, y: 1.1987242, z: 0.015880197}
+  m_Size: {x: 0.5960474, y: 0.20881867, z: 0.6626009}
+  m_Center: {x: -0.06344682, y: 1.1987242, z: -0.026266038}
 --- !u!1 &5257242005792037433
 GameObject:
   m_ObjectHideFlags: 0
@@ -14818,6 +14818,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2939237049845954295, guid: c8fcb9b6ef821e949af1bfed6e8769b0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.637
+      objectReference: {fileID: 0}
     - target: {fileID: 5200130776257310349, guid: c8fcb9b6ef821e949af1bfed6e8769b0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14872,6 +14877,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016380393252927054, guid: c8fcb9b6ef821e949af1bfed6e8769b0,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.g
+      value: 5.3403144
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016380393252927054, guid: c8fcb9b6ef821e949af1bfed6e8769b0,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.b
+      value: 1.5657465
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8fcb9b6ef821e949af1bfed6e8769b0, type: 3}

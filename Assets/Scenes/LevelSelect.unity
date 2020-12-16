@@ -3432,7 +3432,7 @@ PrefabInstance:
     - target: {fileID: 6558576617815306385, guid: 6b401dd54a9d08b42b38cc8d67899147,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6558576617815306385, guid: 6b401dd54a9d08b42b38cc8d67899147,
         type: 3}
@@ -3457,6 +3457,32 @@ PrefabInstance:
     - target: {fileID: 6558576617815306385, guid: 6b401dd54a9d08b42b38cc8d67899147,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558576617815306385, guid: 6b401dd54a9d08b42b38cc8d67899147,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558576617815306385, guid: 6b401dd54a9d08b42b38cc8d67899147,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558576617815306385, guid: 6b401dd54a9d08b42b38cc8d67899147,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 4041053284085564275, guid: cd117c90f5dd4ea47ac701973df11a15,
+        type: 3}
+    - target: {fileID: 6558576617815306385, guid: 6b401dd54a9d08b42b38cc8d67899147,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlayUI3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558576617815306385, guid: 6b401dd54a9d08b42b38cc8d67899147,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6570162512069666507, guid: 6b401dd54a9d08b42b38cc8d67899147,
@@ -4765,6 +4791,11 @@ PrefabInstance:
         type: 3}
       propertyPath: myScollbar
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041053284085564275, guid: cd117c90f5dd4ea47ac701973df11a15,
+        type: 3}
+      propertyPath: myPlayingMusic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd117c90f5dd4ea47ac701973df11a15, type: 3}

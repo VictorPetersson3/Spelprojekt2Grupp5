@@ -9908,7 +9908,7 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 13.928808, g: 5.414288, b: 0, a: 0}
+          key0: {r: 6.9644046, g: 2.734714, b: 0, a: 0}
           key1: {r: 1.3647059, g: 1.7333333, b: 2, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 1}
           key3: {r: 0, g: 0, b: 0, a: 0}
@@ -14867,6 +14867,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369517367806299764, guid: 5992a3fc79ca8334d961d8e9f58824b2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5992a3fc79ca8334d961d8e9f58824b2, type: 3}
