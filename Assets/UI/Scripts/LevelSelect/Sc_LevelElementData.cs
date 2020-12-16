@@ -19,13 +19,13 @@ public class Sc_LevelElementData : MonoBehaviour
     [Space(40, order = 2)]
 
     [SerializeField]
-    Image myLevelImage;
-    [SerializeField]
     TextMeshProUGUI myLevelNameTMP;
     [SerializeField]
     TextMeshProUGUI myLevelSpendGoalTMP;
     [SerializeField]
     GameObject myUIElement;
+    [SerializeField]
+    GameObject myUIElementCanvasGroup;
     [SerializeField]
     RectTransform myLevelMenuRect;
     [SerializeField]
@@ -42,13 +42,12 @@ public class Sc_LevelElementData : MonoBehaviour
     
     private bool myActive;
     private Sprite myConvertedImageSprite;
-    private Vector3 myMin = new Vector3(-60.0f, 40.0f, 0.0f);
+    private Vector3 myMin = new Vector3(-60.0f, 200.0f, 0.0f);
 
 
     private void Start()
     {
         myConvertedImageSprite = Sprite.Create(myImage, new Rect(0.0f, 0.0f, myImage.width, myImage.height), new Vector2(0.5f, 0.5f), 100.0f);
-        myLevelImage.sprite = myConvertedImageSprite;
         myLevelSelect_WorldUI.SetMyLevelName(GameManager.globalInstance.GetName(myLevelIndex));
         myLevelSelect_WorldUI.SetMyLevelImage(myConvertedImageSprite);
         myLevelSelect_WorldUI.SetRequiredScore(
