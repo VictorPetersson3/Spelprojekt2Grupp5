@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     void Update() 
     {
-        Application.targetFrameRate = 10;
+        
         //Application.targetFrameRate = 60;
         if (myMovementStart)
         {
