@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         myMovementStart = false;
     }
 
-    void Update()
+    void Update() 
     {
         //Application.targetFrameRate = 60;
         if (myMovementStart)
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, myMovementList[step].transform.position, myMovementSpeed * Time.deltaTime);
                 Vector3 distanceToNextPos = myMovementList[step].transform.position - transform.position;
                 Quaternion lookAtRotation = Quaternion.LookRotation(myMovementList[step].transform.position - transform.position);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.05f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookAtRotation, Time.deltaTime / 0.1f);
 
                 if (distanceToNextPos.magnitude < 0.05f)
                 {
